@@ -1,25 +1,36 @@
 # Schemas
 
+## Roles
+
+- Name
+- isActive
+- Permissions:{
+  employees:{
+    read: true,
+    write: true
+    }
+  }
+  keda y3ny
+
 ## Employees
 
 - Full Name
 - Phone No
 - Email
 - Password
-- Role
-- Position(?)
+- Role(reference to role)
 - Salary(basic, bonus)
-- Notes(?)
+- isActive(t/f)
 
 ## Contacts(Customers/Leads)
 
 - Name
 - Email
 - Phone
-- Contact owner(reference to employee)
+- Address
 - Job title
-- lifecycle stage(lead or customer)
-- lastUpdatedAt date
+- Contact owner(reference to employee)
+- lifecycle stage(lead or customer)(+Date)
 
 ## Companies
 
@@ -30,12 +41,11 @@
 - Type(?)
 - Address
 - No. of Employees(?)
-- Description/Notes
 
 ## Deals
 
 - Name
-- Stage
+- Stage(+Date)
   - Appointment Scheduled
   - Qualified To Buy
   - Presentation Scheduled
@@ -47,14 +57,14 @@
 - Close Date
 - Deal Owner(reference to Employee)
 - Priority(Low, Medium, High)
-- Associate with Contact
+- Associate with Contact(turn to customer if lead)
   - Customer
   - Company
 
 ## Support Tickets
 
 - Name
-- Status
+- Status(+Dates)
   - New
   - Waiting on Contact
   - Waiting on Employee
@@ -73,16 +83,16 @@
 
 ## Orders
 
-- Name
+- Order ID
 - Description
 - Price
-- Stage
+- Order Owner(reference to Employee)
+- Stage(+Date)
   - Open
   - Processed
   - Shipped
   - Delivered
   - Cancelled
 - Associate with Contact
-  - Customer
+  - Customer(if lead convert to customer)
   - Company
-- CreatedAt
