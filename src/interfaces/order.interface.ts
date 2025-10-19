@@ -1,20 +1,21 @@
-import type mongoose from "mongoose";
+import mongoose from "mongoose";
+import { z } from "zod";
 
-type stageType = "Open" |
-  "Processed" |
-  "Shipped" |
-  "Delivered" |
-  "Cancelled";
+const SOrder = z.object({
+  _id: z.instanceof(mongoose.Types.ObjectId),
+  description: z.string().min(3).max(50),
+  price: z.number().gt(0),
+  ownerId: z.instanceof(mongoose.Types.ObjectId),
+  stage: z.array(
+    z.object({
+      stageType: z
+        .enum(["Open", "Processed", "Shipped", "Delivered", "Cancelled"])
+        .default("Open"),
+      date: z.date().default(new Date())
+    })
+  ),
+  contactId: z.instanceof(mongoose.Types.ObjectId),
+  employeeId: z.instanceof(mongoose.Types.ObjectId).nullable()
+});
 
-export default interface IOrder {
-  _id: mongoose.Types.ObjectId;
-  description: string;
-  price: number;
-  ownerId: mongoose.Types.ObjectId;
-  stage: [{
-    type: stageType;
-    date: Date;
-  }]
-  contactId: mongoose.Types.ObjectId;
-  employeeId: mongoose.Types.ObjectId;
-}
+export type IOrder = z.infer<typeof SOrder>;

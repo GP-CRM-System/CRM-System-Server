@@ -1,2 +1,2 @@
-declare module 'rate-limit-mongo';
-declare module 'passport-google-oauth20';
+declare module "rate-limit-mongo";
+declare module "passport-google-oauth20";

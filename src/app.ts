@@ -19,4 +19,6 @@ swaggerSetup(app);
 
 const port = process.env.PORT || 4650;
 
-app.listen(port, () => logger.info(`Server running on http://localhost:${port}`));
+app.listen(port, () =>
+  logger.info(`Server running on http://localhost:${port}`)
+);

@@ -1,23 +1,30 @@
-import type mongoose from "mongoose";
+import mongoose from "mongoose";
+import { z } from "zod";
 
-type dealType =
-  "Appointment Scheduled" |
-  "Qualified To Buy" |
-  "Presentation Scheduled" |
-  "Decision Maker Bought-In" |
-  "Contract Sent" |
-  "Closed Won" |
-  "Closed Lost";
+const SDeal = z.object({
+  _id: z.instanceof(mongoose.Types.ObjectId),
+  name: z.string().min(3).max(50),
+  stage: z.array(
+    z.object({
+      name: z
+        .enum([
+          "Appointment Scheduled",
+          "Qualified To Buy",
+          "Presentation Scheduled",
+          "Decision Maker Bought-In",
+          "Contract Sent",
+          "Closed Won",
+          "Closed Lost"
+        ])
+        .default("Appointment Scheduled"),
+      date: z.date().default(new Date())
+    })
+  ),
+  amount: z.number().gt(0),
+  ownerId: z.instanceof(mongoose.Types.ObjectId),
+  priority: z.enum(["Low", "Medium", "High"]),
+  contactId: z.instanceof(mongoose.Types.ObjectId),
+  companyId: z.instanceof(mongoose.Types.ObjectId).nullable()
+});
 
-export default interface IDeal {
-  _id: mongoose.Types.ObjectId;
-  stage: [{
-    type: dealType;
-    date: Date;
-  }];
-  amount: number;
-  ownerId: mongoose.Types.ObjectId;
-  priority: "Low" | "Medium" | "High";
-  contactId?: mongoose.Types.ObjectId;
-  companyId?: mongoose.Types.ObjectId;
-}
+export type IDeal = z.infer<typeof SDeal>;

@@ -17,5 +17,23 @@
       "url": "http://localhost:4650",
       "description": "Local development server"
     }
+  ],
+  "tags":[
+    {
+      "name": "Auth",
+      "description": "Authentication endpoints"
+    },
+    {
+      "name": "General",
+      "description": "General endpoints, include Dashboard, Settings, etc."
+    },
+    {
+      "name": "Roles",
+      "description": "Roles endpoints"
+    },
+    {
+      "name": "Employees",
+      "description": "Employees endpoints"
+    }
   ]
 }

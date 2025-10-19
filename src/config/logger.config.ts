@@ -11,22 +11,21 @@ import pretty from "pino-pretty";
 const prettyStream = pretty({
   colorize: true,
   translateTime: "yyyy-mm-dd HH:MM:ss",
-  ignore: "pid,hostname",
+  ignore: "pid,hostname"
 });
 
 const streams = [
   { stream: fs.createWriteStream("./logs/app.log", { flags: "a" }) },
-  { stream: prettyStream },
+  { stream: prettyStream }
 ];
 
-export const logger = pino(
-  { level: "info" },
-  multistream(streams)
-);
+export const logger = pino({ level: "info" }, multistream(streams));
 
 export default function loggerSetup(app: Application): void {
   app.use(morgan("dev"));
-  app.use(morgan("combined", {
-    stream: fs.createWriteStream("./logs/access.log", { flags: "a" })
-  }));
+  app.use(
+    morgan("combined", {
+      stream: fs.createWriteStream("./logs/access.log", { flags: "a" })
+    })
+  );
 }

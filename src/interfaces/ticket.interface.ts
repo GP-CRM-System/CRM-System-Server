@@ -1,19 +1,22 @@
-import type mongoose from "mongoose";
+import mongoose from "mongoose";
+import { z } from "zod";
 
-type statusType = "New" | "Waiting on Contact" | "Waiting on Employee" | "Closed";
-type sourceType = "Chat" | "Email" | "Phone" | "Form";
+const STicket = z.object({
+  _id: z.instanceof(mongoose.Types.ObjectId),
+  name: z.string().min(3).max(50),
+  status: z.array(
+    z.object({
+      statusType: z
+        .enum(["New", "Waiting on Contact", "Waiting on Employee", "Closed"])
+        .default("New"),
+      date: z.date().default(new Date())
+    })
+  ),
+  description: z.string().min(3).max(50),
+  ownerId: z.instanceof(mongoose.Types.ObjectId),
+  source: z.enum(["Chat", "Email", "Phone", "Form"]),
+  priority: z.enum(["Low", "Medium", "High"]),
+  contactId: z.instanceof(mongoose.Types.ObjectId)
+});
 
-export default interface ITicket {
-  _id: mongoose.Types.ObjectId;
-  name: string;
-  status: [{
-    type: statusType;
-    date: Date;
-  }];
-  description: string;
-  ownerId: mongoose.Types.ObjectId;
-  source: sourceType;
-  priority: "Low" | "Medium" | "High";
-  contactId?: mongoose.Types.ObjectId;
-  employeeId?: mongoose.Types.ObjectId;
-}
+export type ITicket = z.infer<typeof STicket>;

@@ -1,17 +1,16 @@
-import type mongoose from "mongoose";
+import mongoose from "mongoose";
+import { z } from "zod";
 
-//fix
-type industry = "IT" | "Finance" | "Healthcare" | "Manufacturing";
-type companyType = "Public" | "Private";
+const SCompany = z.object({
+  _id: z.instanceof(mongoose.Types.ObjectId),
+  name: z.string().min(3).max(50),
+  ownerId: z.instanceof(mongoose.Types.ObjectId),
+  website: z.url().nullable(),
+  email: z.email().nullable(),
+  industry: z.enum(["IT", "Finance", "Healthcare", "Manufacturing"]), //Need to add more industries
+  type: z.enum(["Public", "Private"]), //Need to add more types
+  address: z.string(),
+  numberOfEmployees: z.number().gt(0)
+});
 
-export interface ICompany {
-  _id: mongoose.Types.ObjectId;
-  name: string;
-  ownerId: mongoose.Types.ObjectId;
-  website: string;
-  email: string;
-  industry: industry;
-  type: companyType;
-  address: string;
-  numberOfEmployees: number;
-}
+export type ICompany = z.infer<typeof SCompany>;

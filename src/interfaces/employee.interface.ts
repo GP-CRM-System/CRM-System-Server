@@ -1,12 +1,15 @@
-import type mongoose from "mongoose";
+import mongoose from "mongoose";
+import { z } from "zod";
 
-export default interface IEmployee {
-  _id: mongoose.Types.ObjectId;
-  fullName: string;
-  phone: string;
-  email: string;
-  password: string;
-  roleId: mongoose.Types.ObjectId;
-  salary: number;
-  isActive: boolean;
-}
+const SEmployee = z.object({
+  _id: z.instanceof(mongoose.Types.ObjectId),
+  fullName: z.string().min(3).max(50),
+  phone: z.string().min(8).max(15),
+  email: z.email(),
+  password: z.string().min(8).max(64).nullable(),
+  roleId: z.instanceof(mongoose.Types.ObjectId),
+  salary: z.number().gte(0).default(0),
+  isActive: z.boolean().default(true)
+});
+
+export type IEmployee = z.infer<typeof SEmployee>;

@@ -8,13 +8,10 @@
 // import dotenv from 'dotenv';
 // dotenv.config({ quiet: true });
 
-
-
 // export default function passportSetup(app: Application): void {
 
 //   app.use(passport.initialize());
 //   app.use(passport.session());
-
 
 //   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 //   passport.serializeUser((user: any, done) => {
@@ -82,4 +79,3 @@
 //     throw error;
 //   }
 // }
-
