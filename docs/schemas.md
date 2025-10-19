@@ -54,7 +54,6 @@
   - Closed Won
   - Closed Lost
 - Amount
-- Close Date
 - Deal Owner(reference to Employee)
 - Priority(Low, Medium, High)
 - Associate with Contact(turn to customer if lead)
