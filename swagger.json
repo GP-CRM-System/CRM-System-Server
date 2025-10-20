@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.1.1",
   "info": {
     "title": "Nexify API - CRM System",
     "description": "API documentation for the CRM System",
@@ -14,11 +14,19 @@
   },
   "servers": [
     {
-      "url": "http://localhost:4650",
-      "description": "Local development server"
+      "url": "http://{basePath}:{port}",
+      "description": "Local development server",
+      "variables": {
+        "basePath": {
+          "default": "localhost"
+        },
+        "port": {
+          "default": "4650"
+        }
+      }
     }
   ],
-  "tags":[
+  "tags": [
     {
       "name": "Auth",
       "description": "Authentication endpoints"
@@ -34,6 +42,308 @@
     {
       "name": "Employees",
       "description": "Employees endpoints"
+    },
+    {
+      "name": "Contacts",
+      "description": "Contacts endpoints"
+    },
+    {
+      "name": "Deals",
+      "description": "Deals endpoints"
+    },
+    {
+      "name": "Employees",
+      "description": "Employees endpoints"
+    },
+    {
+      "name": "Orders",
+      "description": "Orders endpoints"
+    },
+    {
+      "name": "Tickets",
+      "description": "Tickets endpoints"
     }
-  ]
+  ],
+  "paths": {
+    "api/v1/auth/register": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Register a new user - Not implemented yet",
+        "description": "Registers a new admin user at the very first time of launching the application, gives it a root role and a new company to the database",
+        "requestBody": {
+          "required": true
+        }
+      }
+    },
+    "api/v1/auth/login": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Login a user - Not implemented yet",
+        "description": "Login a user",
+        "requestBody": {
+          "required": true
+        }
+      }
+    },
+    "api/v1/auth/logout": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Logout a user - Not implemented yet",
+        "description": "Logout a user",
+        "requestBody": {
+          "required": true
+        }
+      }
+    },
+    "api/v1/auth/refresh": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Refresh a user - Not implemented yet",
+        "description": "Refresh a user",
+        "requestBody": {
+          "required": true
+        }
+      }
+    },
+    "api/v1/auth/verify": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Verify a user - Not implemented yet",
+        "description": "Verify a user",
+        "requestBody": {
+          "required": true
+        }
+      }
+    },
+    "api/v1/auth/forgot-password": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Forgot password - Not implemented yet",
+        "description": "Forgot password",
+        "requestBody": {
+          "required": true
+        }
+      }
+    },
+    "api/v1/auth/reset-password": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Reset password - Not implemented yet",
+        "description": "Reset password",
+        "requestBody": {
+          "required": true
+        }
+      }
+    },
+    "api/v1/roles": {
+      "get": {
+        "tags": ["Roles"],
+        "summary": "Get all roles - Not implemented yet",
+        "description": "Get roles",
+        "requestBody": {
+          "required": true
+        }
+      },
+      "post": {
+        "tags": ["Roles"],
+        "summary": "Create a role - Not implemented yet",
+        "description": "Create a role",
+        "requestBody": {
+          "required": true
+        }
+      }
+    },
+    "/api/v1/roles/:id": {
+      "get": {
+        "tags": ["Roles"],
+        "summary": "Get one role - Not implemented yet",
+        "description": "Get one role"
+      },
+      "put": {
+        "tags": ["Roles"],
+        "summary": "Update one role - Not implemented yet",
+        "description": "Update one role"
+      },
+      "delete": {
+        "tags": ["Roles"],
+        "summary": "Deactivate one role - Not implemented yet",
+        "description": "Delete one role"
+      }
+    },
+    "api/v1/employees": {
+      "get": {
+        "tags": ["Employees"],
+        "summary": "Get all employees - Not implemented yet",
+        "description": "Get employees",
+        "requestBody": {
+          "required": true
+        }
+      },
+      "post": {
+        "tags": ["Employees"],
+        "summary": "Create an employee - Not implemented yet",
+        "description": "Create an employee",
+        "requestBody": {
+          "required": true
+        }
+      }
+    },
+    "/api/v1/employees/:id": {
+      "get": {
+        "tags": ["Employees"],
+        "summary": "Get one employee - Not implemented yet",
+        "description": "Get one employee"
+      },
+      "put": {
+        "tags": ["Employees"],
+        "summary": "Update one employee - Not implemented yet",
+        "description": "Update one employee"
+      },
+      "delete": {
+        "tags": ["Employees"],
+        "summary": "Deactivate one employee - Not implemented yet",
+        "description": "Delete one employee"
+      }
+    },
+    "api/v1/contacts": {
+      "get": {
+        "tags": ["Contacts"],
+        "summary": "Get all contacts - Not implemented yet",
+        "description": "Get contacts",
+        "requestBody": {
+          "required": true
+        }
+      },
+      "post": {
+        "tags": ["Contacts"],
+        "summary": "Create a contact - Not implemented yet",
+        "description": "Create a contact",
+        "requestBody": {
+          "required": true
+        }
+      }
+    },
+    "/api/v1/contacts/:id": {
+      "get": {
+        "tags": ["Contacts"],
+        "summary": "Get one contact - Not implemented yet",
+        "description": "Get one contact"
+      },
+      "put": {
+        "tags": ["Contacts"],
+        "summary": "Update one contact - Not implemented yet",
+        "description": "Update one contact"
+      },
+      "delete": {
+        "tags": ["Contacts"],
+        "summary": "Deactivate one contact - Not implemented yet",
+        "description": "Delete one contact"
+      }
+    },
+    "api/v1/deals": {
+      "get": {
+        "tags": ["Deals"],
+        "summary": "Get all deals - Not implemented yet",
+        "description": "Get deals",
+        "requestBody": {
+          "required": true
+        }
+      },
+      "post": {
+        "tags": ["Deals"],
+        "summary": "Create a deal - Not implemented yet",
+        "description": "Create a deal",
+        "requestBody": {
+          "required": true
+        }
+      }
+    },
+    "/api/v1/deals/:id": {
+      "get": {
+        "tags": ["Deals"],
+        "summary": "Get one deal - Not implemented yet",
+        "description": "Get one deal"
+      },
+      "put": {
+        "tags": ["Deals"],
+        "summary": "Update one deal - Not implemented yet",
+        "description": "Update one deal"
+      },
+      "delete": {
+        "tags": ["Deals"],
+        "summary": "Deactivate one deal - Not implemented yet",
+        "description": "Delete one deal"
+      }
+    },
+    "api/v1/orders": {
+      "get": {
+        "tags": ["Orders"],
+        "summary": "Get all orders - Not implemented yet",
+        "description": "Get orders",
+        "requestBody": {
+          "required": true
+        }
+      },
+      "post": {
+        "tags": ["Orders"],
+        "summary": "Create an order - Not implemented yet",
+        "description": "Create an order",
+        "requestBody": {
+          "required": true
+        }
+      }
+    },
+    "/api/v1/orders/:id": {
+      "get": {
+        "tags": ["Orders"],
+        "summary": "Get one order - Not implemented yet",
+        "description": "Get one order"
+      },
+      "put": {
+        "tags": ["Orders"],
+        "summary": "Update one order - Not implemented yet",
+        "description": "Update one order"
+      },
+      "delete": {
+        "tags": ["Orders"],
+        "summary": "Deactivate one order - Not implemented yet",
+        "description": "Delete one order"
+      }
+    },
+    "api/v1/tickets": {
+      "get": {
+        "tags": ["Tickets"],
+        "summary": "Get all tickets - Not implemented yet",
+        "description": "Get tickets",
+        "requestBody": {
+          "required": true
+        }
+      },
+      "post": {
+        "tags": ["Tickets"],
+        "summary": "Create a ticket - Not implemented yet",
+        "description": "Create a ticket",
+        "requestBody": {
+          "required": true
+        }
+      }
+    },
+    "/api/v1/tickets/:id": {
+      "get": {
+        "tags": ["Tickets"],
+        "summary": "Get one ticket - Not implemented yet",
+        "description": "Get one ticket"
+      },
+      "put": {
+        "tags": ["Tickets"],
+        "summary": "Update one ticket - Not implemented yet",
+        "description": "Update one ticket"
+      },
+      "delete": {
+        "tags": ["Tickets"],
+        "summary": "Close one ticket - Not implemented yet",
+        "description": "Delete one ticket"
+      }
+    }
+  }
 }
