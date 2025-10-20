@@ -31,6 +31,17 @@ const roleSchema = new mongoose.Schema<IRole>({
     }
   ]
 });
+roleSchema.index({ name: 1 }, { unique: true });
+
+roleSchema.methods.getPermissions = function () {
+  return this.permissions;
+}
+
+roleSchema.methods.changeActive = function () {
+  this.isActive = !this.isActive;
+  this.save();
+  return;
+};
 
 const Role = mongoose.model<IRole>("Role", roleSchema);
 export default Role;

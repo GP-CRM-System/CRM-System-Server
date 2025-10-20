@@ -1,8 +1,6 @@
-import mongoose from "mongoose";
 import { z } from "zod";
 
-const SRole = z.object({
-  _id: z.instanceof(mongoose.Types.ObjectId),
+export const SRole = z.object({
   name: z.string().min(3).max(50),
   isActive: z.boolean().default(true),
   permissions: z.array(
