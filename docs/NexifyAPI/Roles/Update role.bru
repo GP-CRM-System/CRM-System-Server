@@ -1,23 +1,27 @@
 meta {
-  name: Create Role
+  name: Update role
   type: http
-  seq: 1
+  seq: 3
 }
 
-post {
-  url: {{apiUrl}}/roles
+put {
+  url: {{apiUrl}}/roles/:id
   body: json
   auth: inherit
 }
 
+params:path {
+  id: 68fa59e420488d8514b755f3
+}
+
 body:json {
   {
-    "name": "Sales",
+    "name": "Sales but Updated",
     "permissions": [
       {
         "permName": "Deal",
         "read": true,
-        "write": true
+        "write": false
       }
     ]
   }

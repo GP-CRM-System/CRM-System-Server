@@ -35,7 +35,7 @@ roleSchema.index({ name: 1 }, { unique: true });
 
 roleSchema.methods.getPermissions = function () {
   return this.permissions;
-}
+};
 
 roleSchema.methods.changeActive = function () {
   this.isActive = !this.isActive;

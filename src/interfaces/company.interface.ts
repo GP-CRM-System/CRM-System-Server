@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { z } from "zod";
 
-const SCompany = z.object({
+export const SCompany = z.object({
   _id: z.instanceof(mongoose.Types.ObjectId),
   name: z.string().min(3).max(50),
   ownerId: z.instanceof(mongoose.Types.ObjectId),
