@@ -38,12 +38,10 @@ export async function createEmployee(
   });
 
   if (employee.success === false) {
-    res
-      .status(400)
-      .json({
-        message: "Invalid employee payload",
-        error: employee.error.message
-      });
+    res.status(400).json({
+      message: "Invalid employee payload",
+      error: employee.error.message
+    });
     logger.error("Invalid employee payload");
     return;
   }
@@ -87,7 +85,7 @@ export async function getOneEmployee(
 }
 
 export async function updateEmployee(
-  req: Request<{ id: string }, object, IEmployee>,
+  req: Request<{ id: string }, object, Partial<IEmployee>>,
   res: Response<IResponse>
 ): Promise<void> {
   const id = req.params.id;
@@ -100,10 +98,9 @@ export async function updateEmployee(
     return;
   }
 
-  
   const hashedPassword = bcrypt.hashSync(password!, 10);
 
-  const updatedRole = SEmployee.safeParse({
+  const updatedRole = SEmployee.partial().safeParse({
     fullName,
     phone,
     email,
@@ -113,12 +110,10 @@ export async function updateEmployee(
   });
 
   if (updatedRole.success === false) {
-    res
-      .status(400)
-      .json({
-        message: "Invalid role payload",
-        error: updatedRole.error.message
-      });
+    res.status(400).json({
+      message: "Invalid role payload",
+      error: updatedRole.error.message
+    });
     logger.error("Invalid role payload");
     return;
   }
@@ -130,7 +125,7 @@ export async function updateEmployee(
   return;
 }
 
-export async function deleteEmployee(
+export async function deactivateEmployee(
   req: Request<{ id: string }>,
   res: Response<IResponse>
 ): Promise<void> {

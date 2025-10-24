@@ -35,6 +35,10 @@ const companySchema = new mongoose.Schema<ICompany>({
     type: Number,
     required: false,
     default: 0
+  },
+  isActive: {
+    type: Boolean,
+    default: true
   }
 });
 

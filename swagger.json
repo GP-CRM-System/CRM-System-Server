@@ -14,7 +14,7 @@
   },
   "servers": [
     {
-      "url": "http://{basePath}:{port}",
+      "url": "http://{basePath}:{port}/api/v1",
       "description": "Local development server",
       "variables": {
         "basePath": {
@@ -65,7 +65,7 @@
     }
   ],
   "paths": {
-    "api/v1/auth/register": {
+    "/auth/register": {
       "post": {
         "tags": ["Auth"],
         "summary": "Register a new user - Not implemented yet",
@@ -75,7 +75,7 @@
         }
       }
     },
-    "api/v1/auth/login": {
+    "/auth/login": {
       "post": {
         "tags": ["Auth"],
         "summary": "Login a user - Not implemented yet",
@@ -85,7 +85,7 @@
         }
       }
     },
-    "api/v1/auth/logout": {
+    "/auth/logout": {
       "post": {
         "tags": ["Auth"],
         "summary": "Logout a user - Not implemented yet",
@@ -95,7 +95,7 @@
         }
       }
     },
-    "api/v1/auth/refresh": {
+    "/auth/refresh": {
       "post": {
         "tags": ["Auth"],
         "summary": "Refresh a user - Not implemented yet",
@@ -105,7 +105,7 @@
         }
       }
     },
-    "api/v1/auth/verify": {
+    "/auth/verify": {
       "post": {
         "tags": ["Auth"],
         "summary": "Verify a user - Not implemented yet",
@@ -115,7 +115,7 @@
         }
       }
     },
-    "api/v1/auth/forgot-password": {
+    "/auth/forgot-password": {
       "post": {
         "tags": ["Auth"],
         "summary": "Forgot password - Not implemented yet",
@@ -125,7 +125,7 @@
         }
       }
     },
-    "api/v1/auth/reset-password": {
+    "/auth/reset-password": {
       "post": {
         "tags": ["Auth"],
         "summary": "Reset password - Not implemented yet",
@@ -135,13 +135,20 @@
         }
       }
     },
-    "api/v1/roles": {
+    "/roles": {
       "get": {
         "tags": ["Roles"],
         "summary": "Get all roles - Not implemented yet",
         "description": "Get roles",
         "requestBody": {
-          "required": true
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
         }
       },
       "post": {
@@ -153,7 +160,7 @@
         }
       }
     },
-    "/api/v1/roles/:id": {
+    "//roles/:id": {
       "get": {
         "tags": ["Roles"],
         "summary": "Get one role - Not implemented yet",
@@ -170,7 +177,7 @@
         "description": "Delete one role"
       }
     },
-    "api/v1/employees": {
+    "/employees": {
       "get": {
         "tags": ["Employees"],
         "summary": "Get all employees - Not implemented yet",
@@ -188,7 +195,7 @@
         }
       }
     },
-    "/api/v1/employees/:id": {
+    "//employees/:id": {
       "get": {
         "tags": ["Employees"],
         "summary": "Get one employee - Not implemented yet",
@@ -205,7 +212,7 @@
         "description": "Delete one employee"
       }
     },
-    "api/v1/contacts": {
+    "/contacts": {
       "get": {
         "tags": ["Contacts"],
         "summary": "Get all contacts - Not implemented yet",
@@ -223,7 +230,7 @@
         }
       }
     },
-    "/api/v1/contacts/:id": {
+    "//contacts/:id": {
       "get": {
         "tags": ["Contacts"],
         "summary": "Get one contact - Not implemented yet",
@@ -240,7 +247,7 @@
         "description": "Delete one contact"
       }
     },
-    "api/v1/deals": {
+    "/deals": {
       "get": {
         "tags": ["Deals"],
         "summary": "Get all deals - Not implemented yet",
@@ -258,7 +265,7 @@
         }
       }
     },
-    "/api/v1/deals/:id": {
+    "//deals/:id": {
       "get": {
         "tags": ["Deals"],
         "summary": "Get one deal - Not implemented yet",
@@ -275,7 +282,7 @@
         "description": "Delete one deal"
       }
     },
-    "api/v1/orders": {
+    "/orders": {
       "get": {
         "tags": ["Orders"],
         "summary": "Get all orders - Not implemented yet",
@@ -293,7 +300,7 @@
         }
       }
     },
-    "/api/v1/orders/:id": {
+    "//orders/:id": {
       "get": {
         "tags": ["Orders"],
         "summary": "Get one order - Not implemented yet",
@@ -310,7 +317,7 @@
         "description": "Delete one order"
       }
     },
-    "api/v1/tickets": {
+    "/tickets": {
       "get": {
         "tags": ["Tickets"],
         "summary": "Get all tickets - Not implemented yet",
@@ -328,7 +335,7 @@
         }
       }
     },
-    "/api/v1/tickets/:id": {
+    "//tickets/:id": {
       "get": {
         "tags": ["Tickets"],
         "summary": "Get one ticket - Not implemented yet",
@@ -343,6 +350,167 @@
         "tags": ["Tickets"],
         "summary": "Close one ticket - Not implemented yet",
         "description": "Delete one ticket"
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+    "schemas": {
+      "ResponseMessage": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Operation completed successfully"
+          },
+          "data": {
+            "type": "object",
+            "nullable": true,
+            "example": {
+              "name": "John Doe",
+              "email": "gkx5f@example.com"
+            }
+          },
+          "error": {
+            "type": "string",
+            "nullable": true,
+            "example": "Resource not found"
+          }
+        }
+      },
+      "Role": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "64a7f0c2e4b0c8b1a2d3e4f5"
+          },
+          "name": {
+            "type": "string",
+            "example": "Root"
+          },
+          "permissions": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "example": {
+              "permName": "Order",
+              "read": true,
+              "write": true
+            }
+          },
+          "isActive": {
+            "type": "boolean",
+            "example": true
+          }
+        }
+      },
+      "Employee": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "64a7f0c2e4b0c8b1a2d3e4f5"
+          },
+          "fullName": {
+            "type": "string",
+            "example": "John Doe"
+          },
+          "phone": {
+            "type": "string",
+            "example": "+1234567890"
+          },
+          "email": {
+            "type": "string",
+            "example": "gkx5f@example.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "12345678"
+          },
+          "roleId": {
+            "type": "string",
+            "example": "64a7f0c2e4b0c8b1a2d3e4f5"
+          },
+          "salary": {
+            "type": "number",
+            "example": 5000
+          },
+          "isActive": {
+            "type": "boolean",
+            "example": true
+          }
+        }
+      },
+      "Contact": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "64a7f0c2e4b0c8b1a2d3e4f5"
+          },
+          "name": {
+            "type": "string",
+            "example": "Jane Smith"
+          },
+          "email": {
+            "type": "string",
+            "example": "gkx5f@example.com"
+          },
+          "phone": {
+            "type": "string",
+            "example": "+1234567890"
+          },
+          "address": {
+            "type": "string",
+            "example": "123 Main Street"
+          },
+          "jobTitle": {
+            "type": "string",
+            "example": "Software Engineer"
+          },
+          "ownerId": {
+            "type": "string",
+            "example": "64a7f0c2e4b0c8b1a2d3e4f5"
+          },
+          "stage": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Lead"
+                },
+                "date": {
+                  "type": "string",
+                  "format": "date-time",
+                  "example": "2024-07-01T12:00:00Z"
+                }
+              }
+            },
+            "example": [
+              {
+                "name": "Lead",
+                "date": "2024-07-01T12:00:00Z"
+              },
+              {
+                "name": "Customer",
+                "date": "2024-07-05T15:30:00Z"
+              }
+            ]
+          },
+          "isActive": {
+            "type": "boolean",
+            "example": true
+          }
+        }
       }
     }
   }

@@ -28,18 +28,24 @@ const contactSchema = new mongoose.Schema<IContact>({
     required: true,
     ref: "Employee"
   },
-  stage: [
-    {
-      name: {
-        type: String,
-        required: true
-      },
-      date: {
-        type: Date,
-        required: true
+  stage: {
+    type: [
+      {
+        name: {
+          type: String,
+          enum: ["Lead", "Customer"]
+        },
+        date: {
+          type: Date
+        }
       }
-    }
-  ]
+    ],
+    default: [{ name: "Lead", date: new Date() }]
+  },
+  isActive: {
+    type: Boolean,
+    default: true
+  }
 });
 
 const Contact = mongoose.model<IContact>("Contact", contactSchema);

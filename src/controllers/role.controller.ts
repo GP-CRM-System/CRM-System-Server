@@ -82,12 +82,10 @@ export async function updateRole(
   const updatedRole = SRole.safeParse({ name, permissions });
 
   if (updatedRole.success === false) {
-    res
-      .status(400)
-      .json({
-        message: "Invalid role payload",
-        error: updatedRole.error.message
-      });
+    res.status(400).json({
+      message: "Invalid role payload",
+      error: updatedRole.error.message
+    });
     logger.error("Invalid role payload");
     return;
   }

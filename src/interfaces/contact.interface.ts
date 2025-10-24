@@ -1,8 +1,7 @@
 import mongoose from "mongoose";
 import { z } from "zod";
 
-const SContact = z.object({
-  _id: z.instanceof(mongoose.Types.ObjectId),
+export const SContact = z.object({
   name: z.string().min(3).max(50),
   email: z.email().nullable(),
   phone: z.string().nullable(),
@@ -16,7 +15,8 @@ const SContact = z.object({
         date: z.date().default(new Date())
       })
     )
-    .default([{ name: "Lead", date: new Date() }])
+    .default([{ name: "Lead", date: new Date() }]),
+  isActive: z.boolean().default(true)
 });
 
 export type IContact = z.infer<typeof SContact>;

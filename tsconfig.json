@@ -9,7 +9,6 @@
     // See also https://aka.ms/tsconfig/module
     "module": "nodenext",
     "target": "esnext",
-    // "types": [],
     // For nodejs:
     "lib": ["esnext"],
     "types": ["node"],
@@ -41,5 +40,11 @@
     "moduleDetection": "force",
     "skipLibCheck": true
   },
-  "exclude": ["./eslint.config.ts", "./prettier.config.ts", "./jest.config.ts"]
+  "exclude": [
+    "./eslint.config.ts",
+    "./prettier.config.ts",
+    "./jest.config.ts",
+    "./dist",
+    "./node_modules"
+  ]
 }

@@ -7,6 +7,18 @@ import morgan from "morgan";
 import { pino, multistream } from "pino";
 import pretty from "pino-pretty";
 
+// Ensure logs directory exists
+if (!fs.existsSync("./logs")) {
+  fs.mkdirSync("./logs");
+}
+// Create logs files if they don't exist
+if (!fs.existsSync("./logs/app.log")) {
+  fs.writeFileSync("./logs/app.log", "");
+}
+if (!fs.existsSync("./logs/access.log")) {
+  fs.writeFileSync("./logs/access.log", "");
+}
+
 // Pretty stream for console
 const prettyStream = pretty({
   colorize: true,

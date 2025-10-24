@@ -1,0 +1,120 @@
+import type { Request, Response } from "express";
+import { SContact, type IContact } from "../interfaces/contact.interface.js";
+import { logger } from "../config/logger.config.js";
+import Contact from "../models/contact.model.js";
+import type { IResponse } from "../interfaces/response.interface.js";
+
+export async function createContact(
+  req: Request<object, object, IContact>,
+  res: Response<IResponse>
+): Promise<void> {
+  const { name, email, phone, address, jobTitle, ownerId, stage } = req.body;
+
+  const contact = SContact.safeParse({
+    name,
+    email,
+    phone,
+    address,
+    jobTitle,
+    ownerId,
+    stage
+  });
+
+  if (contact.success === false) {
+    res.status(400).json({ message: "Missing required fields" });
+    logger.error("Missing required fields");
+    return;
+  }
+
+  const existingContact = await Contact.findOne({ email });
+  if (existingContact) {
+    res
+      .status(409)
+      .json({ message: "Contact with the same email already exists" });
+    logger.error(`Contact with email ${email} already exists`);
+    return;
+  }
+
+  const createdContact = await Contact.create(contact.data);
+  logger.info(`Created contact ${name}`);
+  res.status(201).json({ message: "Contact created", data: createdContact });
+  return;
+}
+
+export async function getAllContacts(
+  _req: Request,
+  res: Response<IResponse>
+): Promise<void> {
+  const contacts = await Contact.find();
+  if (contacts.length === 0) {
+    res.status(404).json({ message: "No contacts found" });
+    logger.warn("No contacts found");
+    return;
+  }
+  logger.info("Retrieved all contacts");
+  res.status(200).json({ message: "Contacts retrieved", data: contacts });
+  return;
+}
+
+export async function getOneContact(
+  req: Request<{ id: string }>,
+  res: Response<IResponse>
+): Promise<void> {
+  const { id } = req.params;
+  const contact = await Contact.findById(id);
+  if (!contact) {
+    res.status(404).json({ message: "Contact not found" });
+    logger.warn(`Contact with id ${id} not found`);
+    return;
+  }
+  logger.info(`Retrieved contact with id ${id}`);
+  res.status(200).json({ message: "Contact retrieved", data: contact });
+  return;
+}
+
+export async function updateContact(
+  req: Request<{ id: string }, object, Partial<IContact>>,
+  res: Response<IResponse>
+): Promise<void> {
+  const { id } = req.params;
+  const updates = req.body;
+  const verifiedUpdates = SContact.partial().safeParse(updates);
+
+  if (verifiedUpdates.success === false) {
+    res.status(400).json({ message: "Invalid update fields" });
+    logger.error("Invalid update fields");
+    return;
+  }
+
+  const contact = await Contact.findById(id);
+  if (!contact) {
+    res.status(404).json({ message: "Contact not found" });
+    logger.warn(`Contact with id ${id} not found`);
+    return;
+  }
+
+  await Contact.updateOne({ _id: id }, { $set: verifiedUpdates.data });
+  logger.info(`Updated contact with id ${id}`);
+  res.status(200).json({ message: "Contact updated", data: contact });
+  return;
+}
+
+export async function deactivateContact(
+  req: Request<{ id: string }>,
+  res: Response<IResponse>
+): Promise<void> {
+  const { id } = req.params;
+  const contact = await Contact.findById(id);
+  if (!contact) {
+    res.status(404).json({ message: "Contact not found" });
+    logger.warn(`Contact with id ${id} not found`);
+    return;
+  }
+  await Contact.updateOne(
+    { _id: id },
+    { $set: { isActive: !contact.isActive } }
+  );
+  logger.info(`Deactivated contact with id ${id}`);
+  res.status(200).json({ message: "Contact deactivated", data: contact });
+  return;
+}

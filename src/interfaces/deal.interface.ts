@@ -1,8 +1,7 @@
 import mongoose from "mongoose";
 import { z } from "zod";
 
-const SDeal = z.object({
-  _id: z.instanceof(mongoose.Types.ObjectId),
+export const SDeal = z.object({
   name: z.string().min(3).max(50),
   stage: z.array(
     z.object({
