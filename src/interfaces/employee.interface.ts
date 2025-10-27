@@ -6,9 +6,14 @@ export const SEmployee = z.object({
   phone: z.string().min(8).max(15),
   email: z.email(),
   password: z.string().min(8).max(64).nullable(),
-  roleId: z.instanceof(mongoose.Types.ObjectId),
+  roleId: z.custom<mongoose.Types.ObjectId>((val) => mongoose.Types.ObjectId.isValid(val as string)),
   salary: z.number().gte(0).default(0),
-  isActive: z.boolean().default(false)
+  isActive: z.boolean().default(false),
+  isModified: z.function({
+    input: [z.string()],
+    output: z.boolean()
+  }).readonly().optional(),
+  isNew: z.boolean().readonly().optional()
 });
 
 export type IEmployee = z.infer<typeof SEmployee>;

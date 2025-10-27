@@ -1,5 +1,6 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 import type { IEmployee } from "../interfaces/employee.interface.js";
+import bcrypt from "bcrypt";
 
 const employeeSchema = new mongoose.Schema<IEmployee>({
   fullName: {
@@ -34,6 +35,17 @@ const employeeSchema = new mongoose.Schema<IEmployee>({
     default: true
   }
 });
+
+employeeSchema.pre<IEmployee>("save", async function (next) {
+  if (this.password === undefined) {
+    return next();
+  }
+  if (this.isModified!("password") || this.isNew) {
+    this.password = await bcrypt.hash(this.password!, 10);
+  }
+  next();
+})
+
 
 const Employee = mongoose.model<IEmployee>("Employee", employeeSchema);
 export default Employee;

@@ -1,11 +1,10 @@
 import mongoose from "mongoose";
 import { z } from "zod";
 
-const SOrder = z.object({
-  _id: z.instanceof(mongoose.Types.ObjectId),
+export const SOrder = z.object({
   description: z.string().min(3).max(50),
   price: z.number().gt(0),
-  ownerId: z.instanceof(mongoose.Types.ObjectId),
+  ownerId: z.custom<mongoose.Types.ObjectId>((val) => mongoose.Types.ObjectId.isValid(val as string)),
   stage: z.array(
     z.object({
       stageType: z
@@ -14,8 +13,8 @@ const SOrder = z.object({
       date: z.date().default(new Date())
     })
   ),
-  contactId: z.instanceof(mongoose.Types.ObjectId),
-  employeeId: z.instanceof(mongoose.Types.ObjectId).nullable()
+  contactId: z.custom<mongoose.Types.ObjectId>((val) => mongoose.Types.ObjectId.isValid(val as string)),
+  employeeId: z.custom<mongoose.Types.ObjectId>((val) => mongoose.Types.ObjectId.isValid(val as string))
 });
 
 export type IOrder = z.infer<typeof SOrder>;

@@ -4,12 +4,20 @@ import roleRouter from "./role.routes.js";
 import employeeRouter from "./employee.routes.js";
 import contactRouter from "./contact.routes.js";
 import companyRouter from "./company.routes.js";
+import dealRouter from "./deal.routes.js";
+import orderRouter from "./order.routes.js";
+import ticketRouter from "./ticket.routes.js";
+import miscRouter from "./misc.routes.js";
 
 const router = express.Router();
 
-router.use("/roles", roleRouter);
-router.use("/employees", employeeRouter);
-router.use("/contacts", contactRouter);
 router.use("/companies", companyRouter);
+router.use("/contacts", contactRouter);
+router.use("/deals", dealRouter);
+router.use("/employees", employeeRouter);
+router.use("/orders", orderRouter);
+router.use("/roles", roleRouter);
+router.use("/tickets", ticketRouter);
+router.use(miscRouter);
 
 export default router;

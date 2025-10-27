@@ -1,0 +1,20 @@
+meta {
+  name: Get one contact
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{apiUrl}}/contacts/:id
+  body: none
+  auth: inherit
+}
+
+params:path {
+  id: 68ff3c5cfc3d08afc4ce02a8
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

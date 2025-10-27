@@ -15,15 +15,15 @@ export const SDeal = z.object({
           "Closed Won",
           "Closed Lost"
         ])
-        .default("Appointment Scheduled"),
-      date: z.date().default(new Date())
+      ,
+      date: z.date(),
     })
-  ),
+  ).default([{ name: "Appointment Scheduled", date: new Date() }]),
   amount: z.number().gt(0),
-  ownerId: z.instanceof(mongoose.Types.ObjectId),
+  ownerId: z.custom<mongoose.Types.ObjectId>((val) => mongoose.Types.ObjectId.isValid(val as string)),
   priority: z.enum(["Low", "Medium", "High"]),
-  contactId: z.instanceof(mongoose.Types.ObjectId),
-  companyId: z.instanceof(mongoose.Types.ObjectId).nullable()
+  contactId: z.custom<mongoose.Types.ObjectId>((val) => mongoose.Types.ObjectId.isValid(val as string)),
+  companyId: z.custom<mongoose.Types.ObjectId>((val) => mongoose.Types.ObjectId.isValid(val as string))
 });
 
 export type IDeal = z.infer<typeof SDeal>;

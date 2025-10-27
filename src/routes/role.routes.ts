@@ -2,7 +2,7 @@ import express from "express";
 
 import {
   createRole,
-  deleteRole,
+  deactivateRole,
   getAllRoles,
   getOneRole,
   updateRole
@@ -12,6 +12,6 @@ const roleRouter = express.Router();
 
 roleRouter.route("/").post(createRole).get(getAllRoles);
 
-roleRouter.route("/:id").get(getOneRole).put(updateRole).delete(deleteRole);
+roleRouter.route("/:id").get(getOneRole).put(updateRole).delete(deactivateRole);
 
 export default roleRouter;

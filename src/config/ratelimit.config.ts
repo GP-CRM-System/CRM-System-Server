@@ -1,14 +1,10 @@
-import type { Request, Response } from "express";
 import rateLimit from "express-rate-limit";
+import { rateLimiter } from "../controllers/misc.controller.js";
 
 export const authRateLimit = rateLimit({
   windowMs: 60000,
   limit: 25,
-  handler: (_req: Request, res: Response) => {
-    return res
-      .status(429)
-      .json({ message: "Too many requests, please try again later." });
-  },
+  handler: rateLimiter,
   standardHeaders: true,
   legacyHeaders: false
 });
