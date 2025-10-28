@@ -23,7 +23,7 @@ const contactSchema = new mongoose.Schema<IContact>({
     type: String,
     required: false
   },
-  ownerId: {
+  owner: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
     ref: "Employee"

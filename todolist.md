@@ -1,12 +1,10 @@
 # To-Do List
 
-1. Add Try-Catch blocks in controllers after finalizing logic
-2. implement Authentication and Authorization
-3. Finish Docs
-4. Add Tests
-5. Mail Logic
-6. Implement OAuth 2.0 with google
-7. Implement Ratelimiting
-8. Add Image Uploading with Multer
-9. Add Search Queries to endpoints
-10. change schemas from roleId to role
+1. implement Authentication and Authorization
+2. Finish Docs
+3. Add Tests
+4. Mail Logic
+5. Implement OAuth 2.0 with google
+6. Implement Ratelimiting
+7. Add Image Uploading with Multer
+8. Add Search Queries to endpoints

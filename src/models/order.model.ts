@@ -10,7 +10,7 @@ const orderSchema = new mongoose.Schema<IOrder>({
     type: Number,
     required: true
   },
-  ownerId: {
+  owner: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
     ref: "Employee"
@@ -29,12 +29,12 @@ const orderSchema = new mongoose.Schema<IOrder>({
       }
     }
   ],
-  contactId: {
+  contact: {
     type: mongoose.Schema.Types.ObjectId,
     required: false,
     ref: "Contact"
   },
-  employeeId: {
+  employee: {
     type: mongoose.Schema.Types.ObjectId,
     required: false,
     ref: "Employee"

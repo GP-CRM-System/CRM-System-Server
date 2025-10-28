@@ -9,7 +9,7 @@ export async function createContact(
   res: Response<IResponse>
 ): Promise<void> {
   try {
-    const { name, email, phone, address, jobTitle, ownerId, stage } = req.body;
+    const { name, email, phone, address, jobTitle, owner, stage } = req.body;
   
     const contact = SContact.safeParse({
       name,
@@ -17,7 +17,7 @@ export async function createContact(
       phone,
       address,
       jobTitle,
-      ownerId,
+      owner,
       stage
     });
   

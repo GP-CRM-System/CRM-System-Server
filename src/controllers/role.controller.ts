@@ -88,7 +88,6 @@ export async function updateRole(
 ): Promise<void> {
   try {
     const id = req.params.id;
-    const { name, permissions } = req.body;
   
     const role = await Role.findById(id);
     if (!role) {
@@ -97,7 +96,7 @@ export async function updateRole(
       return;
     }
   
-    const updatedRole = SRole.partial().safeParse({ name, permissions });
+    const updatedRole = SRole.partial().safeParse(req.body);
   
     if (updatedRole.success === false) {
       res.status(400).json({

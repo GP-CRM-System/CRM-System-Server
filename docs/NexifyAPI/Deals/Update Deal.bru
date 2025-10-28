@@ -1,0 +1,26 @@
+meta {
+  name: Update Deal
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{apiUrl}}/deals/:id
+  body: json
+  auth: inherit
+}
+
+params:path {
+  id: 68ff50153a96cf28eb783c31
+}
+
+body:json {
+  {
+    "name":"Updated Deal"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

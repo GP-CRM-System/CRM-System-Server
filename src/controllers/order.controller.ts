@@ -10,34 +10,34 @@ export async function createOrder(
   res: Response<IResponse>
 ): Promise<void> {
   try {
-    const { description, price, ownerId, stage, contactId, employeeId } =
+    const { description, price, owner, stage, contact, employee } =
       req.body;
     const order = SOrder.safeParse({
       description,
       price,
-      ownerId,
+      owner,
       stage,
-      contactId,
-      employeeId
+      contact,
+      employee
     });
 
     if (order.success === false) {
-      res.status(400).json({ message: "Missing required fields" });
+      res.status(400).json({ message: "Missing required fields", error: order.error.toString() });
       logger.error("Missing required fields");
       return;
     }
 
-    const contact = await Contact.findById(contactId);
-    if (!contact) {
+    const associatedContact = await Contact.findById(contact);
+    if (!associatedContact) {
       res.status(404).json({ message: "Associated contact not found" });
-      logger.error(`Associated contact with ID ${contactId} not found`);
+      logger.error(`Associated contact with ID ${contact} not found`);
       return;
     } else {
-      if (contact.stage[contact.stage.length - 1]!.name !== "Customer") {
-        contact.stage.push({ name: "Customer", date: new Date() });
-        await contact.save();
+      if (associatedContact.stage[associatedContact.stage.length - 1]!.name !== "Customer") {
+        associatedContact.stage.push({ name: "Customer", date: new Date() });
+        await associatedContact.save();
         logger.info(
-          `Updated contact ${contact.name} stage to Customer due to new order creation`
+          `Updated contact ${associatedContact.name} stage to Customer due to new order creation`
         );
       }
     }
@@ -75,15 +75,15 @@ export async function getAllOrders(
 }
 
 export async function getOneOrder(
-  req: Request<{ orderId: string }>,
+  req: Request<{ id: string }>,
   res: Response<IResponse>
 ): Promise<void> {
   try {
-    const { orderId } = req.params;
-    const order = await Order.findById(orderId);
+    const { id } = req.params;
+    const order = await Order.findById(id);
     if (!order) {
       res.status(404).json({ message: "Order not found" });
-      logger.warn(`Order with id ${orderId} not found`);
+      logger.warn(`Order with id ${id} not found`);
       return;
     }
     logger.info(`Retrieved order ${order.description}`);
@@ -97,20 +97,21 @@ export async function getOneOrder(
 }
 
 export async function updateOrder(
-  req: Request<{ orderId: string }, object, Partial<IOrder>>,
+  req: Request<{ id: string }, object, Partial<IOrder>>,
   res: Response<IResponse>
 ): Promise<void> {
   try {
-    const { orderId } = req.params;
-    const { description, price, ownerId, stage, contactId, employeeId } =
+    const { id } = req.params;
+    console.log(req.body);
+    const { description, price, owner, stage, contact, employee } =
       req.body;
     const order = SOrder.partial().safeParse({
       description,
       price,
-      ownerId,
+      owner,
       stage,
-      contactId,
-      employeeId
+      contact,
+      employee
     });
 
     if (order.success === false) {
@@ -119,13 +120,13 @@ export async function updateOrder(
       return;
     }
 
-    const existingOrder = await Order.findById(orderId);
+    const existingOrder = await Order.findById(id);
     if (!existingOrder) {
       res.status(404).json({ message: "Order not found" });
-      logger.warn(`Order with id ${orderId} not found`);
+      logger.warn(`Order with id ${id} not found`);
       return;
     }
-    await Order.updateOne({ _id: orderId }, { $set: order.data });
+    await Order.updateOne({ _id: id }, { $set: order.data });
     logger.info(`Updated order ${order.data.description}`);
     res.status(200).json({ message: "Order updated", data: order.data });
     return;

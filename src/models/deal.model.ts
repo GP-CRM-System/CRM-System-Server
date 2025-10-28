@@ -6,17 +6,32 @@ const dealSchema = new mongoose.Schema<IDeal>({
     type: String,
     required: true
   },
-  stage: [
-    {
+  stage: [{
+    name: {
       type: String,
-      required: true
+      required: true,
+      enum: [
+        "Appointment Scheduled",
+        "Qualified To Buy",
+        "Presentation Scheduled",
+        "Decision Maker Bought-In",
+        "Contract Sent",
+        "Closed Won",
+        "Closed Lost",
+      ],
+    },
+    date: {
+      type: Date,
+      required: true,
+      default: Date.now
     }
+  }
   ],
   amount: {
     type: Number,
     required: true
   },
-  ownerId: {
+  owner: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
     ref: "Employee"
@@ -25,12 +40,12 @@ const dealSchema = new mongoose.Schema<IDeal>({
     type: String,
     required: true
   },
-  contactId: {
+  contact: {
     type: mongoose.Schema.Types.ObjectId,
     required: false,
     ref: "Contact"
   },
-  companyId: {
+  company: {
     type: mongoose.Schema.Types.ObjectId,
     required: false,
     ref: "Company"

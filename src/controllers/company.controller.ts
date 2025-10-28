@@ -11,7 +11,7 @@ export async function createCompany(
   try {
     const {
       name,
-      ownerId,
+      owner,
       website,
       email,
       industry,
@@ -22,7 +22,7 @@ export async function createCompany(
 
     const company = SCompany.safeParse({
       name,
-      ownerId,
+      owner,
       website,
       email,
       industry,

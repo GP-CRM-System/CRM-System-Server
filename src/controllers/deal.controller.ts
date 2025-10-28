@@ -10,17 +10,17 @@ export async function createDeal(
   res: Response<IResponse>
 ): Promise<void> {
   try {
-    const { name, stage, amount, ownerId, priority, contactId, companyId } =
+    const { name, stage, amount, owner, priority, contact, company } =
       req.body;
   
     const deal = SDeal.safeParse({
       name,
       stage,
       amount,
-      ownerId,
+      owner,
       priority,
-      contactId,
-      companyId
+      contact,
+      company
     });
   
     if (deal.success === false) {
@@ -36,17 +36,17 @@ export async function createDeal(
       return;
     }
   
-    const contact = await Contact.findById(contactId);
-    if (!contact) {
+    const associatedContact = await Contact.findById(contact);
+    if (!associatedContact) {
       res.status(404).json({ message: "Associated contact not found" });
-      logger.error(`Associated contact with ID ${contactId} not found`);
+      logger.error(`Associated contact with ID ${contact} not found`);
       return;
     } else {
-      if (contact.stage[contact.stage.length - 1]!.name !== "Customer") {
-        contact.stage.push({ name: "Customer", date: new Date() });
-        await contact.save();
+      if (associatedContact.stage[associatedContact.stage.length - 1]!.name !== "Customer") {
+        associatedContact.stage.push({ name: "Customer", date: new Date() });
+        await associatedContact.save();
         logger.info(
-          `Updated contact ${contact.name} stage to Customer due to new deal creation`
+          `Updated contact ${associatedContact.name} stage to Customer due to new deal creation`
         );
       }
     }

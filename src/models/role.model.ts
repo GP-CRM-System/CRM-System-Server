@@ -12,24 +12,41 @@ const roleSchema = new mongoose.Schema<IRole>({
     required: true,
     default: true
   },
-  permissions: [
-    {
-      permName: {
-        type: String,
-        required: true
-      },
-      read: {
-        type: Boolean,
-        required: true,
-        default: false
-      },
-      write: {
-        type: Boolean,
-        required: true,
-        default: false
-      }
-    }
-  ]
+  Company: {
+    read: { type: Boolean, default: false },
+    write: { type: Boolean, default: false },
+    delete: { type: Boolean, default: false }
+  },
+  Employee: {
+    read: { type: Boolean, default: false },
+    write: { type: Boolean, default: false },
+    delete: { type: Boolean, default: false }
+  },
+  Contact: {
+    read: { type: Boolean, default: false },
+    write: { type: Boolean, default: false },
+    delete: { type: Boolean, default: false }
+  },
+  Deal: {
+    read: { type: Boolean, default: false },
+    write: { type: Boolean, default: false },
+    delete: { type: Boolean, default: false }
+  },
+  Role: {
+    read: { type: Boolean, default: false },
+    write: { type: Boolean, default: false },
+    delete: { type: Boolean, default: false }
+  },
+  Order: {
+    read: { type: Boolean, default: false },
+    write: { type: Boolean, default: false },
+    delete: { type: Boolean, default: false }
+  },
+  Ticket: {
+    read: { type: Boolean, default: false },
+    write: { type: Boolean, default: false },
+    delete: { type: Boolean, default: false }
+  }
 });
 roleSchema.index({ name: 1 }, { unique: true });
 

@@ -1,0 +1,26 @@
+meta {
+  name: Create Order
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{apiUrl}}/orders
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "description":"Very good order very nice",
+    "price":54,
+    "owner": "68fa6b0817d720707633e74c",
+    "contact":"68ff3c5cfc3d08afc4ce02a8",
+    "employee":"68fa6b0817d720707633e74c"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

@@ -155,7 +155,7 @@ const industries = [
 
 export const SCompany = z.object({
   name: z.string().min(3).max(50),
-  ownerId: z.custom<mongoose.Types.ObjectId>((val) => mongoose.Types.ObjectId.isValid(val as string)),
+  owner: z.custom<mongoose.Types.ObjectId>((val) => mongoose.Types.ObjectId.isValid(val as string)),
   website: z.url().nullable(),
   email: z.email().nullable(),
   industry: z.enum(industries),

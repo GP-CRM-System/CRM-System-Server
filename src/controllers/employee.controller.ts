@@ -10,7 +10,7 @@ export async function createEmployee(
   res: Response<IResponse>
 ): Promise<void> {
   try {
-    const { fullName, phone, email, password, salary, roleId } = req.body;
+    const { fullName, phone, email, password, salary, role } = req.body;
   
     const hashedPassword = bcrypt.hashSync(password!, 10);
   
@@ -20,7 +20,7 @@ export async function createEmployee(
       email,
       password: hashedPassword,
       salary,
-      roleId
+      role
     });
   
     if (employee.success === false) {
@@ -57,7 +57,7 @@ export async function getAllEmployees(
   res: Response<IResponse>
 ): Promise<void> {
   try {
-    const employees = await Employee.find().select("-password").populate("roleId");
+    const employees = await Employee.find().select("-password").populate("role");
     if (employees.length === 0) {
       res.status(404).json({ message: "No employees found" });
       logger.warn("No employees found");
@@ -102,7 +102,7 @@ export async function updateEmployee(
 ): Promise<void> {
   try {
     const id = req.params.id;
-    const { fullName, phone, email, salary, roleId } = req.body;
+    const { fullName, phone, email, salary, role } = req.body;
     let { password } = req.body;
   
     if (password) {
@@ -122,7 +122,7 @@ export async function updateEmployee(
       email,
       password,
       salary,
-      roleId
+      role
     });
   
     if (updatedRole.success === false) {

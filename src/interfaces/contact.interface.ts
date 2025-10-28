@@ -7,7 +7,7 @@ export const SContact = z.object({
   phone: z.string().nullable(),
   address: z.string().nullable(),
   jobTitle: z.string().nullable(),
-  ownerId: z.custom<mongoose.Types.ObjectId>((val) => mongoose.Types.ObjectId.isValid(val as string)),
+  owner: z.custom<mongoose.Types.ObjectId>((val) => mongoose.Types.ObjectId.isValid(val as string)),
   stage: z
     .array(
       z.object({

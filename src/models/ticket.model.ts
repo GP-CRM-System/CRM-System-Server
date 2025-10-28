@@ -23,7 +23,7 @@ const ticketSchema = new mongoose.Schema<ITicket>({
     type: String,
     required: true
   },
-  ownerId: {
+  owner: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
     ref: "Employee"
@@ -36,7 +36,7 @@ const ticketSchema = new mongoose.Schema<ITicket>({
     type: String,
     required: true
   },
-  contactId: {
+  contact: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
     ref: "Contact"
