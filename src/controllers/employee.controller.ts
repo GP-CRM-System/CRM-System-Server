@@ -11,9 +11,9 @@ export async function createEmployee(
 ): Promise<void> {
   try {
     const { fullName, phone, email, password, salary, role } = req.body;
-  
+
     const hashedPassword = bcrypt.hashSync(password!, 10);
-  
+
     const employee = SEmployee.safeParse({
       fullName,
       phone,
@@ -22,7 +22,7 @@ export async function createEmployee(
       salary,
       role
     });
-  
+
     if (employee.success === false) {
       res.status(400).json({
         message: "Invalid employee payload",
@@ -31,7 +31,7 @@ export async function createEmployee(
       logger.error("Invalid employee payload");
       return;
     }
-  
+
     const existingEmployee = await Employee.findOne({ email });
     if (existingEmployee) {
       res
@@ -40,14 +40,19 @@ export async function createEmployee(
       logger.error(`Employee with email ${email} already exists`);
       return;
     }
-  
+
     logger.info(`Created employee ${fullName}`);
     const createdEmployee = await Employee.create(employee.data);
-    res.status(201).json({ message: "Employee created", data: createdEmployee });
+    res
+      .status(201)
+      .json({ message: "Employee created", data: createdEmployee });
     return;
   } catch (err: unknown) {
     logger.error(`Error creating employee: ${(err as Error).message}`);
-    res.status(500).json({ message: "Internal server error", error: (err as Error).message });
+    res.status(500).json({
+      message: "Internal server error",
+      error: (err as Error).message
+    });
     return;
   }
 }
@@ -57,7 +62,9 @@ export async function getAllEmployees(
   res: Response<IResponse>
 ): Promise<void> {
   try {
-    const employees = await Employee.find().select("-password").populate("role");
+    const employees = await Employee.find()
+      .select("-password")
+      .populate("role");
     if (employees.length === 0) {
       res.status(404).json({ message: "No employees found" });
       logger.warn("No employees found");
@@ -68,7 +75,10 @@ export async function getAllEmployees(
     return;
   } catch (err: unknown) {
     logger.error(`Error retrieving employees: ${(err as Error).message}`);
-    res.status(500).json({ message: "Internal server error", error: (err as Error).message });
+    res.status(500).json({
+      message: "Internal server error",
+      error: (err as Error).message
+    });
     return;
   }
 }
@@ -79,7 +89,7 @@ export async function getOneEmployee(
 ): Promise<void> {
   try {
     const id = req.params.id;
-  
+
     const employee = await Employee.findById(id).select("-password");
     if (!employee) {
       res.status(404).json({ message: "Employee not found" });
@@ -91,7 +101,10 @@ export async function getOneEmployee(
     return;
   } catch (err: unknown) {
     logger.error(`Error retrieving employee: ${(err as Error).message}`);
-    res.status(500).json({ message: "Internal server error", error: (err as Error).message });
+    res.status(500).json({
+      message: "Internal server error",
+      error: (err as Error).message
+    });
     return;
   }
 }
@@ -104,11 +117,11 @@ export async function updateEmployee(
     const id = req.params.id;
     const { fullName, phone, email, salary, role } = req.body;
     let { password } = req.body;
-  
+
     if (password) {
       password = bcrypt.hashSync(password, 10);
     }
-  
+
     const employee = await Employee.findById(id);
     if (!employee) {
       res.status(404).json({ message: "employee not found" });
@@ -124,7 +137,7 @@ export async function updateEmployee(
       salary,
       role
     });
-  
+
     if (updatedRole.success === false) {
       res.status(400).json({
         message: "Invalid role payload",
@@ -133,15 +146,18 @@ export async function updateEmployee(
       logger.error("Invalid role payload");
       return;
     }
-  
+
     await Employee.updateOne({ _id: id }, { $set: updatedRole.data });
-  
+
     logger.info(`Updated employee ${employee.fullName}`);
     res.status(200).json({ message: "Employee updated", data: employee });
     return;
   } catch (err: unknown) {
     logger.error(`Error updating employee: ${(err as Error).message}`);
-    res.status(500).json({ message: "Internal server error", error: (err as Error).message });
+    res.status(500).json({
+      message: "Internal server error",
+      error: (err as Error).message
+    });
     return;
   }
 }
@@ -152,7 +168,7 @@ export async function deactivateEmployee(
 ): Promise<void> {
   try {
     const id = req.params.id;
-  
+
     const employee = await Employee.findById(id);
     if (!employee) {
       res.status(404).json({ message: "employee not found" });
@@ -168,7 +184,10 @@ export async function deactivateEmployee(
     return;
   } catch (err: unknown) {
     logger.error(`Error deactivating employee: ${(err as Error).message}`);
-    res.status(500).json({ message: "Internal server error", error: (err as Error).message });
+    res.status(500).json({
+      message: "Internal server error",
+      error: (err as Error).message
+    });
     return;
   }
 }

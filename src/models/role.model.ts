@@ -2,16 +2,8 @@ import mongoose from "mongoose";
 import type { IRole } from "../interfaces/role.interface.js";
 
 const roleSchema = new mongoose.Schema<IRole>({
-  name: {
-    type: String,
-    required: true,
-    unique: true
-  },
-  isActive: {
-    type: Boolean,
-    required: true,
-    default: true
-  },
+  name: { type: String, required: true, unique: true },
+  isActive: { type: Boolean, required: true, default: true },
   Company: {
     read: { type: Boolean, default: false },
     write: { type: Boolean, default: false },

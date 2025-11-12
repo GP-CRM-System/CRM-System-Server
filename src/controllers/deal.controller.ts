@@ -10,9 +10,8 @@ export async function createDeal(
   res: Response<IResponse>
 ): Promise<void> {
   try {
-    const { name, stage, amount, owner, priority, contact, company } =
-      req.body;
-  
+    const { name, stage, amount, owner, priority, contact, company } = req.body;
+
     const deal = SDeal.safeParse({
       name,
       stage,
@@ -22,27 +21,32 @@ export async function createDeal(
       contact,
       company
     });
-  
+
     if (deal.success === false) {
       res.status(400).json({ message: "Missing required fields" });
       logger.error("Missing required fields");
       return;
     }
-  
+
     const existingDeal = await Deal.findOne({ name });
     if (existingDeal) {
-      res.status(409).json({ message: "Deal with the same name already exists" });
+      res
+        .status(409)
+        .json({ message: "Deal with the same name already exists" });
       logger.error(`Deal with name ${name} already exists`);
       return;
     }
-  
+
     const associatedContact = await Contact.findById(contact);
     if (!associatedContact) {
       res.status(404).json({ message: "Associated contact not found" });
       logger.error(`Associated contact with ID ${contact} not found`);
       return;
     } else {
-      if (associatedContact.stage[associatedContact.stage.length - 1]!.name !== "Customer") {
+      if (
+        associatedContact.stage[associatedContact.stage.length - 1]!.name !==
+        "Customer"
+      ) {
         associatedContact.stage.push({ name: "Customer", date: new Date() });
         await associatedContact.save();
         logger.info(
@@ -50,14 +54,17 @@ export async function createDeal(
         );
       }
     }
-  
+
     logger.info(`Created deal ${name}`);
     const createdDeal = await Deal.create(deal.data);
     res.status(201).json({ message: "Deal created", data: createdDeal });
     return;
   } catch (err: unknown) {
     logger.error(`Error creating deal: ${(err as Error).message}`);
-    res.status(500).json({ message: "Internal server error", error: (err as Error).message });
+    res.status(500).json({
+      message: "Internal server error",
+      error: (err as Error).message
+    });
     return;
   }
 }
@@ -78,7 +85,10 @@ export async function getAllDeals(
     return;
   } catch (err: unknown) {
     logger.error(`Error retrieving deals: ${(err as Error).message}`);
-    res.status(500).json({ message: "Internal server error", error: (err as Error).message });
+    res.status(500).json({
+      message: "Internal server error",
+      error: (err as Error).message
+    });
     return;
   }
 }
@@ -100,7 +110,10 @@ export async function getOneDeal(
     return;
   } catch (err: unknown) {
     logger.error(`Error retreiving deal: ${(err as Error).message}`);
-    res.status(500).json({ message: "Internal server error", error: (err as Error).message });
+    res.status(500).json({
+      message: "Internal server error",
+      error: (err as Error).message
+    });
     return;
   }
 }
@@ -130,7 +143,10 @@ export async function updateDeal(
     return;
   } catch (err: unknown) {
     logger.error(`Error updating deal: ${(err as Error).message}`);
-    res.status(500).json({ message: "Internal server error", error: (err as Error).message });
+    res.status(500).json({
+      message: "Internal server error",
+      error: (err as Error).message
+    });
     return;
   }
 }

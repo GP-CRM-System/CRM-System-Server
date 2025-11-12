@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { z } from "zod";
 
-const industries = [
+export const industries = [
   "Accounting",
   "Airlines",
   "Alternative Dispute Resolution",
@@ -150,16 +150,17 @@ const industries = [
   "Wireless",
   "Writing & Editing",
   "Mobile Games"
-]
-
+];
 
 export const SCompany = z.object({
   name: z.string().min(3).max(50),
-  owner: z.custom<mongoose.Types.ObjectId>((val) => mongoose.Types.ObjectId.isValid(val as string)),
+  owner: z.custom<mongoose.Types.ObjectId>((val) =>
+    mongoose.Types.ObjectId.isValid(val as string)
+  ),
   website: z.url().nullable(),
   email: z.email().nullable(),
   industry: z.enum(industries),
-  type: z.enum(["Prospect", "Partner", "Reseller","Vendor", "Other"]),
+  type: z.enum(["Prospect", "Partner", "Reseller", "Vendor", "Other"]),
   address: z.string().nullable(),
   numberOfEmployees: z.number().gt(0),
   isActive: z.boolean().default(true)

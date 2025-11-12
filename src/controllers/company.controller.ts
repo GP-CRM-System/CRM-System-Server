@@ -32,7 +32,10 @@ export async function createCompany(
     });
 
     if (company.success === false) {
-      res.status(400).json({ message: "Missing required fields", error: company.error.toString() });
+      res.status(400).json({
+        message: "Missing required fields",
+        error: company.error.toString()
+      });
       logger.error("Missing required fields");
       return;
     }
@@ -52,7 +55,10 @@ export async function createCompany(
     return;
   } catch (err: unknown) {
     logger.error(`Error creating company: ${(err as Error).message}`);
-    res.status(500).json({ message: "Internal server error", error: (err as Error).message });
+    res.status(500).json({
+      message: "Internal server error",
+      error: (err as Error).message
+    });
     return;
   }
 }
@@ -73,7 +79,10 @@ export async function getAllCompanies(
     return;
   } catch (err: unknown) {
     logger.error(`Error retrieving companies: ${(err as Error).message}`);
-    res.status(500).json({ message: "Internal server error", error: (err as Error).message });
+    res.status(500).json({
+      message: "Internal server error",
+      error: (err as Error).message
+    });
     return;
   }
 }
@@ -95,17 +104,18 @@ export async function getOneCompany(
     return;
   } catch (err: unknown) {
     logger.error(`Error retrieving company: ${(err as Error).message}`);
-    res.status(500).json({ message: "Internal server error", error: (err as Error).message });
+    res.status(500).json({
+      message: "Internal server error",
+      error: (err as Error).message
+    });
     return;
   }
-
 }
 
 export async function updateCompany(
   req: Request<{ id: string }, object, Partial<ICompany>>,
   res: Response<IResponse>
 ): Promise<void> {
-
   try {
     const { id } = req.params;
     const updateData = req.body;
@@ -127,7 +137,10 @@ export async function updateCompany(
     return;
   } catch (err: unknown) {
     logger.error(`Error updating company: ${(err as Error).message}`);
-    res.status(500).json({ message: "Internal server error", error: (err as Error).message });
+    res.status(500).json({
+      message: "Internal server error",
+      error: (err as Error).message
+    });
     return;
   }
 }
@@ -151,9 +164,12 @@ export async function deactivateCompany(
     logger.info(`Deactivated company ${company.name}`);
     res.status(200).json({ message: "Company deactivated", data: company });
     return;
-  } catch (err:unknown) {
+  } catch (err: unknown) {
     logger.error(`Error deactivating company: ${(err as Error).message}`);
-    res.status(500).json({ message: "Internal server error", error: (err as Error).message });
+    res.status(500).json({
+      message: "Internal server error",
+      error: (err as Error).message
+    });
     return;
   }
 }

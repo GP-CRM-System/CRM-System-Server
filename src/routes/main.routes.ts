@@ -8,9 +8,11 @@ import dealRouter from "./deal.routes.js";
 import orderRouter from "./order.routes.js";
 import ticketRouter from "./ticket.routes.js";
 import miscRouter from "./misc.routes.js";
+import authRouter from "./auth.routes.js";
 
 const router = express.Router();
 
+router.use("/auth", authRouter);
 router.use("/companies", companyRouter);
 router.use("/contacts", contactRouter);
 router.use("/deals", dealRouter);

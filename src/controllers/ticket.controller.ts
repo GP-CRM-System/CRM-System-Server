@@ -10,23 +10,26 @@ export async function createTicket(
 ): Promise<void> {
   try {
     const ticket = STicket.safeParse(req.body);
-  
+
     if (ticket.success === false) {
       res.status(400).json({ message: "Missing required fields" });
       logger.error("Missing required fields");
       return;
     }
-  
+
     const newTicket = new Ticket(ticket.data);
     await newTicket.save();
     logger.info(`Created ticket ${ticket.data.name}`);
     res.status(201).json({ message: "Ticket created", data: newTicket });
     return;
   } catch (err: unknown) {
-      logger.error(`Error creating ticket: ${(err as Error).message}`);
-      res.status(500).json({ message: "Internal server error", error: (err as Error).message });
-      return;
-    }
+    logger.error(`Error creating ticket: ${(err as Error).message}`);
+    res.status(500).json({
+      message: "Internal server error",
+      error: (err as Error).message
+    });
+    return;
+  }
 }
 
 export async function getAllTickets(
@@ -45,7 +48,10 @@ export async function getAllTickets(
     return;
   } catch (err: unknown) {
     logger.error(`Error retrieving tickets: ${(err as Error).message}`);
-    res.status(500).json({ message: "Internal server error", error: (err as Error).message });
+    res.status(500).json({
+      message: "Internal server error",
+      error: (err as Error).message
+    });
     return;
   }
 }
@@ -67,7 +73,10 @@ export async function getOneTicket(
     return;
   } catch (err: unknown) {
     logger.error(`Error retrieving ticket: ${(err as Error).message}`);
-    res.status(500).json({ message: "Internal server error", error: (err as Error).message });
+    res.status(500).json({
+      message: "Internal server error",
+      error: (err as Error).message
+    });
     return;
   }
 }
@@ -79,13 +88,13 @@ export async function updateTicket(
   try {
     const { ticketId } = req.params;
     const updatedTicket = STicket.partial().safeParse(req.body);
-  
+
     if (updatedTicket.success === false) {
       res.status(400).json({ message: "Invalid update fields" });
       logger.error("Invalid update fields");
       return;
     }
-  
+
     const ticket = await Ticket.findById(ticketId);
     if (!ticket) {
       res.status(404).json({ message: "Ticket not found" });
@@ -98,7 +107,10 @@ export async function updateTicket(
     return;
   } catch (err: unknown) {
     logger.error(`Error updating ticket: ${(err as Error).message}`);
-    res.status(500).json({ message: "Internal server error", error: (err as Error).message });
+    res.status(500).json({
+      message: "Internal server error",
+      error: (err as Error).message
+    });
     return;
   }
 }

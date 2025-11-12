@@ -10,8 +10,7 @@ export async function createOrder(
   res: Response<IResponse>
 ): Promise<void> {
   try {
-    const { description, price, owner, stage, contact, employee } =
-      req.body;
+    const { description, price, owner, stage, contact, employee } = req.body;
     const order = SOrder.safeParse({
       description,
       price,
@@ -22,7 +21,10 @@ export async function createOrder(
     });
 
     if (order.success === false) {
-      res.status(400).json({ message: "Missing required fields", error: order.error.toString() });
+      res.status(400).json({
+        message: "Missing required fields",
+        error: order.error.toString()
+      });
       logger.error("Missing required fields");
       return;
     }
@@ -33,7 +35,10 @@ export async function createOrder(
       logger.error(`Associated contact with ID ${contact} not found`);
       return;
     } else {
-      if (associatedContact.stage[associatedContact.stage.length - 1]!.name !== "Customer") {
+      if (
+        associatedContact.stage[associatedContact.stage.length - 1]!.name !==
+        "Customer"
+      ) {
         associatedContact.stage.push({ name: "Customer", date: new Date() });
         await associatedContact.save();
         logger.info(
@@ -48,7 +53,10 @@ export async function createOrder(
     return;
   } catch (err: unknown) {
     logger.error(`Error creating order: ${(err as Error).message}`);
-    res.status(500).json({ message: "Internal server error", error: (err as Error).message });
+    res.status(500).json({
+      message: "Internal server error",
+      error: (err as Error).message
+    });
     return;
   }
 }
@@ -69,7 +77,10 @@ export async function getAllOrders(
     return;
   } catch (err: unknown) {
     logger.error(`Error retrieving orders: ${(err as Error).message}`);
-    res.status(500).json({ message: "Internal server error", error: (err as Error).message });
+    res.status(500).json({
+      message: "Internal server error",
+      error: (err as Error).message
+    });
     return;
   }
 }
@@ -91,7 +102,10 @@ export async function getOneOrder(
     return;
   } catch (err: unknown) {
     logger.error(`Error retrieving order: ${(err as Error).message}`);
-    res.status(500).json({ message: "Internal server error", error: (err as Error).message });
+    res.status(500).json({
+      message: "Internal server error",
+      error: (err as Error).message
+    });
     return;
   }
 }
@@ -103,8 +117,7 @@ export async function updateOrder(
   try {
     const { id } = req.params;
     console.log(req.body);
-    const { description, price, owner, stage, contact, employee } =
-      req.body;
+    const { description, price, owner, stage, contact, employee } = req.body;
     const order = SOrder.partial().safeParse({
       description,
       price,
@@ -132,7 +145,10 @@ export async function updateOrder(
     return;
   } catch (err: unknown) {
     logger.error(`Error updating order: ${(err as Error).message}`);
-    res.status(500).json({ message: "Internal server error", error: (err as Error).message });
+    res.status(500).json({
+      message: "Internal server error",
+      error: (err as Error).message
+    });
     return;
   }
 }

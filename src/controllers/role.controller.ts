@@ -8,7 +8,6 @@ export async function createRole(
   req: Request<object, object, IRole>,
   res: Response<IResponse>
 ): Promise<void> {
-
   try {
     const role = SRole.safeParse(req.body);
 
@@ -22,7 +21,9 @@ export async function createRole(
 
     const existingRole = await Role.findOne({ name: role.data.name });
     if (existingRole) {
-      res.status(409).json({ message: "Role with the same name already exists" });
+      res
+        .status(409)
+        .json({ message: "Role with the same name already exists" });
       logger.error(`Role ${role.data.name} already exists`);
       return;
     }
@@ -33,7 +34,10 @@ export async function createRole(
     return;
   } catch (err: unknown) {
     logger.error(`Error creating role: ${(err as Error).message}`);
-    res.status(500).json({ message: "Internal server error", error: (err as Error).message });
+    res.status(500).json({
+      message: "Internal server error",
+      error: (err as Error).message
+    });
     return;
   }
 }
@@ -54,7 +58,10 @@ export async function getAllRoles(
     return;
   } catch (err: unknown) {
     logger.error(`Error retrieving roles: ${(err as Error).message}`);
-    res.status(500).json({ message: "Internal server error", error: (err as Error).message });
+    res.status(500).json({
+      message: "Internal server error",
+      error: (err as Error).message
+    });
     return;
   }
 }
@@ -65,7 +72,7 @@ export async function getOneRole(
 ): Promise<void> {
   try {
     const id = req.params.id;
-  
+
     const role = await Role.findById(id);
     if (!role) {
       res.status(404).json({ message: "Role not found" });
@@ -77,7 +84,10 @@ export async function getOneRole(
     return;
   } catch (err: unknown) {
     logger.error(`Error retreiving role: ${(err as Error).message}`);
-    res.status(500).json({ message: "Internal server error", error: (err as Error).message });
+    res.status(500).json({
+      message: "Internal server error",
+      error: (err as Error).message
+    });
     return;
   }
 }
@@ -88,16 +98,16 @@ export async function updateRole(
 ): Promise<void> {
   try {
     const id = req.params.id;
-  
+
     const role = await Role.findById(id);
     if (!role) {
       res.status(404).json({ message: "Role not found" });
       logger.warn(`Role ${id} not found`);
       return;
     }
-  
+
     const updatedRole = SRole.partial().safeParse(req.body);
-  
+
     if (updatedRole.success === false) {
       res.status(400).json({
         message: "Invalid role payload",
@@ -106,15 +116,18 @@ export async function updateRole(
       logger.error("Invalid role payload");
       return;
     }
-  
+
     await Role.updateOne({ _id: id }, { $set: updatedRole.data });
-  
+
     logger.info(`Updated role ${id}`);
     res.status(200).json({ message: "Role updated", data: role });
     return;
   } catch (err: unknown) {
     logger.error(`Error updating role: ${(err as Error).message}`);
-    res.status(500).json({ message: "Internal server error", error: (err as Error).message });
+    res.status(500).json({
+      message: "Internal server error",
+      error: (err as Error).message
+    });
     return;
   }
 }
@@ -125,20 +138,23 @@ export async function deactivateRole(
 ): Promise<void> {
   try {
     const id = req.params.id;
-  
+
     const role = await Role.findById(id);
     if (!role) {
       res.status(404).json({ message: "Role not found" });
       logger.warn(`Role ${id} not found`);
       return;
     }
-    await Role.updateOne({ _id: id },{ $set: { isActive: !role.isActive } });
+    await Role.updateOne({ _id: id }, { $set: { isActive: !role.isActive } });
     logger.info(`Deactivated role ${id}`);
     res.status(200).json({ message: "Role deleted" });
     return;
   } catch (err: unknown) {
     logger.error(`Error deactivating role: ${(err as Error).message}`);
-    res.status(500).json({ message: "Internal server error", error: (err as Error).message });
+    res.status(500).json({
+      message: "Internal server error",
+      error: (err as Error).message
+    });
     return;
   }
 }

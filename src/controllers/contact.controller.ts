@@ -10,7 +10,7 @@ export async function createContact(
 ): Promise<void> {
   try {
     const { name, email, phone, address, jobTitle, owner, stage } = req.body;
-  
+
     const contact = SContact.safeParse({
       name,
       email,
@@ -20,13 +20,16 @@ export async function createContact(
       owner,
       stage
     });
-  
+
     if (contact.success === false) {
-      res.status(400).json({ message: "Missing required fields", error: contact.error.toString() });
+      res.status(400).json({
+        message: "Missing required fields",
+        error: contact.error.toString()
+      });
       logger.error("Missing required fields");
       return;
     }
-  
+
     const existingContact = await Contact.findOne({ email });
     if (existingContact) {
       res
@@ -35,14 +38,17 @@ export async function createContact(
       logger.error(`Contact with email ${email} already exists`);
       return;
     }
-  
+
     const createdContact = await Contact.create(contact.data);
     logger.info(`Created contact ${name}`);
     res.status(201).json({ message: "Contact created", data: createdContact });
     return;
   } catch (err: unknown) {
     logger.error(`Error creating contact: ${(err as Error).message}`);
-    res.status(500).json({ message: "Internal server error", error: (err as Error).message });
+    res.status(500).json({
+      message: "Internal server error",
+      error: (err as Error).message
+    });
     return;
   }
 }
@@ -63,7 +69,10 @@ export async function getAllContacts(
     return;
   } catch (err: unknown) {
     logger.error(`Error retrieving contacts: ${(err as Error).message}`);
-    res.status(500).json({ message: "Internal server error", error: (err as Error).message });
+    res.status(500).json({
+      message: "Internal server error",
+      error: (err as Error).message
+    });
     return;
   }
 }
@@ -85,7 +94,10 @@ export async function getOneContact(
     return;
   } catch (err: unknown) {
     logger.error(`Error retreiving contact: ${(err as Error).message}`);
-    res.status(500).json({ message: "Internal server error", error: (err as Error).message });
+    res.status(500).json({
+      message: "Internal server error",
+      error: (err as Error).message
+    });
     return;
   }
 }
@@ -98,27 +110,30 @@ export async function updateContact(
     const { id } = req.params;
     const updates = req.body;
     const verifiedUpdates = SContact.partial().safeParse(updates);
-  
+
     if (verifiedUpdates.success === false) {
       res.status(400).json({ message: "Invalid update fields" });
       logger.error("Invalid update fields");
       return;
     }
-  
+
     const contact = await Contact.findById(id);
     if (!contact) {
       res.status(404).json({ message: "Contact not found" });
       logger.warn(`Contact with id ${id} not found`);
       return;
     }
-  
+
     await Contact.updateOne({ _id: id }, { $set: verifiedUpdates.data });
     logger.info(`Updated contact with id ${id}`);
     res.status(200).json({ message: "Contact updated", data: contact });
     return;
   } catch (err: unknown) {
     logger.error(`Error updating contact: ${(err as Error).message}`);
-    res.status(500).json({ message: "Internal server error", error: (err as Error).message });
+    res.status(500).json({
+      message: "Internal server error",
+      error: (err as Error).message
+    });
     return;
   }
 }
@@ -144,7 +159,10 @@ export async function deactivateContact(
     return;
   } catch (err: unknown) {
     logger.error(`Error deactivating contact: ${(err as Error).message}`);
-    res.status(500).json({ message: "Internal server error", error: (err as Error).message });
+    res.status(500).json({
+      message: "Internal server error",
+      error: (err as Error).message
+    });
     return;
   }
 }

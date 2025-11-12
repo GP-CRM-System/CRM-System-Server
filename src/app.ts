@@ -6,11 +6,13 @@ import mongoSetup from "./config/mongodb.config.js";
 import swaggerSetup from "./config/swagger.config.js";
 import router from "./routes/main.routes.js";
 import { notFound } from "./controllers/misc.controller.js";
+import cookieParser from "cookie-parser";
 // import passportSetup from "./config/passport.config.js";
 
 const app = express();
 
 app.use(express.json());
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(
   cors({
