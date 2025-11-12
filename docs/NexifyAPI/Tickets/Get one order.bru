@@ -1,0 +1,20 @@
+meta {
+  name: Get one order
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{apiUrl}}/orders/:id
+  body: none
+  auth: inherit
+}
+
+params:path {
+  id: 68ff9160779dbe2819b09235
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

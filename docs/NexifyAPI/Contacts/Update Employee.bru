@@ -1,0 +1,26 @@
+meta {
+  name: Update Employee
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{apiUrl}}/contacts/:id
+  body: json
+  auth: inherit
+}
+
+params:path {
+  id: 68ff3c5cfc3d08afc4ce02a8
+}
+
+body:json {
+  {
+    "name":"Updated Contact"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

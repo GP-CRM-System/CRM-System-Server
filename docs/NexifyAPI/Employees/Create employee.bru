@@ -1,0 +1,27 @@
+meta {
+  name: Create employee
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{apiUrl}}/employees
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "fullName": "mhm yah",
+    "phone":"2029141421",
+    "email":"seriddf@gmail.com",
+    "password":"12345678",
+    "salary":34,
+    "role":"6901213cdf42d30d31d476e9"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

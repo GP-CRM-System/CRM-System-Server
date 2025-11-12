@@ -1,0 +1,20 @@
+meta {
+  name: Get one employee
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{apiUrl}}/employees/:id
+  body: none
+  auth: inherit
+}
+
+params:path {
+  id: 6901217edf42d30d31d476ed
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

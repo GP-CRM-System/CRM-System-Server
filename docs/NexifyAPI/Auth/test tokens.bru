@@ -1,0 +1,15 @@
+meta {
+  name: test tokens
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{apiUrl}}/auth/test
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+}

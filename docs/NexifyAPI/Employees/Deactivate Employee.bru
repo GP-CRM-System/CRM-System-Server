@@ -1,0 +1,20 @@
+meta {
+  name: Deactivate Employee
+  type: http
+  seq: 5
+}
+
+delete {
+  url: {{apiUrl}}/employees/:id
+  body: none
+  auth: inherit
+}
+
+params:path {
+  id: 68fe658ea5be9533c923ecdd
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

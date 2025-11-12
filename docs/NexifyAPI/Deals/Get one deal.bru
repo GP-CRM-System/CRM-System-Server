@@ -1,0 +1,20 @@
+meta {
+  name: Get one deal
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{apiUrl}}/deals/:id
+  body: none
+  auth: inherit
+}
+
+params:path {
+  id: 68ff50153a96cf28eb783c31
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
