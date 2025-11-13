@@ -4,7 +4,8 @@ import {
   deactivateContact,
   getAllContacts,
   getOneContact,
-  updateContact
+  updateContact,
+  updateContactToCustomer
 } from "../controllers/contact.controller.js";
 
 const contactRouter = express.Router();
@@ -16,5 +17,7 @@ contactRouter
   .get(getOneContact)
   .put(updateContact)
   .delete(deactivateContact);
+
+contactRouter.put("/stage/:id", updateContactToCustomer);
 
 export default contactRouter;

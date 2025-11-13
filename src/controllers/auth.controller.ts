@@ -6,12 +6,12 @@ import Employee from "../models/employee.model.js";
 import {
   createRootRole,
   generateRefreshToken,
-  generateToken
+  generateToken,
+  verifyToken
 } from "../services/auth.service.js";
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import Role from "../models/role.model.js";
-import jwt from "jsonwebtoken";
 
 export async function registerAdmin(
   req: Request<object, object, IEmployee>,
@@ -39,8 +39,6 @@ export async function registerAdmin(
       logger.error(`Admin ${employee.data.email} already exists`);
       return;
     }
-
-    employee.data.password = bcrypt.hashSync(employee.data.password!, 10);
 
     const roleId = await createRootRole();
     if (!roleId) {
@@ -93,33 +91,92 @@ export async function registerAdmin(
   }
 }
 
-export async function testTokens(req: Request, res: Response): Promise<void> {
+export async function login(
+  req: Request<object, object, Partial<IEmployee>>,
+  res: Response<IResponse>
+): Promise<void> {
   try {
-    const token = req.cookies.token;
-    const refreshToken = req.cookies.refreshToken;
+    const employee = SEmployee.partial().safeParse(req.body);
 
-    if (!token || !refreshToken) {
-      res.status(401).json({ message: "Unauthorized" });
-      logger.error("Unauthorized");
+    if (employee.success === false) {
+      res.status(400).json({
+        message: "Invalid employee payload",
+        error: employee.error.message
+      });
+      logger.error("Invalid employee payload");
       return;
     }
 
-    const decodedToken = jwt.verify(token, process.env.JWT_SECRET as string);
-    const decodedRefreshToken = jwt.verify(
-      refreshToken,
-      process.env.JWT_REFRESH_SECRET as string
-    );
+    const existingEmployee = await Employee.findOne({
+      email: employee.data.email
+    }).populate("role");
+    if (!existingEmployee) {
+      res.status(404).json({ message: "Employee not found" });
+      logger.warn(`Employee ${employee.data.email} not found`);
+      return;
+    }
+
+    if (
+      !bcrypt.compareSync(employee.data.password!, existingEmployee.password!)
+    ) {
+      res.status(401).json({ message: "Invalid credentials" });
+      logger.warn(`Invalid credentials for employee ${employee.data.email}`);
+      return;
+    }
+
+    const token = await generateToken({
+      _id: existingEmployee._id,
+      email: existingEmployee.email,
+      // @ts-expect-error role is populated
+      role: existingEmployee.role
+    });
+    const refreshToken = await generateRefreshToken({
+      _id: existingEmployee._id,
+      email: existingEmployee.email,
+      // @ts-expect-error role is populated
+      role: existingEmployee.role
+    });
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none"
+    });
+
+    res.cookie("refreshToken", refreshToken, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none"
+    });
 
     res
       .status(200)
-      .json({
-        message: "Tokens are valid",
-        data: { decodedToken, decodedRefreshToken }
-      });
-    logger.info("Tokens are valid");
+      .json({ message: "Employee logged in", data: existingEmployee });
     return;
   } catch (err: unknown) {
-    logger.error(`Error testing tokens: ${(err as Error).message}`);
+    logger.error(`Error logging in: ${(err as Error).message}`);
+    res.status(500).json({
+      message: "Internal server error",
+      error: (err as Error).message
+    });
     return;
   }
+}
+
+export async function test(req: Request, res: Response): Promise<void> {
+  const token = req.cookies.token;
+  if (!token) {
+    res.status(401).json({ message: "Unauthorized" });
+    logger.warn("Unauthorized");
+    return;
+  }
+  logger.info("Token found");
+  const data = verifyToken(token);
+  if (!data) {
+    res.status(401).json({ message: "invalid token" });
+    logger.warn("invalid token");
+    return;
+  }
+  res.status(200).json({ message: "Authorized", data });
+  return;
 }

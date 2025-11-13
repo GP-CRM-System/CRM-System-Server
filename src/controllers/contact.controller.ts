@@ -166,3 +166,40 @@ export async function deactivateContact(
     return;
   }
 }
+
+export async function updateContactToCustomer(
+  req: Request<{ id: string }>,
+  res: Response<IResponse>
+): Promise<void> {
+  try {
+    const { id } = req.params;
+
+    const contact = await Contact.findById(id);
+    if (!contact) {
+      res.status(404).json({ message: "Contact not found" });
+      logger.warn(`Contact with id ${id} not found`);
+      return;
+    }
+
+    if (contact.stage.length === 2) {
+      res.status(400).json({ message: "Contact already in customer stage" });
+      logger.warn(`Contact with id ${id} already in customer stage`);
+      return;
+    }
+
+    contact.stage.push({ name: "Customer", date: new Date() });
+
+    await contact.save();
+
+    logger.info(`Updated contact stage with id ${id}`);
+    res.status(200).json({ message: "Contact stage updated", data: contact });
+    return;
+  } catch (err: unknown) {
+    logger.error(`Error updating contact stage: ${(err as Error).message}`);
+    res.status(500).json({
+      message: "Internal server error",
+      error: (err as Error).message
+    });
+    return;
+  }
+}

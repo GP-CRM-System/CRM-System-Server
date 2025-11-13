@@ -8,8 +8,8 @@ export function generateToken(emp: {
   _id: mongoose.Types.ObjectId;
   email: string;
   role: IRole;
-}): string {
-  const payload = { id: emp._id, email: emp.email, role: emp.role };
+}) {
+  const payload = { _id: emp._id, email: emp.email, role: emp.role };
   return jwt.sign(payload, process.env.JWT_SECRET as string, {
     expiresIn: "1h"
   });
@@ -19,14 +19,14 @@ export function generateRefreshToken(emp: {
   _id: mongoose.Types.ObjectId;
   email: string;
   role: IRole;
-}): string {
-  const payload = { id: emp._id, email: emp.email, role: emp.role };
+}) {
+  const payload = { _id: emp._id, email: emp.email, role: emp.role };
   return jwt.sign(payload, process.env.JWT_REFRESH_SECRET as string, {
     expiresIn: "7d"
   });
 }
 
-export function verifyToken(token: string): string | jwt.JwtPayload | null {
+export function verifyToken(token: string) {
   try {
     return jwt.verify(token, process.env.JWT_SECRET as string);
   } catch (error: unknown) {
@@ -35,9 +35,7 @@ export function verifyToken(token: string): string | jwt.JwtPayload | null {
   }
 }
 
-export function verifyRefreshToken(
-  token: string
-): string | jwt.JwtPayload | null {
+export function verifyRefreshToken(token: string) {
   try {
     return jwt.verify(token, process.env.JWT_REFRESH_SECRET as string);
   } catch (error: unknown) {

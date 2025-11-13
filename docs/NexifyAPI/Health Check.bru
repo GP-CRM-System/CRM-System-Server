@@ -1,15 +1,16 @@
 meta {
-  name: test tokens
+  name: Health Check
   type: http
-  seq: 2
+  seq: 8
 }
 
 get {
-  url: {{apiUrl}}/auth/test
+  url: {{apiUrl}}/health
   body: none
   auth: inherit
 }
 
 settings {
   encodeUrl: true
+  timeout: 0
 }

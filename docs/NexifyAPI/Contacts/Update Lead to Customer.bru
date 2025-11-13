@@ -1,22 +1,22 @@
 meta {
-  name: Update Employee
+  name: Update Lead to Customer
   type: http
-  seq: 4
+  seq: 5
 }
 
 put {
-  url: {{apiUrl}}/employees/:id
+  url: {{apiUrl}}/contacts/stage/:id
   body: json
   auth: inherit
 }
 
 params:path {
-  id: 69161259646756a714cfe679
+  id: 691612df646756a714cfe687
 }
 
 body:json {
   {
-    "fullName":"Hewwo"
+    "name":"Updated Contact"
   }
 }
 
