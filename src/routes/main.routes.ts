@@ -9,17 +9,18 @@ import orderRouter from "./order.routes.js";
 import ticketRouter from "./ticket.routes.js";
 import miscRouter from "./misc.routes.js";
 import authRouter from "./auth.routes.js";
+import { isAuthenticated } from "../middleware/auth.middleware.js";
 
 const router = express.Router();
 
 router.use("/auth", authRouter);
-router.use("/companies", companyRouter);
-router.use("/contacts", contactRouter);
-router.use("/deals", dealRouter);
-router.use("/employees", employeeRouter);
-router.use("/orders", orderRouter);
-router.use("/roles", roleRouter);
-router.use("/tickets", ticketRouter);
+router.use("/companies", isAuthenticated, companyRouter);
+router.use("/contacts", isAuthenticated, contactRouter);
+router.use("/deals", isAuthenticated, dealRouter);
+router.use("/employees", isAuthenticated, employeeRouter);
+router.use("/orders", isAuthenticated, orderRouter);
+router.use("/roles", isAuthenticated, roleRouter);
+router.use("/tickets", isAuthenticated, ticketRouter);
 router.use(miscRouter);
 
 export default router;

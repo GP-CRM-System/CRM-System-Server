@@ -7,7 +7,6 @@ import {
   createRootRole,
   generateRefreshToken,
   generateToken,
-  verifyToken
 } from "../services/auth.service.js";
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
@@ -53,7 +52,7 @@ export async function registerAdmin(
     const createdAdmin = await Employee.create(employee.data);
     const rootRole = await Role.findById(roleId);
 
-    const token = await generateToken({
+    const token = generateToken({
       _id: createdAdmin._id,
       email: createdAdmin.email,
       role: rootRole!
@@ -161,22 +160,4 @@ export async function login(
     });
     return;
   }
-}
-
-export async function test(req: Request, res: Response): Promise<void> {
-  const token = req.cookies.token;
-  if (!token) {
-    res.status(401).json({ message: "Unauthorized" });
-    logger.warn("Unauthorized");
-    return;
-  }
-  logger.info("Token found");
-  const data = verifyToken(token);
-  if (!data) {
-    res.status(401).json({ message: "invalid token" });
-    logger.warn("invalid token");
-    return;
-  }
-  res.status(200).json({ message: "Authorized", data });
-  return;
 }

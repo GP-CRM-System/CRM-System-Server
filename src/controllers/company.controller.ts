@@ -3,33 +3,22 @@ import { SCompany, type ICompany } from "../interfaces/company.interface.js";
 import { logger } from "../config/logger.config.js";
 import type { IResponse } from "../interfaces/response.interface.js";
 import Company from "../models/company.model.js";
+import { verifyToken } from "../services/auth.service.js";
 
 export async function createCompany(
   req: Request<object, object, ICompany>,
   res: Response<IResponse>
 ): Promise<void> {
   try {
-    const {
-      name,
-      owner,
-      website,
-      email,
-      industry,
-      type,
-      address,
-      numberOfEmployees
-    } = req.body;
 
-    const company = SCompany.safeParse({
-      name,
-      owner,
-      website,
-      email,
-      industry,
-      type,
-      address,
-      numberOfEmployees
-    });
+    const token = verifyToken(req.cookies.token)
+    // @ts-expect-error bad jwt types
+    if (!token.role.Company.write) {
+      res.json({ message: "Unauthorized" })
+    }
+  
+
+    const company = SCompany.partial().safeParse(req.body);
 
     if (company.success === false) {
       res.status(400).json({
@@ -40,16 +29,16 @@ export async function createCompany(
       return;
     }
 
-    const existingCompany = await Company.findOne({ email });
+    const existingCompany = await Company.findOne({ email: company.data.email });
     if (existingCompany) {
       res
         .status(409)
         .json({ message: "Company with the same email already exists" });
-      logger.error(`Company with email ${email} already exists`);
+      logger.error(`Company with email ${company.data.email} already exists`);
       return;
     }
 
-    logger.info(`Created company ${name}`);
+    logger.info(`Created company ${company.data.name}`);
     const createdCompany = await Company.create(company.data);
     res.status(201).json({ message: "Company created", data: createdCompany });
     return;
@@ -64,10 +53,17 @@ export async function createCompany(
 }
 
 export async function getAllCompanies(
-  _req: Request,
+  req: Request,
   res: Response<IResponse>
 ): Promise<void> {
   try {
+
+    const token = verifyToken(req.cookies.token)
+    // @ts-expect-error bad jwt types
+    if (!token.role.Company.read) {
+      res.json({ message: "Unauthorized" })
+    }
+
     const companies = await Company.find();
     if (companies.length === 0) {
       res.status(404).json({ message: "No companies found" });
@@ -92,6 +88,14 @@ export async function getOneCompany(
   res: Response<IResponse>
 ): Promise<void> {
   try {
+
+    const token = verifyToken(req.cookies.token)
+    // @ts-expect-error bad jwt types
+    if (!token.role.Company.read) {
+      res.json({ message: "Unauthorized" })
+    }
+
+
     const { id } = req.params;
     const company = await Company.findById(id);
     if (!company) {
