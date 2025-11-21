@@ -1,17 +1,17 @@
 meta {
-  name: Delete role
+  name: Get one ticket
   type: http
-  seq: 5
+  seq: 3
 }
 
-delete {
-  url: {{apiUrl}}/roles/:id
+get {
+  url: {{apiUrl}}/tickets/:id
   body: none
   auth: inherit
 }
 
 params:path {
-  id: 68fa59e420488d8514b755f3
+  id: 6920949f55b152ffa8c05a7f
 }
 
 settings {

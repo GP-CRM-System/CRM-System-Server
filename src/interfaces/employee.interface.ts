@@ -10,7 +10,7 @@ export const SEmployee = z.object({
     mongoose.Types.ObjectId.isValid(val as string)
   ),
   salary: z.number().gte(0).default(0),
-  isActive: z.boolean().default(false),
+  isActive: z.boolean().default(true),
   isModified: z
     .function({ input: [z.string()], output: z.boolean() })
     .readonly()

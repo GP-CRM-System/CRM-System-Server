@@ -4,23 +4,20 @@ import { logger } from "../config/logger.config.js";
 import Deal from "../models/deal.model.js";
 import type { IResponse } from "../interfaces/response.interface.js";
 import Contact from "../models/contact.model.js";
+import { verifyToken } from "../services/auth.service.js";
 
 export async function createDeal(
   req: Request<object, object, IDeal>,
   res: Response<IResponse>
 ): Promise<void> {
   try {
-    const { name, stage, amount, owner, priority, contact, company } = req.body;
+    const token = verifyToken(req.cookies.token);
+    // @ts-expect-error bad jwt types
+    if (!token.role.Deal.write) {
+      res.json({ message: "Unauthorized" });
+    }
 
-    const deal = SDeal.safeParse({
-      name,
-      stage,
-      amount,
-      owner,
-      priority,
-      contact,
-      company
-    });
+    const deal = SDeal.safeParse(req.body);
 
     if (deal.success === false) {
       res.status(400).json({ message: "Missing required fields" });
@@ -28,19 +25,19 @@ export async function createDeal(
       return;
     }
 
-    const existingDeal = await Deal.findOne({ name });
+    const existingDeal = await Deal.findOne({ name: deal.data.name });
     if (existingDeal) {
       res
         .status(409)
         .json({ message: "Deal with the same name already exists" });
-      logger.error(`Deal with name ${name} already exists`);
+      logger.error(`Deal with name ${deal.data.name} already exists`);
       return;
     }
 
-    const associatedContact = await Contact.findById(contact);
+    const associatedContact = await Contact.findById(deal.data.contact);
     if (!associatedContact) {
       res.status(404).json({ message: "Associated contact not found" });
-      logger.error(`Associated contact with ID ${contact} not found`);
+      logger.error(`Associated contact with ID ${deal.data.contact} not found`);
       return;
     } else {
       if (
@@ -55,7 +52,7 @@ export async function createDeal(
       }
     }
 
-    logger.info(`Created deal ${name}`);
+    logger.info(`Created deal ${deal.data.name}`);
     const createdDeal = await Deal.create(deal.data);
     res.status(201).json({ message: "Deal created", data: createdDeal });
     return;
@@ -70,10 +67,16 @@ export async function createDeal(
 }
 
 export async function getAllDeals(
-  _req: Request,
+  req: Request,
   res: Response<IResponse>
 ): Promise<void> {
   try {
+    const token = verifyToken(req.cookies.token);
+    // @ts-expect-error bad jwt types
+    if (!token.role.Deal.read) {
+      res.json({ message: "Unauthorized" });
+    }
+
     const deals = await Deal.find();
     if (deals.length === 0) {
       res.status(404).json({ message: "No deals found" });
@@ -98,6 +101,12 @@ export async function getOneDeal(
   res: Response<IResponse>
 ): Promise<void> {
   try {
+    const token = verifyToken(req.cookies.token);
+    // @ts-expect-error bad jwt types
+    if (!token.role.Deal.read) {
+      res.json({ message: "Unauthorized" });
+    }
+
     const { id } = req.params;
     const deal = await Deal.findById(id);
     if (!deal) {
@@ -123,11 +132,22 @@ export async function updateDeal(
   res: Response<IResponse>
 ): Promise<void> {
   try {
+    const token = verifyToken(req.cookies.token);
+    // @ts-expect-error bad jwt types
+    if (!token.role.Deal.write) {
+      res.json({ message: "Unauthorized" });
+    }
+
     const { id } = req.params;
     const updateData = req.body;
     const updatedDeal = SDeal.partial().safeParse(updateData);
     if (updatedDeal.success === false) {
-      res.status(400).json({ message: "Invalid update fields" });
+      res
+        .status(400)
+        .json({
+          message: "Invalid update fields",
+          error: updatedDeal.error.toString()
+        });
       logger.error("Invalid update fields");
       return;
     }

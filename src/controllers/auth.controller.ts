@@ -6,7 +6,7 @@ import Employee from "../models/employee.model.js";
 import {
   createRootRole,
   generateRefreshToken,
-  generateToken,
+  generateToken
 } from "../services/auth.service.js";
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
@@ -106,6 +106,7 @@ export async function login(
       return;
     }
 
+    console.log("employee", employee);
     const existingEmployee = await Employee.findOne({
       email: employee.data.email
     }).populate("role");
@@ -114,6 +115,8 @@ export async function login(
       logger.warn(`Employee ${employee.data.email} not found`);
       return;
     }
+
+    console.log("existingEmployee", existingEmployee);
 
     if (
       !bcrypt.compareSync(employee.data.password!, existingEmployee.password!)
@@ -161,3 +164,14 @@ export async function login(
     return;
   }
 }
+
+// export async function forgotPassword(
+//   req: Request<{id:string}>,
+//   res:Response<IResponse>
+// ):Promise<void> {
+//   try {
+    
+//   } catch (error) {
+    
+//   }
+// }

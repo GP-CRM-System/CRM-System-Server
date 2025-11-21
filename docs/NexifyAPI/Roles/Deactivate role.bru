@@ -1,17 +1,17 @@
 meta {
-  name: Get one order
+  name: Deactivate role
   type: http
-  seq: 3
+  seq: 5
 }
 
-get {
-  url: {{apiUrl}}/orders/:id
+delete {
+  url: {{apiUrl}}/roles/:id
   body: none
   auth: inherit
 }
 
 params:path {
-  id: 68ff9160779dbe2819b09235
+  id: 69208dfc90bf3cd96c3ad8b1
 }
 
 settings {

@@ -10,13 +10,11 @@ export async function createCompany(
   res: Response<IResponse>
 ): Promise<void> {
   try {
-
-    const token = verifyToken(req.cookies.token)
+    const token = verifyToken(req.cookies.token);
     // @ts-expect-error bad jwt types
     if (!token.role.Company.write) {
-      res.json({ message: "Unauthorized" })
+      res.json({ message: "Unauthorized" });
     }
-  
 
     const company = SCompany.partial().safeParse(req.body);
 
@@ -29,7 +27,9 @@ export async function createCompany(
       return;
     }
 
-    const existingCompany = await Company.findOne({ email: company.data.email });
+    const existingCompany = await Company.findOne({
+      email: company.data.email
+    });
     if (existingCompany) {
       res
         .status(409)
@@ -57,11 +57,10 @@ export async function getAllCompanies(
   res: Response<IResponse>
 ): Promise<void> {
   try {
-
-    const token = verifyToken(req.cookies.token)
+    const token = verifyToken(req.cookies.token);
     // @ts-expect-error bad jwt types
     if (!token.role.Company.read) {
-      res.json({ message: "Unauthorized" })
+      res.json({ message: "Unauthorized" });
     }
 
     const companies = await Company.find();
@@ -88,13 +87,11 @@ export async function getOneCompany(
   res: Response<IResponse>
 ): Promise<void> {
   try {
-
-    const token = verifyToken(req.cookies.token)
+    const token = verifyToken(req.cookies.token);
     // @ts-expect-error bad jwt types
     if (!token.role.Company.read) {
-      res.json({ message: "Unauthorized" })
+      res.json({ message: "Unauthorized" });
     }
-
 
     const { id } = req.params;
     const company = await Company.findById(id);
@@ -121,6 +118,12 @@ export async function updateCompany(
   res: Response<IResponse>
 ): Promise<void> {
   try {
+    const token = verifyToken(req.cookies.token);
+    // @ts-expect-error bad jwt types
+    if (!token.role.Company.write) {
+      res.json({ message: "Unauthorized" });
+    }
+
     const { id } = req.params;
     const updateData = req.body;
     const updatedCompany = SCompany.partial().safeParse(updateData);
@@ -154,6 +157,12 @@ export async function deactivateCompany(
   res: Response<IResponse>
 ): Promise<void> {
   try {
+    const token = verifyToken(req.cookies.token);
+    // @ts-expect-error bad jwt types
+    if (!token.role.Company.delete) {
+      res.json({ message: "Unauthorized" });
+    }
+
     const { id } = req.params;
     const company = await Company.findById(id);
     if (!company) {

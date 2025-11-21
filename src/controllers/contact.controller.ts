@@ -3,23 +3,20 @@ import { SContact, type IContact } from "../interfaces/contact.interface.js";
 import { logger } from "../config/logger.config.js";
 import Contact from "../models/contact.model.js";
 import type { IResponse } from "../interfaces/response.interface.js";
+import { verifyToken } from "../services/auth.service.js";
 
 export async function createContact(
   req: Request<object, object, IContact>,
   res: Response<IResponse>
 ): Promise<void> {
   try {
-    const { name, email, phone, address, jobTitle, owner, stage } = req.body;
+    const token = verifyToken(req.cookies.token);
+    // @ts-expect-error bad jwt types
+    if (!token.role.Contact.write) {
+      res.json({ message: "Unauthorized" });
+    }
 
-    const contact = SContact.safeParse({
-      name,
-      email,
-      phone,
-      address,
-      jobTitle,
-      owner,
-      stage
-    });
+    const contact = SContact.safeParse(req.body);
 
     if (contact.success === false) {
       res.status(400).json({
@@ -30,17 +27,19 @@ export async function createContact(
       return;
     }
 
-    const existingContact = await Contact.findOne({ email });
+    const existingContact = await Contact.findOne({
+      email: contact.data.email
+    });
     if (existingContact) {
       res
         .status(409)
         .json({ message: "Contact with the same email already exists" });
-      logger.error(`Contact with email ${email} already exists`);
+      logger.error(`Contact with email ${contact.data.email} already exists`);
       return;
     }
 
     const createdContact = await Contact.create(contact.data);
-    logger.info(`Created contact ${name}`);
+    logger.info(`Created contact ${contact.data.name}`);
     res.status(201).json({ message: "Contact created", data: createdContact });
     return;
   } catch (err: unknown) {
@@ -54,10 +53,16 @@ export async function createContact(
 }
 
 export async function getAllContacts(
-  _req: Request,
+  req: Request,
   res: Response<IResponse>
 ): Promise<void> {
   try {
+    const token = verifyToken(req.cookies.token);
+    // @ts-expect-error bad jwt types
+    if (!token.role.Contact.read) {
+      res.json({ message: "Unauthorized" });
+    }
+
     const contacts = await Contact.find();
     if (contacts.length === 0) {
       res.status(404).json({ message: "No contacts found" });
@@ -82,8 +87,14 @@ export async function getOneContact(
   res: Response<IResponse>
 ): Promise<void> {
   try {
+    const token = verifyToken(req.cookies.token);
+    // @ts-expect-error bad jwt types
+    if (!token.role.Contact.read) {
+      res.json({ message: "Unauthorized" });
+    }
+
     const { id } = req.params;
-    const contact = await Contact.findById(id);
+    const contact = await Contact.findById(id).populate("owner");
     if (!contact) {
       res.status(404).json({ message: "Contact not found" });
       logger.warn(`Contact with id ${id} not found`);
@@ -107,6 +118,12 @@ export async function updateContact(
   res: Response<IResponse>
 ): Promise<void> {
   try {
+    const token = verifyToken(req.cookies.token);
+    // @ts-expect-error bad jwt types
+    if (!token.role.Contact.write) {
+      res.json({ message: "Unauthorized" });
+    }
+
     const { id } = req.params;
     const updates = req.body;
     const verifiedUpdates = SContact.partial().safeParse(updates);
@@ -143,6 +160,12 @@ export async function deactivateContact(
   res: Response<IResponse>
 ): Promise<void> {
   try {
+    const token = verifyToken(req.cookies.token);
+    // @ts-expect-error bad jwt types
+    if (!token.role.Contact.delete) {
+      res.json({ message: "Unauthorized" });
+    }
+
     const { id } = req.params;
     const contact = await Contact.findById(id);
     if (!contact) {
@@ -172,6 +195,12 @@ export async function updateContactToCustomer(
   res: Response<IResponse>
 ): Promise<void> {
   try {
+    const token = verifyToken(req.cookies.token);
+    // @ts-expect-error bad jwt types
+    if (!token.role.Contact.write) {
+      res.json({ message: "Unauthorized" });
+    }
+
     const { id } = req.params;
 
     const contact = await Contact.findById(id);

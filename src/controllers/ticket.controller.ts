@@ -3,17 +3,29 @@ import { STicket, type ITicket } from "../interfaces/ticket.interface.js";
 import { logger } from "../config/logger.config.js";
 import Ticket from "../models/ticket.model.js";
 import type { IResponse } from "../interfaces/response.interface.js";
+import { verifyToken } from "../services/auth.service.js";
 
 export async function createTicket(
   req: Request<object, object, ITicket>,
   res: Response<IResponse>
 ): Promise<void> {
   try {
+    const token = verifyToken(req.cookies.token);
+    // @ts-expect-error bad jwt types
+    if (!token.role.Ticket.write) {
+      res.json({ message: "Unauthorized" });
+    }
+
     const ticket = STicket.safeParse(req.body);
 
     if (ticket.success === false) {
-      res.status(400).json({ message: "Missing required fields" });
-      logger.error("Missing required fields");
+      res
+        .status(400)
+        .json({
+          message: "Invalid ticket payload",
+          error: ticket.error.toString()
+        });
+      logger.error("Invalid ticket payload");
       return;
     }
 
@@ -33,10 +45,16 @@ export async function createTicket(
 }
 
 export async function getAllTickets(
-  _req: Request,
+  req: Request,
   res: Response<IResponse>
 ): Promise<void> {
   try {
+    const token = verifyToken(req.cookies.token);
+    // @ts-expect-error bad jwt types
+    if (!token.role.Ticket.read) {
+      res.json({ message: "Unauthorized" });
+    }
+
     const tickets = await Ticket.find();
     if (tickets.length === 0) {
       res.status(404).json({ message: "No tickets found" });
@@ -57,15 +75,22 @@ export async function getAllTickets(
 }
 
 export async function getOneTicket(
-  req: Request<{ ticketId: string }>,
+  req: Request<{ id: string }>,
   res: Response<IResponse>
 ): Promise<void> {
   try {
-    const { ticketId } = req.params;
-    const ticket = await Ticket.findById(ticketId);
+    const { id } = req.params;
+
+    const token = verifyToken(req.cookies.token);
+    // @ts-expect-error bad jwt types
+    if (!token.role.Ticket.read) {
+      res.json({ message: "Unauthorized" });
+    }
+
+    const ticket = await Ticket.findById(id);
     if (!ticket) {
       res.status(404).json({ message: "Ticket not found" });
-      logger.warn(`Ticket with id ${ticketId} not found`);
+      logger.warn(`Ticket with id ${id} not found`);
       return;
     }
     logger.info(`Retrieved ticket ${ticket.name}`);
@@ -82,11 +107,18 @@ export async function getOneTicket(
 }
 
 export async function updateTicket(
-  req: Request<{ ticketId: string }, object, Partial<ITicket>>,
+  req: Request<{ id: string }, object, Partial<ITicket>>,
   res: Response<IResponse>
 ): Promise<void> {
   try {
-    const { ticketId } = req.params;
+    const token = verifyToken(req.cookies.token);
+    // @ts-expect-error bad jwt types
+    if (!token.role.Ticket.write) {
+      res.json({ message: "Unauthorized" });
+    }
+
+    const { id } = req.params;
+
     const updatedTicket = STicket.partial().safeParse(req.body);
 
     if (updatedTicket.success === false) {
@@ -95,13 +127,13 @@ export async function updateTicket(
       return;
     }
 
-    const ticket = await Ticket.findById(ticketId);
+    const ticket = await Ticket.findById(id);
     if (!ticket) {
       res.status(404).json({ message: "Ticket not found" });
-      logger.warn(`Ticket with id ${ticketId} not found`);
+      logger.warn(`Ticket with id ${id} not found`);
       return;
     }
-    await Ticket.updateOne({ _id: ticketId }, { $set: updatedTicket.data });
+    await Ticket.updateOne({ _id: id }, { $set: updatedTicket.data });
     logger.info(`Updated ticket ${ticket.name}`);
     res.status(200).json({ message: "Ticket updated", data: ticket });
     return;

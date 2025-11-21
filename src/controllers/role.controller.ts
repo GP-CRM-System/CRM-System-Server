@@ -3,12 +3,19 @@ import { SRole, type IRole } from "../interfaces/role.interface.js";
 import { logger } from "../config/logger.config.js";
 import Role from "../models/role.model.js";
 import type { IResponse } from "../interfaces/response.interface.js";
+import { verifyToken } from "../services/auth.service.js";
 
 export async function createRole(
   req: Request<object, object, IRole>,
   res: Response<IResponse>
 ): Promise<void> {
   try {
+    const token = verifyToken(req.cookies.token);
+    // @ts-expect-error bad jwt types
+    if (!token.role.Role.write) {
+      res.json({ message: "Unauthorized" });
+    }
+
     const role = SRole.safeParse(req.body);
 
     if (role.success === false) {
@@ -43,10 +50,16 @@ export async function createRole(
 }
 
 export async function getAllRoles(
-  _req: Request,
+  req: Request,
   res: Response<IResponse>
 ): Promise<void> {
   try {
+    const token = verifyToken(req.cookies.token);
+    // @ts-expect-error bad jwt types
+    if (!token.role.Role.read) {
+      res.json({ message: "Unauthorized" });
+    }
+
     const roles = await Role.find();
     if (roles.length === 0) {
       res.status(404).json({ message: "No roles found" });
@@ -73,6 +86,12 @@ export async function getOneRole(
   try {
     const id = req.params.id;
 
+    const token = verifyToken(req.cookies.token);
+    // @ts-expect-error bad jwt types
+    if (!token.role.Role.read) {
+      res.json({ message: "Unauthorized" });
+    }
+
     const role = await Role.findById(id);
     if (!role) {
       res.status(404).json({ message: "Role not found" });
@@ -97,6 +116,12 @@ export async function updateRole(
   res: Response<IResponse>
 ): Promise<void> {
   try {
+    const token = verifyToken(req.cookies.token);
+    // @ts-expect-error bad jwt types
+    if (!token.role.Role.write) {
+      res.json({ message: "Unauthorized" });
+    }
+
     const id = req.params.id;
 
     const role = await Role.findById(id);
@@ -137,6 +162,12 @@ export async function deactivateRole(
   res: Response<IResponse>
 ): Promise<void> {
   try {
+    const token = verifyToken(req.cookies.token);
+    // @ts-expect-error bad jwt types
+    if (!token.role.Role.delete) {
+      res.json({ message: "Unauthorized" });
+    }
+
     const id = req.params.id;
 
     const role = await Role.findById(id);

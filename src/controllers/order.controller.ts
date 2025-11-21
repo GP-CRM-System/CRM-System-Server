@@ -4,21 +4,20 @@ import { logger } from "../config/logger.config.js";
 import Order from "../models/order.model.js";
 import type { IResponse } from "../interfaces/response.interface.js";
 import Contact from "../models/contact.model.js";
+import { verifyToken } from "../services/auth.service.js";
 
 export async function createOrder(
   req: Request<object, object, IOrder>,
   res: Response<IResponse>
 ): Promise<void> {
   try {
-    const { description, price, owner, stage, contact, employee } = req.body;
-    const order = SOrder.safeParse({
-      description,
-      price,
-      owner,
-      stage,
-      contact,
-      employee
-    });
+    const token = verifyToken(req.cookies.token);
+    // @ts-expect-error bad jwt types
+    if (!token.role.Order.write) {
+      res.json({ message: "Unauthorized" });
+    }
+
+    const order = SOrder.safeParse(req.body);
 
     if (order.success === false) {
       res.status(400).json({
@@ -29,10 +28,12 @@ export async function createOrder(
       return;
     }
 
-    const associatedContact = await Contact.findById(contact);
+    const associatedContact = await Contact.findById(order.data.contact);
     if (!associatedContact) {
       res.status(404).json({ message: "Associated contact not found" });
-      logger.error(`Associated contact with ID ${contact} not found`);
+      logger.error(
+        `Associated contact with ID ${order.data.contact} not found`
+      );
       return;
     } else {
       if (
@@ -47,7 +48,7 @@ export async function createOrder(
       }
     }
 
-    logger.info(`Created order with description ${description}`);
+    logger.info(`Created order with description ${order.data.description}`);
     const createdOrder = await Order.create(order.data);
     res.status(201).json({ message: "Order created", data: createdOrder });
     return;
@@ -62,10 +63,16 @@ export async function createOrder(
 }
 
 export async function getAllOrders(
-  _req: Request,
+  req: Request,
   res: Response<IResponse>
 ): Promise<void> {
   try {
+    const token = verifyToken(req.cookies.token);
+    // @ts-expect-error bad jwt types
+    if (!token.role.Order.read) {
+      res.json({ message: "Unauthorized" });
+    }
+
     const orders = await Order.find();
     if (orders.length === 0) {
       res.status(404).json({ message: "No orders found" });
@@ -90,6 +97,12 @@ export async function getOneOrder(
   res: Response<IResponse>
 ): Promise<void> {
   try {
+    const token = verifyToken(req.cookies.token);
+    // @ts-expect-error bad jwt types
+    if (!token.role.Order.read) {
+      res.json({ message: "Unauthorized" });
+    }
+
     const { id } = req.params;
     const order = await Order.findById(id);
     if (!order) {
@@ -115,21 +128,23 @@ export async function updateOrder(
   res: Response<IResponse>
 ): Promise<void> {
   try {
+    const token = verifyToken(req.cookies.token);
+    // @ts-expect-error bad jwt types
+    if (!token.role.Order.write) {
+      res.json({ message: "Unauthorized" });
+    }
+
     const { id } = req.params;
-    console.log(req.body);
-    const { description, price, owner, stage, contact, employee } = req.body;
-    const order = SOrder.partial().safeParse({
-      description,
-      price,
-      owner,
-      stage,
-      contact,
-      employee
-    });
+    const order = SOrder.partial().safeParse(req.body);
 
     if (order.success === false) {
-      res.status(400).json({ message: "Missing required fields" });
-      logger.error("Missing required fields");
+      res
+        .status(400)
+        .json({
+          message: "Invalid Order payload",
+          error: order.error.toString()
+        });
+      logger.error("Invalid Order payload");
       return;
     }
 
