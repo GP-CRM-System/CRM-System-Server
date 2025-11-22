@@ -1,81 +1,41 @@
-// // Configuration for Passport.js to handle OAuth2.0 authentication
+import passport from 'passport';
+import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
+import type { Application } from 'express';
+import dotenv from 'dotenv';
+import { logger } from './logger.config.js';
+import Employee from '../models/employee.model.js';
+dotenv.config({ quiet: true });
 
-// import passport, { type Profile } from 'passport';
-// import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
-// // import { IUser, User } from '../models/user.model.js';
-// import { logger } from './logger.config.js';
-// import { type Application } from 'express';
-// import dotenv from 'dotenv';
-// dotenv.config({ quiet: true });
+export default function passportSetup(app: Application): void {
+  app.use(passport.initialize());
 
-// export default function passportSetup(app: Application): void {
+  if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET || !process.env.GOOGLE_REDIRECT_URI) {
+    logger.error("Google OAuth credentials not found")
+    throw new Error('Google OAuth credentials not found');
+  }
 
-//   app.use(passport.initialize());
-//   app.use(passport.session());
+  passport.use(new GoogleStrategy({
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL: process.env.GOOGLE_REDIRECT_URI,
+    scope: ['profile', 'email'],
+  }, async function verify(
+    _accessToken: string,
+    _refreshToken: string,
+    profile: passport.Profile,
+    done: passport.DoneCallback
+  ): Promise<void> {
 
-//   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-//   passport.serializeUser((user: any, done) => {
-//     done(null, user.id);
-//   });
+    try {
+      const emp = await Employee.findOne({ email: profile?.emails?.[0]?.value });
+      if (emp) {
+        return done(null, emp);
+      }
+      return done("User not found", null);
+    } catch (error: unknown) {
+      logger.error(`Google OAuth error: ${error}`);
+      return done(error, null);
+    }
+  }));
 
-//   passport.deserializeUser(async (id: string, done) => {
-//     try {
-//       const user = await User.findById(id).select('-password');
-//       done(null, user);
-//     } catch (error) {
-//       done(error, null);
-//     }
-//   });
-
-//   passport.use(new GoogleStrategy({
-//     clientID: process.env.GOOGLE_CLIENT_ID!,
-//     clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-//     callbackURL: process.env.GOOGLE_REDIRECT_URI!,
-//     scope: ['profile', 'email']
-//     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-//   }, async (accessToken: string, refreshToken: string, profile: Profile, done: (error: Error | null, user?: any) => void) => {
-//     try {
-//       const user = await findOrCreateUser(profile, 'google');
-//       return done(null, user);
-//     } catch (error: unknown) {
-//       logger.error(error);
-//       return done(error as Error, undefined);
-//     }
-//   }));
-// }
-
-// // eslint-disable-next-line @typescript-eslint/no-explicit-any
-// async function findOrCreateUser(profile: any, provider: 'google'): Promise<IUser> {
-//   try {
-//     let user = await User.findOne({
-//       oauthProvider: provider,
-//       oauthId: profile.id
-//     });
-
-//     if (user) return user;
-
-//     if (profile.emails?.[0]?.value) {
-//       user = await User.findOne({ email: profile.emails[0].value });
-
-//       if (user) {
-//         user.oauth = provider;
-//         user.oauthId = profile.id;
-//         await user.save();
-//         return user;
-//       }
-//     }
-
-//     const userData = {
-//       oauth: provider,
-//       oauthId: profile.id,
-//       name: `${profile.name?.givenName || ''} ${profile.name?.familyName || ''}`,
-//       email: profile.emails?.[0]?.value,
-//     };
-
-//     user = await User.create(userData);
-//     return user;
-//   } catch (error) {
-//     logger.error(`Error finding/creating user: ${error}`);
-//     throw error;
-//   }
-// }
+}

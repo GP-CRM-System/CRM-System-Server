@@ -6,6 +6,7 @@ export const SEmployee = z.object({
   phone: z.string().min(7).max(14),
   email: z.email(),
   password: z.string().min(8).max(64).nullable(),
+  provider: z.enum(["google"]).nullable(),
   role: z.custom<mongoose.Types.ObjectId>((val) =>
     mongoose.Types.ObjectId.isValid(val as string)
   ),

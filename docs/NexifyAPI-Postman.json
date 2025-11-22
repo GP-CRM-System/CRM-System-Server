@@ -16,12 +16,8 @@
         "url": {
           "raw": "{{apiUrl}}/health",
           "protocol": "",
-          "host": [
-            "{{apiUrl}}"
-          ],
-          "path": [
-            "health"
-          ],
+          "host": ["{{apiUrl}}"],
+          "path": ["health"],
           "query": [],
           "variable": []
         }
@@ -42,13 +38,8 @@
             "url": {
               "raw": "{{apiUrl}}/auth/login",
               "protocol": "",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "auth",
-                "login"
-              ],
+              "host": ["{{apiUrl}}"],
+              "path": ["auth", "login"],
               "query": [],
               "variable": []
             },
@@ -75,13 +66,8 @@
             "url": {
               "raw": "{{apiUrl}}/auth/register",
               "protocol": "",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "auth",
-                "register"
-              ],
+              "host": ["{{apiUrl}}"],
+              "path": ["auth", "register"],
               "query": [],
               "variable": []
             },
@@ -113,12 +99,8 @@
             "url": {
               "raw": "{{apiUrl}}/contacts",
               "protocol": "",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "contacts"
-              ],
+              "host": ["{{apiUrl}}"],
+              "path": ["contacts"],
               "query": [],
               "variable": []
             },
@@ -145,12 +127,8 @@
             "url": {
               "raw": "{{apiUrl}}/contacts",
               "protocol": "",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "contacts"
-              ],
+              "host": ["{{apiUrl}}"],
+              "path": ["contacts"],
               "query": [],
               "variable": []
             }
@@ -168,13 +146,8 @@
             "url": {
               "raw": "{{apiUrl}}/contacts/:id",
               "protocol": "",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "contacts",
-                ":id"
-              ],
+              "host": ["{{apiUrl}}"],
+              "path": ["contacts", ":id"],
               "query": [],
               "variable": [
                 {
@@ -197,13 +170,8 @@
             "url": {
               "raw": "{{apiUrl}}/contacts/:id",
               "protocol": "",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "contacts",
-                ":id"
-              ],
+              "host": ["{{apiUrl}}"],
+              "path": ["contacts", ":id"],
               "query": [],
               "variable": [
                 {
@@ -235,14 +203,8 @@
             "url": {
               "raw": "{{apiUrl}}/contacts/stage/:id",
               "protocol": "",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "contacts",
-                "stage",
-                ":id"
-              ],
+              "host": ["{{apiUrl}}"],
+              "path": ["contacts", "stage", ":id"],
               "query": [],
               "variable": [
                 {
@@ -279,12 +241,8 @@
             "url": {
               "raw": "{{apiUrl}}/deals",
               "protocol": "",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "deals"
-              ],
+              "host": ["{{apiUrl}}"],
+              "path": ["deals"],
               "query": [],
               "variable": []
             },
@@ -311,12 +269,8 @@
             "url": {
               "raw": "{{apiUrl}}/deals",
               "protocol": "",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "deals"
-              ],
+              "host": ["{{apiUrl}}"],
+              "path": ["deals"],
               "query": [],
               "variable": []
             }
@@ -334,13 +288,8 @@
             "url": {
               "raw": "{{apiUrl}}/deals/:id",
               "protocol": "",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "deals",
-                ":id"
-              ],
+              "host": ["{{apiUrl}}"],
+              "path": ["deals", ":id"],
               "query": [],
               "variable": [
                 {
@@ -363,13 +312,8 @@
             "url": {
               "raw": "{{apiUrl}}/deals/:id",
               "protocol": "",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "deals",
-                ":id"
-              ],
+              "host": ["{{apiUrl}}"],
+              "path": ["deals", ":id"],
               "query": [],
               "variable": [
                 {
@@ -406,12 +350,8 @@
             "url": {
               "raw": "{{apiUrl}}/employees",
               "protocol": "",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "employees"
-              ],
+              "host": ["{{apiUrl}}"],
+              "path": ["employees"],
               "query": [],
               "variable": []
             },
@@ -438,13 +378,8 @@
             "url": {
               "raw": "{{apiUrl}}/employees/:id",
               "protocol": "",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "employees",
-                ":id"
-              ],
+              "host": ["{{apiUrl}}"],
+              "path": ["employees", ":id"],
               "query": [],
               "variable": [
                 {
@@ -467,12 +402,8 @@
             "url": {
               "raw": "{{apiUrl}}/employees",
               "protocol": "",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "employees"
-              ],
+              "host": ["{{apiUrl}}"],
+              "path": ["employees"],
               "query": [],
               "variable": []
             }
@@ -490,13 +421,8 @@
             "url": {
               "raw": "{{apiUrl}}/employees/:id",
               "protocol": "",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "employees",
-                ":id"
-              ],
+              "host": ["{{apiUrl}}"],
+              "path": ["employees", ":id"],
               "query": [],
               "variable": [
                 {
@@ -519,13 +445,8 @@
             "url": {
               "raw": "{{apiUrl}}/employees/:id",
               "protocol": "",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "employees",
-                ":id"
-              ],
+              "host": ["{{apiUrl}}"],
+              "path": ["employees", ":id"],
               "query": [],
               "variable": [
                 {
@@ -562,12 +483,8 @@
             "url": {
               "raw": "{{apiUrl}}/orders",
               "protocol": "",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "orders"
-              ],
+              "host": ["{{apiUrl}}"],
+              "path": ["orders"],
               "query": [],
               "variable": []
             },
@@ -594,12 +511,8 @@
             "url": {
               "raw": "{{apiUrl}}/orders",
               "protocol": "",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "orders"
-              ],
+              "host": ["{{apiUrl}}"],
+              "path": ["orders"],
               "query": [],
               "variable": []
             }
@@ -617,13 +530,8 @@
             "url": {
               "raw": "{{apiUrl}}/orders/:id",
               "protocol": "",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "orders",
-                ":id"
-              ],
+              "host": ["{{apiUrl}}"],
+              "path": ["orders", ":id"],
               "query": [],
               "variable": [
                 {
@@ -646,13 +554,8 @@
             "url": {
               "raw": "{{apiUrl}}/orders/:id",
               "protocol": "",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "orders",
-                ":id"
-              ],
+              "host": ["{{apiUrl}}"],
+              "path": ["orders", ":id"],
               "query": [],
               "variable": [
                 {
@@ -689,12 +592,8 @@
             "url": {
               "raw": "{{apiUrl}}/roles",
               "protocol": "",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "roles"
-              ],
+              "host": ["{{apiUrl}}"],
+              "path": ["roles"],
               "query": [],
               "variable": []
             },
@@ -721,13 +620,8 @@
             "url": {
               "raw": "{{apiUrl}}/roles/:id",
               "protocol": "",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "roles",
-                ":id"
-              ],
+              "host": ["{{apiUrl}}"],
+              "path": ["roles", ":id"],
               "query": [],
               "variable": [
                 {
@@ -750,12 +644,8 @@
             "url": {
               "raw": "{{apiUrl}}/roles",
               "protocol": "",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "roles"
-              ],
+              "host": ["{{apiUrl}}"],
+              "path": ["roles"],
               "query": [],
               "variable": []
             }
@@ -773,13 +663,8 @@
             "url": {
               "raw": "{{apiUrl}}/roles/:id",
               "protocol": "",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "roles",
-                ":id"
-              ],
+              "host": ["{{apiUrl}}"],
+              "path": ["roles", ":id"],
               "query": [],
               "variable": [
                 {
@@ -802,13 +687,8 @@
             "url": {
               "raw": "{{apiUrl}}/roles/:id",
               "protocol": "",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "roles",
-                ":id"
-              ],
+              "host": ["{{apiUrl}}"],
+              "path": ["roles", ":id"],
               "query": [],
               "variable": [
                 {
@@ -845,12 +725,8 @@
             "url": {
               "raw": "{{apiUrl}}/tickets",
               "protocol": "",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "tickets"
-              ],
+              "host": ["{{apiUrl}}"],
+              "path": ["tickets"],
               "query": [],
               "variable": []
             },
@@ -877,12 +753,8 @@
             "url": {
               "raw": "{{apiUrl}}/tickets",
               "protocol": "",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "tickets"
-              ],
+              "host": ["{{apiUrl}}"],
+              "path": ["tickets"],
               "query": [],
               "variable": []
             }
@@ -900,13 +772,8 @@
             "url": {
               "raw": "{{apiUrl}}/tickets/:id",
               "protocol": "",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "tickets",
-                ":id"
-              ],
+              "host": ["{{apiUrl}}"],
+              "path": ["tickets", ":id"],
               "query": [],
               "variable": [
                 {
@@ -929,13 +796,8 @@
             "url": {
               "raw": "{{apiUrl}}/tickets/:id",
               "protocol": "",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "tickets",
-                ":id"
-              ],
+              "host": ["{{apiUrl}}"],
+              "path": ["tickets", ":id"],
               "query": [],
               "variable": [
                 {

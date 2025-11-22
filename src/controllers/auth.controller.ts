@@ -11,6 +11,8 @@ import {
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import Role from "../models/role.model.js";
+import { emailTemplates, sendEmail } from "../config/mail.config.js";
+import type { IRole } from "../interfaces/role.interface.js";
 
 export async function registerAdmin(
   req: Request<object, object, IEmployee>,
@@ -75,6 +77,8 @@ export async function registerAdmin(
       secure: true,
       sameSite: "none"
     });
+
+    await sendEmail(createdAdmin.email, emailTemplates.welcome(createdAdmin.fullName).subject, emailTemplates.welcome(createdAdmin.fullName).html);
 
     res
       .status(201)
@@ -172,13 +176,45 @@ export async function login(
   }
 }
 
-// export async function forgotPassword(
-//   req: Request<{id:string}>,
-//   res:Response<IResponse>
-// ):Promise<void> {
-//   try {
+export async function googleCallback(
+  req: Request,
+  res: Response<IResponse>
+): Promise<void> {
+  try {
+    if (!req.user) {
+      logger.error('No user data from Google while logging in');
+      throw new Error('No user data from Google while logging in');
+    }
 
-//   } catch (error) {
+    const emp = req.user as IEmployee & { _id: mongoose.Types.ObjectId, role: IRole };
 
-//   }
-// }
+    // Generate JWT
+    const token = generateToken({
+      _id: emp._id,
+      email: emp.email,
+      role: emp.role
+    });
+
+    const refreshToken = generateRefreshToken({
+      _id: emp._id,
+      email: emp.email,
+      role: emp.role
+    });
+
+    res.status(200).json({
+      message: "Google authentication successful",
+      data: {
+        token,
+        refreshToken,
+        emp
+      }
+    });
+    console.log(`User logged in via Google: ${emp.email}`);
+  } catch (error: unknown) {
+    console.error(`Google OAuth error: ${error}`);
+    res.status(500).json({
+      message: "Internal server error",
+      error: (error as Error).message
+    });
+  }
+}

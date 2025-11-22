@@ -7,6 +7,7 @@ const employeeSchema = new mongoose.Schema<IEmployee>({
   phone: { type: String, required: true },
   email: { type: String, required: true },
   password: { type: String, required: true },
+  provider: { type: String, enum: ["google", null], default: null },
   role: { type: mongoose.Schema.Types.ObjectId, required: true, ref: "Role" },
   salary: { type: Number, required: true, default: 0 },
   isActive: { type: Boolean, required: true, default: true }

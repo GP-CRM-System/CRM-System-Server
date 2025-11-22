@@ -8,7 +8,7 @@ import router from "./routes/main.routes.js";
 import { notFound } from "./controllers/misc.controller.js";
 import cookieParser from "cookie-parser";
 import helmet from "helmet";
-// import passportSetup from "./config/passport.config.js";
+import passportSetup from "./config/passport.config.js";
 
 const app = express();
 
@@ -27,7 +27,7 @@ app.use(
 
 loggerSetup(app);
 mongoSetup();
-// passportSetup(app);
+passportSetup(app);
 swaggerSetup(app);
 app.use("/api/v1", router);
 app.use(notFound);
