@@ -19,12 +19,10 @@ export async function createTicket(
     const ticket = STicket.safeParse(req.body);
 
     if (ticket.success === false) {
-      res
-        .status(400)
-        .json({
-          message: "Invalid ticket payload",
-          error: ticket.error.toString()
-        });
+      res.status(400).json({
+        message: "Invalid ticket payload",
+        error: ticket.error.toString()
+      });
       logger.error("Invalid ticket payload");
       return;
     }

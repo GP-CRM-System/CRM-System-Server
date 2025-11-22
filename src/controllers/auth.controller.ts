@@ -78,7 +78,14 @@ export async function registerAdmin(
 
     res
       .status(201)
-      .json({ message: "Admin created", data: { token, refreshToken } });
+      .json({
+        message: "Admin created",
+        data: {
+          token,
+          refreshToken,
+          admin: await createdAdmin.populate("role")
+        }
+      });
     return;
   } catch (err: unknown) {
     logger.error(`Error registering admin: ${(err as Error).message}`);
@@ -170,8 +177,8 @@ export async function login(
 //   res:Response<IResponse>
 // ):Promise<void> {
 //   try {
-    
+
 //   } catch (error) {
-    
+
 //   }
 // }

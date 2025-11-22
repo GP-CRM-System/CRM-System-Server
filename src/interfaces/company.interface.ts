@@ -159,7 +159,7 @@ export const SCompany = z.object({
   ),
   website: z.url().nullable(),
   email: z.email().nullable(),
-  industry: z.enum(industries),
+  industry: z.enum(industries).optional(),
   type: z.enum(["Prospect", "Partner", "Reseller", "Vendor", "Other"]),
   address: z.string().nullable(),
   numberOfEmployees: z.number().gt(0),

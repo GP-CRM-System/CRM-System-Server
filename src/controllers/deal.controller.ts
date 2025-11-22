@@ -142,12 +142,10 @@ export async function updateDeal(
     const updateData = req.body;
     const updatedDeal = SDeal.partial().safeParse(updateData);
     if (updatedDeal.success === false) {
-      res
-        .status(400)
-        .json({
-          message: "Invalid update fields",
-          error: updatedDeal.error.toString()
-        });
+      res.status(400).json({
+        message: "Invalid update fields",
+        error: updatedDeal.error.toString()
+      });
       logger.error("Invalid update fields");
       return;
     }

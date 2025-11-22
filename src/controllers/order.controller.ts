@@ -138,12 +138,10 @@ export async function updateOrder(
     const order = SOrder.partial().safeParse(req.body);
 
     if (order.success === false) {
-      res
-        .status(400)
-        .json({
-          message: "Invalid Order payload",
-          error: order.error.toString()
-        });
+      res.status(400).json({
+        message: "Invalid Order payload",
+        error: order.error.toString()
+      });
       logger.error("Invalid Order payload");
       return;
     }

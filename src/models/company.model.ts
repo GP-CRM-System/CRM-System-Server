@@ -10,7 +10,7 @@ const companySchema = new mongoose.Schema<ICompany>({
   },
   website: { type: String, required: false },
   email: { type: String, required: false },
-  industry: { type: String, required: true },
+  industry: { type: String },
   type: { type: String, required: true },
   address: { type: String, required: false },
   numberOfEmployees: { type: Number, required: false, default: 0 },
