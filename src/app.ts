@@ -18,8 +18,9 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(
   cors({
-    origin: process.env.CORS_ORIGIN,
+    origin: ['http://localhost:5173', 'http://localhost:4650', "https://nexify-nine.vercel.app/", "https://nexify-nine.vercel.app"],
     methods: ["GET", "POST", "PUT", "DELETE"],
+      credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"]
   })
 );

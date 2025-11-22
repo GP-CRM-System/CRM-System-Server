@@ -10,7 +10,8 @@ export default function mongoSetup(): void {
   mongoose
     .connect(process.env.MONGODB_URI!)
     .then(() =>
-      logger.info(`Connected to MongoDB at ${process.env.MONGODB_URI}`)
+      // logger.info(`Connected to MongoDB at ${process.env.MONGODB_URI}`)
+      logger.info(`Connected to MongoDB`)
     )
     .catch((err) => {
       logger.error(err);
