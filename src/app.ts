@@ -8,7 +8,7 @@ import router from "./routes/main.routes.js";
 import { notFound } from "./controllers/misc.controller.js";
 import cookieParser from "cookie-parser";
 import helmet from "helmet";
-// import passportSetup from "./config/passport.config.js";
+import passportSetup from "./config/passport.config.js";
 
 const app = express();
 
@@ -18,16 +18,16 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(
   cors({
-    origin: ['http://localhost:5173', 'http://localhost:4650', "https://nexify-nine.vercel.app/", "https://nexify-nine.vercel.app"],
+    origin: process.env.CORS_ORIGIN?.split(", ") || [],
     methods: ["GET", "POST", "PUT", "DELETE"],
-      credentials: true,
+    credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"]
   })
 );
 
 loggerSetup(app);
 mongoSetup();
-// passportSetup(app);
+passportSetup(app);
 swaggerSetup(app);
 app.use("/api/v1", router);
 app.use(notFound);

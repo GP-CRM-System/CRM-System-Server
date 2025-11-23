@@ -13,18 +13,19 @@ export async function createTicket(
     const token = verifyToken(req.cookies.token);
     // @ts-expect-error bad jwt types
     if (!token.role.Ticket.write) {
-      res.json({ message: "Unauthorized" });
+      res
+        .status(401)
+        .json({ message: "Error creating ticket", error: "Unauthorized" });
+      return;
     }
 
-    const ticket = STicket.safeParse(req.body);
+    const ticket = await STicket.safeParseAsync(req.body);
 
     if (ticket.success === false) {
-      res
-        .status(400)
-        .json({
-          message: "Invalid ticket payload",
-          error: ticket.error.toString()
-        });
+      res.status(400).json({
+        message: "Invalid ticket payload",
+        error: JSON.parse(ticket.error.message)
+      });
       logger.error("Invalid ticket payload");
       return;
     }
@@ -52,12 +53,20 @@ export async function getAllTickets(
     const token = verifyToken(req.cookies.token);
     // @ts-expect-error bad jwt types
     if (!token.role.Ticket.read) {
-      res.json({ message: "Unauthorized" });
+      res
+        .status(401)
+        .json({ message: "Error retrieving tickets", error: "Unauthorized" });
+      return;
     }
 
     const tickets = await Ticket.find();
     if (tickets.length === 0) {
-      res.status(404).json({ message: "No tickets found" });
+      res
+        .status(404)
+        .json({
+          message: "Error retrieving tickets",
+          error: "No tickets found"
+        });
       logger.warn("No tickets found");
       return;
     }
@@ -84,12 +93,20 @@ export async function getOneTicket(
     const token = verifyToken(req.cookies.token);
     // @ts-expect-error bad jwt types
     if (!token.role.Ticket.read) {
-      res.json({ message: "Unauthorized" });
+      res
+        .status(401)
+        .json({ message: "Error retrieving ticket", error: "Unauthorized" });
+      return;
     }
 
     const ticket = await Ticket.findById(id);
     if (!ticket) {
-      res.status(404).json({ message: "Ticket not found" });
+      res
+        .status(404)
+        .json({
+          message: "Error retrieving ticket",
+          error: "Ticket not found"
+        });
       logger.warn(`Ticket with id ${id} not found`);
       return;
     }
@@ -114,22 +131,32 @@ export async function updateTicket(
     const token = verifyToken(req.cookies.token);
     // @ts-expect-error bad jwt types
     if (!token.role.Ticket.write) {
-      res.json({ message: "Unauthorized" });
+      res
+        .status(401)
+        .json({ message: "Error updating ticket", error: "Unauthorized" });
+      return;
     }
 
     const { id } = req.params;
 
-    const updatedTicket = STicket.partial().safeParse(req.body);
+    const updatedTicket = await STicket.partial().safeParseAsync(req.body);
 
     if (updatedTicket.success === false) {
-      res.status(400).json({ message: "Invalid update fields" });
+      res
+        .status(400)
+        .json({
+          message: "Invalid update fields",
+          error: JSON.parse(updatedTicket.error.message)
+        });
       logger.error("Invalid update fields");
       return;
     }
 
     const ticket = await Ticket.findById(id);
     if (!ticket) {
-      res.status(404).json({ message: "Ticket not found" });
+      res
+        .status(404)
+        .json({ message: "Error updating ticket", error: "Ticket not found" });
       logger.warn(`Ticket with id ${id} not found`);
       return;
     }

@@ -3,47 +3,27 @@
 
 import dotenv from "dotenv";
 import nodemailer from "nodemailer";
-
+import { logger } from "./logger.config.js";
 dotenv.config({ quiet: true });
 
-const mailConfig = {
-  host: process.env.SMTP_HOST!,
-  port: parseInt(process.env.SMTP_PORT!),
-  secure: process.env.SMTP_SECURE === "true",
-  auth: { user: process.env.SMTP_USER!, pass: process.env.SMTP_PASS! },
-  from: process.env.SMTP_FROM!
-};
-
 export const emailTemplates = {
-  welcome: (firstName: string) => ({
-    subject: "Welcome to WalletWatch!",
+  welcome: (name: string) => ({
+    subject: "Welcome to Nexify!",
     html: `
-            <h2>Welcome to WalletWatch!</h2>
-            <p>Hi ${firstName},</p>
-            <p>Thank you for joining WalletWatch. We're excited to help you manage your Budgets and expenses more efficiently.</p>
+            <h2>Welcome to Nexify!</h2>
+            <p>Hi ${name},</p>
+            <p>Thank you for joining Nexify. We're excited to help you manage your customers and employees efficiently.</p>
             <p>Visit your dashboard: <a href="${process.env.APP_URL!}/">Click here</a></p>
         `
   }),
 
-  overspending: (firstName: string, percentage: number, amount: number) => ({
-    subject: "Budget Overspending Alert",
+  forgotPassword: (name: string) => ({
+    subject: "Forgot Password",
     html: `
-            <h2>Budget Overspending Alert</h2>
-            <p>Hi ${firstName},</p>
-            <p>We noticed that you have overspent your budget by ${percentage.toFixed(2)}%.</p>
-            <p>You have spent a total of $${amount.toFixed(2)}.</p>
-            <p>Please review your budget and expenses to avoid further overspending.</p>
-        `
-  }),
-  reminder: () => ({
-    subject: "Budget Reminder",
-    html: `<p>Reminder: Don’t forget to log today’s expenses in your Smart Budget Tracker.</p>  
-<p>Keeping your expenses updated helps you stay within your budget and track your saving goals.</p>`
-  }),
-  report: () => ({
-    subject: `Monthly Budget Report`,
-    html: `<p>Hi,</p>
-        <p>Here is your monthly budget report:</p>
+            <h2>Forgot Password</h2>
+            <p>Hi ${name},</p>
+            <p>You have requested to reset your password. Please click the link below to reset your password:</p>
+            <p><a href="${process.env.APP_URL!}/reset-password">Click here</a></p>
         `
   })
 };
@@ -52,13 +32,38 @@ export const sendEmail = async (
   to: string,
   subject: string,
   html: string
-): Promise<nodemailer.SentMessageInfo> => {
-  const transporter = nodemailer.createTransport(mailConfig);
-  const info = await transporter.sendMail({
-    from: `"WalletWatch" <${mailConfig.from}>`,
-    to,
-    subject,
-    html
+): Promise<nodemailer.SentMessageInfo | Error> => {
+  if (
+    !process.env.SMTP_HOST ||
+    !process.env.SMTP_PORT ||
+    !process.env.SMTP_SECURE ||
+    !process.env.SMTP_USER ||
+    !process.env.SMTP_PASS ||
+    !process.env.SMTP_FROM
+  ) {
+    logger.error("Missing environment variables for mail configuration");
+    return new Error("Missing environment variables for mail configuration");
+  }
+
+  const transporter = nodemailer.createTransport({
+    host: process.env.SMTP_HOST,
+    port: parseInt(process.env.SMTP_PORT),
+    secure: process.env.SMTP_SECURE === "true",
+    auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
+    from: process.env.SMTP_FROM
   });
-  return info;
+
+  try {
+    const info = await transporter.sendMail({
+      from: `"Nexify Team" <${process.env.SMTP_FROM}>`,
+      to,
+      subject,
+      html
+    });
+    logger.info(`Email sent to ${to}`);
+    return info;
+  } catch (error: unknown) {
+    logger.error(`Error sending email: ${(error as Error).message}`);
+    return error;
+  }
 };

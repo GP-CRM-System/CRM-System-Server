@@ -2,10 +2,5 @@
 
 ## add interfaces for inputs
 
-1. implement Authentication and Authorization
-2. Add Tests
-3. Mail Logic
-4. Implement OAuth 2.0 with google
-5. Implement Ratelimiting
-6. Add Image Uploading with Multer
-7. Add Search Queries to endpoints
+3. Add Image Uploading with Multer
+4. Add Search Queries to endpoints

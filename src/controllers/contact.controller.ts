@@ -13,17 +13,20 @@ export async function createContact(
     const token = verifyToken(req.cookies.token);
     // @ts-expect-error bad jwt types
     if (!token.role.Contact.write) {
-      res.json({ message: "Unauthorized" });
+      res
+        .status(401)
+        .json({ message: "Contact creation failed", error: "Unauthorized" });
+      return;
     }
 
-    const contact = SContact.safeParse(req.body);
+    const contact = await SContact.safeParseAsync(req.body);
 
     if (contact.success === false) {
       res.status(400).json({
-        message: "Missing required fields",
-        error: contact.error.toString()
+        message: "Invalid fields for contact creation",
+        error: JSON.parse(contact.error.message)
       });
-      logger.error("Missing required fields");
+      logger.error("Invalid fields for contact creation");
       return;
     }
 
@@ -33,7 +36,10 @@ export async function createContact(
     if (existingContact) {
       res
         .status(409)
-        .json({ message: "Contact with the same email already exists" });
+        .json({
+          message: "Contact creation failed",
+          error: "Contact with the same email already exists"
+        });
       logger.error(`Contact with email ${contact.data.email} already exists`);
       return;
     }
@@ -60,12 +66,20 @@ export async function getAllContacts(
     const token = verifyToken(req.cookies.token);
     // @ts-expect-error bad jwt types
     if (!token.role.Contact.read) {
-      res.json({ message: "Unauthorized" });
+      res
+        .status(401)
+        .json({ message: "Contact retrieval failed", error: "Unauthorized" });
+      return;
     }
 
     const contacts = await Contact.find();
     if (contacts.length === 0) {
-      res.status(404).json({ message: "No contacts found" });
+      res
+        .status(404)
+        .json({
+          message: "Contact retrieval failed",
+          error: "No contacts found"
+        });
       logger.warn("No contacts found");
       return;
     }
@@ -90,13 +104,19 @@ export async function getOneContact(
     const token = verifyToken(req.cookies.token);
     // @ts-expect-error bad jwt types
     if (!token.role.Contact.read) {
-      res.json({ message: "Unauthorized" });
+      res.json({ message: "Contact retrieval failed", error: "Unauthorized" });
+      return;
     }
 
     const { id } = req.params;
     const contact = await Contact.findById(id).populate("owner");
     if (!contact) {
-      res.status(404).json({ message: "Contact not found" });
+      res
+        .status(404)
+        .json({
+          message: "Contact retrieval failed",
+          error: "Contact not found"
+        });
       logger.warn(`Contact with id ${id} not found`);
       return;
     }
@@ -121,7 +141,8 @@ export async function updateContact(
     const token = verifyToken(req.cookies.token);
     // @ts-expect-error bad jwt types
     if (!token.role.Contact.write) {
-      res.json({ message: "Unauthorized" });
+      res.json({ message: "Contact update failed", error: "Unauthorized" });
+      return;
     }
 
     const { id } = req.params;
@@ -129,14 +150,21 @@ export async function updateContact(
     const verifiedUpdates = SContact.partial().safeParse(updates);
 
     if (verifiedUpdates.success === false) {
-      res.status(400).json({ message: "Invalid update fields" });
+      res
+        .status(400)
+        .json({
+          message: "Contact update failed",
+          error: JSON.parse(verifiedUpdates.error.message)
+        });
       logger.error("Invalid update fields");
       return;
     }
 
     const contact = await Contact.findById(id);
     if (!contact) {
-      res.status(404).json({ message: "Contact not found" });
+      res
+        .status(404)
+        .json({ message: "Contact update failed", error: "Contact not found" });
       logger.warn(`Contact with id ${id} not found`);
       return;
     }
@@ -163,13 +191,22 @@ export async function deactivateContact(
     const token = verifyToken(req.cookies.token);
     // @ts-expect-error bad jwt types
     if (!token.role.Contact.delete) {
-      res.json({ message: "Unauthorized" });
+      res.json({
+        message: "Contact deactivation failed",
+        error: "Unauthorized"
+      });
+      return;
     }
 
     const { id } = req.params;
     const contact = await Contact.findById(id);
     if (!contact) {
-      res.status(404).json({ message: "Contact not found" });
+      res
+        .status(404)
+        .json({
+          message: "Contact deactivation failed",
+          error: "Contact not found"
+        });
       logger.warn(`Contact with id ${id} not found`);
       return;
     }
@@ -198,20 +235,28 @@ export async function updateContactToCustomer(
     const token = verifyToken(req.cookies.token);
     // @ts-expect-error bad jwt types
     if (!token.role.Contact.write) {
-      res.json({ message: "Unauthorized" });
+      res.json({ message: "Contact update failed", error: "Unauthorized" });
+      return;
     }
 
     const { id } = req.params;
 
     const contact = await Contact.findById(id);
     if (!contact) {
-      res.status(404).json({ message: "Contact not found" });
+      res
+        .status(404)
+        .json({ message: "Contact update failed", error: "Contact not found" });
       logger.warn(`Contact with id ${id} not found`);
       return;
     }
 
     if (contact.stage.length === 2) {
-      res.status(400).json({ message: "Contact already in customer stage" });
+      res
+        .status(400)
+        .json({
+          message: "Contact update failed",
+          error: "Contact already in customer stage"
+        });
       logger.warn(`Contact with id ${id} already in customer stage`);
       return;
     }

@@ -11,18 +11,20 @@ import {
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import Role from "../models/role.model.js";
+import { emailTemplates, sendEmail } from "../config/mail.config.js";
+import type { IRole } from "../interfaces/role.interface.js";
 
 export async function registerAdmin(
   req: Request<object, object, IEmployee>,
   res: Response<IResponse>
 ): Promise<void> {
   try {
-    const employee = SEmployee.partial().safeParse(req.body);
+    const employee = await SEmployee.partial().safeParseAsync(req.body);
 
     if (employee.success === false) {
       res.status(400).json({
         message: "Invalid admin payload",
-        error: employee.error.message
+        error: JSON.parse(employee.error.message)
       });
       logger.error("Invalid admin payload");
       return;
@@ -34,14 +36,22 @@ export async function registerAdmin(
     if (existingAdmin) {
       res
         .status(409)
-        .json({ message: "Employee with the same email already exists" });
+        .json({
+          message: "Admin creation failed",
+          error: "Admin with the same email already exists"
+        });
       logger.error(`Admin ${employee.data.email} already exists`);
       return;
     }
 
     const roleId = await createRootRole();
     if (!roleId) {
-      res.status(500).json({ message: "Failed to create root role" });
+      res
+        .status(500)
+        .json({
+          message: "Admin creation failed",
+          error: "Failed to create root role"
+        });
       logger.error("Failed to create root role");
       return;
     }
@@ -89,7 +99,7 @@ export async function registerAdmin(
 
     res
       .status(201)
-      .json({ message: "Admin created", data: { token, refreshToken, user } });
+      .json({ message: "Admin created", data: { token, refreshToken } });
     return;
   } catch (err: unknown) {
     logger.error(`Error registering admin: ${(err as Error).message}`);
@@ -106,44 +116,45 @@ export async function login(
   res: Response<IResponse>
 ): Promise<void> {
   try {
-    const employee = SEmployee.partial().safeParse(req.body);
+    const employee = await SEmployee.partial().safeParseAsync(req.body);
 
     if (employee.success === false) {
       res.status(400).json({
         message: "Invalid employee payload",
-        error: employee.error.message
+        error: JSON.parse(employee.error.message)
       });
       logger.error("Invalid employee payload");
       return;
     }
 
-    console.log("employee", employee);
     const existingEmployee = await Employee.findOne({
       email: employee.data.email
     }).populate("role");
     if (!existingEmployee) {
-      res.status(404).json({ message: "Employee not found" });
+      res
+        .status(404)
+        .json({ message: "Login failed", error: "Employee not found" });
       logger.warn(`Employee ${employee.data.email} not found`);
       return;
     }
 
-    console.log("existingEmployee", existingEmployee);
-
     if (
       !bcrypt.compareSync(employee.data.password!, existingEmployee.password!)
     ) {
-      res.status(401).json({ message: "Invalid credentials" });
+      res
+        .status(401)
+        .json({ message: "Login failed", error: "Invalid credentials" });
       logger.warn(`Invalid credentials for employee ${employee.data.email}`);
       return;
     }
 
-    const token = await generateToken({
+    const token = generateToken({
       _id: existingEmployee._id,
       email: existingEmployee.email,
       // @ts-expect-error role is populated
       role: existingEmployee.role
     });
-    const refreshToken = await generateRefreshToken({
+    const refreshToken = generateRefreshToken({
       _id: existingEmployee._id,
       email: existingEmployee.email,
       // @ts-expect-error role is populated
@@ -176,13 +187,56 @@ export async function login(
   }
 }
 
-// export async function forgotPassword(
-//   req: Request<{id:string}>,
-//   res:Response<IResponse>
-// ):Promise<void> {
-//   try {
-    
-//   } catch (error) {
-    
-//   }
-// }
+export async function googleCallback(
+  req: Request,
+  res: Response<IResponse>
+): Promise<void> {
+  try {
+    if (!req.user) {
+      logger.error("No user data from Google while logging in");
+      res
+        .status(401)
+        .json({
+          message: "Login failed",
+          error: "No user data from Google while logging in"
+        });
+      return;
+    }
+
+    const emp = req.user as IEmployee & {
+      _id: mongoose.Types.ObjectId;
+      role: IRole;
+    };
+
+    // Generate JWT
+    const token = generateToken({
+      _id: emp._id,
+      email: emp.email,
+      role: emp.role
+    });
+
+    const refreshToken = generateRefreshToken({
+      _id: emp._id,
+      email: emp.email,
+      role: emp.role
+    });
+
+    res.status(200).json({
+      message: "Google authentication successful",
+      data: {
+        token,
+        refreshToken,
+        emp
+      }
+    });
+    logger.info(`User logged in via Google: ${emp.email}`);
+    return;
+  } catch (error: unknown) {
+    logger.error(`Google OAuth error: ${error}`);
+    res.status(500).json({
+      message: "Internal server error",
+      error: (error as Error).message
+    });
+    return;
+  }
+}

@@ -1,8 +1,16 @@
 import mongoose from "mongoose";
 import { z } from "zod";
+import Employee from "../models/employee.model.js";
+import Contact from "../models/contact.model.js";
+import Company from "../models/company.model.js";
 
 export const SDeal = z.object({
-  name: z.string().min(3).max(50),
+  name: z
+    .string("Deal name is required")
+    .min(3, "Deal name must be at least 3 characters long")
+    .max(50, "Deal name must be at most 50 characters long")
+    .regex(/^[a-zA-Z ]+$/, "Deal name must contain only letters and spaces"),
+
   stage: z
     .array(
       z.object({
@@ -19,18 +27,23 @@ export const SDeal = z.object({
       })
     )
     .default([{ name: "Appointment Scheduled", date: new Date() }]),
-  amount: z.number().gt(0),
-  owner: z.custom<mongoose.Types.ObjectId>((val) =>
-    mongoose.Types.ObjectId.isValid(val as string)
-  ),
-  priority: z.enum(["Low", "Medium", "High"]),
-  contact: z.custom<mongoose.Types.ObjectId>((val) =>
-    mongoose.Types.ObjectId.isValid(val as string)
-  ),
+
+  amount: z.number("Amount is required").gt(0, "Amount must be greater than 0"),
+  owner: z.custom<mongoose.Types.ObjectId>(async (val) => {
+    mongoose.Types.ObjectId.isValid(val as string);
+    return await Employee.findById(val);
+  }, "Owner is should be a valid employee"),
+
+  priority: z.enum(["Low", "Medium", "High"], "Invalid priority"),
+  contact: z.custom<mongoose.Types.ObjectId>(async (val) => {
+    mongoose.Types.ObjectId.isValid(val as string);
+    return await Contact.findById(val);
+  }, "Contact is should be a valid contact"),
   company: z
-    .custom<mongoose.Types.ObjectId>((val) =>
-      mongoose.Types.ObjectId.isValid(val as string)
-    )
+    .custom<mongoose.Types.ObjectId>(async (val) => {
+      mongoose.Types.ObjectId.isValid(val as string);
+      return await Company.findById(val);
+    }, "Company is should be a valid company")
     .optional()
 });
 

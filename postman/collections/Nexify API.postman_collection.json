@@ -1,0 +1,1264 @@
+{
+  "info": {
+    "_postman_id": "7d3f8a4a-1f2b-4743-b5a6-f2ef11f3a3d1",
+    "name": "Nexify API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register Admin",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "92a50bbc-7d8e-49e5-bfd9-f8ebd955f47a",
+                "exec": [
+                  "let adminId;",
+                  "try {",
+                  "    const jsonData = pm.response.json();",
+                  "    adminId = jsonData?.data?.admin?._id;",
+                  "    if (adminId) {",
+                  "        pm.collectionVariables.set('adminId', adminId);",
+                  "        pm.test('adminId set as collection variable', function () {",
+                  "            pm.expect(pm.collectionVariables.get('adminId')).to.eql(adminId);",
+                  "        });",
+                  "    } else {",
+                  "        pm.test(\"adminId not found in response\", function () {",
+                  "            pm.expect(adminId, \"adminId should be present in response.data.admin._id\").to.not.be.undefined;",
+                  "        });",
+                  "    }",
+                  "} catch (e) {",
+                  "    pm.test(\"Response is not valid JSON or does not contain expected structure\", function () {",
+                  "        pm.expect.fail(\"Could not extract adminId: \" + e.message);",
+                  "    });",
+                  "}",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "b8f64225-4cb1-4075-aa11-b6bf187c7d38",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fullName\":\"FirstName Lastname\",\n  \"phone\":\"1234567890\",\n  \"email\":\"{{adminEmail}}\",\n  \"password\":\"{{adminPassword}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiUrl}}/auth/register",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "auth",
+                "register"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "51ff3b52-9883-478f-9806-fc8935914c83",
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    var jsonData = pm.response.json();",
+                  "    if (jsonData && jsonData.data && jsonData.data._id) {",
+                  "        pm.collectionVariables.set(\"adminId\", jsonData.data._id);",
+                  "    }",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "b539c1cd-0af7-4267-be54-38e8c2d1b1ca",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\":\"{{adminEmail}}\",\n  \"password\":\"{{adminPassword}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiUrl}}/auth/login",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Google Login",
+          "id": "4f684df7-3591-40e9-bb87-1c6c60b17b82",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "url": {
+              "raw": "{{apiUrl}}/auth/google",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "auth",
+                "google"
+              ]
+            }
+          }
+        }
+      ],
+      "id": "588ba7df-8fd0-49c3-bb09-7ade43e5c2d0"
+    },
+    {
+      "name": "Roles",
+      "item": [
+        {
+          "name": "Create Role",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "b36e91d7-0778-4d5c-b47d-c016eed8a916",
+                "exec": [
+                  "pm.test(\"Status code is 201 and roleId is set\", function () {",
+                  "    pm.response.to.have.status(201);",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.data).to.have.property('_id');",
+                  "    pm.collectionVariables.set(\"roleId\", jsonData.data._id);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "f927ed73-9f57-4f13-99f9-2def528d6bca",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Human Resources\",\n    \"Employee\": {\n        \"read\": true,\n        \"write\": false,\n        \"delete\": false\n    }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiUrl}}/roles",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "roles"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get all roles",
+          "id": "94a1618a-e632-4443-9691-9415669a8fd2",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "url": {
+              "raw": "{{apiUrl}}/roles",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "roles"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get one role",
+          "id": "927d5207-b4a4-4121-9131-707ea1b0f4ca",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "url": {
+              "raw": "{{apiUrl}}/roles/:id",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "roles",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "{{roleId}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update role",
+          "id": "feaa64b3-2ed4-4fef-8250-bfa3d7b87b72",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Human Resources but Updated\",\n  \"Employee\": {\n    \"read\": true,\n    \"write\": false,\n    \"delete\": true\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiUrl}}/roles/:id",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "roles",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "{{roleId}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Deactivate role",
+          "id": "e5f52c69-a80a-40a1-858c-a8a81b658a40",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "DELETE",
+            "url": {
+              "raw": "{{apiUrl}}/roles/:id",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "roles",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "{{roleId}}"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "id": "3c3c176e-db3e-462a-bba8-ecfe93bec43b"
+    },
+    {
+      "name": "Employees",
+      "item": [
+        {
+          "name": "Create employee",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "66ef48ee-7558-4f00-be91-1adefd92ff81",
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    var jsonData = pm.response.json();",
+                  "    if (jsonData && jsonData.data && jsonData.data._id) {",
+                  "        pm.collectionVariables.set(\"empId\", jsonData.data._id);",
+                  "    }",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "3f19f990-a9bd-4094-a396-26c3207ff2c4",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fullName\": \"very good employee\",\n  \"phone\":\"2029141421\",\n  \"email\":\"{{empEmail}}\",\n  \"password\":\"{{empPass}}\",\n  \"salary\":2000,\n  \"role\":\"{{roleId}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiUrl}}/employees",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "employees"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get all employees",
+          "id": "406f1852-4b2c-4f55-94d1-2be64cc310b5",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "url": {
+              "raw": "{{apiUrl}}/employees",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "employees"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get one employee",
+          "id": "e096816b-6d14-4363-a5e0-df8bbcefab97",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "url": {
+              "raw": "{{apiUrl}}/employees/:id",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "employees",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "{{empId}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Employee",
+          "id": "40b3593d-51d1-4106-bf09-d652b5f02cbc",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fullName\":\"Updated Name\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiUrl}}/employees/:id",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "employees",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "{{empId}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Deactivate Employee",
+          "id": "49b4ec6d-663f-493b-8be1-35d76cb122f6",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "DELETE",
+            "url": {
+              "raw": "{{apiUrl}}/employees/:id",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "employees",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "{{empId}}"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "id": "5f646d7a-a405-470f-b8c8-b695651a422a"
+    },
+    {
+      "name": "Contacts",
+      "item": [
+        {
+          "name": "Create Contact",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "98317e4e-f645-4102-8e62-dbbf4111e09e",
+                "exec": [
+                  "pm.test(\"Status code is 201\", function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "",
+                  "if (pm.response.code === 201) {",
+                  "    var jsonData = pm.response.json();",
+                  "    if (jsonData && jsonData.data && jsonData.data._id) {",
+                  "        pm.collectionVariables.set(\"contactId\", jsonData.data._id);",
+                  "    }",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "7fa17cc4-ec25-4e6a-b6a4-0b9bdbcb73dd",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\":\"Contact Person\",\n  \"email\":\"contact@example.com\",\n  \"phone\": null,\n  \"address\":\"234 Contact Avenue\",\n  \"jobTitle\": null,\n  \"owner\": \"{{empId}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiUrl}}/contacts",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "contacts"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get all Contacts",
+          "id": "eef2a1d3-b6e9-4f47-9260-60892e4f4820",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "url": {
+              "raw": "{{apiUrl}}/contacts",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "contacts"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get one contact",
+          "id": "4c54744b-8643-4578-9074-b3b14bac758c",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "url": {
+              "raw": "{{apiUrl}}/contacts/:id",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "contacts",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "{{contactId}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Contact",
+          "id": "2a886ff6-81a5-42c2-8779-e741d10320c3",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\":\"Updated Contact\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiUrl}}/contacts/:id",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "contacts",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "{{contactId}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Lead to Customer",
+          "id": "d1b81f6e-2866-427c-99ec-f4c54924bd66",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\":\"Updated Contact\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiUrl}}/contacts/stage/:id",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "contacts",
+                "stage",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "{{contactId}}"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "id": "d2d5c7e8-6a57-44b5-9103-2bbcba27b84c"
+    },
+    {
+      "name": "Companies",
+      "item": [
+        {
+          "name": "Create Company",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "56bec9fd-992f-4c8e-a418-64e8966a1c8c",
+                "exec": [
+                  "pm.test(\"Status code is 201\", function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "",
+                  "if (pm.response.code === 201) {",
+                  "    var jsonData = pm.response.json();",
+                  "    if (jsonData && jsonData.data && jsonData.data._id) {",
+                  "        pm.collectionVariables.set(\"companyId\", jsonData.data._id);",
+                  "    }",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "f9a95e1e-f8e6-4e48-9272-031c42c93070",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Very beautiful company\",\n    \"owner\": \"{{empId}}\",\n    \"website\":\"https://google.com\",\n    \"email\":\"company@company.com\",\n    \"industry\":\"Animation\",\n    \"type\":\"Partner\",\n    \"address\":\"231 Street\",\n    \"numberOfEmployee\": 67\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiUrl}}/companies",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "companies"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get all Companies",
+          "id": "92a543e3-97b7-4633-ac79-2f774cec3f52",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "url": {
+              "raw": "{{apiUrl}}/companies",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "companies"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get one company",
+          "id": "000ca027-4950-4975-9af2-719cd3a6ab39",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "url": {
+              "raw": "{{apiUrl}}/companies/:id",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "companies",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "{{companyId}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Company",
+          "id": "5ec72b8b-73fe-4798-a3b6-8618042ebd91",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\":\"Updated company\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiUrl}}/companies/:id",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "companies",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "{{companyId}}"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "id": "44d9679d-7e56-430c-85f1-c9902e63d953"
+    },
+    {
+      "name": "Deals",
+      "item": [
+        {
+          "name": "Create Deal",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "93e9679c-3d2f-4441-aff2-4d3a0ff4add7",
+                "exec": [
+                  "pm.test(\"Status code is 201\", function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "",
+                  "if (pm.response.code === 201) {",
+                  "    var jsonData = pm.response.json();",
+                  "    if (jsonData && jsonData.data && jsonData.data._id) {",
+                  "        pm.collectionVariables.set(\"dealId\", jsonData.data._id);",
+                  "    }",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "772b4a15-d3c3-430d-819e-2bd1f29b4e31",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\":\"Deal Deal\",\n  \"amount\":67,\n  \"owner\": \"{{empId}}\",\n  \"priority\":\"Medium\",\n  \"contact\":\"{{contactId}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiUrl}}/deals",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "deals"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get all Deals",
+          "id": "90816117-f707-4ffe-976d-e8103c757895",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "url": {
+              "raw": "{{apiUrl}}/deals",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "deals"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get one deal",
+          "id": "85f5013b-d5aa-4e80-a015-a7d6dd3f8a13",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "url": {
+              "raw": "{{apiUrl}}/deals/:id",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "deals",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "{{dealId}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Deal",
+          "id": "e91d10f3-f277-47a4-aa30-52cc6c03373f",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\":\"Updated Deal\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiUrl}}/deals/:id",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "deals",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "{{dealId}}"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "id": "170562e3-b101-4e94-9fd3-6b4cdff53fa4"
+    },
+    {
+      "name": "Orders",
+      "item": [
+        {
+          "name": "Create Order",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "64abea7d-b6ad-4791-b856-705aeb06f581",
+                "exec": [
+                  "pm.test(\"Status code is 201\", function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "",
+                  "if (pm.response.code === 201) {",
+                  "    var jsonData = pm.response.json();",
+                  "    if (jsonData && jsonData.data && jsonData.data._id) {",
+                  "        pm.collectionVariables.set(\"orderId\", jsonData.data._id);",
+                  "    }",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "41ad65df-75e4-4931-af5a-cab69d5cdd00",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\":\"Very good order very nice\",\n  \"price\":54,\n  \"owner\": \"{{empId}}\",\n  \"contact\":\"{{contactId}}\",\n  \"employee\":\"{{empId}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiUrl}}/orders",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "orders"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get all Orders",
+          "id": "16df26c1-c4d4-434b-b54b-52945072f3e8",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "url": {
+              "raw": "{{apiUrl}}/orders",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "orders"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get one order",
+          "id": "0d463022-aba7-4abb-a70c-20ec3db4909e",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "url": {
+              "raw": "{{apiUrl}}/orders/:id",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "orders",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "{{orderId}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Orders",
+          "id": "feb10035-0995-4d46-982d-651a8042d199",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\":\"Updated Order\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiUrl}}/orders/:id",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "orders",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "{{orderId}}"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "id": "1772ece9-a0f3-464e-a435-eef0c0f43c9c"
+    },
+    {
+      "name": "Tickets",
+      "item": [
+        {
+          "name": "Create Ticket",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "3cc75ff9-8f40-4a69-87e0-afe6091c7793",
+                "exec": [
+                  "pm.test(\"Status code is 201\", function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "",
+                  "if (pm.response.code === 201) {",
+                  "    var jsonData = pm.response.json();",
+                  "    if (jsonData && jsonData.data && jsonData.data._id) {",
+                  "        pm.collectionVariables.set(\"ticketId\", jsonData.data._id);",
+                  "    }",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "765c2c80-339f-49a1-81a6-4b2048845988",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\":\"yeah uhuh\",\n  \"description\":\"descriptiondescription\",\n  \"owner\":\"{{empId}}\",\n  \"source\":\"Chat\",\n  \"priority\":\"Low\",\n  \"contact\":\"{{contactId}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiUrl}}/tickets",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "tickets"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get all Tickets",
+          "id": "bcd0c82b-2510-436e-a222-b66dfb01ac04",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "url": {
+              "raw": "{{apiUrl}}/tickets",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "tickets"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get one ticket",
+          "id": "2cc6d429-b10e-4d0f-ac3b-bc7acbd2b564",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "url": {
+              "raw": "{{apiUrl}}/tickets/:id",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "tickets",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "{{ticketId}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Orders",
+          "id": "12fb4d5e-f032-4e7a-8d67-7acc12d4cc22",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\":\"Updated Ticket\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiUrl}}/tickets/:id",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "tickets",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "{{ticketId}}"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "id": "9b6156d9-cd69-4b0e-8cf6-dffb3a137d71"
+    },
+    {
+      "name": "Health Check",
+      "id": "99308d4b-e6e7-4e0e-a698-49fe2e94e168",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "url": {
+          "raw": "{{apiUrl}}/health",
+          "host": [
+            "{{apiUrl}}"
+          ],
+          "path": [
+            "health"
+          ]
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "id": "b1a523ff-4522-4f9a-952f-54a2c55ca778",
+      "key": "apiUrl",
+      "value": ""
+    },
+    {
+      "id": "1dda63fb-4bad-4242-81eb-44ae573f6dcb",
+      "key": "adminEmail",
+      "value": "",
+      "type": "default"
+    },
+    {
+      "id": "9e2bfd5d-07c8-4d01-b607-fe151f9601df",
+      "key": "adminPassword",
+      "value": "",
+      "type": "default"
+    },
+    {
+      "id": "542c59db-b516-4166-b9b4-ea38ac717a90",
+      "key": "adminId",
+      "value": "",
+      "type": "default"
+    },
+    {
+      "id": "764fc360-97ce-4de0-b32c-5b4982145cb2",
+      "key": "roleId",
+      "value": "",
+      "type": "default"
+    },
+    {
+      "id": "8ab1bbfa-419a-4607-b5b7-ba149189c003",
+      "key": "empEmail",
+      "value": "",
+      "type": "default"
+    },
+    {
+      "id": "405ca566-6c57-4448-a48b-892dccc0b04c",
+      "key": "empPass",
+      "value": "",
+      "type": "default"
+    },
+    {
+      "id": "76110d48-53c9-4750-8e92-12b37b45c040",
+      "key": "empId",
+      "value": "",
+      "type": "default"
+    },
+    {
+      "id": "21f49ed1-d3ee-422c-9b51-b9c5385808eb",
+      "key": "contactId",
+      "value": "",
+      "type": "default"
+    },
+    {
+      "id": "0d56730a-08ea-4995-bd7a-ad4a36951e6b",
+      "key": "companyId",
+      "value": "",
+      "type": "default"
+    },
+    {
+      "id": "dd0b1082-af48-4fe3-95e2-73b461050a85",
+      "key": "dealId",
+      "value": "",
+      "type": "default"
+    },
+    {
+      "id": "9cbb36b5-dc4a-4d78-849c-eae925e9f440",
+      "key": "orderId",
+      "value": "",
+      "type": "default"
+    },
+    {
+      "id": "f1025c81-f5ae-46d7-af66-a50153badd1b",
+      "key": "ticketId",
+      "value": "",
+      "type": "default"
+    }
+  ]
+}

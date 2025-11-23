@@ -13,15 +13,18 @@ export async function createEmployee(
     const token = verifyToken(req.cookies.token);
     // @ts-expect-error bad jwt types
     if (!token.role.Employee.write) {
-      res.json({ message: "Unauthorized" });
+      res
+        .status(401)
+        .json({ message: "Error creating employee", error: "Unauthorized" });
+      return;
     }
 
-    const employee = SEmployee.safeParse(req.body);
+    const employee = await SEmployee.safeParseAsync(req.body);
 
     if (employee.success === false) {
       res.status(400).json({
         message: "Invalid employee payload",
-        error: employee.error.message
+        error: JSON.parse(employee.error.message)
       });
       logger.error("Invalid employee payload");
       return;
@@ -33,7 +36,10 @@ export async function createEmployee(
     if (existingEmployee) {
       res
         .status(409)
-        .json({ message: "Employee with the same email already exists" });
+        .json({
+          message: "Error creating employee",
+          error: "Employee with the same email already exists"
+        });
       logger.error(`Employee with email ${employee.data.email} already exists`);
       return;
     }
@@ -62,14 +68,22 @@ export async function getAllEmployees(
     const token = verifyToken(req.cookies.token);
     // @ts-expect-error bad jwt types
     if (!token.role.Employee.read) {
-      res.json({ message: "Unauthorized" });
+      res
+        .status(401)
+        .json({ message: "Error retrieving employees", error: "Unauthorized" });
+      return;
     }
 
     const employees = await Employee.find()
-      .select("-password")
+      .select("-password -__v")
       .populate("role");
     if (employees.length === 0) {
-      res.status(404).json({ message: "No employees found" });
+      res
+        .status(404)
+        .json({
+          message: "Error retrieving employees",
+          error: "No employees found"
+        });
       logger.warn("No employees found");
       return;
     }
@@ -94,14 +108,22 @@ export async function getOneEmployee(
     const token = verifyToken(req.cookies.token);
     // @ts-expect-error bad jwt types
     if (!token.role.Employee.read) {
-      res.json({ message: "Unauthorized" });
+      res
+        .status(401)
+        .json({ message: "Error retrieving employee", error: "Unauthorized" });
+      return;
     }
 
     const id = req.params.id;
 
     const employee = await Employee.findById(id).select("-password");
     if (!employee) {
-      res.status(404).json({ message: "Employee not found" });
+      res
+        .status(404)
+        .json({
+          message: "Error retrieving employee",
+          error: "Employee not found"
+        });
       logger.warn(`Employee ${id} not found`);
       return;
     }
@@ -119,31 +141,39 @@ export async function getOneEmployee(
 }
 
 export async function updateEmployee(
-  req: Request<{ id: string }, object, Partial<IEmployee>>,
+  req: Request,
   res: Response<IResponse>
 ): Promise<void> {
   try {
     const token = verifyToken(req.cookies.token);
     // @ts-expect-error bad jwt types
     if (!token.role.Employee.write) {
-      res.json({ message: "Unauthorized" });
+      res
+        .status(401)
+        .json({ message: "Error updating employee", error: "Unauthorized" });
+      return;
     }
 
     const id = req.params.id;
 
     const employee = await Employee.findById(id);
     if (!employee) {
-      res.status(404).json({ message: "employee not found" });
-      logger.warn(`employee ${id} not found`);
+      res
+        .status(404)
+        .json({
+          message: "Error updating employee",
+          error: "Employee not found"
+        });
+      logger.warn(`Employee ${id} not found`);
       return;
     }
 
-    const updatedEmployee = SEmployee.partial().safeParse(req.body);
+    const updatedEmployee = await SEmployee.partial().safeParseAsync(req.body);
 
     if (updatedEmployee.success === false) {
       res.status(400).json({
-        message: "Invalid employee payload",
-        error: updatedEmployee.error.message
+        message: "Error updating employee",
+        error: JSON.parse(updatedEmployee.error.message)
       });
       logger.error("Invalid employee payload");
       return;
@@ -172,15 +202,26 @@ export async function deactivateEmployee(
     const token = verifyToken(req.cookies.token);
     // @ts-expect-error bad jwt types
     if (!token.role.Employee.delete) {
-      res.json({ message: "Unauthorized" });
+      res
+        .status(401)
+        .json({
+          message: "Error deactivating employee",
+          error: "Unauthorized"
+        });
+      return;
     }
 
     const id = req.params.id;
 
     const employee = await Employee.findById(id);
     if (!employee) {
-      res.status(404).json({ message: "employee not found" });
-      logger.warn(`employee ${id} not found`);
+      res
+        .status(404)
+        .json({
+          message: "Error deactivating employee",
+          error: "Employee not found"
+        });
+      logger.warn(`Employee ${id} not found`);
       return;
     }
     await Employee.updateOne(
@@ -188,7 +229,7 @@ export async function deactivateEmployee(
       { $set: { isActive: !employee.isActive } }
     );
     logger.info(`Deactivated employee ${employee.fullName}`);
-    res.status(200).json({ message: "employee Deactivated" });
+    res.status(200).json({ message: "Employee deactivated", data: employee });
     return;
   } catch (err: unknown) {
     logger.error(`Error deactivating employee: ${(err as Error).message}`);

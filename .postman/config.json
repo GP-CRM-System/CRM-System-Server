@@ -1,0 +1,14 @@
+{
+  "workspace": {
+    "id": "a2f35c44-2b2b-41c9-86d1-19566893a68f"
+  },
+  "entities": {
+    "collections": [
+      "..\\postman\\collections\\Nexify API.postman_collection.json"
+    ],
+    "environments": [],
+    "specs": [],
+    "flows": [],
+    "globals": []
+  }
+}

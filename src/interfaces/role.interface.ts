@@ -1,7 +1,11 @@
 import { z } from "zod";
 
 export const SRole = z.object({
-  name: z.string().min(3).max(50),
+  name: z
+    .string("Role name is required")
+    .min(3, "Role name must be at least 3 characters long")
+    .max(50, "Role name must be at most 50 characters long")
+    .regex(/^[a-zA-Z ]+$/, "Role name must contain only letters and spaces"),
   isActive: z.boolean().default(true),
   Company: z
     .object({ read: z.boolean(), write: z.boolean(), delete: z.boolean() })
