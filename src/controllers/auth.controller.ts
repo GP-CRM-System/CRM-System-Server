@@ -97,7 +97,7 @@ export async function registerAdmin(
       data: {
         token,
         refreshToken,
-        admin: await createdAdmin.populate("role")
+        user: await createdAdmin.populate("role")
       }
     });
     return;
