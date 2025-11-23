@@ -86,20 +86,20 @@ export async function registerAdmin(
       sameSite: "none"
     });
 
-    // Populate role permissions for response
-    const user = {
-      _id: createdAdmin._id,
-      fullName: createdAdmin.fullName,
-      email: createdAdmin.email,
-      role: rootRole || {},
-      phone: createdAdmin.phone,
-      salary: createdAdmin.salary,
-      isActive: createdAdmin.isActive
-    };
+    await sendEmail(
+      createdAdmin.email,
+      emailTemplates.welcome(createdAdmin.fullName).subject,
+      emailTemplates.welcome(createdAdmin.fullName).html
+    );
 
-    res
-      .status(201)
-      .json({ message: "Admin created", data: { token, refreshToken } });
+    res.status(201).json({
+      message: "Admin created",
+      data: {
+        token,
+        refreshToken,
+        user: await createdAdmin.populate("role")
+      }
+    });
     return;
   } catch (err: unknown) {
     logger.error(`Error registering admin: ${(err as Error).message}`);
