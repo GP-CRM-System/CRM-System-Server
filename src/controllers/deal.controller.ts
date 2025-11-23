@@ -14,14 +14,20 @@ export async function createDeal(
     const token = verifyToken(req.cookies.token);
     // @ts-expect-error bad jwt types
     if (!token.role.Deal.write) {
-      res.json({ message: "Unauthorized" });
+      res.json({ message: "Deal creation failed", error: "Unauthorized" });
+      return;
     }
 
-    const deal = SDeal.safeParse(req.body);
+    const deal = await SDeal.safeParseAsync(req.body);
 
     if (deal.success === false) {
-      res.status(400).json({ message: "Missing required fields" });
-      logger.error("Missing required fields");
+      res
+        .status(400)
+        .json({
+          message: "Deal creation failed",
+          error: JSON.parse(deal.error.message)
+        });
+      logger.error("Missing required fields in deal creation");
       return;
     }
 
@@ -29,14 +35,22 @@ export async function createDeal(
     if (existingDeal) {
       res
         .status(409)
-        .json({ message: "Deal with the same name already exists" });
+        .json({
+          message: "Deal creation failed",
+          error: "Deal with the same name already exists"
+        });
       logger.error(`Deal with name ${deal.data.name} already exists`);
       return;
     }
 
     const associatedContact = await Contact.findById(deal.data.contact);
     if (!associatedContact) {
-      res.status(404).json({ message: "Associated contact not found" });
+      res
+        .status(404)
+        .json({
+          message: "Associated contact not found",
+          error: "Associated contact not found"
+        });
       logger.error(`Associated contact with ID ${deal.data.contact} not found`);
       return;
     } else {
@@ -74,12 +88,15 @@ export async function getAllDeals(
     const token = verifyToken(req.cookies.token);
     // @ts-expect-error bad jwt types
     if (!token.role.Deal.read) {
-      res.json({ message: "Unauthorized" });
+      res.json({ message: "Deals retrieval failed", error: "Unauthorized" });
+      return;
     }
 
     const deals = await Deal.find();
     if (deals.length === 0) {
-      res.status(404).json({ message: "No deals found" });
+      res
+        .status(404)
+        .json({ message: "Deals retrieval failed", error: "No deals found" });
       logger.warn("No deals found");
       return;
     }
@@ -104,13 +121,16 @@ export async function getOneDeal(
     const token = verifyToken(req.cookies.token);
     // @ts-expect-error bad jwt types
     if (!token.role.Deal.read) {
-      res.json({ message: "Unauthorized" });
+      res.json({ message: "Deal retrieval failed", error: "Unauthorized" });
+      return;
     }
 
     const { id } = req.params;
     const deal = await Deal.findById(id);
     if (!deal) {
-      res.status(404).json({ message: "Deal not found" });
+      res
+        .status(404)
+        .json({ message: "Deal retrieval failed", error: "Deal not found" });
       logger.warn(`Deal with id ${id} not found`);
       return;
     }
@@ -135,23 +155,28 @@ export async function updateDeal(
     const token = verifyToken(req.cookies.token);
     // @ts-expect-error bad jwt types
     if (!token.role.Deal.write) {
-      res.json({ message: "Unauthorized" });
+      res
+        .status(401)
+        .json({ message: "Deal retrieval failed", error: "Unauthorized" });
+      return;
     }
 
     const { id } = req.params;
     const updateData = req.body;
-    const updatedDeal = SDeal.partial().safeParse(updateData);
+    const updatedDeal = await SDeal.partial().safeParseAsync(updateData);
     if (updatedDeal.success === false) {
       res.status(400).json({
         message: "Invalid update fields",
-        error: updatedDeal.error.toString()
+        error: JSON.parse(updatedDeal.error.message)
       });
-      logger.error("Invalid update fields");
+      logger.error(`Invalid update fields for deal ${id}`);
       return;
     }
     const deal = await Deal.findById(id);
     if (!deal) {
-      res.status(404).json({ message: "Deal not found" });
+      res
+        .status(404)
+        .json({ message: "Deal updating failed", error: "Deal not found" });
       logger.warn(`Deal with id ${id} not found`);
       return;
     }

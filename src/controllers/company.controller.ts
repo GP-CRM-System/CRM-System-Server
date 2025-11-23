@@ -10,34 +10,44 @@ export async function createCompany(
   res: Response<IResponse>
 ): Promise<void> {
   try {
+    // Verify Authorization
     const token = verifyToken(req.cookies.token);
     // @ts-expect-error bad jwt types
     if (!token.role.Company.write) {
-      res.json({ message: "Unauthorized" });
-    }
-
-    const company = SCompany.partial().safeParse(req.body);
-
-    if (company.success === false) {
-      res.status(400).json({
-        message: "Missing required fields",
-        error: company.error.toString()
-      });
-      logger.error("Missing required fields");
+      res
+        .status(401)
+        .json({ message: "Company creation failed", error: "Unauthorized" });
       return;
     }
 
+    // Validate company payload
+    const company = await SCompany.partial().safeParseAsync(req.body);
+
+    if (company.success === false) {
+      res.status(400).json({
+        message: "Invalid fields for company creation",
+        error: JSON.parse(company.error.message)
+      });
+      logger.error(`Invalid fields for company creation`);
+      return;
+    }
+
+    // Check if company already exists
     const existingCompany = await Company.findOne({
       email: company.data.email
     });
     if (existingCompany) {
       res
         .status(409)
-        .json({ message: "Company with the same email already exists" });
+        .json({
+          message: "Company creation failed",
+          error: "Company with the same email already exists"
+        });
       logger.error(`Company with email ${company.data.email} already exists`);
       return;
     }
 
+    // Create company
     logger.info(`Created company ${company.data.name}`);
     const createdCompany = await Company.create(company.data);
     res.status(201).json({ message: "Company created", data: createdCompany });
@@ -60,12 +70,20 @@ export async function getAllCompanies(
     const token = verifyToken(req.cookies.token);
     // @ts-expect-error bad jwt types
     if (!token.role.Company.read) {
-      res.json({ message: "Unauthorized" });
+      res
+        .status(401)
+        .json({ message: "Company retrieval failed", error: "Unauthorized" });
+      return;
     }
 
     const companies = await Company.find();
     if (companies.length === 0) {
-      res.status(404).json({ message: "No companies found" });
+      res
+        .status(404)
+        .json({
+          message: "Company retrieval failed",
+          error: "No companies found"
+        });
       logger.warn("No companies found");
       return;
     }
@@ -90,13 +108,21 @@ export async function getOneCompany(
     const token = verifyToken(req.cookies.token);
     // @ts-expect-error bad jwt types
     if (!token.role.Company.read) {
-      res.json({ message: "Unauthorized" });
+      res
+        .status(401)
+        .json({ message: "Company retrieval failed", error: "Unauthorized" });
+      return;
     }
 
     const { id } = req.params;
     const company = await Company.findById(id);
     if (!company) {
-      res.status(404).json({ message: "Company not found" });
+      res
+        .status(404)
+        .json({
+          message: "Company retrieval failed",
+          error: "Company not found"
+        });
       logger.warn(`Company with id ${id} not found`);
       return;
     }
@@ -121,20 +147,30 @@ export async function updateCompany(
     const token = verifyToken(req.cookies.token);
     // @ts-expect-error bad jwt types
     if (!token.role.Company.write) {
-      res.json({ message: "Unauthorized" });
+      res
+        .status(401)
+        .json({ message: "Company update failed", error: "Unauthorized" });
+      return;
     }
 
     const { id } = req.params;
     const updateData = req.body;
-    const updatedCompany = SCompany.partial().safeParse(updateData);
+    const updatedCompany = await SCompany.partial().safeParseAsync(updateData);
     if (updatedCompany.success === false) {
-      res.status(400).json({ message: "Invalid update fields" });
+      res
+        .status(400)
+        .json({
+          message: "Invalid update fields",
+          error: JSON.parse(updatedCompany.error.message)
+        });
       logger.error("Invalid update fields");
       return;
     }
     const company = await Company.findById(id);
     if (!company) {
-      res.status(404).json({ message: "Company not found" });
+      res
+        .status(404)
+        .json({ message: "Company update failed", error: "Company not found" });
       logger.warn(`Company with id ${id} not found`);
       return;
     }
@@ -160,13 +196,24 @@ export async function deactivateCompany(
     const token = verifyToken(req.cookies.token);
     // @ts-expect-error bad jwt types
     if (!token.role.Company.delete) {
-      res.json({ message: "Unauthorized" });
+      res
+        .status(401)
+        .json({
+          message: "Company deactivation failed",
+          error: "Unauthorized"
+        });
+      return;
     }
 
     const { id } = req.params;
     const company = await Company.findById(id);
     if (!company) {
-      res.status(404).json({ message: "Company not found" });
+      res
+        .status(404)
+        .json({
+          message: "Company deactivation failed",
+          error: "Company not found"
+        });
       logger.warn(`Company with id ${id} not found`);
       return;
     }

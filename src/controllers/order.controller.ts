@@ -14,15 +14,18 @@ export async function createOrder(
     const token = verifyToken(req.cookies.token);
     // @ts-expect-error bad jwt types
     if (!token.role.Order.write) {
-      res.json({ message: "Unauthorized" });
+      res
+        .status(401)
+        .json({ message: "Error creating order", error: "Unauthorized" });
+      return;
     }
 
-    const order = SOrder.safeParse(req.body);
+    const order = await SOrder.safeParseAsync(req.body);
 
     if (order.success === false) {
-      res.status(400).json({
-        message: "Missing required fields",
-        error: order.error.toString()
+      res.json({
+        message: "Error creating order",
+        error: JSON.parse(order.error.message)
       });
       logger.error("Missing required fields");
       return;
@@ -30,7 +33,10 @@ export async function createOrder(
 
     const associatedContact = await Contact.findById(order.data.contact);
     if (!associatedContact) {
-      res.status(404).json({ message: "Associated contact not found" });
+      res.json({
+        message: "Error creating order",
+        error: "Associated contact not found"
+      });
       logger.error(
         `Associated contact with ID ${order.data.contact} not found`
       );
@@ -70,12 +76,17 @@ export async function getAllOrders(
     const token = verifyToken(req.cookies.token);
     // @ts-expect-error bad jwt types
     if (!token.role.Order.read) {
-      res.json({ message: "Unauthorized" });
+      res
+        .status(401)
+        .json({ message: "Error retrieving orders", error: "Unauthorized" });
+      return;
     }
 
     const orders = await Order.find();
     if (orders.length === 0) {
-      res.status(404).json({ message: "No orders found" });
+      res
+        .status(404)
+        .json({ message: "Error retrieving orders", error: "No orders found" });
       logger.warn("No orders found");
       return;
     }
@@ -100,13 +111,18 @@ export async function getOneOrder(
     const token = verifyToken(req.cookies.token);
     // @ts-expect-error bad jwt types
     if (!token.role.Order.read) {
-      res.json({ message: "Unauthorized" });
+      res
+        .status(401)
+        .json({ message: "Error retrieving order", error: "Unauthorized" });
+      return;
     }
 
     const { id } = req.params;
     const order = await Order.findById(id);
     if (!order) {
-      res.status(404).json({ message: "Order not found" });
+      res
+        .status(404)
+        .json({ message: "Error retrieving order", error: "Order not found" });
       logger.warn(`Order with id ${id} not found`);
       return;
     }
@@ -131,16 +147,19 @@ export async function updateOrder(
     const token = verifyToken(req.cookies.token);
     // @ts-expect-error bad jwt types
     if (!token.role.Order.write) {
-      res.json({ message: "Unauthorized" });
+      res
+        .status(401)
+        .json({ message: "Error updating order", error: "Unauthorized" });
+      return;
     }
 
     const { id } = req.params;
-    const order = SOrder.partial().safeParse(req.body);
+    const order = await SOrder.partial().safeParseAsync(req.body);
 
     if (order.success === false) {
       res.status(400).json({
         message: "Invalid Order payload",
-        error: order.error.toString()
+        error: JSON.parse(order.error.message)
       });
       logger.error("Invalid Order payload");
       return;
@@ -148,7 +167,9 @@ export async function updateOrder(
 
     const existingOrder = await Order.findById(id);
     if (!existingOrder) {
-      res.status(404).json({ message: "Order not found" });
+      res
+        .status(404)
+        .json({ message: "Error updating order", error: "Order not found" });
       logger.warn(`Order with id ${id} not found`);
       return;
     }

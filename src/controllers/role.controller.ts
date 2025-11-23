@@ -13,15 +13,21 @@ export async function createRole(
     const token = verifyToken(req.cookies.token);
     // @ts-expect-error bad jwt types
     if (!token.role.Role.write) {
-      res.json({ message: "Unauthorized" });
+      res
+        .status(401)
+        .json({ message: "Error creating role", error: "Unauthorized" });
+      return;
     }
 
-    const role = SRole.safeParse(req.body);
+    const role = await SRole.safeParseAsync(req.body);
 
     if (role.success === false) {
       res
         .status(400)
-        .json({ message: "Invalid role payload", error: role.error.message });
+        .json({
+          message: "Invalid role payload",
+          error: JSON.parse(role.error.message)
+        });
       logger.error("Invalid role payload");
       return;
     }
@@ -30,7 +36,10 @@ export async function createRole(
     if (existingRole) {
       res
         .status(409)
-        .json({ message: "Role with the same name already exists" });
+        .json({
+          message: "Error creating role",
+          error: "Role with the same name already exists"
+        });
       logger.error(`Role ${role.data.name} already exists`);
       return;
     }
@@ -57,12 +66,17 @@ export async function getAllRoles(
     const token = verifyToken(req.cookies.token);
     // @ts-expect-error bad jwt types
     if (!token.role.Role.read) {
-      res.json({ message: "Unauthorized" });
+      res
+        .status(401)
+        .json({ message: "Error retrieving roles", error: "Unauthorized" });
+      return;
     }
 
     const roles = await Role.find();
     if (roles.length === 0) {
-      res.status(404).json({ message: "No roles found" });
+      res
+        .status(404)
+        .json({ message: "Error retrieving roles", error: "No roles found" });
       logger.warn("No roles found");
       return;
     }
@@ -89,12 +103,17 @@ export async function getOneRole(
     const token = verifyToken(req.cookies.token);
     // @ts-expect-error bad jwt types
     if (!token.role.Role.read) {
-      res.json({ message: "Unauthorized" });
+      res
+        .status(401)
+        .json({ message: "Error retrieving role", error: "Unauthorized" });
+      return;
     }
 
     const role = await Role.findById(id);
     if (!role) {
-      res.status(404).json({ message: "Role not found" });
+      res
+        .status(404)
+        .json({ message: "Error retrieving role", error: "Role not found" });
       logger.warn(`Role ${id} not found`);
       return;
     }
@@ -119,24 +138,29 @@ export async function updateRole(
     const token = verifyToken(req.cookies.token);
     // @ts-expect-error bad jwt types
     if (!token.role.Role.write) {
-      res.json({ message: "Unauthorized" });
+      res
+        .status(401)
+        .json({ message: "Error updating role", error: "Unauthorized" });
+      return;
     }
 
     const id = req.params.id;
 
     const role = await Role.findById(id);
     if (!role) {
-      res.status(404).json({ message: "Role not found" });
+      res
+        .status(404)
+        .json({ message: "Error updating role", error: "Role not found" });
       logger.warn(`Role ${id} not found`);
       return;
     }
 
-    const updatedRole = SRole.partial().safeParse(req.body);
+    const updatedRole = await SRole.partial().safeParseAsync(req.body);
 
     if (updatedRole.success === false) {
       res.status(400).json({
         message: "Invalid role payload",
-        error: updatedRole.error.message
+        error: JSON.parse(updatedRole.error.message)
       });
       logger.error("Invalid role payload");
       return;
@@ -165,20 +189,25 @@ export async function deactivateRole(
     const token = verifyToken(req.cookies.token);
     // @ts-expect-error bad jwt types
     if (!token.role.Role.delete) {
-      res.json({ message: "Unauthorized" });
+      res
+        .status(401)
+        .json({ message: "Error deactivating role", error: "Unauthorized" });
+      return;
     }
 
     const id = req.params.id;
 
     const role = await Role.findById(id);
     if (!role) {
-      res.status(404).json({ message: "Role not found" });
+      res
+        .status(404)
+        .json({ message: "Error deactivating role", error: "Role not found" });
       logger.warn(`Role ${id} not found`);
       return;
     }
     await Role.updateOne({ _id: id }, { $set: { isActive: !role.isActive } });
     logger.info(`Deactivated role ${id}`);
-    res.status(200).json({ message: "Role deleted" });
+    res.status(200).json({ message: "Role deactivated", data: role });
     return;
   } catch (err: unknown) {
     logger.error(`Error deactivating role: ${(err as Error).message}`);

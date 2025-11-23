@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { z } from "zod";
+import Employee from "../models/employee.model.js";
 
 export const industries = [
   "Accounting",
@@ -153,16 +154,37 @@ export const industries = [
 ];
 
 export const SCompany = z.object({
-  name: z.string().min(3).max(50),
-  owner: z.custom<mongoose.Types.ObjectId>((val) =>
-    mongoose.Types.ObjectId.isValid(val as string)
-  ),
-  website: z.url().nullable(),
-  email: z.email().nullable(),
-  industry: z.enum(industries).optional(),
-  type: z.enum(["Prospect", "Partner", "Reseller", "Vendor", "Other"]),
-  address: z.string().nullable(),
-  numberOfEmployees: z.number().gt(0),
+  name: z
+    .string("Company name is required")
+    .min(3, "Company name must be at least 3 characters long")
+    .max(50, "Company name must be at most 50 characters long")
+    .regex(/^[a-zA-Z ]+$/, "Company name must contain only letters and spaces"),
+  owner: z.custom<mongoose.Types.ObjectId>(async (val) => {
+    mongoose.Types.ObjectId.isValid(val as string);
+    return await Employee.findById(val);
+  }, "Owner is should be a valid employee"),
+  website: z.url("Website should be a valid URL").nullable(),
+  email: z.email("Invalid email").nullable(),
+  industry: z.enum(industries, "Invalid industry").optional(),
+  type: z
+    .enum(
+      ["Prospect", "Partner", "Reseller", "Vendor", "Other"],
+      "Invalid type"
+    )
+    .optional(),
+  address: z
+    .string("Address is required")
+    .min(3, "Address must be at least 3 characters long")
+    .max(100, "Address must be at most 100 characters long")
+    .regex(
+      /^[a-zA-Z0-9 ]+$/,
+      "Address must contain only letters, numbers and spaces"
+    )
+    .nullable(),
+  numberOfEmployees: z
+    .number("Number of employees is required")
+    .gt(1, "Number of employees must be greater than 1")
+    .nullable(),
   isActive: z.boolean().default(true)
 });
 

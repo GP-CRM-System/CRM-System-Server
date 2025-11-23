@@ -6,9 +6,7 @@ import nodemailer from "nodemailer";
 import { logger } from "./logger.config.js";
 dotenv.config({ quiet: true });
 
-
 export const emailTemplates = {
-
   welcome: (name: string) => ({
     subject: "Welcome to Nexify!",
     html: `
@@ -35,8 +33,14 @@ export const sendEmail = async (
   subject: string,
   html: string
 ): Promise<nodemailer.SentMessageInfo | Error> => {
-
-  if (!process.env.SMTP_HOST || !process.env.SMTP_PORT || !process.env.SMTP_SECURE || !process.env.SMTP_USER || !process.env.SMTP_PASS || !process.env.SMTP_FROM) {
+  if (
+    !process.env.SMTP_HOST ||
+    !process.env.SMTP_PORT ||
+    !process.env.SMTP_SECURE ||
+    !process.env.SMTP_USER ||
+    !process.env.SMTP_PASS ||
+    !process.env.SMTP_FROM
+  ) {
     logger.error("Missing environment variables for mail configuration");
     return new Error("Missing environment variables for mail configuration");
   }
@@ -62,4 +66,4 @@ export const sendEmail = async (
     logger.error(`Error sending email: ${(error as Error).message}`);
     return error;
   }
-}
+};
