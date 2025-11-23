@@ -175,7 +175,11 @@ export async function login(
 
     res
       .status(200)
-      .json({ message: "Employee logged in", data: existingEmployee });
+      .json({ message: "Employee logged in", data: {
+        token,
+        refreshToken,
+        user: existingEmployee
+      } });
     return;
   } catch (err: unknown) {
     logger.error(`Error logging in: ${(err as Error).message}`);
