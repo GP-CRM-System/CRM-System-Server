@@ -7,12 +7,12 @@ import swaggerSetup from "./config/swagger.config.js";
 import router from "./routes/main.routes.js";
 import { notFound } from "./controllers/misc.controller.js";
 import cookieParser from "cookie-parser";
-import helmet from "helmet";
+import * as helmet from "helmet";
 import passportSetup from "./config/passport.config.js";
 
 const app = express();
 
-app.use(helmet());
+app.use(helmet.default());
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
