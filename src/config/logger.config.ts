@@ -8,16 +8,16 @@ import { pino, multistream } from "pino";
 import pretty from "pino-pretty";
 
 // Ensure logs directory exists
-if (!fs.existsSync("./logs")) {
-  fs.mkdirSync("./logs");
-}
-// Create logs files if they don't exist
-if (!fs.existsSync("./logs/app.log")) {
-  fs.writeFileSync("./logs/app.log", "");
-}
-if (!fs.existsSync("./logs/access.log")) {
-  fs.writeFileSync("./logs/access.log", "");
-}
+// if (!fs.existsSync("./logs")) {
+//   fs.mkdirSync("./logs");
+// }
+// // Create logs files if they don't exist
+// if (!fs.existsSync("./logs/app.log")) {
+//   fs.writeFileSync("./logs/app.log", "");
+// }
+// if (!fs.existsSync("./logs/access.log")) {
+//   fs.writeFileSync("./logs/access.log", "");
+// }
 
 // Pretty stream for console
 const prettyStream = pretty({
@@ -26,18 +26,23 @@ const prettyStream = pretty({
   ignore: "pid,hostname"
 });
 
-const streams = [
-  { stream: fs.createWriteStream("./logs/app.log", { flags: "a" }) },
-  { stream: prettyStream }
-];
+// const streams = [
+//   { stream: fs.createWriteStream("./logs/app.log", { flags: "a" }) },
+//   { stream: prettyStream }
+// ];
 
-export const logger = pino({ level: "info" }, multistream(streams));
+export const logger = pino(
+  { level: "info" },
+  prettyStream
+);
 
 export default function loggerSetup(app: Application): void {
   app.use(morgan("dev"));
-  app.use(
-    morgan("combined", {
-      stream: fs.createWriteStream("./logs/access.log", { flags: "a" })
-    })
-  );
+  morgan("combined", {
+      stream: {
+        write: (message) => {
+          logger.info(message.trim()); // send morgan logs to pino
+        }
+      }
+  });
 }
