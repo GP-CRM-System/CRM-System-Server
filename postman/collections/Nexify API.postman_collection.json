@@ -133,6 +133,59 @@
               ]
             }
           }
+        },
+        {
+          "name": "Forgot Password",
+          "id": "5bf6f4a6-a3a3-4e58-ad92-241f3247a80c",
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"{{empEmail}}\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiUrl}}/auth/forgot-password",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "auth",
+                "forgot-password"
+              ]
+            }
+          }
+        },
+        {
+          "name": "New Request",
+          "id": "54709f86-fc48-4a12-bbf9-8b3cc5bcb5c4",
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"password\":\"{{empPass}}\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiUrl}}/auth/reset-password/{{empId}}",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "auth",
+                "reset-password",
+                "{{empId}}"
+              ]
+            }
+          }
         }
       ],
       "id": "588ba7df-8fd0-49c3-bb09-7ade43e5c2d0"
@@ -1184,78 +1237,78 @@
   ],
   "variable": [
     {
-      "id": "b1a523ff-4522-4f9a-952f-54a2c55ca778",
+      "id": "1c4e67d6-cf4a-4e01-9b00-fd297a391009",
       "key": "apiUrl",
       "value": ""
     },
     {
-      "id": "1dda63fb-4bad-4242-81eb-44ae573f6dcb",
+      "id": "adbfbdda-05f5-4581-ad62-a5a1a31d4964",
       "key": "adminEmail",
       "value": "",
       "type": "default"
     },
     {
-      "id": "9e2bfd5d-07c8-4d01-b607-fe151f9601df",
+      "id": "25686ca3-ae92-4926-a249-ddf46dfce0bc",
       "key": "adminPassword",
       "value": "",
       "type": "default"
     },
     {
-      "id": "542c59db-b516-4166-b9b4-ea38ac717a90",
+      "id": "28ef00aa-90e4-4f39-8176-f44b35d9f1a1",
       "key": "adminId",
       "value": "",
       "type": "default"
     },
     {
-      "id": "764fc360-97ce-4de0-b32c-5b4982145cb2",
+      "id": "c9e53d53-77fb-4a09-9456-b2f2c3348f19",
       "key": "roleId",
       "value": "",
       "type": "default"
     },
     {
-      "id": "8ab1bbfa-419a-4607-b5b7-ba149189c003",
+      "id": "d2f8a73c-8e5d-4430-b1a0-6a8c740cd080",
       "key": "empEmail",
       "value": "",
       "type": "default"
     },
     {
-      "id": "405ca566-6c57-4448-a48b-892dccc0b04c",
+      "id": "fbc28581-4671-4f15-b482-5c92dbc876af",
       "key": "empPass",
       "value": "",
       "type": "default"
     },
     {
-      "id": "76110d48-53c9-4750-8e92-12b37b45c040",
+      "id": "3dfd357c-9212-4f60-88be-b780599968d1",
       "key": "empId",
       "value": "",
       "type": "default"
     },
     {
-      "id": "21f49ed1-d3ee-422c-9b51-b9c5385808eb",
+      "id": "f6003193-c8f0-47a4-a0a2-1096c971ed77",
       "key": "contactId",
       "value": "",
       "type": "default"
     },
     {
-      "id": "0d56730a-08ea-4995-bd7a-ad4a36951e6b",
+      "id": "28b1be01-85c6-414c-819d-5cf11a2bf992",
       "key": "companyId",
       "value": "",
       "type": "default"
     },
     {
-      "id": "dd0b1082-af48-4fe3-95e2-73b461050a85",
+      "id": "2129d644-328f-4476-9a46-5e249f6eed27",
       "key": "dealId",
       "value": "",
       "type": "default"
     },
     {
-      "id": "9cbb36b5-dc4a-4d78-849c-eae925e9f440",
+      "id": "dfcaff79-0ad7-4eab-99e9-40c54b5a6f3a",
       "key": "orderId",
       "value": "",
       "type": "default"
     },
     {
-      "id": "f1025c81-f5ae-46d7-af66-a50153badd1b",
+      "id": "c6745566-0960-4c39-80fd-7d31e2eb9af0",
       "key": "ticketId",
       "value": "",
       "type": "default"

@@ -13,6 +13,7 @@ import bcrypt from "bcrypt";
 import Role from "../models/role.model.js";
 import { emailTemplates, sendEmail } from "../config/mail.config.js";
 import type { IRole } from "../interfaces/role.interface.js";
+import { z } from "zod";
 
 export async function registerAdmin(
   req: Request<object, object, IEmployee>,
@@ -175,11 +176,13 @@ export async function login(
 
     res
       .status(200)
-      .json({ message: "Employee logged in", data: {
-        token,
-        refreshToken,
-        user: existingEmployee
-      } });
+      .json({
+        message: "Employee logged in", data: {
+          token,
+          refreshToken,
+          user: existingEmployee
+        }
+      });
     return;
   } catch (err: unknown) {
     logger.error(`Error logging in: ${(err as Error).message}`);
@@ -237,6 +240,122 @@ export async function googleCallback(
     return;
   } catch (error: unknown) {
     logger.error(`Google OAuth error: ${error}`);
+    res.status(500).json({
+      message: "Internal server error",
+      error: (error as Error).message
+    });
+    return;
+  }
+}
+
+export async function forgotPassword(
+  req: Request<object, object, { email: string }>,
+  res: Response<IResponse>
+): Promise<void> {
+  try {
+    const email = z.email("Email is should be valid").safeParse(req.body.email);
+
+    if (email.success === false) {
+      res.status(400).json({
+        message: "Password Reset failed",
+        error: JSON.parse(email.error.message)
+      });
+      logger.error("Invalid email");
+      return;
+    }
+
+    const existingEmployee = await Employee.findOne({
+      email: email.data
+    });
+
+    if (!existingEmployee) {
+      res.status(200).json({
+        message: "Password Reset sucessful",
+        data: "if employee exists, an email should be sent"
+      });
+      logger.error(`Employee ${email.data} not found`);
+      return;
+    }
+
+    await existingEmployee.updateOne({
+      resetExpire: Date.now() + 3600000 * 24 // 24 hours
+    });
+
+    await sendEmail(
+      email.data,
+      emailTemplates.forgotPassword(existingEmployee.fullName, `http://localhost:3000/reset-password?token=${existingEmployee._id}`).subject,
+      emailTemplates.forgotPassword(existingEmployee.fullName, `http://localhost:3000/reset-password?token=${existingEmployee._id}`).html
+    );
+
+    res.status(200).json({
+      message: "Password Reset sucessful",
+      data: "if employee exists, an email should be sent"
+    });
+    logger.info(`Password reset email sent to ${email.data}`);
+    return;
+
+  } catch (error: unknown) {
+    logger.error(`Error forgot password: ${(error as Error).message}`);
+    res.status(500).json({
+      message: "Internal server error",
+      error: (error as Error).message
+    });
+    return;
+  }
+}
+
+export async function resetPassword(
+  req: Request<{ id: string }, object, { password: string }>,
+  res: Response<IResponse>
+): Promise<void> {
+  try {
+    const { id } = req.params;
+    const password = z
+      .string("Password is required")
+      .min(8, "Password must be at least 8 characters long")
+      .max(64, "Password must be at most 64 characters long").safeParse(req.body.password);
+
+    if (password.success === false) {
+      res.status(400).json({
+        message: "Password Reset failed",
+        error: JSON.parse(password.error.message)
+      });
+      logger.error("Invalid password");
+      return;
+    }
+
+    const existingEmployee = await Employee.findById(id);
+    if (!existingEmployee) {
+      res.status(404).json({
+        message: "Password Reset failed",
+        error: "Employee not found"
+      });
+      logger.error(`Employee ${id} not found`);
+      return;
+    }
+
+    if (existingEmployee.resetExpire === null || existingEmployee.resetExpire!.getTime() < Date.now()) {
+      res.status(400).json({
+        message: "Password Reset failed",
+        error: "Reset token expired"
+      });
+      logger.error(`Reset token expired for employee ${id}`);
+      return;
+    }
+
+    await existingEmployee.updateOne({
+      password: password.data,
+      resetExpire: null
+    });
+
+    res.status(200).json({
+      message: "Password Reset sucessful",
+      data: "Password reset successfully"
+    });
+    logger.info(`Password reset for employee ${id}`);
+    return;
+  } catch (error: unknown) {
+    logger.error(`Error reset password: ${(error as Error).message}`);
     res.status(500).json({
       message: "Internal server error",
       error: (error as Error).message

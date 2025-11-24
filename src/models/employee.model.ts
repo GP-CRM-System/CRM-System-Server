@@ -9,7 +9,8 @@ const employeeSchema = new mongoose.Schema<IEmployee>({
   password: { type: String, required: true },
   role: { type: mongoose.Schema.Types.ObjectId, required: true, ref: "Role" },
   salary: { type: Number, required: true, default: 0 },
-  isActive: { type: Boolean, required: true, default: true }
+  isActive: { type: Boolean, required: true, default: true },
+  resetExpire: { type: Date }
 });
 
 employeeSchema.pre<IEmployee>("save", async function (next) {

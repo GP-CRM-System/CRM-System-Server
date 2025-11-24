@@ -33,7 +33,8 @@ export const SEmployee = z.object({
     .function({ input: [z.string()], output: z.boolean() })
     .readonly()
     .optional(),
-  isNew: z.boolean().readonly().optional()
+  isNew: z.boolean().readonly().optional(),
+  resetExpire: z.date().nullable().default(null)
 });
 
 export type IEmployee = z.infer<typeof SEmployee>;

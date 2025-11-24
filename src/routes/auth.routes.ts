@@ -2,7 +2,9 @@ import express from "express";
 import {
   login,
   registerAdmin,
-  googleCallback
+  googleCallback,
+  forgotPassword,
+  resetPassword
 } from "../controllers/auth.controller.js";
 import passport from "passport";
 
@@ -22,5 +24,8 @@ authRouter.get(
   passport.authenticate("google", { session: false }),
   googleCallback
 );
+
+authRouter.post("/forgot-password", forgotPassword)
+authRouter.post("/reset-password/:id", resetPassword)
 
 export default authRouter;
