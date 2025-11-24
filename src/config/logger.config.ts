@@ -2,9 +2,8 @@
 // Used for logging in console and writing to file
 
 import { type Application } from "express";
-import fs from "fs";
 import morgan from "morgan";
-import { pino, multistream } from "pino";
+import { pino } from "pino";
 import pretty from "pino-pretty";
 
 // Ensure logs directory exists
