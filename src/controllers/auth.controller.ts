@@ -194,6 +194,28 @@ export async function login(
   }
 }
 
+export async function logout(
+  req: Request,
+  res: Response<IResponse>
+): Promise<void> {
+  try {
+    res.clearCookie("token");
+    res.clearCookie("refreshToken");
+    res.status(200).json({
+      message: "Employee logged out successfully",
+      data: null
+    });
+    return;
+  } catch (err: unknown) {
+    logger.error(`Error logging out: ${(err as Error).message}`);
+    res.status(500).json({
+      message: "Internal server error",
+      error: (err as Error).message
+    });
+    return;
+  }
+}
+
 export async function googleCallback(
   req: Request,
   res: Response<IResponse>

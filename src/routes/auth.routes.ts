@@ -4,7 +4,8 @@ import {
   registerAdmin,
   googleCallback,
   forgotPassword,
-  resetPassword
+  resetPassword,
+  logout
 } from "../controllers/auth.controller.js";
 import passport from "passport";
 
@@ -27,5 +28,6 @@ authRouter.get(
 
 authRouter.post("/forgot-password", forgotPassword)
 authRouter.post("/reset-password/:id", resetPassword)
+authRouter.get("/logout", logout)
 
 export default authRouter;
