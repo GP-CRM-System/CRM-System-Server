@@ -82,7 +82,23 @@ export async function getAllOrders(
       return;
     }
 
-    const orders = await Order.find();
+    const { description } = req.query;
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = parseInt(req.query.limit as string) || 10;
+    const skip = (page - 1) * limit;
+
+
+    const orders = await Order.find({
+      description: { $regex: description ?? "", $options: "i" },
+    })
+      .select("-__v")
+      .populate("owner", "fullName")
+      .populate("contact", "name")
+      .populate("employee", "fullName")
+      .skip(skip)
+      .limit(limit)
+      .sort({ createdAt: -1 });
+
     if (orders.length === 0) {
       res
         .status(404)
@@ -91,7 +107,7 @@ export async function getAllOrders(
       return;
     }
     logger.info("Retrieved all orders");
-    res.status(200).json({ message: "Orders retrieved", data: orders });
+    res.status(200).json({ message: "Orders retrieved", data: { orders, page, limit, total: orders.length } });
     return;
   } catch (err: unknown) {
     logger.error(`Error retrieving orders: ${(err as Error).message}`);

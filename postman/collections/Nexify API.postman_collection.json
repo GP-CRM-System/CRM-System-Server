@@ -427,6 +427,13 @@
               ],
               "path": [
                 "employees"
+              ],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "Firs",
+                  "disabled": true
+                }
               ]
             }
           }
@@ -582,12 +589,28 @@
             },
             "method": "GET",
             "url": {
-              "raw": "{{apiUrl}}/contacts",
+              "raw": "{{apiUrl}}/contacts?stage=",
               "host": [
                 "{{apiUrl}}"
               ],
               "path": [
                 "contacts"
+              ],
+              "query": [
+                {
+                  "key": "name",
+                  "value": null,
+                  "disabled": true
+                },
+                {
+                  "key": "jobTitle",
+                  "value": null,
+                  "disabled": true
+                },
+                {
+                  "key": "stage",
+                  "value": ""
+                }
               ]
             }
           }
@@ -759,6 +782,28 @@
               ],
               "path": [
                 "companies"
+              ],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "comp",
+                  "disabled": true
+                },
+                {
+                  "key": "industry",
+                  "value": "Animation",
+                  "disabled": true
+                },
+                {
+                  "key": "page",
+                  "value": "1",
+                  "disabled": true
+                },
+                {
+                  "key": "limit",
+                  "value": "10",
+                  "disabled": true
+                }
               ]
             }
           }
@@ -1254,78 +1299,78 @@
   ],
   "variable": [
     {
-      "id": "061ee648-d35f-4e09-874b-b8999696d0ec",
+      "id": "7e2bad3e-e85e-4b18-b5bc-e637db4c7f62",
       "key": "apiUrl",
       "value": ""
     },
     {
-      "id": "1a763f93-bea7-42c8-8037-d2857512583e",
+      "id": "2470ac36-895a-4d97-902f-8c27b92b52f0",
       "key": "adminEmail",
       "value": "",
       "type": "default"
     },
     {
-      "id": "1b3bcdf1-4e84-4c62-98a0-8fa53db2f455",
+      "id": "d10f9ad3-812d-4c16-905e-2d641a9ff64e",
       "key": "adminPassword",
       "value": "",
       "type": "default"
     },
     {
-      "id": "40f428f8-871f-4042-9790-ef9fa50be592",
+      "id": "fd5f547c-b0c1-41ad-989d-61ed9c3c0472",
       "key": "adminId",
       "value": "",
       "type": "default"
     },
     {
-      "id": "9ef17301-ff7f-4fdd-872b-6f8af723fd55",
+      "id": "c6ee70e6-251f-4a11-b287-acefe8a0460d",
       "key": "roleId",
       "value": "",
       "type": "default"
     },
     {
-      "id": "03a0c01e-1dba-4d9e-afbe-2ba7c361f405",
+      "id": "8046293c-48a9-4f50-a47f-deaec9d9d279",
       "key": "empEmail",
       "value": "",
       "type": "default"
     },
     {
-      "id": "e5ab2abc-abc7-4867-9e23-841bbb5441ec",
+      "id": "689bf0f3-2160-4d69-bc57-833e8e000f27",
       "key": "empPass",
       "value": "",
       "type": "default"
     },
     {
-      "id": "d2ce3a63-dc8e-45a3-b0da-16c3f684fa19",
+      "id": "5abf33f1-7d6b-4f01-b9b7-48994ebf73a4",
       "key": "empId",
       "value": "",
       "type": "default"
     },
     {
-      "id": "e0e3ed36-9259-464f-85d3-275d75a2524b",
+      "id": "11e752bb-8b44-4325-ac7e-74647cf94765",
       "key": "contactId",
       "value": "",
       "type": "default"
     },
     {
-      "id": "06ff9b05-ac79-47ea-9aab-5c8a20873a3c",
+      "id": "abba60a5-01fa-4237-950c-78fcf20fdf76",
       "key": "companyId",
       "value": "",
       "type": "default"
     },
     {
-      "id": "66bc3bec-2e28-4d20-a3b7-0b7d75a38b7d",
+      "id": "3d8e4aac-d689-422a-9f10-3931e24562d6",
       "key": "dealId",
       "value": "",
       "type": "default"
     },
     {
-      "id": "cdeb8d41-5212-41ba-86cd-580baf700fc9",
+      "id": "992953fc-b938-4d7c-b026-9d9a9b1eb87b",
       "key": "orderId",
       "value": "",
       "type": "default"
     },
     {
-      "id": "966247bd-6bbb-40e1-8fd9-157c3a936770",
+      "id": "9186c19c-92fe-44fc-9e1d-5d98751c6ab6",
       "key": "ticketId",
       "value": "",
       "type": "default"

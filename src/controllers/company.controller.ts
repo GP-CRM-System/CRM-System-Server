@@ -76,7 +76,24 @@ export async function getAllCompanies(
       return;
     }
 
-    const companies = await Company.find();
+    // Querying logic
+    const { name, industry, type } = req.query;
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = parseInt(req.query.limit as string) || 10;
+    const skip = (page - 1) * limit;
+
+
+    const companies = await Company.find({
+      name: { $regex: name ?? "", $options: "i" },
+      industry: { $regex: industry ?? "", $options: "i" },
+      type: { $regex: type ?? "", $options: "i" }
+    })
+      .populate("contact", "name")
+      .populate("owner", "fullName")
+      .skip(skip)
+      .limit(limit)
+      .sort({ createdAt: -1 });
+
     if (companies.length === 0) {
       res
         .status(404)
@@ -87,8 +104,8 @@ export async function getAllCompanies(
       logger.warn("No companies found");
       return;
     }
-    logger.info("Retrieved all companies");
-    res.status(200).json({ message: "Companies retrieved", data: companies });
+    logger.info(`Retrieved ${companies.length} companies`);
+    res.status(200).json({ message: "Companies retrieved", data: { companies, total: companies.length, page, limit } });
     return;
   } catch (err: unknown) {
     logger.error(`Error retrieving companies: ${(err as Error).message}`);

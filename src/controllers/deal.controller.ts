@@ -92,7 +92,22 @@ export async function getAllDeals(
       return;
     }
 
-    const deals = await Deal.find();
+    const { name, priority } = req.query;
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = parseInt(req.query.limit as string) || 10;
+    const skip = (page - 1) * limit;
+
+
+    const deals = await Deal.find({
+      name: { $regex: name ?? "", $options: "i" },
+      priority: { $regex: priority ?? "", $options: "i" },
+    })
+      .skip(skip)
+      .limit(limit)
+      .populate("owner", "fullName")
+      .populate("contact", "name")
+      .populate("company", "name");
+
     if (deals.length === 0) {
       res
         .status(404)
@@ -101,7 +116,7 @@ export async function getAllDeals(
       return;
     }
     logger.info("Retrieved all deals");
-    res.status(200).json({ message: "Deals retrieved", data: deals });
+    res.status(200).json({ message: "Deals retrieved", data: { deals, page, limit, total: deals.length } });
     return;
   } catch (err: unknown) {
     logger.error(`Error retrieving deals: ${(err as Error).message}`);

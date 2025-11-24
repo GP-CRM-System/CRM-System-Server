@@ -72,7 +72,24 @@ export async function getAllContacts(
       return;
     }
 
-    const contacts = await Contact.find();
+    const { name, jobTitle, stage } = req.query;
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = parseInt(req.query.limit as string) || 10;
+    const skip = (page - 1) * limit;
+
+    const filter: { name: object, jobTitle: object, stage?: object } = {
+      name: { $regex: name ?? "", $options: "i" },
+      jobTitle: { $in: [null, jobTitle ?? ""] },
+    };
+
+    if (stage === "Lead") {
+      filter.stage = { $size: 1 };
+    }
+
+    const contacts = await Contact.find(filter)
+      .skip(skip)
+      .limit(limit)
+      .populate("owner", "fullName");
     if (contacts.length === 0) {
       res
         .status(404)
@@ -84,7 +101,7 @@ export async function getAllContacts(
       return;
     }
     logger.info("Retrieved all contacts");
-    res.status(200).json({ message: "Contacts retrieved", data: contacts });
+    res.status(200).json({ message: "Contacts retrieved", data: { contacts, page, limit } });
     return;
   } catch (err: unknown) {
     logger.error(`Error retrieving contacts: ${(err as Error).message}`);

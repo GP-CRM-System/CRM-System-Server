@@ -72,7 +72,16 @@ export async function getAllRoles(
       return;
     }
 
-    const roles = await Role.find();
+    const { name } = req.query;
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = parseInt(req.query.limit as string) || 10;
+    const skip = (page - 1) * limit;
+
+    const roles = await Role.find({ name: { $regex: name ?? "", $options: "i" } })
+      .skip(skip)
+      .limit(limit)
+      .sort({ createdAt: -1 });
+
     if (roles.length === 0) {
       res
         .status(404)
@@ -81,7 +90,7 @@ export async function getAllRoles(
       return;
     }
     logger.info("Retrieved all roles");
-    res.status(200).json({ message: "Roles retrieved", data: roles });
+    res.status(200).json({ message: "Roles retrieved", data: { roles, page, limit, total: roles.length } });
     return;
   } catch (err: unknown) {
     logger.error(`Error retrieving roles: ${(err as Error).message}`);
