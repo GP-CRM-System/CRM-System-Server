@@ -35,24 +35,20 @@ export async function registerAdmin(
       email: employee.data.email
     });
     if (existingAdmin) {
-      res
-        .status(409)
-        .json({
-          message: "Admin creation failed",
-          error: "Admin with the same email already exists"
-        });
+      res.status(409).json({
+        message: "Admin creation failed",
+        error: "Admin with the same email already exists"
+      });
       logger.error(`Admin ${employee.data.email} already exists`);
       return;
     }
 
     const roleId = await createRootRole();
     if (!roleId) {
-      res
-        .status(500)
-        .json({
-          message: "Admin creation failed",
-          error: "Failed to create root role"
-        });
+      res.status(500).json({
+        message: "Admin creation failed",
+        error: "Failed to create root role"
+      });
       logger.error("Failed to create root role");
       return;
     }
@@ -174,15 +170,14 @@ export async function login(
       sameSite: "none"
     });
 
-    res
-      .status(200)
-      .json({
-        message: "Employee logged in", data: {
-          token,
-          refreshToken,
-          user: existingEmployee
-        }
-      });
+    res.status(200).json({
+      message: "Employee logged in",
+      data: {
+        token,
+        refreshToken,
+        user: existingEmployee
+      }
+    });
     return;
   } catch (err: unknown) {
     logger.error(`Error logging in: ${(err as Error).message}`);
@@ -223,12 +218,10 @@ export async function googleCallback(
   try {
     if (!req.user) {
       logger.error("No user data from Google while logging in");
-      res
-        .status(401)
-        .json({
-          message: "Login failed",
-          error: "No user data from Google while logging in"
-        });
+      res.status(401).json({
+        message: "Login failed",
+        error: "No user data from Google while logging in"
+      });
       return;
     }
 
@@ -305,8 +298,14 @@ export async function forgotPassword(
 
     await sendEmail(
       email.data,
-      emailTemplates.forgotPassword(existingEmployee.fullName, `http://localhost:3000/reset-password?token=${existingEmployee._id}`).subject,
-      emailTemplates.forgotPassword(existingEmployee.fullName, `http://localhost:3000/reset-password?token=${existingEmployee._id}`).html
+      emailTemplates.forgotPassword(
+        existingEmployee.fullName,
+        `http://localhost:3000/reset-password?token=${existingEmployee._id}`
+      ).subject,
+      emailTemplates.forgotPassword(
+        existingEmployee.fullName,
+        `http://localhost:3000/reset-password?token=${existingEmployee._id}`
+      ).html
     );
 
     res.status(200).json({
@@ -315,7 +314,6 @@ export async function forgotPassword(
     });
     logger.info(`Password reset email sent to ${email.data}`);
     return;
-
   } catch (error: unknown) {
     logger.error(`Error forgot password: ${(error as Error).message}`);
     res.status(500).json({
@@ -335,7 +333,8 @@ export async function resetPassword(
     const password = z
       .string("Password is required")
       .min(8, "Password must be at least 8 characters long")
-      .max(64, "Password must be at most 64 characters long").safeParse(req.body.password);
+      .max(64, "Password must be at most 64 characters long")
+      .safeParse(req.body.password);
 
     if (password.success === false) {
       res.status(400).json({
@@ -356,7 +355,10 @@ export async function resetPassword(
       return;
     }
 
-    if (existingEmployee.resetExpire === null || existingEmployee.resetExpire!.getTime() < Date.now()) {
+    if (
+      existingEmployee.resetExpire === null ||
+      existingEmployee.resetExpire!.getTime() < Date.now()
+    ) {
       res.status(400).json({
         message: "Password Reset failed",
         error: "Reset token expired"

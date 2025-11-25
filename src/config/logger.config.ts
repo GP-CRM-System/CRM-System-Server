@@ -30,18 +30,15 @@ const prettyStream = pretty({
 //   { stream: prettyStream }
 // ];
 
-export const logger = pino(
-  { level: "info" },
-  prettyStream
-);
+export const logger = pino({ level: "info" }, prettyStream);
 
 export default function loggerSetup(app: Application): void {
   app.use(morgan("dev"));
   morgan("combined", {
-      stream: {
-        write: (message) => {
-          logger.info(message.trim()); // send morgan logs to pino
-        }
+    stream: {
+      write: (message) => {
+        logger.info(message.trim()); // send morgan logs to pino
       }
+    }
   });
 }

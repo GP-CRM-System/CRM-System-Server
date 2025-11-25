@@ -26,8 +26,8 @@ authRouter.get(
   googleCallback
 );
 
-authRouter.post("/forgot-password", forgotPassword)
-authRouter.post("/reset-password/:id", resetPassword)
-authRouter.get("/logout", logout)
+authRouter.post("/forgot-password", forgotPassword);
+authRouter.post("/reset-password/:id", resetPassword);
+authRouter.get("/logout", logout);
 
 export default authRouter;

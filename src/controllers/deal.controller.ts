@@ -21,36 +21,30 @@ export async function createDeal(
     const deal = await SDeal.safeParseAsync(req.body);
 
     if (deal.success === false) {
-      res
-        .status(400)
-        .json({
-          message: "Deal creation failed",
-          error: JSON.parse(deal.error.message)
-        });
+      res.status(400).json({
+        message: "Deal creation failed",
+        error: JSON.parse(deal.error.message)
+      });
       logger.error("Missing required fields in deal creation");
       return;
     }
 
     const existingDeal = await Deal.findOne({ name: deal.data.name });
     if (existingDeal) {
-      res
-        .status(409)
-        .json({
-          message: "Deal creation failed",
-          error: "Deal with the same name already exists"
-        });
+      res.status(409).json({
+        message: "Deal creation failed",
+        error: "Deal with the same name already exists"
+      });
       logger.error(`Deal with name ${deal.data.name} already exists`);
       return;
     }
 
     const associatedContact = await Contact.findById(deal.data.contact);
     if (!associatedContact) {
-      res
-        .status(404)
-        .json({
-          message: "Associated contact not found",
-          error: "Associated contact not found"
-        });
+      res.status(404).json({
+        message: "Associated contact not found",
+        error: "Associated contact not found"
+      });
       logger.error(`Associated contact with ID ${deal.data.contact} not found`);
       return;
     } else {
@@ -97,10 +91,9 @@ export async function getAllDeals(
     const limit = parseInt(req.query.limit as string) || 10;
     const skip = (page - 1) * limit;
 
-
     const deals = await Deal.find({
       name: { $regex: name ?? "", $options: "i" },
-      priority: { $regex: priority ?? "", $options: "i" },
+      priority: { $regex: priority ?? "", $options: "i" }
     })
       .skip(skip)
       .limit(limit)
@@ -116,7 +109,12 @@ export async function getAllDeals(
       return;
     }
     logger.info("Retrieved all deals");
-    res.status(200).json({ message: "Deals retrieved", data: { deals, page, limit, total: deals.length } });
+    res
+      .status(200)
+      .json({
+        message: "Deals retrieved",
+        data: { deals, page, limit, total: deals.length }
+      });
     return;
   } catch (err: unknown) {
     logger.error(`Error retrieving deals: ${(err as Error).message}`);
@@ -196,6 +194,58 @@ export async function updateDeal(
       return;
     }
     await Deal.updateOne({ _id: id }, { $set: updatedDeal.data });
+    logger.info(`Updated deal ${deal.name}`);
+    res.status(200).json({ message: "Deal updated", data: deal });
+    return;
+  } catch (err: unknown) {
+    logger.error(`Error updating deal: ${(err as Error).message}`);
+    res.status(500).json({
+      message: "Internal server error",
+      error: (err as Error).message
+    });
+    return;
+  }
+}
+
+export async function addNewDealStage(
+  req: Request<
+    { id: string },
+    object,
+    {
+      name:
+        | "Appointment Scheduled"
+        | "Qualified To Buy"
+        | "Presentation Scheduled"
+        | "Decision Maker Bought-In"
+        | "Contract Sent"
+        | "Closed Won"
+        | "Closed Lost";
+    }
+  >,
+  res: Response<IResponse>
+): Promise<void> {
+  try {
+    const token = verifyToken(req.cookies.token);
+    // @ts-expect-error bad jwt types
+    if (!token.role.Deal.write) {
+      res
+        .status(401)
+        .json({ message: "Error updating deal", error: "Unauthorized" });
+      return;
+    }
+
+    const { id } = req.params;
+    const { name } = req.body;
+    const deal = await Deal.findById(id);
+    if (!deal) {
+      res
+        .status(404)
+        .json({ message: "Error updating deal", error: "Deal not found" });
+      logger.warn(`Deal with id ${id} not found`);
+      return;
+    }
+    deal.stage.push({ name, date: new Date() });
+    await deal.save();
     logger.info(`Updated deal ${deal.name}`);
     res.status(200).json({ message: "Deal updated", data: deal });
     return;

@@ -87,9 +87,8 @@ export async function getAllOrders(
     const limit = parseInt(req.query.limit as string) || 10;
     const skip = (page - 1) * limit;
 
-
     const orders = await Order.find({
-      description: { $regex: description ?? "", $options: "i" },
+      description: { $regex: description ?? "", $options: "i" }
     })
       .select("-__v")
       .populate("owner", "fullName")
@@ -107,7 +106,12 @@ export async function getAllOrders(
       return;
     }
     logger.info("Retrieved all orders");
-    res.status(200).json({ message: "Orders retrieved", data: { orders, page, limit, total: orders.length } });
+    res
+      .status(200)
+      .json({
+        message: "Orders retrieved",
+        data: { orders, page, limit, total: orders.length }
+      });
     return;
   } catch (err: unknown) {
     logger.error(`Error retrieving orders: ${(err as Error).message}`);
@@ -192,6 +196,49 @@ export async function updateOrder(
     await Order.updateOne({ _id: id }, { $set: order.data });
     logger.info(`Updated order ${order.data.description}`);
     res.status(200).json({ message: "Order updated", data: order.data });
+    return;
+  } catch (err: unknown) {
+    logger.error(`Error updating order: ${(err as Error).message}`);
+    res.status(500).json({
+      message: "Internal server error",
+      error: (err as Error).message
+    });
+    return;
+  }
+}
+
+export async function addNewOrderStage(
+  req: Request<
+    { id: string },
+    object,
+    { stageType: "Open" | "Processed" | "Shipped" | "Delivered" | "Cancelled" }
+  >,
+  res: Response<IResponse>
+): Promise<void> {
+  try {
+    const token = verifyToken(req.cookies.token);
+    // @ts-expect-error bad jwt types
+    if (!token.role.Order.write) {
+      res
+        .status(401)
+        .json({ message: "Error updating order", error: "Unauthorized" });
+      return;
+    }
+
+    const { id } = req.params;
+    const { stageType } = req.body;
+    const order = await Order.findById(id);
+    if (!order) {
+      res
+        .status(404)
+        .json({ message: "Error updating order", error: "Order not found" });
+      logger.warn(`Order with id ${id} not found`);
+      return;
+    }
+    order.stage.push({ stageType, date: new Date() });
+    await order.save();
+    logger.info(`Updated order ${order.description}`);
+    res.status(200).json({ message: "Order updated", data: order });
     return;
   } catch (err: unknown) {
     logger.error(`Error updating order: ${(err as Error).message}`);

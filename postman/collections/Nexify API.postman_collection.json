@@ -161,7 +161,7 @@
           }
         },
         {
-          "name": "New Request",
+          "name": "Reset Password",
           "id": "54709f86-fc48-4a12-bbf9-8b3cc5bcb5c4",
           "request": {
             "method": "POST",
@@ -188,7 +188,7 @@
           }
         },
         {
-          "name": "New Request",
+          "name": "Logout",
           "id": "cbd550c7-3490-474b-a135-afc7527ca318",
           "request": {
             "method": "GET",
@@ -1003,6 +1003,33 @@
               ]
             }
           }
+        },
+        {
+          "name": "Update Deal Stage",
+          "id": "aa586646-fe5f-49e5-8453-4c549649b7e5",
+          "request": {
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiUrl}}/deals/{{dealId}}/stage",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "deals",
+                "{{dealId}}",
+                "stage"
+              ]
+            }
+          }
         }
       ],
       "id": "170562e3-b101-4e94-9fd3-6b4cdff53fa4"
@@ -1031,6 +1058,16 @@
                 ],
                 "type": "text/javascript"
               }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "2a693ccf-2e33-4977-8911-8619bc91a10c",
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript"
+              }
             }
           ],
           "id": "41ad65df-75e4-4931-af5a-cab69d5cdd00",
@@ -1041,7 +1078,7 @@
             "method": "POST",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"description\":\"Very good order very nice\",\n  \"price\":54,\n  \"owner\": \"{{empId}}\",\n  \"contact\":\"{{contactId}}\",\n  \"employee\":\"{{empId}}\"\n}",
+              "raw": "{\n    \"description\": \"Very good Order\",\n    \"owner\": \"{{empId}}\",\n    \"contact\": \"{{contactId}}\",\n    \"employee\": \"{{empId}}\",\n    \"products\": [\n        {\n            \"name\": \"Very Good Product\",\n            \"quantity\": 21,\n            \"unitPrice\": 67\n        }\n    ]\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -1105,7 +1142,7 @@
           }
         },
         {
-          "name": "Update Orders",
+          "name": "Update Order",
           "id": "feb10035-0995-4d46-982d-651a8042d199",
           "request": {
             "auth": {
@@ -1135,6 +1172,33 @@
                   "key": "id",
                   "value": "{{orderId}}"
                 }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Order Stage",
+          "id": "4822c426-fa28-4741-9153-a87cdee5014c",
+          "request": {
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiUrl}}/orders/{{orderId}}/stage",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "orders",
+                "{{orderId}}",
+                "stage"
               ]
             }
           }
@@ -1240,7 +1304,7 @@
           }
         },
         {
-          "name": "Update Orders",
+          "name": "Update Ticket",
           "id": "12fb4d5e-f032-4e7a-8d67-7acc12d4cc22",
           "request": {
             "auth": {
@@ -1273,6 +1337,33 @@
               ]
             }
           }
+        },
+        {
+          "name": "Update Ticket Status",
+          "id": "53cf984e-8a40-420f-a5a7-b225d239dbdf",
+          "request": {
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiUrl}}/tickets/{{ticketId}}/status",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "tickets",
+                "{{ticketId}}",
+                "status"
+              ]
+            }
+          }
         }
       ],
       "id": "9b6156d9-cd69-4b0e-8cf6-dffb3a137d71"
@@ -1299,78 +1390,78 @@
   ],
   "variable": [
     {
-      "id": "7e2bad3e-e85e-4b18-b5bc-e637db4c7f62",
+      "id": "e9355c18-9d2e-4ebf-bb0e-a77ce1f81137",
       "key": "apiUrl",
       "value": ""
     },
     {
-      "id": "2470ac36-895a-4d97-902f-8c27b92b52f0",
+      "id": "5d910caf-633a-4c3a-a715-92081b9da7f2",
       "key": "adminEmail",
       "value": "",
       "type": "default"
     },
     {
-      "id": "d10f9ad3-812d-4c16-905e-2d641a9ff64e",
+      "id": "7f4a355a-6f6f-428c-af16-5aa28c303282",
       "key": "adminPassword",
       "value": "",
       "type": "default"
     },
     {
-      "id": "fd5f547c-b0c1-41ad-989d-61ed9c3c0472",
+      "id": "b4ea8a0d-e5d4-4b0f-b5c5-2fc499fcb713",
       "key": "adminId",
       "value": "",
       "type": "default"
     },
     {
-      "id": "c6ee70e6-251f-4a11-b287-acefe8a0460d",
+      "id": "1974749f-889b-4c28-91aa-7246dabddd8e",
       "key": "roleId",
       "value": "",
       "type": "default"
     },
     {
-      "id": "8046293c-48a9-4f50-a47f-deaec9d9d279",
+      "id": "a6f98a9a-5554-49c0-8e39-9e98da9aa009",
       "key": "empEmail",
       "value": "",
       "type": "default"
     },
     {
-      "id": "689bf0f3-2160-4d69-bc57-833e8e000f27",
+      "id": "23e036e4-5441-4bea-a7fb-e461090596fd",
       "key": "empPass",
       "value": "",
       "type": "default"
     },
     {
-      "id": "5abf33f1-7d6b-4f01-b9b7-48994ebf73a4",
+      "id": "3cfb42eb-0d73-4c1f-8a4a-d44adc67156a",
       "key": "empId",
       "value": "",
       "type": "default"
     },
     {
-      "id": "11e752bb-8b44-4325-ac7e-74647cf94765",
+      "id": "5abe1051-5be8-4282-bd0d-726b2e2ffbe1",
       "key": "contactId",
       "value": "",
       "type": "default"
     },
     {
-      "id": "abba60a5-01fa-4237-950c-78fcf20fdf76",
+      "id": "edb697da-f77e-4335-bf0a-9a47e9560a3c",
       "key": "companyId",
       "value": "",
       "type": "default"
     },
     {
-      "id": "3d8e4aac-d689-422a-9f10-3931e24562d6",
+      "id": "f6379164-280a-4e18-8f9e-16615b5319c9",
       "key": "dealId",
       "value": "",
       "type": "default"
     },
     {
-      "id": "992953fc-b938-4d7c-b026-9d9a9b1eb87b",
+      "id": "73a635b8-5e2c-4025-a206-6949961d89c0",
       "key": "orderId",
       "value": "",
       "type": "default"
     },
     {
-      "id": "9186c19c-92fe-44fc-9e1d-5d98751c6ab6",
+      "id": "58df04c0-c5d7-452c-bef5-643fb01ab037",
       "key": "ticketId",
       "value": "",
       "type": "default"

@@ -22,24 +22,20 @@ export async function createRole(
     const role = await SRole.safeParseAsync(req.body);
 
     if (role.success === false) {
-      res
-        .status(400)
-        .json({
-          message: "Invalid role payload",
-          error: JSON.parse(role.error.message)
-        });
+      res.status(400).json({
+        message: "Invalid role payload",
+        error: JSON.parse(role.error.message)
+      });
       logger.error("Invalid role payload");
       return;
     }
 
     const existingRole = await Role.findOne({ name: role.data.name });
     if (existingRole) {
-      res
-        .status(409)
-        .json({
-          message: "Error creating role",
-          error: "Role with the same name already exists"
-        });
+      res.status(409).json({
+        message: "Error creating role",
+        error: "Role with the same name already exists"
+      });
       logger.error(`Role ${role.data.name} already exists`);
       return;
     }
@@ -77,7 +73,9 @@ export async function getAllRoles(
     const limit = parseInt(req.query.limit as string) || 10;
     const skip = (page - 1) * limit;
 
-    const roles = await Role.find({ name: { $regex: name ?? "", $options: "i" } })
+    const roles = await Role.find({
+      name: { $regex: name ?? "", $options: "i" }
+    })
       .skip(skip)
       .limit(limit)
       .sort({ createdAt: -1 });
@@ -90,7 +88,12 @@ export async function getAllRoles(
       return;
     }
     logger.info("Retrieved all roles");
-    res.status(200).json({ message: "Roles retrieved", data: { roles, page, limit, total: roles.length } });
+    res
+      .status(200)
+      .json({
+        message: "Roles retrieved",
+        data: { roles, page, limit, total: roles.length }
+      });
     return;
   } catch (err: unknown) {
     logger.error(`Error retrieving roles: ${(err as Error).message}`);

@@ -34,12 +34,10 @@ export async function createEmployee(
       email: employee.data.email
     });
     if (existingEmployee) {
-      res
-        .status(409)
-        .json({
-          message: "Error creating employee",
-          error: "Employee with the same email already exists"
-        });
+      res.status(409).json({
+        message: "Error creating employee",
+        error: "Employee with the same email already exists"
+      });
       logger.error(`Employee with email ${employee.data.email} already exists`);
       return;
     }
@@ -80,26 +78,29 @@ export async function getAllEmployees(
     const skip = (page - 1) * limit;
 
     const employees = await Employee.find({
-      fullName: { $regex: fullName ?? "", $options: "i" },
+      fullName: { $regex: fullName ?? "", $options: "i" }
     })
       .select("-password -__v")
       .populate("role")
       .skip(skip)
       .limit(limit)
       .sort({ createdAt: -1 });
-    
+
     if (employees.length === 0) {
-      res
-        .status(404)
-        .json({
-          message: "Error retrieving employees",
-          error: "No employees found"
-        });
+      res.status(404).json({
+        message: "Error retrieving employees",
+        error: "No employees found"
+      });
       logger.warn("No employees found");
       return;
     }
     logger.info(`Retrieved ${employees.length} employees`);
-    res.status(200).json({ message: "Employees retrieved", data: { employees, page, limit, total: employees.length } });
+    res
+      .status(200)
+      .json({
+        message: "Employees retrieved",
+        data: { employees, page, limit, total: employees.length }
+      });
     return;
   } catch (err: unknown) {
     logger.error(`Error retrieving employees: ${(err as Error).message}`);
@@ -129,12 +130,10 @@ export async function getOneEmployee(
 
     const employee = await Employee.findById(id).select("-password");
     if (!employee) {
-      res
-        .status(404)
-        .json({
-          message: "Error retrieving employee",
-          error: "Employee not found"
-        });
+      res.status(404).json({
+        message: "Error retrieving employee",
+        error: "Employee not found"
+      });
       logger.warn(`Employee ${id} not found`);
       return;
     }
@@ -169,12 +168,10 @@ export async function updateEmployee(
 
     const employee = await Employee.findById(id);
     if (!employee) {
-      res
-        .status(404)
-        .json({
-          message: "Error updating employee",
-          error: "Employee not found"
-        });
+      res.status(404).json({
+        message: "Error updating employee",
+        error: "Employee not found"
+      });
       logger.warn(`Employee ${id} not found`);
       return;
     }
@@ -213,12 +210,10 @@ export async function deactivateEmployee(
     const token = verifyToken(req.cookies.token);
     // @ts-expect-error bad jwt types
     if (!token.role.Employee.delete) {
-      res
-        .status(401)
-        .json({
-          message: "Error deactivating employee",
-          error: "Unauthorized"
-        });
+      res.status(401).json({
+        message: "Error deactivating employee",
+        error: "Unauthorized"
+      });
       return;
     }
 
@@ -226,12 +221,10 @@ export async function deactivateEmployee(
 
     const employee = await Employee.findById(id);
     if (!employee) {
-      res
-        .status(404)
-        .json({
-          message: "Error deactivating employee",
-          error: "Employee not found"
-        });
+      res.status(404).json({
+        message: "Error deactivating employee",
+        error: "Employee not found"
+      });
       logger.warn(`Employee ${id} not found`);
       return;
     }

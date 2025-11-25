@@ -3,7 +3,6 @@ import type { IOrder } from "../interfaces/order.interface.js";
 
 const orderSchema = new mongoose.Schema<IOrder>({
   description: { type: String, required: true },
-  price: { type: Number, required: true },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
@@ -24,7 +23,14 @@ const orderSchema = new mongoose.Schema<IOrder>({
     type: mongoose.Schema.Types.ObjectId,
     required: false,
     ref: "Employee"
-  }
+  },
+  products: [
+    {
+      name: String,
+      unitPrice: Number,
+      quantity: Number
+    }
+  ]
 });
 
 const Order = mongoose.model("Order", orderSchema);
