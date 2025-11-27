@@ -1,0 +1,831 @@
+[{
+  "_id": {
+    "$oid": "69282c7f3a5583fd5d6be59c"
+  },
+  "name": "Anthony Reed",
+  "phone": "01022334881",
+  "email": "anthony.reed@example.com",
+  "address": "42 Sunset Road",
+  "jobTitle": "Sales Manager",
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122eef"
+  },
+  "stage": [
+    {
+      "name": "Lead",
+      "date": {
+        "$date": "2025-01-03T10:12:00.000Z"
+      },
+      "_id": {
+        "$oid": "69282c7f3a5583fd5d6be59d"
+      }
+    }
+  ],
+  "isActive": true,
+  "createdAt": {
+    "$date": "2025-01-03T10:12:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-12T12:44:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69282c7f3a5583fd5d6be59e"
+  },
+  "name": "Linda Carter",
+  "phone": "01288341222",
+  "email": null,
+  "address": "17 Green Valley",
+  "jobTitle": null,
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122ef0"
+  },
+  "stage": [
+    {
+      "name": "Lead",
+      "date": {
+        "$date": "2025-01-10T09:22:00.000Z"
+      },
+      "_id": {
+        "$oid": "69282c7f3a5583fd5d6be59f"
+      }
+    },
+    {
+      "name": "Customer",
+      "date": {
+        "$date": "2025-02-01T11:10:00.000Z"
+      },
+      "_id": {
+        "$oid": "69282c7f3a5583fd5d6be5a0"
+      }
+    }
+  ],
+  "isActive": true,
+  "createdAt": {
+    "$date": "2025-01-10T09:22:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-01T11:10:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69282c7f3a5583fd5d6be5a1"
+  },
+  "name": "Jason Miller",
+  "phone": null,
+  "email": "jason.miller@example.com",
+  "address": "89 Riverside Street",
+  "jobTitle": "Marketing Lead",
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122ef1"
+  },
+  "stage": [
+    {
+      "name": "Lead",
+      "date": {
+        "$date": "2025-01-05T08:15:00.000Z"
+      },
+      "_id": {
+        "$oid": "69282c7f3a5583fd5d6be5a2"
+      }
+    }
+  ],
+  "isActive": false,
+  "createdAt": {
+    "$date": "2025-01-05T08:15:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-15T12:48:55.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69282c7f3a5583fd5d6be5a3"
+  },
+  "name": "Hannah Brooks",
+  "phone": "01577339911",
+  "email": "hannah.brooks@example.com",
+  "address": null,
+  "jobTitle": "Account Executive",
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122ef2"
+  },
+  "stage": [
+    {
+      "name": "Lead",
+      "date": {
+        "$date": "2025-01-14T09:41:00.000Z"
+      },
+      "_id": {
+        "$oid": "69282c7f3a5583fd5d6be5a4"
+      }
+    }
+  ],
+  "isActive": true,
+  "createdAt": {
+    "$date": "2025-01-14T09:41:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-19T12:20:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69282c7f3a5583fd5d6be5a5"
+  },
+  "name": "Natalie Foster",
+  "phone": "01033445567",
+  "email": "natalie.foster@example.com",
+  "address": "5 Forest Drive",
+  "jobTitle": null,
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122ef3"
+  },
+  "stage": [
+    {
+      "name": "Lead",
+      "date": {
+        "$date": "2025-01-18T10:01:00.000Z"
+      },
+      "_id": {
+        "$oid": "69282c7f3a5583fd5d6be5a6"
+      }
+    },
+    {
+      "name": "Customer",
+      "date": {
+        "$date": "2025-02-10T10:12:00.000Z"
+      },
+      "_id": {
+        "$oid": "69282c7f3a5583fd5d6be5a7"
+      }
+    }
+  ],
+  "isActive": true,
+  "createdAt": {
+    "$date": "2025-01-18T10:01:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-10T10:12:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69282c7f3a5583fd5d6be5a8"
+  },
+  "name": "Oliver Hayes",
+  "phone": "01155344290",
+  "email": null,
+  "address": "21 Lakewood District",
+  "jobTitle": "Operations Manager",
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122ef4"
+  },
+  "stage": [
+    {
+      "name": "Lead",
+      "date": {
+        "$date": "2025-01-07T12:22:00.000Z"
+      },
+      "_id": {
+        "$oid": "69282c7f3a5583fd5d6be5a9"
+      }
+    }
+  ],
+  "isActive": false,
+  "createdAt": {
+    "$date": "2025-01-07T12:22:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-21T13:55:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69282c7f3a5583fd5d6be5aa"
+  },
+  "name": "Diana Collins",
+  "phone": null,
+  "email": "diana.collins@example.com",
+  "address": null,
+  "jobTitle": "HR Specialist",
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122ef5"
+  },
+  "stage": [
+    {
+      "name": "Lead",
+      "date": {
+        "$date": "2025-01-12T08:33:00.000Z"
+      },
+      "_id": {
+        "$oid": "69282c7f3a5583fd5d6be5ab"
+      }
+    }
+  ],
+  "isActive": true,
+  "createdAt": {
+    "$date": "2025-01-12T08:33:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-22T10:11:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69282c7f3a5583fd5d6be5ac"
+  },
+  "name": "Kevin Price",
+  "phone": "01044129300",
+  "email": "kevin.price@example.com",
+  "address": "33 Hilltop Avenue",
+  "jobTitle": "Sales Representative",
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122ef6"
+  },
+  "stage": [
+    {
+      "name": "Lead",
+      "date": {
+        "$date": "2025-01-04T14:55:00.000Z"
+      },
+      "_id": {
+        "$oid": "69282c7f3a5583fd5d6be5ad"
+      }
+    }
+  ],
+  "isActive": true,
+  "createdAt": {
+    "$date": "2025-01-04T14:55:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-18T10:27:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69282c7f3a5583fd5d6be5ae"
+  },
+  "name": "Rachel Stewart",
+  "phone": "01277441220",
+  "email": "rachel.stewart@example.com",
+  "address": null,
+  "jobTitle": null,
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122ef7"
+  },
+  "stage": [
+    {
+      "name": "Lead",
+      "date": {
+        "$date": "2025-01-11T12:19:00.000Z"
+      },
+      "_id": {
+        "$oid": "69282c7f3a5583fd5d6be5af"
+      }
+    },
+    {
+      "name": "Customer",
+      "date": {
+        "$date": "2025-02-03T09:45:00.000Z"
+      },
+      "_id": {
+        "$oid": "69282c7f3a5583fd5d6be5b0"
+      }
+    }
+  ],
+  "isActive": true,
+  "createdAt": {
+    "$date": "2025-01-11T12:19:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-03T09:45:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69282c7f3a5583fd5d6be5b1"
+  },
+  "name": "Samuel Morgan",
+  "phone": "01199234412",
+  "email": null,
+  "address": "98 Market Lane",
+  "jobTitle": "Procurement Lead",
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122ef8"
+  },
+  "stage": [
+    {
+      "name": "Lead",
+      "date": {
+        "$date": "2025-01-10T07:12:00.000Z"
+      },
+      "_id": {
+        "$oid": "69282c7f3a5583fd5d6be5b2"
+      }
+    }
+  ],
+  "isActive": false,
+  "createdAt": {
+    "$date": "2025-01-10T07:12:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-24T15:00:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69282c7f3a5583fd5d6be5b3"
+  },
+  "name": "Victoria Allen",
+  "phone": null,
+  "email": "victoria.allen@example.com",
+  "address": "61 River Bend",
+  "jobTitle": "Product Advisor",
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122ef9"
+  },
+  "stage": [
+    {
+      "name": "Lead",
+      "date": {
+        "$date": "2025-01-06T11:33:00.000Z"
+      },
+      "_id": {
+        "$oid": "69282c7f3a5583fd5d6be5b4"
+      }
+    }
+  ],
+  "isActive": true,
+  "createdAt": {
+    "$date": "2025-01-06T11:33:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-26T14:20:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69282c7f3a5583fd5d6be5b5"
+  },
+  "name": "Ethan Wallace",
+  "phone": "01545009211",
+  "email": "ethan.wallace@example.com",
+  "address": "103 Sunset Avenue",
+  "jobTitle": "Business Analyst",
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122efa"
+  },
+  "stage": [
+    {
+      "name": "Lead",
+      "date": {
+        "$date": "2025-01-03T09:41:00.000Z"
+      },
+      "_id": {
+        "$oid": "69282c7f3a5583fd5d6be5b6"
+      }
+    }
+  ],
+  "isActive": true,
+  "createdAt": {
+    "$date": "2025-01-03T09:41:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-18T12:15:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69282c7f3a5583fd5d6be5b7"
+  },
+  "name": "Chad Hunter",
+  "phone": null,
+  "email": null,
+  "address": "30 Pine Ridge",
+  "jobTitle": "Sales Coordinator",
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122efb"
+  },
+  "stage": [
+    {
+      "name": "Lead",
+      "date": {
+        "$date": "2025-01-19T08:13:00.000Z"
+      },
+      "_id": {
+        "$oid": "69282c7f3a5583fd5d6be5b8"
+      }
+    },
+    {
+      "name": "Customer",
+      "date": {
+        "$date": "2025-02-04T13:10:00.000Z"
+      },
+      "_id": {
+        "$oid": "69282c7f3a5583fd5d6be5b9"
+      }
+    }
+  ],
+  "isActive": true,
+  "createdAt": {
+    "$date": "2025-01-19T08:13:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-04T13:10:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69282c7f3a5583fd5d6be5ba"
+  },
+  "name": "Abigail Turner",
+  "phone": "01099321811",
+  "email": "abigail.turner@example.com",
+  "address": null,
+  "jobTitle": null,
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122efc"
+  },
+  "stage": [
+    {
+      "name": "Lead",
+      "date": {
+        "$date": "2025-01-15T11:29:00.000Z"
+      },
+      "_id": {
+        "$oid": "69282c7f3a5583fd5d6be5bb"
+      }
+    }
+  ],
+  "isActive": false,
+  "createdAt": {
+    "$date": "2025-01-15T11:29:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-22T15:40:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69282c7f3a5583fd5d6be5bc"
+  },
+  "name": "Caroline Brooks",
+  "phone": "01233559981",
+  "email": "caroline.brooks@example.com",
+  "address": "72 Oak Lane",
+  "jobTitle": "Marketing Assistant",
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122efd"
+  },
+  "stage": [
+    {
+      "name": "Lead",
+      "date": {
+        "$date": "2025-01-08T07:55:00.000Z"
+      },
+      "_id": {
+        "$oid": "69282c7f3a5583fd5d6be5bd"
+      }
+    }
+  ],
+  "isActive": true,
+  "createdAt": {
+    "$date": "2025-01-08T07:55:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-21T10:20:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69282c7f3a5583fd5d6be5be"
+  },
+  "name": "Derek Evans",
+  "phone": "01577230119",
+  "email": null,
+  "address": "44 West Creek",
+  "jobTitle": "Customer Advisor",
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122efe"
+  },
+  "stage": [
+    {
+      "name": "Lead",
+      "date": {
+        "$date": "2025-01-09T14:10:00.000Z"
+      },
+      "_id": {
+        "$oid": "69282c7f3a5583fd5d6be5bf"
+      }
+    }
+  ],
+  "isActive": false,
+  "createdAt": {
+    "$date": "2025-01-09T14:10:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-18T10:33:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69282c7f3a5583fd5d6be5c0"
+  },
+  "name": "Jasmine Myers",
+  "phone": "01077449923",
+  "email": "jasmine.myers@example.com",
+  "address": "14 Orchard Way",
+  "jobTitle": "Technical Consultant",
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122eff"
+  },
+  "stage": [
+    {
+      "name": "Lead",
+      "date": {
+        "$date": "2025-01-13T09:22:00.000Z"
+      },
+      "_id": {
+        "$oid": "69282c7f3a5583fd5d6be5c1"
+      }
+    },
+    {
+      "name": "Customer",
+      "date": {
+        "$date": "2025-02-12T09:25:00.000Z"
+      },
+      "_id": {
+        "$oid": "69282c7f3a5583fd5d6be5c2"
+      }
+    }
+  ],
+  "isActive": true,
+  "createdAt": {
+    "$date": "2025-01-13T09:22:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-12T09:25:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69282c7f3a5583fd5d6be5c3"
+  },
+  "name": "Patrick Wells",
+  "phone": null,
+  "email": null,
+  "address": "66 Elm Street",
+  "jobTitle": "Support Engineer",
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122f00"
+  },
+  "stage": [
+    {
+      "name": "Lead",
+      "date": {
+        "$date": "2025-01-04T10:34:00.000Z"
+      },
+      "_id": {
+        "$oid": "69282c7f3a5583fd5d6be5c4"
+      }
+    }
+  ],
+  "isActive": true,
+  "createdAt": {
+    "$date": "2025-01-04T10:34:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-18T12:15:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69282c7f3a5583fd5d6be5c5"
+  },
+  "name": "Sabrina Knight",
+  "phone": "01211093422",
+  "email": "sabrina.knight@example.com",
+  "address": "78 Broad Street",
+  "jobTitle": "Office Manager",
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122f01"
+  },
+  "stage": [
+    {
+      "name": "Lead",
+      "date": {
+        "$date": "2025-01-11T11:19:00.000Z"
+      },
+      "_id": {
+        "$oid": "69282c7f3a5583fd5d6be5c6"
+      }
+    }
+  ],
+  "isActive": true,
+  "createdAt": {
+    "$date": "2025-01-11T11:19:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-22T13:45:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69282c7f3a5583fd5d6be5c7"
+  },
+  "name": "Logan Fisher",
+  "phone": "01144782133",
+  "email": null,
+  "address": null,
+  "jobTitle": "Assistant Manager",
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122f02"
+  },
+  "stage": [
+    {
+      "name": "Lead",
+      "date": {
+        "$date": "2025-01-16T13:31:00.000Z"
+      },
+      "_id": {
+        "$oid": "69282c7f3a5583fd5d6be5c8"
+      }
+    },
+    {
+      "name": "Customer",
+      "date": {
+        "$date": "2025-02-01T12:22:00.000Z"
+      },
+      "_id": {
+        "$oid": "69282c7f3a5583fd5d6be5c9"
+      }
+    }
+  ],
+  "isActive": true,
+  "createdAt": {
+    "$date": "2025-01-16T13:31:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-01T12:22:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69282c7f3a5583fd5d6be5ca"
+  },
+  "name": "Hailey Sanders",
+  "phone": "01066123498",
+  "email": "hailey.sanders@example.com",
+  "address": "25 Lake Street",
+  "jobTitle": null,
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122f03"
+  },
+  "stage": [
+    {
+      "name": "Lead",
+      "date": {
+        "$date": "2025-01-18T10:29:00.000Z"
+      },
+      "_id": {
+        "$oid": "69282c7f3a5583fd5d6be5cb"
+      }
+    }
+  ],
+  "isActive": true,
+  "createdAt": {
+    "$date": "2025-01-18T10:29:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-28T12:09:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69282c7f3a5583fd5d6be5cc"
+  },
+  "name": "Trevor Simmons",
+  "phone": null,
+  "email": null,
+  "address": "90 Central Road",
+  "jobTitle": "Sales Intern",
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122f04"
+  },
+  "stage": [
+    {
+      "name": "Lead",
+      "date": {
+        "$date": "2025-01-04T11:29:00.000Z"
+      },
+      "_id": {
+        "$oid": "69282c7f3a5583fd5d6be5cd"
+      }
+    }
+  ],
+  "isActive": false,
+  "createdAt": {
+    "$date": "2025-01-04T11:29:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-14T09:50:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69282c7f3a5583fd5d6be5ce"
+  },
+  "name": "Felix Turner",
+  "phone": "01255880011",
+  "email": "felix.turner@example.com",
+  "address": "36 North Ridge",
+  "jobTitle": "Account Manager",
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122f05"
+  },
+  "stage": [
+    {
+      "name": "Lead",
+      "date": {
+        "$date": "2025-01-13T09:14:00.000Z"
+      },
+      "_id": {
+        "$oid": "69282c7f3a5583fd5d6be5cf"
+      }
+    },
+    {
+      "name": "Customer",
+      "date": {
+        "$date": "2025-02-05T12:11:00.000Z"
+      },
+      "_id": {
+        "$oid": "69282c7f3a5583fd5d6be5d0"
+      }
+    }
+  ],
+  "isActive": true,
+  "createdAt": {
+    "$date": "2025-01-13T09:14:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-05T12:11:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69282c7f3a5583fd5d6be5d1"
+  },
+  "name": "Vanessa Cole",
+  "phone": "01522118743",
+  "email": null,
+  "address": "11 Garden Street",
+  "jobTitle": null,
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122f06"
+  },
+  "stage": [
+    {
+      "name": "Lead",
+      "date": {
+        "$date": "2025-01-09T07:51:00.000Z"
+      },
+      "_id": {
+        "$oid": "69282c7f3a5583fd5d6be5d2"
+      }
+    }
+  ],
+  "isActive": true,
+  "createdAt": {
+    "$date": "2025-01-09T07:51:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-20T15:22:00.000Z"
+  },
+  "__v": 0
+}]

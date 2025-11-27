@@ -54,6 +54,7 @@ export async function registerAdmin(
     }
 
     employee.data.role = new mongoose.Types.ObjectId(roleId);
+    employee.data.password = bcrypt.hashSync(employee.data.password!, 10);
 
     logger.info(`Created admin ${employee.data.email}`);
     const createdAdmin = await Employee.create(employee.data);
@@ -366,6 +367,8 @@ export async function resetPassword(
       logger.error(`Reset token expired for employee ${id}`);
       return;
     }
+
+    password.data = bcrypt.hashSync(password.data, 10);
 
     await existingEmployee.updateOne({
       password: password.data,

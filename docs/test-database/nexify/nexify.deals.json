@@ -1,0 +1,1842 @@
+[{
+  "_id": {
+    "$oid": "69283154cbcecfa149326413"
+  },
+  "name": "Global Tech SaaS Contract",
+  "stage": [
+    {
+      "name": "Appointment Scheduled",
+      "date": {
+        "$date": "2025-01-05T10:00:00.000Z"
+      }
+    },
+    {
+      "name": "Qualified To Buy",
+      "date": {
+        "$date": "2025-01-10T12:00:00.000Z"
+      }
+    },
+    {
+      "name": "Presentation Scheduled",
+      "date": {
+        "$date": "2025-01-15T15:00:00.000Z"
+      }
+    },
+    {
+      "name": "Decision Maker Bought-In",
+      "date": {
+        "$date": "2025-01-22T09:00:00.000Z"
+      }
+    },
+    {
+      "name": "Contract Sent",
+      "date": {
+        "$date": "2025-01-25T14:30:00.000Z"
+      }
+    },
+    {
+      "name": "Closed Won",
+      "date": {
+        "$date": "2025-02-05T11:00:00.000Z"
+      }
+    }
+  ],
+  "amount": 125000,
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122eef"
+  },
+  "priority": "High",
+  "contact": {
+    "$oid": "69282c7f3a5583fd5d6be59c"
+  },
+  "company": {
+    "$oid": "69282f97cbcecfa1493263f8"
+  },
+  "createdAt": {
+    "$date": "2025-01-05T10:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-05T11:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69283154cbcecfa149326414"
+  },
+  "name": "Innovate Annual Retainer",
+  "stage": [
+    {
+      "name": "Appointment Scheduled",
+      "date": {
+        "$date": "2025-01-15T11:00:00.000Z"
+      }
+    },
+    {
+      "name": "Qualified To Buy",
+      "date": {
+        "$date": "2025-01-20T10:00:00.000Z"
+      }
+    },
+    {
+      "name": "Presentation Scheduled",
+      "date": {
+        "$date": "2025-01-27T14:00:00.000Z"
+      }
+    }
+  ],
+  "amount": 45000,
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122ef0"
+  },
+  "priority": "Medium",
+  "contact": {
+    "$oid": "69282c7f3a5583fd5d6be59e"
+  },
+  "company": {
+    "$oid": "69282f97cbcecfa1493263f9"
+  },
+  "createdAt": {
+    "$date": "2025-01-15T11:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-27T14:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69283154cbcecfa149326415"
+  },
+  "name": "Phoenix Material Supply",
+  "stage": [
+    {
+      "name": "Appointment Scheduled",
+      "date": {
+        "$date": "2025-01-10T14:00:00.000Z"
+      }
+    },
+    {
+      "name": "Qualified To Buy",
+      "date": {
+        "$date": "2025-01-14T09:00:00.000Z"
+      }
+    },
+    {
+      "name": "Closed Lost",
+      "date": {
+        "$date": "2025-01-25T16:00:00.000Z"
+      }
+    }
+  ],
+  "amount": 80000,
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122ef1"
+  },
+  "priority": "Low",
+  "contact": {
+    "$oid": "69282c7f3a5583fd5d6be5a0"
+  },
+  "company": {
+    "$oid": "69282f97cbcecfa1493263fa"
+  },
+  "createdAt": {
+    "$date": "2025-01-10T14:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-25T16:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69283154cbcecfa149326416"
+  },
+  "name": "MediCare EHR Upgrade",
+  "stage": [
+    {
+      "name": "Appointment Scheduled",
+      "date": {
+        "$date": "2025-02-01T09:00:00.000Z"
+      }
+    },
+    {
+      "name": "Qualified To Buy",
+      "date": {
+        "$date": "2025-02-05T11:30:00.000Z"
+      }
+    },
+    {
+      "name": "Presentation Scheduled",
+      "date": {
+        "$date": "2025-02-12T13:00:00.000Z"
+      }
+    },
+    {
+      "name": "Decision Maker Bought-In",
+      "date": {
+        "$date": "2025-02-20T10:00:00.000Z"
+      }
+    }
+  ],
+  "amount": 250000,
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122ef2"
+  },
+  "priority": "High",
+  "contact": {
+    "$oid": "69282c7f3a5583fd5d6be5a2"
+  },
+  "company": {
+    "$oid": "69282f97cbcecfa1493263fb"
+  },
+  "createdAt": {
+    "$date": "2025-02-01T09:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-20T10:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69283154cbcecfa149326417"
+  },
+  "name": "Apex Q3 Tax Service",
+  "stage": [
+    {
+      "name": "Appointment Scheduled",
+      "date": {
+        "$date": "2025-01-01T10:30:00.000Z"
+      }
+    },
+    {
+      "name": "Qualified To Buy",
+      "date": {
+        "$date": "2025-01-06T11:00:00.000Z"
+      }
+    },
+    {
+      "name": "Presentation Scheduled",
+      "date": {
+        "$date": "2025-01-13T12:00:00.000Z"
+      }
+    },
+    {
+      "name": "Decision Maker Bought-In",
+      "date": {
+        "$date": "2025-01-20T15:00:00.000Z"
+      }
+    },
+    {
+      "name": "Contract Sent",
+      "date": {
+        "$date": "2025-01-23T14:00:00.000Z"
+      }
+    }
+  ],
+  "amount": 15000,
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122ef3"
+  },
+  "priority": "Medium",
+  "contact": {
+    "$oid": "69282c7f3a5583fd5d6be5a4"
+  },
+  "company": {
+    "$oid": "69282f97cbcecfa1493263fc"
+  },
+  "createdAt": {
+    "$date": "2025-01-01T10:30:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-23T14:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69283154cbcecfa149326418"
+  },
+  "name": "Elite Hub Distribution Deal",
+  "stage": [
+    {
+      "name": "Appointment Scheduled",
+      "date": {
+        "$date": "2024-12-10T10:00:00.000Z"
+      }
+    },
+    {
+      "name": "Qualified To Buy",
+      "date": {
+        "$date": "2024-12-15T11:00:00.000Z"
+      }
+    },
+    {
+      "name": "Presentation Scheduled",
+      "date": {
+        "$date": "2024-12-20T14:00:00.000Z"
+      }
+    },
+    {
+      "name": "Decision Maker Bought-In",
+      "date": {
+        "$date": "2024-12-27T10:00:00.000Z"
+      }
+    },
+    {
+      "name": "Contract Sent",
+      "date": {
+        "$date": "2024-12-30T10:00:00.000Z"
+      }
+    },
+    {
+      "name": "Closed Won",
+      "date": {
+        "$date": "2025-01-10T11:00:00.000Z"
+      }
+    }
+  ],
+  "amount": 92000,
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122ef4"
+  },
+  "priority": "High",
+  "contact": {
+    "$oid": "69282c7f3a5583fd5d6be5a6"
+  },
+  "company": {
+    "$oid": "69282f97cbcecfa1493263fd"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T10:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-10T11:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69283154cbcecfa149326419"
+  },
+  "name": "Digital Waves New Campaign",
+  "stage": [
+    {
+      "name": "Appointment Scheduled",
+      "date": {
+        "$date": "2025-02-10T15:00:00.000Z"
+      }
+    },
+    {
+      "name": "Qualified To Buy",
+      "date": {
+        "$date": "2025-02-14T09:30:00.000Z"
+      }
+    }
+  ],
+  "amount": 22000,
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122ef5"
+  },
+  "priority": "Medium",
+  "contact": {
+    "$oid": "69282c7f3a5583fd5d6be5a8"
+  },
+  "company": {
+    "$oid": "69282f97cbcecfa1493263fe"
+  },
+  "createdAt": {
+    "$date": "2025-02-10T15:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-14T09:30:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69283154cbcecfa14932641a"
+  },
+  "name": "Green Earth Consulting",
+  "stage": [
+    {
+      "name": "Appointment Scheduled",
+      "date": {
+        "$date": "2024-11-01T09:00:00.000Z"
+      }
+    },
+    {
+      "name": "Qualified To Buy",
+      "date": {
+        "$date": "2024-11-05T10:30:00.000Z"
+      }
+    },
+    {
+      "name": "Presentation Scheduled",
+      "date": {
+        "$date": "2024-11-12T14:00:00.000Z"
+      }
+    },
+    {
+      "name": "Closed Lost",
+      "date": {
+        "$date": "2024-12-01T15:00:00.000Z"
+      }
+    }
+  ],
+  "amount": 35000,
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122ef6"
+  },
+  "priority": "Low",
+  "contact": {
+    "$oid": "69282c7f3a5583fd5d6be5aa"
+  },
+  "company": {
+    "$oid": "69282f97cbcecfa1493263ff"
+  },
+  "createdAt": {
+    "$date": "2024-11-01T09:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-01T15:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69283154cbcecfa14932641b"
+  },
+  "name": "Streamline Software License",
+  "stage": [
+    {
+      "name": "Appointment Scheduled",
+      "date": {
+        "$date": "2025-01-20T11:00:00.000Z"
+      }
+    },
+    {
+      "name": "Qualified To Buy",
+      "date": {
+        "$date": "2025-01-25T14:00:00.000Z"
+      }
+    },
+    {
+      "name": "Presentation Scheduled",
+      "date": {
+        "$date": "2025-02-01T10:30:00.000Z"
+      }
+    },
+    {
+      "name": "Decision Maker Bought-In",
+      "date": {
+        "$date": "2025-02-08T11:00:00.000Z"
+      }
+    },
+    {
+      "name": "Contract Sent",
+      "date": {
+        "$date": "2025-02-11T16:00:00.000Z"
+      }
+    },
+    {
+      "name": "Closed Won",
+      "date": {
+        "$date": "2025-02-21T09:30:00.000Z"
+      }
+    }
+  ],
+  "amount": 68000,
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122ef7"
+  },
+  "priority": "High",
+  "contact": {
+    "$oid": "69282c7f3a5583fd5d6be5ac"
+  },
+  "company": {
+    "$oid": "69282f97cbcecfa149326400"
+  },
+  "createdAt": {
+    "$date": "2025-01-20T11:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-21T09:30:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69283154cbcecfa14932641c"
+  },
+  "name": "Precision Machinery Order",
+  "stage": [
+    {
+      "name": "Appointment Scheduled",
+      "date": {
+        "$date": "2025-01-22T13:00:00.000Z"
+      }
+    },
+    {
+      "name": "Qualified To Buy",
+      "date": {
+        "$date": "2025-01-27T10:00:00.000Z"
+      }
+    },
+    {
+      "name": "Presentation Scheduled",
+      "date": {
+        "$date": "2025-02-03T11:00:00.000Z"
+      }
+    },
+    {
+      "name": "Decision Maker Bought-In",
+      "date": {
+        "$date": "2025-02-10T14:00:00.000Z"
+      }
+    }
+  ],
+  "amount": 180000,
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122ef8"
+  },
+  "priority": "High",
+  "contact": {
+    "$oid": "69282c7f3a5583fd5d6be5ae"
+  },
+  "company": {
+    "$oid": "69282f97cbcecfa149326401"
+  },
+  "createdAt": {
+    "$date": "2025-01-22T13:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-10T14:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69283154cbcecfa14932641d"
+  },
+  "name": "Horizon Q4 Partnership",
+  "stage": [
+    {
+      "name": "Appointment Scheduled",
+      "date": {
+        "$date": "2024-12-15T10:00:00.000Z"
+      }
+    },
+    {
+      "name": "Qualified To Buy",
+      "date": {
+        "$date": "2024-12-20T11:00:00.000Z"
+      }
+    },
+    {
+      "name": "Presentation Scheduled",
+      "date": {
+        "$date": "2025-01-05T15:00:00.000Z"
+      }
+    },
+    {
+      "name": "Decision Maker Bought-In",
+      "date": {
+        "$date": "2025-01-12T10:00:00.000Z"
+      }
+    },
+    {
+      "name": "Contract Sent",
+      "date": {
+        "$date": "2025-01-15T11:00:00.000Z"
+      }
+    },
+    {
+      "name": "Closed Lost",
+      "date": {
+        "$date": "2025-01-30T10:00:00.000Z"
+      }
+    }
+  ],
+  "amount": 55000,
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122ef9"
+  },
+  "priority": "Medium",
+  "contact": {
+    "$oid": "69282c7f3a5583fd5d6be5b0"
+  },
+  "company": {
+    "$oid": "69282f97cbcecfa149326402"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T10:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-30T10:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69283154cbcecfa14932641e"
+  },
+  "name": "NextGen Game Engine License",
+  "stage": [
+    {
+      "name": "Appointment Scheduled",
+      "date": {
+        "$date": "2025-02-05T14:00:00.000Z"
+      }
+    }
+  ],
+  "amount": 7500,
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122efa"
+  },
+  "priority": "Low",
+  "contact": {
+    "$oid": "69282c7f3a5583fd5d6be5b2"
+  },
+  "company": {
+    "$oid": "69282f97cbcecfa149326403"
+  },
+  "createdAt": {
+    "$date": "2025-02-05T14:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-05T14:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69283154cbcecfa14932641f"
+  },
+  "name": "Oceanic Bulk Order 1",
+  "stage": [
+    {
+      "name": "Appointment Scheduled",
+      "date": {
+        "$date": "2025-01-12T09:00:00.000Z"
+      }
+    },
+    {
+      "name": "Qualified To Buy",
+      "date": {
+        "$date": "2025-01-17T11:00:00.000Z"
+      }
+    },
+    {
+      "name": "Presentation Scheduled",
+      "date": {
+        "$date": "2025-01-24T13:00:00.000Z"
+      }
+    },
+    {
+      "name": "Decision Maker Bought-In",
+      "date": {
+        "$date": "2025-01-31T09:00:00.000Z"
+      }
+    },
+    {
+      "name": "Contract Sent",
+      "date": {
+        "$date": "2025-02-03T10:00:00.000Z"
+      }
+    },
+    {
+      "name": "Closed Won",
+      "date": {
+        "$date": "2025-02-13T12:00:00.000Z"
+      }
+    }
+  ],
+  "amount": 32000,
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122efb"
+  },
+  "priority": "High",
+  "contact": {
+    "$oid": "69282c7f3a5583fd5d6be5b4"
+  },
+  "company": {
+    "$oid": "69282f97cbcecfa149326404"
+  },
+  "createdAt": {
+    "$date": "2025-01-12T09:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-13T12:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69283154cbcecfa149326420"
+  },
+  "name": "Cityscape Brokerage Agreement",
+  "stage": [
+    {
+      "name": "Appointment Scheduled",
+      "date": {
+        "$date": "2025-01-08T16:00:00.000Z"
+      }
+    },
+    {
+      "name": "Qualified To Buy",
+      "date": {
+        "$date": "2025-01-13T10:00:00.000Z"
+      }
+    },
+    {
+      "name": "Presentation Scheduled",
+      "date": {
+        "$date": "2025-01-20T14:30:00.000Z"
+      }
+    }
+  ],
+  "amount": 18000,
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122efc"
+  },
+  "priority": "Medium",
+  "contact": {
+    "$oid": "69282c7f3a5583fd5d6be5b6"
+  },
+  "company": {
+    "$oid": "69282f97cbcecfa149326405"
+  },
+  "createdAt": {
+    "$date": "2025-01-08T16:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-20T14:30:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69283154cbcecfa149326421"
+  },
+  "name": "Future Telecom Infrastructure",
+  "stage": [
+    {
+      "name": "Appointment Scheduled",
+      "date": {
+        "$date": "2024-12-01T10:00:00.000Z"
+      }
+    },
+    {
+      "name": "Qualified To Buy",
+      "date": {
+        "$date": "2024-12-05T10:00:00.000Z"
+      }
+    },
+    {
+      "name": "Presentation Scheduled",
+      "date": "2024-12-12T13:00:00.000Z"
+    },
+    {
+      "name": "Closed Lost",
+      "date": {
+        "$date": "2025-01-01T15:00:00.000Z"
+      }
+    }
+  ],
+  "amount": 210000,
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122efd"
+  },
+  "priority": "High",
+  "contact": {
+    "$oid": "69282c7f3a5583fd5d6be5b8"
+  },
+  "company": {
+    "$oid": "69282f97cbcecfa149326406"
+  },
+  "createdAt": {
+    "$date": "2024-12-01T10:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-01T15:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69283154cbcecfa149326422"
+  },
+  "name": "Global Import Q1 Logistics",
+  "stage": [
+    {
+      "name": "Appointment Scheduled",
+      "date": {
+        "$date": "2025-01-25T11:00:00.000Z"
+      }
+    },
+    {
+      "name": "Qualified To Buy",
+      "date": {
+        "$date": "2025-01-30T10:00:00.000Z"
+      }
+    },
+    {
+      "name": "Presentation Scheduled",
+      "date": {
+        "$date": "2025-02-06T14:00:00.000Z"
+      }
+    },
+    {
+      "name": "Decision Maker Bought-In",
+      "date": {
+        "$date": "2025-02-13T12:00:00.000Z"
+      }
+    }
+  ],
+  "amount": 48000,
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122efe"
+  },
+  "priority": "Medium",
+  "contact": {
+    "$oid": "69282c7f3a5583fd5d6be5ba"
+  },
+  "company": {
+    "$oid": "69282f97cbcecfa149326407"
+  },
+  "createdAt": {
+    "$date": "2025-01-25T11:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-13T12:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69283154cbcecfa149326423"
+  },
+  "name": "Alpha Biotech Equipment",
+  "stage": [
+    {
+      "name": "Appointment Scheduled",
+      "date": {
+        "$date": "2024-11-10T14:00:00.000Z"
+      }
+    },
+    {
+      "name": "Qualified To Buy",
+      "date": {
+        "$date": "2024-11-15T11:00:00.000Z"
+      }
+    },
+    {
+      "name": "Presentation Scheduled",
+      "date": {
+        "$date": "2024-11-22T10:00:00.000Z"
+      }
+    },
+    {
+      "name": "Decision Maker Bought-In",
+      "date": {
+        "$date": "2024-11-29T15:00:00.000Z"
+      }
+    },
+    {
+      "name": "Contract Sent",
+      "date": {
+        "$date": "2024-12-02T13:00:00.000Z"
+      }
+    },
+    {
+      "name": "Closed Won",
+      "date": {
+        "$date": "2024-12-12T09:00:00.000Z"
+      }
+    }
+  ],
+  "amount": 195000,
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122eff"
+  },
+  "priority": "High",
+  "contact": {
+    "$oid": "69282c7f3a5583fd5d6be5bc"
+  },
+  "company": {
+    "$oid": "69282f97cbcecfa149326408"
+  },
+  "createdAt": {
+    "$date": "2024-11-10T14:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-12T09:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69283154cbcecfa149326424"
+  },
+  "name": "Summit Training Program",
+  "stage": [
+    {
+      "name": "Appointment Scheduled",
+      "date": {
+        "$date": "2025-01-01T10:00:00.000Z"
+      }
+    },
+    {
+      "name": "Qualified To Buy",
+      "date": {
+        "$date": "2025-01-06T11:00:00.000Z"
+      }
+    },
+    {
+      "name": "Presentation Scheduled",
+      "date": {
+        "$date": "2025-01-13T14:00:00.000Z"
+      }
+    },
+    {
+      "name": "Closed Lost",
+      "date": {
+        "$date": "2025-01-25T10:00:00.000Z"
+      }
+    }
+  ],
+  "amount": 25000,
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122f00"
+  },
+  "priority": "Medium",
+  "contact": {
+    "$oid": "69282c7f3a5583fd5d6be5be"
+  },
+  "company": {
+    "$oid": "69282f97cbcecfa149326409"
+  },
+  "createdAt": {
+    "$date": "2025-01-01T10:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-25T10:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69283154cbcecfa149326425"
+  },
+  "name": "Coastal Marketing Agreement",
+  "stage": [
+    {
+      "name": "Appointment Scheduled",
+      "date": {
+        "$date": "2025-02-15T12:00:00.000Z"
+      }
+    },
+    {
+      "name": "Qualified To Buy",
+      "date": {
+        "$date": "2025-02-20T11:00:00.000Z"
+      }
+    },
+    {
+      "name": "Presentation Scheduled",
+      "date": {
+        "$date": "2025-02-27T10:00:00.000Z"
+      }
+    }
+  ],
+  "amount": 12000,
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122f01"
+  },
+  "priority": "Low",
+  "contact": {
+    "$oid": "69282c7f3a5583fd5d6be5c0"
+  },
+  "company": {
+    "$oid": "69282f97cbcecfa14932640a"
+  },
+  "createdAt": {
+    "$date": "2025-02-15T12:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-27T10:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69283154cbcecfa149326426"
+  },
+  "name": "Midwest Auto Parts Supply",
+  "stage": [
+    {
+      "name": "Appointment Scheduled",
+      "date": {
+        "$date": "2025-01-03T14:00:00.000Z"
+      }
+    },
+    {
+      "name": "Qualified To Buy",
+      "date": {
+        "$date": "2025-01-08T10:00:00.000Z"
+      }
+    },
+    {
+      "name": "Presentation Scheduled",
+      "date": {
+        "$date": "2025-01-15T11:00:00.000Z"
+      }
+    },
+    {
+      "name": "Decision Maker Bought-In",
+      "date": {
+        "$date": "2025-01-22T13:00:00.000Z"
+      }
+    },
+    {
+      "name": "Contract Sent",
+      "date": {
+        "$date": "2025-01-25T14:00:00.000Z"
+      }
+    },
+    {
+      "name": "Closed Won",
+      "date": {
+        "$date": "2025-02-05T15:00:00.000Z"
+      }
+    }
+  ],
+  "amount": 155000,
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122f02"
+  },
+  "priority": "High",
+  "contact": {
+    "$oid": "69282c7f3a5583fd5d6be5c2"
+  },
+  "company": {
+    "$oid": "69282f97cbcecfa14932640b"
+  },
+  "createdAt": {
+    "$date": "2025-01-03T14:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-05T15:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69283154cbcecfa149326427"
+  },
+  "name": "Data Security Annual License",
+  "stage": [
+    {
+      "name": "Appointment Scheduled",
+      "date": {
+        "$date": "2025-01-28T10:00:00.000Z"
+      }
+    },
+    {
+      "name": "Qualified To Buy",
+      "date": {
+        "$date": "2025-02-02T11:00:00.000Z"
+      }
+    },
+    {
+      "name": "Presentation Scheduled",
+      "date": {
+        "$date": "2025-02-09T14:00:00.000Z"
+      }
+    }
+  ],
+  "amount": 42000,
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122f03"
+  },
+  "priority": "Medium",
+  "contact": {
+    "$oid": "69282c7f3a5583fd5d6be5c4"
+  },
+  "company": {
+    "$oid": "69282f97cbcecfa14932640c"
+  },
+  "createdAt": {
+    "$date": "2025-01-28T10:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-09T14:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69283154cbcecfa149326428"
+  },
+  "name": "Creative Apparel Design Work",
+  "stage": [
+    {
+      "name": "Appointment Scheduled",
+      "date": {
+        "$date": "2025-01-18T10:00:00.000Z"
+      }
+    },
+    {
+      "name": "Qualified To Buy",
+      "date": {
+        "$date": "2025-01-23T11:00:00.000Z"
+      }
+    },
+    {
+      "name": "Presentation Scheduled",
+      "date": {
+        "$date": "2025-01-30T15:00:00.000Z"
+      }
+    },
+    {
+      "name": "Decision Maker Bought-In",
+      "date": {
+        "$date": "2025-02-06T14:00:00.000Z"
+      }
+    },
+    {
+      "name": "Contract Sent",
+      "date": {
+        "$date": "2025-02-09T10:00:00.000Z"
+      }
+    }
+  ],
+  "amount": 28000,
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122f04"
+  },
+  "priority": "Low",
+  "contact": {
+    "$oid": "69282c7f3a5583fd5d6be5c6"
+  },
+  "company": {
+    "$oid": "69282f97cbcecfa14932640d"
+  },
+  "createdAt": {
+    "$date": "2025-01-18T10:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-09T10:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69283154cbcecfa149326429"
+  },
+  "name": "Industrial Robotics Maintenance",
+  "stage": [
+    {
+      "name": "Appointment Scheduled",
+      "date": {
+        "$date": "2025-01-10T12:00:00.000Z"
+      }
+    },
+    {
+      "name": "Qualified To Buy",
+      "date": {
+        "$date": "2025-01-15T13:00:00.000Z"
+      }
+    },
+    {
+      "name": "Presentation Scheduled",
+      "date": {
+        "$date": "2025-01-22T10:00:00.000Z"
+      }
+    },
+    {
+      "name": "Decision Maker Bought-In",
+      "date": {
+        "$date": "2025-01-29T11:00:00.000Z"
+      }
+    },
+    {
+      "name": "Contract Sent",
+      "date": {
+        "$date": "2025-02-01T15:00:00.000Z"
+      }
+    },
+    {
+      "name": "Closed Lost",
+      "date": {
+        "$date": "2025-02-11T16:00:00.000Z"
+      }
+    }
+  ],
+  "amount": 85000,
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122f05"
+  },
+  "priority": "Medium",
+  "contact": {
+    "$oid": "69282c7f3a5583fd5d6be5c8"
+  },
+  "company": {
+    "$oid": "69282f97cbcecfa14932640e"
+  },
+  "createdAt": {
+    "$date": "2025-01-10T12:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-11T16:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69283154cbcecfa14932642a"
+  },
+  "name": "E Learning Pro Content Deal",
+  "stage": [
+    {
+      "name": "Appointment Scheduled",
+      "date": {
+        "$date": "2025-01-04T09:00:00.000Z"
+      }
+    },
+    {
+      "name": "Qualified To Buy",
+      "date": {
+        "$date": "2025-01-09T10:00:00.000Z"
+      }
+    },
+    {
+      "name": "Presentation Scheduled",
+      "date": {
+        "$date": "2025-01-16T11:00:00.000Z"
+      }
+    },
+    {
+      "name": "Decision Maker Bought-In",
+      "date": {
+        "$date": "2025-01-23T12:00:00.000Z"
+      }
+    },
+    {
+      "name": "Contract Sent",
+      "date": {
+        "$date": "2025-01-26T14:00:00.000Z"
+      }
+    },
+    {
+      "name": "Closed Won",
+      "date": {
+        "$date": "2025-02-06T10:00:00.000Z"
+      }
+    }
+  ],
+  "amount": 58000,
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122ef4"
+  },
+  "priority": "High",
+  "contact": {
+    "$oid": "69282c7f3a5583fd5d6be5ca"
+  },
+  "company": {
+    "$oid": "69282f97cbcecfa14932640f"
+  },
+  "createdAt": {
+    "$date": "2025-01-04T09:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-06T10:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69283154cbcecfa14932642b"
+  },
+  "name": "New Client Onboarding Q1",
+  "stage": [
+    {
+      "name": "Appointment Scheduled",
+      "date": {
+        "$date": "2025-02-03T10:00:00.000Z"
+      }
+    },
+    {
+      "name": "Qualified To Buy",
+      "date": {
+        "$date": "2025-02-08T11:00:00.000Z"
+      }
+    }
+  ],
+  "amount": 11000,
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122ef3"
+  },
+  "priority": "Low",
+  "contact": {
+    "$oid": "69282c7f3a5583fd5d6be5cc"
+  },
+  "company": null,
+  "createdAt": {
+    "$date": "2025-02-03T10:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-08T11:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69283154cbcecfa14932642c"
+  },
+  "name": "Vendor Renewal Contract",
+  "stage": [
+    {
+      "name": "Appointment Scheduled",
+      "date": {
+        "$date": "2025-01-01T15:00:00.000Z"
+      }
+    },
+    {
+      "name": "Qualified To Buy",
+      "date": {
+        "$date": "2025-01-04T10:00:00.000Z"
+      }
+    },
+    {
+      "name": "Presentation Scheduled",
+      "date": {
+        "$date": "2025-01-11T12:00:00.000Z"
+      }
+    },
+    {
+      "name": "Decision Maker Bought-In",
+      "date": {
+        "$date": "2025-01-18T10:00:00.000Z"
+      }
+    },
+    {
+      "name": "Contract Sent",
+      "date": {
+        "$date": "2025-01-21T11:00:00.000Z"
+      }
+    },
+    {
+      "name": "Closed Won",
+      "date": {
+        "$date": "2025-01-31T12:00:00.000Z"
+      }
+    }
+  ],
+  "amount": 38000,
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122ef5"
+  },
+  "priority": "High",
+  "contact": {
+    "$oid": "69282c7f3a5583fd5d6be5ce"
+  },
+  "company": {
+    "$oid": "69282f97cbcecfa1493263f9"
+  },
+  "createdAt": {
+    "$date": "2025-01-01T15:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-31T12:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69283154cbcecfa14932642d"
+  },
+  "name": "Large Scale Project Bid",
+  "stage": [
+    {
+      "name": "Appointment Scheduled",
+      "date": {
+        "$date": "2024-12-19T13:00:00.000Z"
+      }
+    },
+    {
+      "name": "Qualified To Buy",
+      "date": {
+        "$date": "2024-12-24T14:00:00.000Z"
+      }
+    },
+    {
+      "name": "Presentation Scheduled",
+      "date": {
+        "$date": "2025-01-06T10:00:00.000Z"
+      }
+    },
+    {
+      "name": "Decision Maker Bought-In",
+      "date": {
+        "$date": "2025-01-13T11:00:00.000Z"
+      }
+    },
+    {
+      "name": "Contract Sent",
+      "date": {
+        "$date": "2025-01-16T12:00:00.000Z"
+      }
+    },
+    {
+      "name": "Closed Lost",
+      "date": {
+        "$date": "2025-01-26T14:00:00.000Z"
+      }
+    }
+  ],
+  "amount": 230000,
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122eef"
+  },
+  "priority": "High",
+  "contact": {
+    "$oid": "69282c7f3a5583fd5d6be5d0"
+  },
+  "company": {
+    "$oid": "69282f97cbcecfa1493263fa"
+  },
+  "createdAt": {
+    "$date": "2024-12-19T13:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-26T14:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69283154cbcecfa14932642e"
+  },
+  "name": "Small Consulting Project",
+  "stage": [
+    {
+      "name": "Appointment Scheduled",
+      "date": {
+        "$date": "2025-02-12T09:00:00.000Z"
+      }
+    },
+    {
+      "name": "Qualified To Buy",
+      "date": {
+        "$date": "2025-02-17T10:00:00.000Z"
+      }
+    }
+  ],
+  "amount": 6500,
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122ef6"
+  },
+  "priority": "Low",
+  "contact": {
+    "$oid": "69282c7f3a5583fd5d6be5d2"
+  },
+  "company": null,
+  "createdAt": {
+    "$date": "2025-02-12T09:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-17T10:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69283154cbcecfa14932642f"
+  },
+  "name": "Mid-Market System Rollout",
+  "stage": [
+    {
+      "name": "Appointment Scheduled",
+      "date": {
+        "$date": "2025-01-15T10:00:00.000Z"
+      }
+    },
+    {
+      "name": "Qualified To Buy",
+      "date": {
+        "$date": "2025-01-20T11:00:00.000Z"
+      }
+    },
+    {
+      "name": "Presentation Scheduled",
+      "date": {
+        "$date": "2025-01-27T14:00:00.000Z"
+      }
+    },
+    {
+      "name": "Decision Maker Bought-In",
+      "date": {
+        "$date": "2025-02-03T09:00:00.000Z"
+      }
+    },
+    {
+      "name": "Contract Sent",
+      "date": {
+        "$date": "2025-02-06T10:00:00.000Z"
+      }
+    },
+    {
+      "name": "Closed Won",
+      "date": {
+        "$date": "2025-02-16T11:00:00.000Z"
+      }
+    }
+  ],
+  "amount": 105000,
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122f04"
+  },
+  "priority": "Medium",
+  "contact": {
+    "$oid": "69282c7f3a5583fd5d6be5d4"
+  },
+  "company": {
+    "$oid": "69282f97cbcecfa149326400"
+  },
+  "createdAt": {
+    "$date": "2025-01-15T10:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-16T11:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69283154cbcecfa149326430"
+  },
+  "name": "Q2 Marketing Budget Proposal",
+  "stage": [
+    {
+      "name": "Appointment Scheduled",
+      "date": {
+        "$date": "2025-02-19T11:00:00.000Z"
+      }
+    },
+    {
+      "name": "Qualified To Buy",
+      "date": {
+        "$date": "2025-02-24T13:00:00.000Z"
+      }
+    }
+  ],
+  "amount": 40000,
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122ef0"
+  },
+  "priority": "High",
+  "contact": {
+    "$oid": "69282c7f3a5583fd5d6be5d6"
+  },
+  "company": {
+    "$oid": "69282f97cbcecfa1493263f9"
+  },
+  "createdAt": {
+    "$date": "2025-02-19T11:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-24T13:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69283154cbcecfa149326431"
+  },
+  "name": "New Regional Partnership",
+  "stage": [
+    {
+      "name": "Appointment Scheduled",
+      "date": {
+        "$date": "2025-01-20T14:00:00.000Z"
+      }
+    },
+    {
+      "name": "Qualified To Buy",
+      "date": {
+        "$date": "2025-01-25T11:00:00.000Z"
+      }
+    },
+    {
+      "name": "Presentation Scheduled",
+      "date": {
+        "$date": "2025-02-01T15:00:00.000Z"
+      }
+    },
+    {
+      "name": "Decision Maker Bought-In",
+      "date": {
+        "$date": "2025-02-08T10:00:00.000Z"
+      }
+    },
+    {
+      "name": "Contract Sent",
+      "date": {
+        "$date": "2025-02-11T13:00:00.000Z"
+      }
+    },
+    {
+      "name": "Closed Won",
+      "date": {
+        "$date": "2025-02-21T15:00:00.000Z"
+      }
+    }
+  ],
+  "amount": 72000,
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122ef1"
+  },
+  "priority": "High",
+  "contact": {
+    "$oid": "69282c7f3a5583fd5d6be5d8"
+  },
+  "company": {
+    "$oid": "69282f97cbcecfa149326405"
+  },
+  "createdAt": {
+    "$date": "2025-01-20T14:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-21T15:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69283154cbcecfa149326432"
+  },
+  "name": "Hospital Software Integration",
+  "stage": [
+    {
+      "name": "Appointment Scheduled",
+      "date": {
+        "$date": "2024-11-25T10:00:00.000Z"
+      }
+    },
+    {
+      "name": "Qualified To Buy",
+      "date": {
+        "$date": "2024-11-30T11:00:00.000Z"
+      }
+    },
+    {
+      "name": "Presentation Scheduled",
+      "date": {
+        "$date": "2024-12-07T14:00:00.000Z"
+      }
+    },
+    {
+      "name": "Decision Maker Bought-In",
+      "date": {
+        "$date": "2024-12-14T10:00:00.000Z"
+      }
+    },
+    {
+      "name": "Contract Sent",
+      "date": {
+        "$date": "2024-12-17T11:00:00.000Z"
+      }
+    },
+    {
+      "name": "Closed Lost",
+      "date": {
+        "$date": "2024-12-27T12:00:00.000Z"
+      }
+    }
+  ],
+  "amount": 99000,
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122ef2"
+  },
+  "priority": "Medium",
+  "contact": {
+    "$oid": "69282c7f3a5583fd5d6be5da"
+  },
+  "company": {
+    "$oid": "69282f97cbcecfa1493263fb"
+  },
+  "createdAt": {
+    "$date": "2024-11-25T10:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-27T12:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69283154cbcecfa149326433"
+  },
+  "name": "Financial Audit Service 2025",
+  "stage": [
+    {
+      "name": "Appointment Scheduled",
+      "date": {
+        "$date": "2025-02-20T10:00:00.000Z"
+      }
+    }
+  ],
+  "amount": 10000,
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122ef3"
+  },
+  "priority": "Low",
+  "contact": {
+    "$oid": "69282c7f3a5583fd5d6be5dc"
+  },
+  "company": {
+    "$oid": "69282f97cbcecfa1493263fc"
+  },
+  "createdAt": {
+    "$date": "2025-02-20T10:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-20T10:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69283154cbcecfa149326434"
+  },
+  "name": "Logistics Route Optimization",
+  "stage": [
+    {
+      "name": "Appointment Scheduled",
+      "date": {
+        "$date": "2025-01-08T10:00:00.000Z"
+      }
+    },
+    {
+      "name": "Qualified To Buy",
+      "date": {
+        "$date": "2025-01-13T12:00:00.000Z"
+      }
+    },
+    {
+      "name": "Presentation Scheduled",
+      "date": {
+        "$date": "2025-01-20T14:00:00.000Z"
+      }
+    },
+    {
+      "name": "Decision Maker Bought-In",
+      "date": {
+        "$date": "2025-01-27T11:00:00.000Z"
+      }
+    },
+    {
+      "name": "Contract Sent",
+      "date": {
+        "$date": "2025-01-30T10:00:00.000Z"
+      }
+    },
+    {
+      "name": "Closed Won",
+      "date": {
+        "$date": "2025-02-10T09:00:00.000Z"
+      }
+    }
+  ],
+  "amount": 63000,
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122ef4"
+  },
+  "priority": "High",
+  "contact": {
+    "$oid": "69282c7f3a5583fd5d6be5de"
+  },
+  "company": {
+    "$oid": "69282f97cbcecfa1493263fd"
+  },
+  "createdAt": {
+    "$date": "2025-01-08T10:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-10T09:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69283154cbcecfa149326435"
+  },
+  "name": "New Website Design",
+  "stage": [
+    {
+      "name": "Appointment Scheduled",
+      "date": {
+        "$date": "2025-01-10T11:00:00.000Z"
+      }
+    },
+    {
+      "name": "Qualified To Buy",
+      "date": {
+        "$date": "2025-01-15T12:00:00.000Z"
+      }
+    },
+    {
+      "name": "Presentation Scheduled",
+      "date": {
+        "$date": "2025-01-22T15:00:00.000Z"
+      }
+    },
+    {
+      "name": "Closed Lost",
+      "date": {
+        "$date": "2025-02-01T10:00:00.000Z"
+      }
+    }
+  ],
+  "amount": 18500,
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122ef5"
+  },
+  "priority": "Medium",
+  "contact": {
+    "$oid": "69282c7f3a5583fd5d6be5e0"
+  },
+  "company": {
+    "$oid": "69282f97cbcecfa1493263fe"
+  },
+  "createdAt": {
+    "$date": "2025-01-10T11:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-01T10:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69283154cbcecfa149326436"
+  },
+  "name": "Environmental Impact Study",
+  "stage": [
+    {
+      "name": "Appointment Scheduled",
+      "date": {
+        "$date": "2025-02-07T14:00:00.000Z"
+      }
+    },
+    {
+      "name": "Qualified To Buy",
+      "date": {
+        "$date": "2025-02-12T10:00:00.000Z"
+      }
+    },
+    {
+      "name": "Presentation Scheduled",
+      "date": {
+        "$date": "2025-02-19T11:00:00.000Z"
+      }
+    },
+    {
+      "name": "Decision Maker Bought-In",
+      "date": {
+        "$date": "2025-02-26T14:00:00.000Z"
+      }
+    },
+    {
+      "name": "Contract Sent",
+      "date": {
+        "$date": "2025-03-01T10:00:00.000Z"
+      }
+    }
+  ],
+  "amount": 31000,
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122ef6"
+  },
+  "priority": "High",
+  "contact": {
+    "$oid": "69282c7f3a5583fd5d6be5e2"
+  },
+  "company": {
+    "$oid": "69282f97cbcecfa1493263ff"
+  },
+  "createdAt": {
+    "$date": "2025-02-07T14:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-01T10:00:00.000Z"
+  }
+}]

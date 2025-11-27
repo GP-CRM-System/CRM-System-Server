@@ -15,15 +15,5 @@ const employeeSchema = new mongoose.Schema<IEmployee>({
   updatedAt: { type: Date, default: Date.now }
 });
 
-employeeSchema.pre<IEmployee>("save", async function (next) {
-  if (this.password === undefined) {
-    return next();
-  }
-  if (this.isModified!("password") || this.isNew) {
-    this.password = await bcrypt.hash(this.password!, 10);
-  }
-  next();
-});
-
 const Employee = mongoose.model<IEmployee>("Employee", employeeSchema);
 export default Employee;

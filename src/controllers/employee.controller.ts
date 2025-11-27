@@ -4,6 +4,7 @@ import { logger } from "../config/logger.config.js";
 import Employee from "../models/employee.model.js";
 import type { IResponse } from "../interfaces/response.interface.js";
 import { verifyToken } from "../services/auth.service.js";
+import bcrypt from "bcrypt";
 
 export async function createEmployee(
   req: Request<object, object, IEmployee>,
@@ -43,6 +44,7 @@ export async function createEmployee(
     }
 
     logger.info(`Created employee ${employee.data.fullName}`);
+    employee.data.password = bcrypt.hashSync(employee.data.password!, 10);
     const createdEmployee = await Employee.create(employee.data);
     res
       .status(201)
@@ -166,7 +168,7 @@ export async function updateEmployee(
 
     const id = req.params.id;
 
-    const employee = await Employee.findById(id);
+    const employee = await Employee.findById(id).select("-password");
     if (!employee) {
       res.status(404).json({
         message: "Error updating employee",

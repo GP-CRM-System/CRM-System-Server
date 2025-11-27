@@ -85,7 +85,6 @@ export async function getAllCompanies(
       industry: { $regex: industry ?? "", $options: "i" },
       type: { $regex: type ?? "", $options: "i" }
     })
-      .populate("contact", "name")
       .populate("owner", "fullName")
       .skip(skip)
       .limit(limit)
