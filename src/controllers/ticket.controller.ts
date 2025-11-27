@@ -84,12 +84,10 @@ export async function getAllTickets(
       return;
     }
     logger.info("Retrieved all tickets");
-    res
-      .status(200)
-      .json({
-        message: "Tickets retrieved",
-        data: { tickets, total: tickets.length, page, limit }
-      });
+    res.status(200).json({
+      message: "Tickets retrieved",
+      data: { tickets, total: tickets.length, page, limit }
+    });
     return;
   } catch (err: unknown) {
     logger.error(`Error retrieving tickets: ${(err as Error).message}`);

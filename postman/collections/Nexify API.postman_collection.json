@@ -1464,13 +1464,13 @@
       "id": "827054a9-1afa-40ce-a6d7-1ab1aeb3f830"
     },
     {
-      "name": "New Folder",
+      "name": "Analytics",
       "item": [
         {
-          "name": "New Request",
+          "name": "Cards",
           "id": "e60dc247-af13-4554-a6f9-422edd68e864",
           "request": {
-            "method": "POST",
+            "method": "GET",
             "body": {
               "mode": "raw",
               "raw": "",
@@ -1481,13 +1481,81 @@
               }
             },
             "url": {
-              "raw": "{{apiUrl}}/test/add-dummy-data",
+              "raw": "{{apiUrl}}/analytics/cards",
               "host": [
                 "{{apiUrl}}"
               ],
               "path": [
-                "test",
-                "add-dummy-data"
+                "analytics",
+                "cards"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Revenue Data",
+          "id": "35ff7281-2b81-4e35-877f-82d49fec06f5",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{apiUrl}}/analytics/revenue",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "analytics",
+                "revenue"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Ticket Statuses",
+          "id": "9a5753f2-caaf-4dde-8212-a3e12858ed8e",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{apiUrl}}/analytics/tickets",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "analytics",
+                "tickets"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Product Performance",
+          "id": "41a92a50-8fc0-43ca-9151-5d48bbf01ada",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{apiUrl}}/analytics/products",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "analytics",
+                "products"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Lead Conversions by Employees",
+          "id": "d12b6395-f3cc-4196-b87e-392d3a07aa19",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{apiUrl}}/analytics/leads",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "analytics",
+                "leads"
               ]
             }
           }
@@ -1517,78 +1585,78 @@
   ],
   "variable": [
     {
-      "id": "ca41a6b6-7fb3-4732-a706-4c50a9179735",
+      "id": "768e6127-ae4a-4b2e-aa3d-75eb2594c012",
       "key": "apiUrl",
       "value": ""
     },
     {
-      "id": "7541a70c-9626-4312-84ca-3c6d91817b9f",
+      "id": "5e6a08e4-42f0-46d9-8cbf-5854d615233c",
       "key": "adminEmail",
       "value": "",
       "type": "default"
     },
     {
-      "id": "608cffb0-a4ba-4c80-bb35-55b205c7ce40",
+      "id": "b3c37e9c-192a-4f64-9f96-217c7f20820e",
       "key": "adminPassword",
       "value": "",
       "type": "default"
     },
     {
-      "id": "e3429872-e369-49b2-93e4-f46d81a6d29b",
+      "id": "71d40c3a-4dcd-469a-b0ee-8de223614612",
       "key": "adminId",
       "value": "",
       "type": "default"
     },
     {
-      "id": "96ee35e8-0306-4465-8176-6091a3e54b48",
+      "id": "f923b931-017e-4100-91f4-3fcce7ce9864",
       "key": "roleId",
       "value": "",
       "type": "default"
     },
     {
-      "id": "2b409789-3a2a-47b2-a9de-ac34220cfea3",
+      "id": "9cf59d8f-d9a3-4d85-896c-b35132155949",
       "key": "empEmail",
       "value": "",
       "type": "default"
     },
     {
-      "id": "2295c048-86d2-423a-905b-45181922d9b6",
+      "id": "6323d82e-4b1f-42d0-9ba2-b42adb3b27bf",
       "key": "empPass",
       "value": "",
       "type": "default"
     },
     {
-      "id": "dc6af2bf-c34b-443e-9f74-e2124fe38b88",
+      "id": "15297106-7977-4756-83ed-88789b986be4",
       "key": "empId",
       "value": "",
       "type": "default"
     },
     {
-      "id": "c68ea2d2-088e-4417-a24f-22f0911d2402",
+      "id": "f76612dd-9c31-4149-83a3-6a49229bf94f",
       "key": "contactId",
       "value": "",
       "type": "default"
     },
     {
-      "id": "1235a265-3706-4475-8a72-fe33ed4f4498",
+      "id": "b84001fe-52a0-4938-85f2-2e9b27362013",
       "key": "companyId",
       "value": "",
       "type": "default"
     },
     {
-      "id": "ccbfb2e1-04c7-4336-8657-d1bbb664c015",
+      "id": "c629e282-4eb2-491e-b819-c9f4f4fbf76f",
       "key": "dealId",
       "value": "",
       "type": "default"
     },
     {
-      "id": "8f2e9210-64b8-4daa-9c40-ef93291eb26f",
+      "id": "079a5ded-4417-4c12-9062-9ecc99e2a0df",
       "key": "orderId",
       "value": "",
       "type": "default"
     },
     {
-      "id": "41d5bd63-5d4e-43c0-b6dd-1dfed19adae3",
+      "id": "7838a13f-e5ab-4347-9dfc-c9f0cf033bde",
       "key": "ticketId",
       "value": "",
       "type": "default"

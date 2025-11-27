@@ -97,12 +97,10 @@ export async function getAllEmployees(
       return;
     }
     logger.info(`Retrieved ${employees.length} employees`);
-    res
-      .status(200)
-      .json({
-        message: "Employees retrieved",
-        data: { employees, page, limit, total: employees.length }
-      });
+    res.status(200).json({
+      message: "Employees retrieved",
+      data: { employees, page, limit, total: employees.length }
+    });
     return;
   } catch (err: unknown) {
     logger.error(`Error retrieving employees: ${(err as Error).message}`);

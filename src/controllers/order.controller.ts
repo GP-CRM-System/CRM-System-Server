@@ -106,12 +106,10 @@ export async function getAllOrders(
       return;
     }
     logger.info("Retrieved all orders");
-    res
-      .status(200)
-      .json({
-        message: "Orders retrieved",
-        data: { orders, page, limit, total: orders.length }
-      });
+    res.status(200).json({
+      message: "Orders retrieved",
+      data: { orders, page, limit, total: orders.length }
+    });
     return;
   } catch (err: unknown) {
     logger.error(`Error retrieving orders: ${(err as Error).message}`);

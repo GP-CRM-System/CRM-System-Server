@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import type { IEmployee } from "../interfaces/employee.interface.js";
-import bcrypt from "bcrypt";
 
 const employeeSchema = new mongoose.Schema<IEmployee>({
   fullName: { type: String, required: true },

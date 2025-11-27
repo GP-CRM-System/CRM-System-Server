@@ -88,12 +88,10 @@ export async function getAllRoles(
       return;
     }
     logger.info("Retrieved all roles");
-    res
-      .status(200)
-      .json({
-        message: "Roles retrieved",
-        data: { roles, page, limit, total: roles.length }
-      });
+    res.status(200).json({
+      message: "Roles retrieved",
+      data: { roles, page, limit, total: roles.length }
+    });
     return;
   } catch (err: unknown) {
     logger.error(`Error retrieving roles: ${(err as Error).message}`);

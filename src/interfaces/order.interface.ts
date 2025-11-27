@@ -59,6 +59,7 @@ export const SOrder = z.object({
     )
     .default([]),
   createdAt: z.date().optional(),
-  updatedAt: z.date().optional()});
+  updatedAt: z.date().optional()
+});
 
 export type IOrder = z.infer<typeof SOrder>;

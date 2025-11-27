@@ -109,12 +109,10 @@ export async function getAllDeals(
       return;
     }
     logger.info("Retrieved all deals");
-    res
-      .status(200)
-      .json({
-        message: "Deals retrieved",
-        data: { deals, page, limit, total: deals.length }
-      });
+    res.status(200).json({
+      message: "Deals retrieved",
+      data: { deals, page, limit, total: deals.length }
+    });
     return;
   } catch (err: unknown) {
     logger.error(`Error retrieving deals: ${(err as Error).message}`);

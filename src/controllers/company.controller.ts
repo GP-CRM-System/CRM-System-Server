@@ -99,12 +99,10 @@ export async function getAllCompanies(
       return;
     }
     logger.info(`Retrieved ${companies.length} companies`);
-    res
-      .status(200)
-      .json({
-        message: "Companies retrieved",
-        data: { companies, total: companies.length, page, limit }
-      });
+    res.status(200).json({
+      message: "Companies retrieved",
+      data: { companies, total: companies.length, page, limit }
+    });
     return;
   } catch (err: unknown) {
     logger.error(`Error retrieving companies: ${(err as Error).message}`);
