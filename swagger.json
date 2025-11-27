@@ -240,10 +240,187 @@
           "companyPhone": { "type": "string" }
         },
         "required": ["fullName", "email", "password", "companyName"]
+      },
+      "AnalyticsCards": {
+        "type": "object",
+        "properties": {
+          "totalRevenue": { "type": "number" },
+          "numberOfOrders": { "type": "number" },
+          "conversionRate": { "type": "string" },
+          "cancellationRate": { "type": "string" },
+          "revenueChange": { "type": "number" },
+          "ordersChange": { "type": "number" },
+          "conversionChange": { "type": "string" },
+          "cancellationChange": { "type": "string" }
+        }
+      },
+      "RevenueTrend": {
+        "type": "object",
+        "properties": {
+          "monthNumber": { "type": "integer" },
+          "year": { "type": "integer" },
+          "month": { "type": "string" },
+          "revenue": { "type": "number" },
+          "orders": { "type": "integer" }
+        }
+      },
+      "TicketStatus": {
+        "type": "object",
+        "properties": {
+          "value": { "type": "integer" },
+          "status": { "type": "string" },
+          "name": { "type": "string" }
+        }
+      },
+      "ProductPerformance": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "sales": { "type": "integer" },
+          "revenue": { "type": "number" }
+        }
+      },
+      "LeadConversion": {
+        "type": "object",
+        "properties": {
+          "employeeId": { "type": "string" },
+          "conversions": { "type": "integer" },
+          "leadsHandled": { "type": "integer" },
+          "conversionRate": { "type": "number" }
+        }
       }
     }
   },
   "paths": {
+    "/analytics/cards": {
+      "get": {
+        "summary": "Get analytics cards data",
+        "tags": ["Analytics"],
+        "responses": {
+          "200": {
+            "description": "Analytics cards data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": { "type": "string" },
+                    "data": { "$ref": "#/components/schemas/AnalyticsCards" }
+                  }
+                }
+              }
+            }
+          },
+          "500": { "description": "Server error" }
+        }
+      }
+    },
+    "/analytics/revenue": {
+      "get": {
+        "summary": "Get revenue trends",
+        "tags": ["Analytics"],
+        "responses": {
+          "200": {
+            "description": "Revenue trends data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": { "type": "string" },
+                    "data": {
+                      "type": "array",
+                      "items": { "$ref": "#/components/schemas/RevenueTrend" }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": { "description": "Server error" }
+        }
+      }
+    },
+    "/analytics/tickets": {
+      "get": {
+        "summary": "Get ticket statuses",
+        "tags": ["Analytics"],
+        "responses": {
+          "200": {
+            "description": "Ticket statuses data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": { "type": "string" },
+                    "data": {
+                      "type": "array",
+                      "items": { "$ref": "#/components/schemas/TicketStatus" }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": { "description": "Server error" }
+        }
+      }
+    },
+    "/analytics/products": {
+      "get": {
+        "summary": "Get product performance",
+        "tags": ["Analytics"],
+        "responses": {
+          "200": {
+            "description": "Product performance data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": { "type": "string" },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ProductPerformance"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": { "description": "Server error" }
+        }
+      }
+    },
+    "/analytics/leads": {
+      "get": {
+        "summary": "Get lead conversions",
+        "tags": ["Analytics"],
+        "responses": {
+          "200": {
+            "description": "Lead conversions data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": { "type": "string" },
+                    "data": {
+                      "type": "array",
+                      "items": { "$ref": "#/components/schemas/LeadConversion" }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": { "description": "Server error" }
+        }
+      }
+    },
     "/auth/register": {
       "post": {
         "summary": "Register a new admin",
