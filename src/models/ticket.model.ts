@@ -21,7 +21,9 @@ const ticketSchema = new mongoose.Schema<ITicket>({
     type: mongoose.Schema.Types.ObjectId,
     required: true,
     ref: "Contact"
-  }
+  },
+  createdAt: { type: Date, default: Date.now },
+  updatedAt: { type: Date, default: Date.now }
 });
 
 const Ticket = mongoose.model("Ticket", ticketSchema);

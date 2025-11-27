@@ -39,7 +39,9 @@ export const STicket = z.object({
   contact: z.custom<mongoose.Types.ObjectId>(async (val) => {
     mongoose.Types.ObjectId.isValid(val as string);
     return await Contact.findById(val);
-  }, "Contact is should be a valid contact")
+  }, "Contact is should be a valid contact"),
+  createdAt: z.date().optional(),
+  updatedAt: z.date().optional()
 });
 
 export type ITicket = z.infer<typeof STicket>;

@@ -14,7 +14,9 @@ const companySchema = new mongoose.Schema<ICompany>({
   type: { type: String, required: true },
   address: { type: String, required: false },
   numberOfEmployees: { type: Number, required: false, default: 0 },
-  isActive: { type: Boolean, default: true }
+  isActive: { type: Boolean, default: true },
+  createdAt: { type: Date, default: Date.now },
+  updatedAt: { type: Date, default: Date.now }
 });
 
 const Company = mongoose.model<ICompany>("Company", companySchema);

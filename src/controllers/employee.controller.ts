@@ -84,7 +84,7 @@ export async function getAllEmployees(
       .populate("role")
       .skip(skip)
       .limit(limit)
-      .sort({ createdAt: -1 });
+      .sort({ createdAt: 1 });
 
     if (employees.length === 0) {
       res.status(404).json({

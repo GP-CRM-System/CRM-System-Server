@@ -44,7 +44,9 @@ export const SDeal = z.object({
       mongoose.Types.ObjectId.isValid(val as string);
       return await Company.findById(val);
     }, "Company is should be a valid company")
-    .optional()
+    .optional(),
+  createdAt: z.date().optional(),
+  updatedAt: z.date().optional()
 });
 
 export type IDeal = z.infer<typeof SDeal>;

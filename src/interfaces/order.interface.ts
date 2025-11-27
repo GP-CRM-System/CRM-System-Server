@@ -57,7 +57,8 @@ export const SOrder = z.object({
           .gt(0, "Product quantity must be greater than 0")
       })
     )
-    .default([])
-});
+    .default([]),
+  createdAt: z.date().optional(),
+  updatedAt: z.date().optional()});
 
 export type IOrder = z.infer<typeof SOrder>;

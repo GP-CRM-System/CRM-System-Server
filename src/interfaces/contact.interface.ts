@@ -41,7 +41,9 @@ export const SContact = z.object({
       })
     )
     .default([{ name: "Lead", date: new Date() }]),
-  isActive: z.boolean().default(true)
+  isActive: z.boolean().default(true),
+  createdAt: z.date().optional(),
+  updatedAt: z.date().optional()
 });
 
 export type IContact = z.infer<typeof SContact>;
