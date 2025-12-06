@@ -12,7 +12,6 @@ export const SOrder = z.object({
       /^[a-zA-Z ,.]+$/,
       "Description must contain only letters, spaces, commas and periods"
     ),
-  price: z.number("Price is required").gt(0, "Price must be greater than 0"),
   owner: z.custom<mongoose.Types.ObjectId>(async (val) => {
     mongoose.Types.ObjectId.isValid(val as string);
     return await Employee.findById(val);
@@ -38,7 +37,29 @@ export const SOrder = z.object({
   employee: z.custom<mongoose.Types.ObjectId>(async (val) => {
     mongoose.Types.ObjectId.isValid(val as string);
     return await Employee.findById(val);
-  }, "Employee is should be a valid employee")
+  }, "Employee is should be a valid employee"),
+  products: z
+    .array(
+      z.object({
+        name: z
+          .string("Product name should be a string")
+          .min(3, "Product name must be at least 3 characters long")
+          .max(100, "Product name must be at most 100 characters long")
+          .regex(
+            /^[a-zA-Z ,.]+$/,
+            "Product name must contain only letters, spaces, commas and periods"
+          ),
+        unitPrice: z
+          .number("Product unit price should be a number")
+          .gt(0, "Product unit price must be greater than 0"),
+        quantity: z
+          .number("Product quantity should be a number")
+          .gt(0, "Product quantity must be greater than 0")
+      })
+    )
+    .default([]),
+  createdAt: z.date().optional(),
+  updatedAt: z.date().optional()
 });
 
 export type IOrder = z.infer<typeof SOrder>;

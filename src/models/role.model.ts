@@ -38,9 +38,10 @@ const roleSchema = new mongoose.Schema<IRole>({
     read: { type: Boolean, default: false },
     write: { type: Boolean, default: false },
     delete: { type: Boolean, default: false }
-  }
+  },
+  createdAt: { type: Date, default: Date.now },
+  updatedAt: { type: Date, default: Date.now }
 });
-roleSchema.index({ name: 1 }, { unique: true });
 
 roleSchema.methods.getPermissions = function () {
   return this.permissions;

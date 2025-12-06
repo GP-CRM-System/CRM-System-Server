@@ -37,7 +37,9 @@ const dealSchema = new mongoose.Schema<IDeal>({
     type: mongoose.Schema.Types.ObjectId,
     required: false,
     ref: "Company"
-  }
+  },
+  createdAt: { type: Date, default: Date.now },
+  updatedAt: { type: Date, default: Date.now }
 });
 
 const Deal = mongoose.model<IDeal>("Deal", dealSchema);

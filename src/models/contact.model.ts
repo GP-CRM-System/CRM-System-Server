@@ -22,7 +22,9 @@ const contactSchema = new mongoose.Schema<IContact>({
     ],
     default: [{ name: "Lead", date: new Date() }]
   },
-  isActive: { type: Boolean, default: true }
+  isActive: { type: Boolean, default: true },
+  createdAt: { type: Date, default: Date.now },
+  updatedAt: { type: Date, default: Date.now }
 });
 
 const Contact = mongoose.model<IContact>("Contact", contactSchema);

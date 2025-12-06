@@ -27,7 +27,9 @@ export const SRole = z.object({
     .default({ read: false, write: false, delete: false }),
   Ticket: z
     .object({ read: z.boolean(), write: z.boolean(), delete: z.boolean() })
-    .default({ read: false, write: false, delete: false })
+    .default({ read: false, write: false, delete: false }),
+  createdAt: z.date().optional(),
+  updatedAt: z.date().optional()
 });
 
 export type IRole = z.infer<typeof SRole>;

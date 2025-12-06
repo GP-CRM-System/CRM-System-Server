@@ -10,20 +10,27 @@ export const emailTemplates = {
   welcome: (name: string) => ({
     subject: "Welcome to Nexify!",
     html: `
-            <h2>Welcome to Nexify!</h2>
             <p>Hi ${name},</p>
             <p>Thank you for joining Nexify. We're excited to help you manage your customers and employees efficiently.</p>
             <p>Visit your dashboard: <a href="${process.env.APP_URL!}/">Click here</a></p>
         `
   }),
 
-  forgotPassword: (name: string) => ({
+  forgotPassword: (name: string, link: string) => ({
     subject: "Forgot Password",
     html: `
-            <h2>Forgot Password</h2>
             <p>Hi ${name},</p>
             <p>You have requested to reset your password. Please click the link below to reset your password:</p>
-            <p><a href="${process.env.APP_URL!}/reset-password">Click here</a></p>
+            <p><a href="${link}">Click here</a></p>
+        `
+  }),
+
+  invite: (sender: string, reciever: string, link: string) => ({
+    subject: "Invite to join Nexify",
+    html: `
+            <p>Hi ${reciever},</p>
+            <p>You have been invited by ${sender} to join Nexify. Please click the link below to join:</p>
+            <p><a href="${link}">Click here</a></p>
         `
   })
 };

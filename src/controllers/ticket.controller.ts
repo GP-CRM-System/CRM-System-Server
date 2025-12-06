@@ -59,19 +59,35 @@ export async function getAllTickets(
       return;
     }
 
-    const tickets = await Ticket.find();
+    const { name, priority, source } = req.query;
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = parseInt(req.query.limit as string) || 10;
+    const skip = (page - 1) * limit;
+
+    const tickets = await Ticket.find({
+      name: { $regex: name ?? "", $options: "i" },
+      priority: { $regex: priority ?? "", $options: "i" },
+      source: { $regex: source ?? "", $options: "i" }
+    })
+      .populate("owner", "fullName")
+      .populate("contact", "name")
+      .skip(skip)
+      .limit(limit)
+      .sort({ createdAt: -1 });
+
     if (tickets.length === 0) {
-      res
-        .status(404)
-        .json({
-          message: "Error retrieving tickets",
-          error: "No tickets found"
-        });
+      res.status(404).json({
+        message: "Error retrieving tickets",
+        error: "No tickets found"
+      });
       logger.warn("No tickets found");
       return;
     }
     logger.info("Retrieved all tickets");
-    res.status(200).json({ message: "Tickets retrieved", data: tickets });
+    res.status(200).json({
+      message: "Tickets retrieved",
+      data: { tickets, total: tickets.length, page, limit }
+    });
     return;
   } catch (err: unknown) {
     logger.error(`Error retrieving tickets: ${(err as Error).message}`);
@@ -101,12 +117,10 @@ export async function getOneTicket(
 
     const ticket = await Ticket.findById(id);
     if (!ticket) {
-      res
-        .status(404)
-        .json({
-          message: "Error retrieving ticket",
-          error: "Ticket not found"
-        });
+      res.status(404).json({
+        message: "Error retrieving ticket",
+        error: "Ticket not found"
+      });
       logger.warn(`Ticket with id ${id} not found`);
       return;
     }
@@ -142,12 +156,10 @@ export async function updateTicket(
     const updatedTicket = await STicket.partial().safeParseAsync(req.body);
 
     if (updatedTicket.success === false) {
-      res
-        .status(400)
-        .json({
-          message: "Invalid update fields",
-          error: JSON.parse(updatedTicket.error.message)
-        });
+      res.status(400).json({
+        message: "Invalid update fields",
+        error: JSON.parse(updatedTicket.error.message)
+      });
       logger.error("Invalid update fields");
       return;
     }
@@ -161,6 +173,55 @@ export async function updateTicket(
       return;
     }
     await Ticket.updateOne({ _id: id }, { $set: updatedTicket.data });
+    logger.info(`Updated ticket ${ticket.name}`);
+    res.status(200).json({ message: "Ticket updated", data: ticket });
+    return;
+  } catch (err: unknown) {
+    logger.error(`Error updating ticket: ${(err as Error).message}`);
+    res.status(500).json({
+      message: "Internal server error",
+      error: (err as Error).message
+    });
+    return;
+  }
+}
+
+export async function addNewTicketStatus(
+  req: Request<
+    { id: string },
+    object,
+    {
+      statusType:
+        | "New"
+        | "Waiting on Contact"
+        | "Waiting on Employee"
+        | "Closed";
+    }
+  >,
+  res: Response<IResponse>
+): Promise<void> {
+  try {
+    const token = verifyToken(req.cookies.token);
+    // @ts-expect-error bad jwt types
+    if (!token.role.Ticket.write) {
+      res
+        .status(401)
+        .json({ message: "Error updating ticket", error: "Unauthorized" });
+      return;
+    }
+
+    const { id } = req.params;
+    const { statusType } = req.body;
+    const ticket = await Ticket.findById(id);
+    if (!ticket) {
+      res
+        .status(404)
+        .json({ message: "Error updating ticket", error: "Ticket not found" });
+      logger.warn(`Ticket with id ${id} not found`);
+      return;
+    }
+    ticket.status.push({ statusType, date: new Date() });
+    await ticket.save();
     logger.info(`Updated ticket ${ticket.name}`);
     res.status(200).json({ message: "Ticket updated", data: ticket });
     return;

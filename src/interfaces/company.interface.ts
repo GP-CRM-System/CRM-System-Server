@@ -185,7 +185,9 @@ export const SCompany = z.object({
     .number("Number of employees is required")
     .gt(1, "Number of employees must be greater than 1")
     .nullable(),
-  isActive: z.boolean().default(true)
+  isActive: z.boolean().default(true),
+  createdAt: z.date().optional(),
+  updatedAt: z.date().optional()
 });
 
 export type ICompany = z.infer<typeof SCompany>;

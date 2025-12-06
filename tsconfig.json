@@ -27,7 +27,7 @@
     "noImplicitReturns": true,
     "noImplicitOverride": true,
     "noUnusedLocals": false,
-    "noUnusedParameters": true,
+    "noUnusedParameters": false,
     // "noFallthroughCasesInSwitch": true,
     // "noPropertyAccessFromIndexSignature": true,
 
@@ -37,7 +37,12 @@
     "verbatimModuleSyntax": true,
     "isolatedModules": true,
     "moduleDetection": "force",
-    "skipLibCheck": true
+    "skipLibCheck": true,
+
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+
+    "typeRoots": ["./types", "./node_modules/@types"]
   },
   "exclude": [
     "./eslint.config.ts",

@@ -34,12 +34,10 @@ export async function createContact(
       email: contact.data.email
     });
     if (existingContact) {
-      res
-        .status(409)
-        .json({
-          message: "Contact creation failed",
-          error: "Contact with the same email already exists"
-        });
+      res.status(409).json({
+        message: "Contact creation failed",
+        error: "Contact with the same email already exists"
+      });
       logger.error(`Contact with email ${contact.data.email} already exists`);
       return;
     }
@@ -72,19 +70,36 @@ export async function getAllContacts(
       return;
     }
 
-    const contacts = await Contact.find();
+    const { name, jobTitle, stage } = req.query;
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = parseInt(req.query.limit as string) || 10;
+    const skip = (page - 1) * limit;
+
+    const filter: { name: object; jobTitle: object; stage?: object } = {
+      name: { $regex: name ?? "", $options: "i" },
+      jobTitle: { $in: [null, jobTitle ?? ""] }
+    };
+
+    if (stage === "Lead") {
+      filter.stage = { $size: 1 };
+    }
+
+    const contacts = await Contact.find(filter)
+      .skip(skip)
+      .limit(limit)
+      .populate("owner", "fullName");
     if (contacts.length === 0) {
-      res
-        .status(404)
-        .json({
-          message: "Contact retrieval failed",
-          error: "No contacts found"
-        });
+      res.status(404).json({
+        message: "Contact retrieval failed",
+        error: "No contacts found"
+      });
       logger.warn("No contacts found");
       return;
     }
     logger.info("Retrieved all contacts");
-    res.status(200).json({ message: "Contacts retrieved", data: contacts });
+    res
+      .status(200)
+      .json({ message: "Contacts retrieved", data: { contacts, page, limit } });
     return;
   } catch (err: unknown) {
     logger.error(`Error retrieving contacts: ${(err as Error).message}`);
@@ -111,12 +126,10 @@ export async function getOneContact(
     const { id } = req.params;
     const contact = await Contact.findById(id).populate("owner");
     if (!contact) {
-      res
-        .status(404)
-        .json({
-          message: "Contact retrieval failed",
-          error: "Contact not found"
-        });
+      res.status(404).json({
+        message: "Contact retrieval failed",
+        error: "Contact not found"
+      });
       logger.warn(`Contact with id ${id} not found`);
       return;
     }
@@ -150,12 +163,10 @@ export async function updateContact(
     const verifiedUpdates = SContact.partial().safeParse(updates);
 
     if (verifiedUpdates.success === false) {
-      res
-        .status(400)
-        .json({
-          message: "Contact update failed",
-          error: JSON.parse(verifiedUpdates.error.message)
-        });
+      res.status(400).json({
+        message: "Contact update failed",
+        error: JSON.parse(verifiedUpdates.error.message)
+      });
       logger.error("Invalid update fields");
       return;
     }
@@ -201,12 +212,10 @@ export async function deactivateContact(
     const { id } = req.params;
     const contact = await Contact.findById(id);
     if (!contact) {
-      res
-        .status(404)
-        .json({
-          message: "Contact deactivation failed",
-          error: "Contact not found"
-        });
+      res.status(404).json({
+        message: "Contact deactivation failed",
+        error: "Contact not found"
+      });
       logger.warn(`Contact with id ${id} not found`);
       return;
     }
@@ -251,12 +260,10 @@ export async function updateContactToCustomer(
     }
 
     if (contact.stage.length === 2) {
-      res
-        .status(400)
-        .json({
-          message: "Contact update failed",
-          error: "Contact already in customer stage"
-        });
+      res.status(400).json({
+        message: "Contact update failed",
+        error: "Contact already in customer stage"
+      });
       logger.warn(`Contact with id ${id} already in customer stage`);
       return;
     }

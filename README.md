@@ -1,10 +1,33 @@
 # CRM System Server
 
-Backend repository for the Nexify CRM System. This server provides a robust API for managing companies, contacts, deals, employees, orders, roles, and tickets.
+Backend repository for the Nexify CRM System. This server provides a robust, RESTful API for managing companies, contacts, deals, employees, orders, roles, and tickets. It is designed to streamline customer relationship management for businesses by tracking interactions, managing sales pipelines, and handling support tickets with high performance and security.
 
 ## Project Idea
 
-The Nexify CRM System is designed to streamline customer relationship management for businesses. It allows organizations to track interactions with clients, manage sales pipelines (deals), handle customer support tickets, and organize employee roles and permissions. The backend is built with performance, security, and scalability in mind.
+The Nexify CRM System is a comprehensive solution designed to empower organizations to manage their customer relationships effectively. Beyond simple contact management, it offers a full suite of tools to:
+
+- **Track Interactions**: Keep a detailed history of all communications with clients.
+- **Manage Sales Pipelines**: Visualize and progress deals through customizable stages.
+- **Handle Support**: Efficiently manage and resolve customer support tickets.
+- **Role-Based Access**: Securely manage employee permissions and access levels.
+- **Analyze Performance**: Gain insights into revenue trends, lead conversions, and product performance.
+
+The backend is architected with scalability and security at its core, utilizing modern technologies to ensure a reliable and fast experience.
+
+## Key Features
+
+- **Role-Based Access Control (RBAC)**: Granular permissions for every resource (Read, Write, Delete) ensuring data security.
+- **Advanced Authentication**:
+  - **Google OAuth 2.0**: Secure and convenient login using Google accounts.
+  - **JWT (JSON Web Tokens)**: Stateless authentication for API requests.
+- **Advanced Analytics**:
+  - **Revenue Trends**: Visualize monthly revenue data.
+  - **Lead Conversions**: Track how leads are converting into customers.
+  - **Product Performance**: Analyze top-performing products.
+  - **Ticket Statuses**: Monitor the distribution of support tickets.
+- **Data Validation**: Robust schema validation using Zod to ensure data integrity.
+- **API Documentation**: Integrated Swagger UI for easy API exploration and testing.
+- **Logging**: Structured logging with Pino and Morgan for monitoring and debugging.
 
 ## Technologies Used
 
@@ -12,9 +35,9 @@ The Nexify CRM System is designed to streamline customer relationship management
 - **Language**: TypeScript
 - **Framework**: Express.js
 - **Database**: MongoDB (with Mongoose)
-- **Authentication**: Passport.js (Google OAuth 2.0), JWT (JSON Web Tokens)
+- **Authentication**: Passport.js (Google OAuth 2.0), JWT
 - **Documentation**: Swagger UI
-- **Logging**: Pino
+- **Logging**: Pino, Morgan
 
 ## NPM Modules
 
@@ -32,6 +55,8 @@ Key dependencies used in this project:
 - `cors`: Middleware to enable Cross-Origin Resource Sharing.
 - `swagger-ui-express`: Auto-generated API documentation.
 - `nodemailer`: Send emails from Node.js.
+- `prettier` : Code formatter.
+- `eslint` : JavaScript and TypeScript linter.
 
 ## Folder Structure
 
@@ -102,6 +127,14 @@ Base URL: `/api/v1`
 - `GET /auth/google`: Initiate Google OAuth login.
 - `GET /auth/google/callback`: Google OAuth callback.
 
+### Analytics
+
+- `GET /analytics/cards`: Get summary cards data.
+- `GET /analytics/revenue`: Get monthly revenue trends.
+- `GET /analytics/tickets`: Get ticket status distribution.
+- `GET /analytics/products`: Get product performance data.
+- `GET /analytics/leads`: Get lead conversion rates.
+
 ### Resources
 
 All resource routes are protected by `isAuthenticated` middleware.
@@ -132,6 +165,19 @@ All resource routes are protected by `isAuthenticated` middleware.
 
 - `GET /health`: Check server health status.
 
+## Dummy Data
+
+To quickly populate your database with sample data for testing, you can use the JSON data in `docs/test-database`.
+
+**Instructions:**
+
+1. Open **MongoDB Compass**.
+2. Connect to your database (e.g., `mongodb://localhost:27017/nexify`).
+3. Navigate to a collection.
+4. Click **Add Data** -> **Insert Document**.
+5. Switch to the **JSON** view (the `{}` icon).
+6. Paste the array of objects below and click **Insert**.
+
 ## How to Run
 
 1. **Install Dependencies**:
@@ -158,17 +204,17 @@ All resource routes are protected by `isAuthenticated` middleware.
     npm run prod:start
     ```
 
-## Features
-
-- **Role-Based Access Control (RBAC)**: Granular permissions for every resource.
-- **Authentication**: Secure login via JWT and Google OAuth.
-- **Data Validation**: Robust schema validation using Zod.
-- **API Documentation**: Integrated Swagger UI for easy API exploration.
-- **Logging**: Structured logging for monitoring and debugging.
-
 ## Future Work
 
-- [ ] Implement advanced filtering and pagination for all list endpoints.
-- [ ] Add unit and integration tests (Jest).
-- [ ] Implement websocket support for real-time updates (e.g., new tickets).
-- [ ] Dockerize the application for easy deployment.
+- [ ] **Redis Caching**: Integrate Redis to cache frequent API responses and improve performance.(maybe idk)
+- [ ] **File Uploads**: Support for uploading avatars and document attachments (e.g., using AWS S3 or Multer).
+- [ ] **Enhanced Email Notifications**: Create HTML email templates for system alerts and updates.
+- [ ] **Audit Logs**: Track critical system actions for security and compliance.(maybe idk)
+- [ ] **Multi-tenancy**: Support multiple companies or organizations with separate databases and user accounts.
+- [ ] **AI Chatbot**: Implement an AI-powered chatbot for customer support and lead generation.
+- [ ] **Real-time Notifications**: Implement WebSockets for instant updates on deals, tickets, and other critical events.
+- [ ] **Customizable Dashboards**: Allow users to personalize their dashboards with relevant widgets and metrics.(in frontend b2a)
+- [ ] **Third-Party Integrations**: Connect with external services like SMS gateways, payment processors.
+- [ ] **Automated Email Notifications**: Implement automated email notifications for system alerts and updates.(not really)
+- [ ] **Advanced Reporting**: Develop more sophisticated reporting tools with custom report generation and scheduling.
+- [ ] **More Sophisticated Analytics**: Implement more sophisticated analytics tools to track user behavior and system performance.
