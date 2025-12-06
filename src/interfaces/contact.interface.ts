@@ -37,7 +37,10 @@ export const SContact = z.object({
     .array(
       z.object({
         name: z.enum(["Lead", "Customer"]),
-        date: z.date().default(new Date())
+        date: z.preprocess(
+          (val) => (typeof val === "string" ? new Date(val) : val),
+          z.date().default(new Date())
+        )
       })
     )
     .default([{ name: "Lead", date: new Date() }]),

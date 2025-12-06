@@ -19,6 +19,8 @@ export async function createContact(
       return;
     }
 
+    console.log('body', req.body)
+
     const contact = await SContact.safeParseAsync(req.body);
 
     if (contact.success === false) {
@@ -75,11 +77,13 @@ export async function getAllContacts(
     const limit = parseInt(req.query.limit as string) || 10;
     const skip = (page - 1) * limit;
 
-    const filter: { name: object; jobTitle: object; stage?: object } = {
-      name: { $regex: name ?? "", $options: "i" },
-      jobTitle: { $in: [null, jobTitle ?? ""] }
-    };
-
+    const filter: Record<string, unknown> = {};
+    if (name) {
+      filter.name = { $regex: name, $options: "i" };
+    }
+    if (jobTitle) {
+      filter.jobTitle = jobTitle;
+    }
     if (stage === "Lead") {
       filter.stage = { $size: 1 };
     }
@@ -88,6 +92,7 @@ export async function getAllContacts(
       .skip(skip)
       .limit(limit)
       .populate("owner", "fullName");
+    const total = await Contact.countDocuments(filter);
     if (contacts.length === 0) {
       res.status(404).json({
         message: "Contact retrieval failed",
@@ -99,7 +104,7 @@ export async function getAllContacts(
     logger.info("Retrieved all contacts");
     res
       .status(200)
-      .json({ message: "Contacts retrieved", data: { contacts, page, limit } });
+      .json({ message: "Contacts retrieved", data: { contacts, page, limit, total } });
     return;
   } catch (err: unknown) {
     logger.error(`Error retrieving contacts: ${(err as Error).message}`);
