@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import { z } from "zod";
 import Employee from "../models/employee.model.js";
+import Contact from "../models/contact.model.js";
 
 export const industries = [
     "Accounting",
@@ -166,6 +167,10 @@ export const SCompany = z.object({
         mongoose.Types.ObjectId.isValid(val as string);
         return await Employee.findById(val);
     }, "Owner is should be a valid employee"),
+    contact: z.custom<mongoose.Types.ObjectId>(async (val) => {
+        mongoose.Types.ObjectId.isValid(val as string);
+        return await Contact.findById(val);
+    }, "Contact is should be a valid contact"),
     website: z.url("Website should be a valid URL").nullable(),
     email: z.email("Invalid email").nullable(),
     industry: z.enum(industries, "Invalid industry").optional(),

@@ -8,6 +8,11 @@ const companySchema = new mongoose.Schema<ICompany>({
         required: true,
         ref: "Employee"
     },
+    contact: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: "Contact"
+    },
     website: { type: String, required: false },
     email: { type: String, required: false },
     industry: { type: String },
