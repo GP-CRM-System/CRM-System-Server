@@ -58,13 +58,8 @@
             },
             "url": {
               "raw": "{{apiUrl}}/auth/register",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "auth",
-                "register"
-              ]
+              "host": ["{{apiUrl}}"],
+              "path": ["auth", "register"]
             }
           }
         },
@@ -104,13 +99,8 @@
             },
             "url": {
               "raw": "{{apiUrl}}/auth/login",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "auth",
-                "login"
-              ]
+              "host": ["{{apiUrl}}"],
+              "path": ["auth", "login"]
             }
           }
         },
@@ -124,13 +114,8 @@
             "method": "GET",
             "url": {
               "raw": "{{apiUrl}}/auth/google",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "auth",
-                "google"
-              ]
+              "host": ["{{apiUrl}}"],
+              "path": ["auth", "google"]
             }
           }
         },
@@ -150,13 +135,8 @@
             },
             "url": {
               "raw": "{{apiUrl}}/auth/forgot-password",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "auth",
-                "forgot-password"
-              ]
+              "host": ["{{apiUrl}}"],
+              "path": ["auth", "forgot-password"]
             }
           }
         },
@@ -176,14 +156,8 @@
             },
             "url": {
               "raw": "{{apiUrl}}/auth/reset-password/{{empId}}",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "auth",
-                "reset-password",
-                "{{empId}}"
-              ]
+              "host": ["{{apiUrl}}"],
+              "path": ["auth", "reset-password", "{{empId}}"]
             }
           }
         },
@@ -194,13 +168,8 @@
             "method": "GET",
             "url": {
               "raw": "{{apiUrl}}/auth/logout",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "auth",
-                "logout"
-              ]
+              "host": ["{{apiUrl}}"],
+              "path": ["auth", "logout"]
             }
           }
         }
@@ -246,12 +215,8 @@
             },
             "url": {
               "raw": "{{apiUrl}}/roles",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "roles"
-              ]
+              "host": ["{{apiUrl}}"],
+              "path": ["roles"]
             }
           }
         },
@@ -265,12 +230,8 @@
             "method": "GET",
             "url": {
               "raw": "{{apiUrl}}/roles",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "roles"
-              ]
+              "host": ["{{apiUrl}}"],
+              "path": ["roles"]
             }
           }
         },
@@ -284,13 +245,8 @@
             "method": "GET",
             "url": {
               "raw": "{{apiUrl}}/roles/:id",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "roles",
-                ":id"
-              ],
+              "host": ["{{apiUrl}}"],
+              "path": ["roles", ":id"],
               "variable": [
                 {
                   "key": "id",
@@ -319,13 +275,8 @@
             },
             "url": {
               "raw": "{{apiUrl}}/roles/:id",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "roles",
-                ":id"
-              ],
+              "host": ["{{apiUrl}}"],
+              "path": ["roles", ":id"],
               "variable": [
                 {
                   "key": "id",
@@ -345,13 +296,8 @@
             "method": "DELETE",
             "url": {
               "raw": "{{apiUrl}}/roles/:id",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "roles",
-                ":id"
-              ],
+              "host": ["{{apiUrl}}"],
+              "path": ["roles", ":id"],
               "variable": [
                 {
                   "key": "id",
@@ -403,12 +349,8 @@
             },
             "url": {
               "raw": "{{apiUrl}}/employees",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "employees"
-              ]
+              "host": ["{{apiUrl}}"],
+              "path": ["employees"]
             }
           }
         },
@@ -422,12 +364,8 @@
             "method": "GET",
             "url": {
               "raw": "{{apiUrl}}/employees",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "employees"
-              ],
+              "host": ["{{apiUrl}}"],
+              "path": ["employees"],
               "query": [
                 {
                   "key": "name",
@@ -453,13 +391,8 @@
             "method": "GET",
             "url": {
               "raw": "{{apiUrl}}/employees/:id",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "employees",
-                ":id"
-              ],
+              "host": ["{{apiUrl}}"],
+              "path": ["employees", ":id"],
               "variable": [
                 {
                   "key": "id",
@@ -488,13 +421,8 @@
             },
             "url": {
               "raw": "{{apiUrl}}/employees/:id",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "employees",
-                ":id"
-              ],
+              "host": ["{{apiUrl}}"],
+              "path": ["employees", ":id"],
               "variable": [
                 {
                   "key": "id",
@@ -514,13 +442,8 @@
             "method": "DELETE",
             "url": {
               "raw": "{{apiUrl}}/employees/:id",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "employees",
-                ":id"
-              ],
+              "host": ["{{apiUrl}}"],
+              "path": ["employees", ":id"],
               "variable": [
                 {
                   "key": "id",
@@ -576,12 +499,8 @@
             },
             "url": {
               "raw": "{{apiUrl}}/contacts",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "contacts"
-              ]
+              "host": ["{{apiUrl}}"],
+              "path": ["contacts"]
             }
           }
         },
@@ -595,12 +514,8 @@
             "method": "GET",
             "url": {
               "raw": "{{apiUrl}}/contacts?stage=",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "contacts"
-              ],
+              "host": ["{{apiUrl}}"],
+              "path": ["contacts"],
               "query": [
                 {
                   "key": "name",
@@ -630,13 +545,8 @@
             "method": "GET",
             "url": {
               "raw": "{{apiUrl}}/contacts/:id",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "contacts",
-                ":id"
-              ],
+              "host": ["{{apiUrl}}"],
+              "path": ["contacts", ":id"],
               "variable": [
                 {
                   "key": "id",
@@ -665,13 +575,8 @@
             },
             "url": {
               "raw": "{{apiUrl}}/contacts/:id",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "contacts",
-                ":id"
-              ],
+              "host": ["{{apiUrl}}"],
+              "path": ["contacts", ":id"],
               "variable": [
                 {
                   "key": "id",
@@ -700,14 +605,8 @@
             },
             "url": {
               "raw": "{{apiUrl}}/contacts/stage/:id",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "contacts",
-                "stage",
-                ":id"
-              ],
+              "host": ["{{apiUrl}}"],
+              "path": ["contacts", "stage", ":id"],
               "variable": [
                 {
                   "key": "id",
@@ -763,12 +662,8 @@
             },
             "url": {
               "raw": "{{apiUrl}}/companies",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "companies"
-              ]
+              "host": ["{{apiUrl}}"],
+              "path": ["companies"]
             }
           }
         },
@@ -782,12 +677,8 @@
             "method": "GET",
             "url": {
               "raw": "{{apiUrl}}/companies",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "companies"
-              ],
+              "host": ["{{apiUrl}}"],
+              "path": ["companies"],
               "query": [
                 {
                   "key": "name",
@@ -823,13 +714,8 @@
             "method": "GET",
             "url": {
               "raw": "{{apiUrl}}/companies/:id",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "companies",
-                ":id"
-              ],
+              "host": ["{{apiUrl}}"],
+              "path": ["companies", ":id"],
               "variable": [
                 {
                   "key": "id",
@@ -858,13 +744,8 @@
             },
             "url": {
               "raw": "{{apiUrl}}/companies/:id",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "companies",
-                ":id"
-              ],
+              "host": ["{{apiUrl}}"],
+              "path": ["companies", ":id"],
               "variable": [
                 {
                   "key": "id",
@@ -906,9 +787,7 @@
               "listen": "prerequest",
               "script": {
                 "id": "aed0e8cb-114c-4381-af40-cba7276e2e79",
-                "exec": [
-                  ""
-                ],
+                "exec": [""],
                 "type": "text/javascript"
               }
             }
@@ -930,12 +809,8 @@
             },
             "url": {
               "raw": "{{apiUrl}}/deals",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "deals"
-              ]
+              "host": ["{{apiUrl}}"],
+              "path": ["deals"]
             }
           }
         },
@@ -1014,9 +889,7 @@
               "listen": "prerequest",
               "script": {
                 "id": "3eb85122-7c56-476c-8e59-b6f217554ce6",
-                "exec": [
-                  ""
-                ],
+                "exec": [""],
                 "type": "text/javascript"
               }
             }
@@ -1029,12 +902,8 @@
             "method": "GET",
             "url": {
               "raw": "{{apiUrl}}/deals",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "deals"
-              ]
+              "host": ["{{apiUrl}}"],
+              "path": ["deals"]
             }
           }
         },
@@ -1048,13 +917,8 @@
             "method": "GET",
             "url": {
               "raw": "{{apiUrl}}/deals/:id",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "deals",
-                ":id"
-              ],
+              "host": ["{{apiUrl}}"],
+              "path": ["deals", ":id"],
               "variable": [
                 {
                   "key": "id",
@@ -1083,13 +947,8 @@
             },
             "url": {
               "raw": "{{apiUrl}}/deals/:id",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "deals",
-                ":id"
-              ],
+              "host": ["{{apiUrl}}"],
+              "path": ["deals", ":id"],
               "variable": [
                 {
                   "key": "id",
@@ -1115,14 +974,8 @@
             },
             "url": {
               "raw": "{{apiUrl}}/deals/{{dealId}}/stage",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "deals",
-                "{{dealId}}",
-                "stage"
-              ]
+              "host": ["{{apiUrl}}"],
+              "path": ["deals", "{{dealId}}", "stage"]
             }
           }
         }
@@ -1158,9 +1011,7 @@
               "listen": "prerequest",
               "script": {
                 "id": "5fb7a64d-462c-4d01-b69c-ae489b7d8593",
-                "exec": [
-                  ""
-                ],
+                "exec": [""],
                 "type": "text/javascript"
               }
             }
@@ -1182,12 +1033,8 @@
             },
             "url": {
               "raw": "{{apiUrl}}/orders",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "orders"
-              ]
+              "host": ["{{apiUrl}}"],
+              "path": ["orders"]
             }
           }
         },
@@ -1201,12 +1048,8 @@
             "method": "GET",
             "url": {
               "raw": "{{apiUrl}}/orders",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "orders"
-              ]
+              "host": ["{{apiUrl}}"],
+              "path": ["orders"]
             }
           }
         },
@@ -1220,13 +1063,8 @@
             "method": "GET",
             "url": {
               "raw": "{{apiUrl}}/orders/:id",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "orders",
-                ":id"
-              ],
+              "host": ["{{apiUrl}}"],
+              "path": ["orders", ":id"],
               "variable": [
                 {
                   "key": "id",
@@ -1255,13 +1093,8 @@
             },
             "url": {
               "raw": "{{apiUrl}}/orders/:id",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "orders",
-                ":id"
-              ],
+              "host": ["{{apiUrl}}"],
+              "path": ["orders", ":id"],
               "variable": [
                 {
                   "key": "id",
@@ -1287,14 +1120,8 @@
             },
             "url": {
               "raw": "{{apiUrl}}/orders/{{orderId}}/stage",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "orders",
-                "{{orderId}}",
-                "stage"
-              ]
+              "host": ["{{apiUrl}}"],
+              "path": ["orders", "{{orderId}}", "stage"]
             }
           }
         }
@@ -1344,12 +1171,8 @@
             },
             "url": {
               "raw": "{{apiUrl}}/tickets",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "tickets"
-              ]
+              "host": ["{{apiUrl}}"],
+              "path": ["tickets"]
             }
           }
         },
@@ -1363,12 +1186,8 @@
             "method": "GET",
             "url": {
               "raw": "{{apiUrl}}/tickets",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "tickets"
-              ]
+              "host": ["{{apiUrl}}"],
+              "path": ["tickets"]
             }
           }
         },
@@ -1382,13 +1201,8 @@
             "method": "GET",
             "url": {
               "raw": "{{apiUrl}}/tickets/:id",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "tickets",
-                ":id"
-              ],
+              "host": ["{{apiUrl}}"],
+              "path": ["tickets", ":id"],
               "variable": [
                 {
                   "key": "id",
@@ -1417,13 +1231,8 @@
             },
             "url": {
               "raw": "{{apiUrl}}/tickets/:id",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "tickets",
-                ":id"
-              ],
+              "host": ["{{apiUrl}}"],
+              "path": ["tickets", ":id"],
               "variable": [
                 {
                   "key": "id",
@@ -1449,14 +1258,8 @@
             },
             "url": {
               "raw": "{{apiUrl}}/tickets/{{ticketId}}/status",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "tickets",
-                "{{ticketId}}",
-                "status"
-              ]
+              "host": ["{{apiUrl}}"],
+              "path": ["tickets", "{{ticketId}}", "status"]
             }
           }
         }
@@ -1482,13 +1285,8 @@
             },
             "url": {
               "raw": "{{apiUrl}}/analytics/cards",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "analytics",
-                "cards"
-              ]
+              "host": ["{{apiUrl}}"],
+              "path": ["analytics", "cards"]
             }
           }
         },
@@ -1499,13 +1297,8 @@
             "method": "GET",
             "url": {
               "raw": "{{apiUrl}}/analytics/revenue",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "analytics",
-                "revenue"
-              ]
+              "host": ["{{apiUrl}}"],
+              "path": ["analytics", "revenue"]
             }
           }
         },
@@ -1516,13 +1309,8 @@
             "method": "GET",
             "url": {
               "raw": "{{apiUrl}}/analytics/tickets",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "analytics",
-                "tickets"
-              ]
+              "host": ["{{apiUrl}}"],
+              "path": ["analytics", "tickets"]
             }
           }
         },
@@ -1533,13 +1321,8 @@
             "method": "GET",
             "url": {
               "raw": "{{apiUrl}}/analytics/products",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "analytics",
-                "products"
-              ]
+              "host": ["{{apiUrl}}"],
+              "path": ["analytics", "products"]
             }
           }
         },
@@ -1550,13 +1333,8 @@
             "method": "GET",
             "url": {
               "raw": "{{apiUrl}}/analytics/leads",
-              "host": [
-                "{{apiUrl}}"
-              ],
-              "path": [
-                "analytics",
-                "leads"
-              ]
+              "host": ["{{apiUrl}}"],
+              "path": ["analytics", "leads"]
             }
           }
         }
@@ -1573,90 +1351,86 @@
         "method": "GET",
         "url": {
           "raw": "{{apiUrl}}/health",
-          "host": [
-            "{{apiUrl}}"
-          ],
-          "path": [
-            "health"
-          ]
+          "host": ["{{apiUrl}}"],
+          "path": ["health"]
         }
       }
     }
   ],
   "variable": [
     {
-      "id": "768e6127-ae4a-4b2e-aa3d-75eb2594c012",
+      "id": "2177519b-828f-4e12-86a5-2dbf87d14535",
       "key": "apiUrl",
       "value": ""
     },
     {
-      "id": "5e6a08e4-42f0-46d9-8cbf-5854d615233c",
+      "id": "04985e57-a99f-4301-8ca9-49f3829664d7",
       "key": "adminEmail",
       "value": "",
       "type": "default"
     },
     {
-      "id": "b3c37e9c-192a-4f64-9f96-217c7f20820e",
+      "id": "bc7e0a26-1412-49b1-be1b-12d4089d55d3",
       "key": "adminPassword",
       "value": "",
       "type": "default"
     },
     {
-      "id": "71d40c3a-4dcd-469a-b0ee-8de223614612",
+      "id": "2a73eb90-367a-4aee-9fd5-cd140aa4e3a2",
       "key": "adminId",
       "value": "",
       "type": "default"
     },
     {
-      "id": "f923b931-017e-4100-91f4-3fcce7ce9864",
+      "id": "e85e9e84-2d4e-49e8-bf6c-0b199397d7d5",
       "key": "roleId",
       "value": "",
       "type": "default"
     },
     {
-      "id": "9cf59d8f-d9a3-4d85-896c-b35132155949",
+      "id": "90759edb-5b38-49dd-8d0d-63e8d7c22a32",
       "key": "empEmail",
       "value": "",
       "type": "default"
     },
     {
-      "id": "6323d82e-4b1f-42d0-9ba2-b42adb3b27bf",
+      "id": "e45a8b76-84d1-49fa-817b-5b2a530fa99e",
       "key": "empPass",
       "value": "",
       "type": "default"
     },
     {
-      "id": "15297106-7977-4756-83ed-88789b986be4",
+      "id": "bb90c6c8-fa9b-4202-bad0-5c9f85671c3c",
       "key": "empId",
       "value": "",
       "type": "default"
     },
     {
-      "id": "f76612dd-9c31-4149-83a3-6a49229bf94f",
+      "id": "b2388c3c-fbf2-448c-943d-47a16723bed0",
       "key": "contactId",
       "value": "",
       "type": "default"
     },
     {
-      "id": "b84001fe-52a0-4938-85f2-2e9b27362013",
+      "id": "c725b4b7-785e-496b-96b2-31d911f09baf",
       "key": "companyId",
       "value": "",
       "type": "default"
     },
     {
-      "id": "c629e282-4eb2-491e-b819-c9f4f4fbf76f",
+      "id": "530d89db-4d54-4188-b9a7-faf7cc029052",
       "key": "dealId",
       "value": "",
       "type": "default"
     },
     {
-      "id": "079a5ded-4417-4c12-9062-9ecc99e2a0df",
+      "id": "bc02e538-c796-405c-9d7d-b7982d6c0dc9",
       "key": "orderId",
       "value": "",
       "type": "default"
     },
     {
-      "id": "7838a13f-e5ab-4347-9dfc-c9f0cf033bde",
+      "id": "e56c5934-484b-4c71-97e4-ec78370a8315",
       "key": "ticketId",
       "value": "",
       "type": "default"

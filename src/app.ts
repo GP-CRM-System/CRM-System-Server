@@ -17,12 +17,12 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(
-  cors({
-    origin: process.env.CORS_ORIGIN?.split(",") || [],
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
-    allowedHeaders: ["Content-Type", "Authorization"]
-  })
+    cors({
+        origin: process.env.CORS_ORIGIN?.split(",") || [],
+        methods: ["GET", "POST", "PUT", "DELETE"],
+        credentials: true,
+        allowedHeaders: ["Content-Type", "Authorization"]
+    })
 );
 
 loggerSetup(app);
@@ -35,5 +35,5 @@ app.use(notFound);
 const port = process.env.PORT || 4650;
 
 app.listen(port, () =>
-  logger.info(`Server running on http://localhost:${port}`)
+    logger.info(`Server running on http://localhost:${port}`)
 );

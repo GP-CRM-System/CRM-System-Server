@@ -1,10 +1,10 @@
 import express from "express";
 import {
-  addNewOrderStage,
-  createOrder,
-  getAllOrders,
-  getOneOrder,
-  updateOrder
+    addNewOrderStage,
+    createOrder,
+    getAllOrders,
+    getOneOrder,
+    updateOrder
 } from "../controllers/order.controller.js";
 
 const orderRouter = express.Router();

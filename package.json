@@ -14,17 +14,17 @@
   "author": "GP-CRM-System",
   "type": "module",
   "main": "src/app.ts",
-  "scripts": {
-    "dev:start": "tsx src/app.ts",
-    "dev:watch": "tsx watch src/app.ts",
-    "dev:build": "tsc",
-    "dev:lint": "eslint src --ext .ts",
-    "dev:format": "prettier --write src/**/*.{js,ts}",
-    "prod:start": "node dist/app.js",
-    "prod:watch": "nodemon dist/app.js",
-    "test:start": "jest",
-    "test:watch": "jest --watch"
-  },
+    "scripts": {
+      "dev:start": "tsx src/app.ts",
+      "dev:watch": "tsx watch src/app.ts",
+      "dev:build": "tsc",
+      "dev:lint": "eslint src --ext .ts",
+      "dev:format": "prettier --write src/**/*.{js,ts}",
+      "prod:start": "node dist/app.js",
+      "prod:watch": "nodemon dist/app.js",
+      "test:start": "jest",
+      "test:watch": "jest --watch"
+    },
   "dependencies": {
     "bcrypt": "^6.0.0",
     "cookie-parser": "^1.4.7",

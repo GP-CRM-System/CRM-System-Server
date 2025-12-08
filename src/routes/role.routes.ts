@@ -1,11 +1,11 @@
 import express from "express";
 
 import {
-  createRole,
-  deactivateRole,
-  getAllRoles,
-  getOneRole,
-  updateRole
+    createRole,
+    deactivateRole,
+    getAllRoles,
+    getOneRole,
+    updateRole
 } from "../controllers/role.controller.js";
 
 const roleRouter = express.Router();

@@ -1,10 +1,10 @@
 import express from "express";
 import {
-  getCards,
-  getLeadConversions,
-  getProductPerformance,
-  getRevenueTrends,
-  getTicketStatuses
+    getCards,
+    getLeadConversions,
+    getProductPerformance,
+    getRevenueTrends,
+    getTicketStatuses
 } from "../controllers/analytics.controller.js";
 
 const analyticsRouter = express.Router();
