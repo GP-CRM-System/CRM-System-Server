@@ -10,6 +10,7 @@ export async function createContact(
     res: Response<IResponse>
 ): Promise<void> {
     try {
+        console.log(req.body)
         const token = verifyToken(req.cookies.token);
         // @ts-expect-error bad jwt types
         if (!token.role.Contact.write) {
@@ -28,6 +29,7 @@ export async function createContact(
                 error: JSON.parse(contact.error.message)
             });
             logger.error("Invalid fields for contact creation");
+            logger.info(contact.error)
             return;
         }
 
@@ -82,18 +84,31 @@ export async function getAllContacts(
         const limit = parseInt(req.query.limit as string) || 10;
         const skip = (page - 1) * limit;
 
-        const filter: { name: object; jobTitle: object; stage?: object } = {
+        console.log(jobTitle)
+
+        const filter: { name: object; jobTitle?: object; } = {
             name: { $regex: name ?? "", $options: "i" },
-            jobTitle: { $in: [null, jobTitle ?? ""] }
         };
 
-        if (stage === "Lead") {
-            filter.stage = { $size: 1 };
-        } else if (stage === "Customer") {
-            filter.stage = { $size: 2 };
+        if (jobTitle) {
+            filter.jobTitle = { $regex: jobTitle as string, $options: "i" };
         }
 
-        const contacts = await Contact.find(filter)
+        let stageFilter = {};
+
+        if (stage === "Lead") {
+            stageFilter = {
+                "stage.name": "Lead",
+                stage: { $size: 1 }
+            };
+        } else if (stage === "Customer") {
+            stageFilter = { "stage.name": "Customer" };
+        }
+
+        const contacts = await Contact.find({
+            ...filter,
+            ...stageFilter
+        })
             .skip(skip)
             .limit(limit)
             .populate("owner", "fullName");

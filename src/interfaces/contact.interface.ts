@@ -28,7 +28,6 @@ export const SContact = z.object({
         .nullable(),
     jobTitle: z
         .string("Invalid job title")
-        .min(3, "Job title must be at least 3 characters long")
         .max(50, "Job title must be at most 50 characters long")
         .regex(/^[a-zA-Z ]+$/, "Job title must contain only letters and spaces")
         .nullable(),
@@ -40,10 +39,9 @@ export const SContact = z.object({
         .array(
             z.object({
                 name: z.enum(["Lead", "Customer"]),
-                date: z.date().default(new Date())
+                date: z.coerce.date()
             })
-        )
-        .default([{ name: "Lead", date: new Date() }]),
+        ),
     isActive: z.boolean().default(true),
     createdAt: z.date().optional(),
     updatedAt: z.date().optional()
