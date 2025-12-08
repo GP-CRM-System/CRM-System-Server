@@ -1,10 +1,10 @@
 import express from "express";
 import {
-  addNewDealStage,
-  createDeal,
-  getAllDeals,
-  getOneDeal,
-  updateDeal
+    addNewDealStage,
+    createDeal,
+    getAllDeals,
+    getOneDeal,
+    updateDeal
 } from "../controllers/deal.controller.js";
 
 const dealRouter = express.Router();

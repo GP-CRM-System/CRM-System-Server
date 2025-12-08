@@ -20,9 +20,9 @@ import pretty from "pino-pretty";
 
 // Pretty stream for console
 const prettyStream = pretty({
-  colorize: true,
-  translateTime: "yyyy-mm-dd HH:MM:ss",
-  ignore: "pid,hostname"
+    colorize: true,
+    translateTime: "yyyy-mm-dd HH:MM:ss",
+    ignore: "pid,hostname"
 });
 
 // const streams = [
@@ -33,12 +33,12 @@ const prettyStream = pretty({
 export const logger = pino({ level: "info" }, prettyStream);
 
 export default function loggerSetup(app: Application): void {
-  app.use(morgan("dev"));
-  morgan("combined", {
-    stream: {
-      write: (message) => {
-        logger.info(message.trim()); // send morgan logs to pino
-      }
-    }
-  });
+    app.use(morgan("dev"));
+    morgan("combined", {
+        stream: {
+            write: (message) => {
+                logger.info(message.trim()); // send morgan logs to pino
+            }
+        }
+    });
 }
