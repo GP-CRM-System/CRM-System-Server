@@ -241,3 +241,42 @@ export async function addNewTicketStatus(
         return;
     }
 }
+
+export async function deleteTicket(
+    req: Request<{ id: string }>,
+    res: Response<IResponse>
+): Promise<void> {
+    try {
+        const token = verifyToken(req.cookies.token);
+        // @ts-expect-error bad jwt types
+        if (!token.role.Ticket.delete) {
+            res.status(401).json({
+                message: "Error deleting ticket",
+                error: "Unauthorized"
+            });
+            return;
+        }
+
+        const { id } = req.params;
+        const ticket = await Ticket.findById(id);
+        if (!ticket) {
+            res.status(404).json({
+                message: "Error deleting ticket",
+                error: "Ticket not found"
+            });
+            logger.warn(`Ticket with id ${id} not found`);
+            return;
+        }
+        await ticket.deleteOne();
+        logger.info(`Deleted ticket ${ticket.name}`);
+        res.status(200).json({ message: "Ticket deleted", data: ticket });
+        return;
+    } catch (err: unknown) {
+        logger.error(`Error deleting ticket: ${(err as Error).message}`);
+        res.status(500).json({
+            message: "Internal server error",
+            error: (err as Error).message
+        });
+        return;
+    }
+}

@@ -310,11 +310,11 @@ export async function forgotPassword(
             email.data,
             emailTemplates.forgotPassword(
                 existingEmployee.fullName,
-                `http://localhost:3000/reset-password?token=${existingEmployee._id}`
+                `http://localhost:5173/reset-password?token=${existingEmployee._id}`
             ).subject,
             emailTemplates.forgotPassword(
                 existingEmployee.fullName,
-                `http://localhost:3000/reset-password?token=${existingEmployee._id}`
+                `http://localhost:5173/reset-password?token=${existingEmployee._id}`
             ).html
         );
 

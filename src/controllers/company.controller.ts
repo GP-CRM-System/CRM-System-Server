@@ -218,31 +218,27 @@ export async function deactivateCompany(
         // @ts-expect-error bad jwt types
         if (!token.role.Company.delete) {
             res.status(401).json({
-                message: "Company deactivation failed",
+                message: "Company deletion failed",
                 error: "Unauthorized"
             });
             return;
         }
 
         const { id } = req.params;
-        const company = await Company.findById(id);
+        const company = await Company.findByIdAndDelete(id);
         if (!company) {
             res.status(404).json({
-                message: "Company deactivation failed",
+                message: "Company deletion failed",
                 error: "Company not found"
             });
             logger.warn(`Company with id ${id} not found`);
             return;
         }
-        await Company.updateOne(
-            { _id: id },
-            { $set: { isActive: !company.isActive } }
-        );
-        logger.info(`Deactivated company ${company.name}`);
-        res.status(200).json({ message: "Company deactivated", data: company });
+        logger.info(`Deleted company ${company.name}`);
+        res.status(200).json({ message: "Company deleted", data: company });
         return;
     } catch (err: unknown) {
-        logger.error(`Error deactivating company: ${(err as Error).message}`);
+        logger.error(`Error deleting company: ${(err as Error).message}`);
         res.status(500).json({
             message: "Internal server error",
             error: (err as Error).message

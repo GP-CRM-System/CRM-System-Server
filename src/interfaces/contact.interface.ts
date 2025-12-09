@@ -35,16 +35,15 @@ export const SContact = z.object({
         mongoose.Types.ObjectId.isValid(val as string);
         return await Employee.findById(val);
     }, "Owner is should be a valid employee"),
-    stage: z
-        .array(
-            z.object({
-                name: z.enum(["Lead", "Customer"]),
-                date: z.coerce.date()
-            })
-        ),
+    stage: z.array(
+        z.object({
+            name: z.enum(["Lead", "Customer"]),
+            date: z.coerce.date()
+        })
+    ),
     isActive: z.boolean().default(true),
-    createdAt: z.date().optional(),
-    updatedAt: z.date().optional()
+    createdAt: z.coerce.date().optional(),
+    updatedAt: z.coerce.date().optional()
 });
 
 export type IContact = z.infer<typeof SContact>;

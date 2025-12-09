@@ -10,7 +10,7 @@ export async function createContact(
     res: Response<IResponse>
 ): Promise<void> {
     try {
-        console.log(req.body)
+        console.log(req.body);
         const token = verifyToken(req.cookies.token);
         // @ts-expect-error bad jwt types
         if (!token.role.Contact.write) {
@@ -29,7 +29,7 @@ export async function createContact(
                 error: JSON.parse(contact.error.message)
             });
             logger.error("Invalid fields for contact creation");
-            logger.info(contact.error)
+            logger.info(contact.error);
             return;
         }
 
@@ -84,10 +84,10 @@ export async function getAllContacts(
         const limit = parseInt(req.query.limit as string) || 10;
         const skip = (page - 1) * limit;
 
-        console.log(jobTitle)
+        console.log(jobTitle);
 
-        const filter: { name: object; jobTitle?: object; } = {
-            name: { $regex: name ?? "", $options: "i" },
+        const filter: { name: object; jobTitle?: object } = {
+            name: { $regex: name ?? "", $options: "i" }
         };
 
         if (jobTitle) {
@@ -235,31 +235,27 @@ export async function deactivateContact(
         // @ts-expect-error bad jwt types
         if (!token.role.Contact.delete) {
             res.json({
-                message: "Contact deactivation failed",
+                message: "Contact deletion failed",
                 error: "Unauthorized"
             });
             return;
         }
 
         const { id } = req.params;
-        const contact = await Contact.findById(id);
+        const contact = await Contact.findByIdAndDelete(id);
         if (!contact) {
             res.status(404).json({
-                message: "Contact deactivation failed",
+                message: "Contact deletion failed",
                 error: "Contact not found"
             });
             logger.warn(`Contact with id ${id} not found`);
             return;
         }
-        await Contact.updateOne(
-            { _id: id },
-            { $set: { isActive: !contact.isActive } }
-        );
-        logger.info(`Deactivated contact with id ${id}`);
-        res.status(200).json({ message: "Contact deactivated", data: contact });
+        logger.info(`Deleted contact with id ${id}`);
+        res.status(200).json({ message: "Contact deleted", data: contact });
         return;
     } catch (err: unknown) {
-        logger.error(`Error deactivating contact: ${(err as Error).message}`);
+        logger.error(`Error deleting contact: ${(err as Error).message}`);
         res.status(500).json({
             message: "Internal server error",
             error: (err as Error).message
@@ -316,6 +312,44 @@ export async function updateContactToCustomer(
         return;
     } catch (err: unknown) {
         logger.error(`Error updating contact stage: ${(err as Error).message}`);
+        res.status(500).json({
+            message: "Internal server error",
+            error: (err as Error).message
+        });
+        return;
+    }
+}
+
+export async function deleteContact(
+    req: Request<{ id: string }>,
+    res: Response<IResponse>
+): Promise<void> {
+    try {
+        const token = verifyToken(req.cookies.token);
+        // @ts-expect-error bad jwt types
+        if (!token.role.Contact.delete) {
+            res.json({
+                message: "Contact deletion failed",
+                error: "Unauthorized"
+            });
+            return;
+        }
+
+        const { id } = req.params;
+        const contact = await Contact.findByIdAndDelete(id);
+        if (!contact) {
+            res.status(404).json({
+                message: "Contact deletion failed",
+                error: "Contact not found"
+            });
+            logger.warn(`Contact with id ${id} not found`);
+            return;
+        }
+        logger.info(`Deleted contact with id ${id}`);
+        res.status(200).json({ message: "Contact deleted", data: contact });
+        return;
+    } catch (err: unknown) {
+        logger.error(`Error deleting contact: ${(err as Error).message}`);
         res.status(500).json({
             message: "Internal server error",
             error: (err as Error).message

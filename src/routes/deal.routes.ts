@@ -2,6 +2,7 @@ import express from "express";
 import {
     addNewDealStage,
     createDeal,
+    deleteDeal,
     getAllDeals,
     getOneDeal,
     updateDeal
@@ -11,7 +12,7 @@ const dealRouter = express.Router();
 
 dealRouter.route("/").get(getAllDeals).post(createDeal);
 
-dealRouter.route("/:id").get(getOneDeal).put(updateDeal);
+dealRouter.route("/:id").get(getOneDeal).put(updateDeal).delete(deleteDeal);
 
 dealRouter.route("/:id/stage").put(addNewDealStage);
 

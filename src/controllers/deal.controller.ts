@@ -276,3 +276,41 @@ export async function addNewDealStage(
         return;
     }
 }
+
+export async function deleteDeal(
+    req: Request<{ id: string }>,
+    res: Response<IResponse>
+): Promise<void> {
+    try {
+        const token = verifyToken(req.cookies.token);
+        // @ts-expect-error bad jwt types
+        if (!token.role.Deal.delete) {
+            res.status(401).json({
+                message: "Error deleting deal",
+                error: "Unauthorized"
+            });
+            return;
+        }
+
+        const { id } = req.params;
+        const deal = await Deal.findByIdAndDelete(id);
+        if (!deal) {
+            res.status(404).json({
+                message: "Error deleting deal",
+                error: "Deal not found"
+            });
+            logger.warn(`Deal with id ${id} not found`);
+            return;
+        }
+        logger.info(`Deleted deal ${deal.name}`);
+        res.status(200).json({ message: "Deal deleted", data: deal });
+        return;
+    } catch (err: unknown) {
+        logger.error(`Error deleting deal: ${(err as Error).message}`);
+        res.status(500).json({
+            message: "Internal server error",
+            error: (err as Error).message
+        });
+        return;
+    }
+}

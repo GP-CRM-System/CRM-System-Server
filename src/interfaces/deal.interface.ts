@@ -14,22 +14,20 @@ export const SDeal = z.object({
             "Deal name must contain only letters and spaces"
         ),
 
-    stage: z
-        .array(
-            z.object({
-                name: z.enum([
-                    "Appointment Scheduled",
-                    "Qualified To Buy",
-                    "Presentation Scheduled",
-                    "Decision Maker Bought-In",
-                    "Contract Sent",
-                    "Closed Won",
-                    "Closed Lost"
-                ]),
-                date: z.date()
-            })
-        )
-        .default([{ name: "Appointment Scheduled", date: new Date() }]),
+    stage: z.array(
+        z.object({
+            name: z.enum([
+                "Appointment Scheduled",
+                "Qualified To Buy",
+                "Presentation Scheduled",
+                "Decision Maker Bought-In",
+                "Contract Sent",
+                "Closed Won",
+                "Closed Lost"
+            ]),
+            date: z.date()
+        })
+    ),
 
     amount: z
         .number("Amount is required")
@@ -50,8 +48,8 @@ export const SDeal = z.object({
             return await Company.findById(val);
         }, "Company is should be a valid company")
         .optional(),
-    createdAt: z.date().optional(),
-    updatedAt: z.date().optional()
+    createdAt: z.coerce.date().optional(),
+    updatedAt: z.coerce.date().optional()
 });
 
 export type IDeal = z.infer<typeof SDeal>;

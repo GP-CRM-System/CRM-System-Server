@@ -266,3 +266,42 @@ export async function addNewOrderStage(
         return;
     }
 }
+
+export async function deleteOrder(
+    req: Request<{ id: string }>,
+    res: Response<IResponse>
+): Promise<void> {
+    try {
+        const token = verifyToken(req.cookies.token);
+        // @ts-expect-error bad jwt types
+        if (!token.role.Order.delete) {
+            res.status(401).json({
+                message: "Error deleting order",
+                error: "Unauthorized"
+            });
+            return;
+        }
+
+        const { id } = req.params;
+        const order = await Order.findById(id);
+        if (!order) {
+            res.status(404).json({
+                message: "Error deleting order",
+                error: "Order not found"
+            });
+            logger.warn(`Order with id ${id} not found`);
+            return;
+        }
+        await order.deleteOne();
+        logger.info(`Deleted order ${order.description}`);
+        res.status(200).json({ message: "Order deleted", data: order });
+        return;
+    } catch (err: unknown) {
+        logger.error(`Error deleting order: ${(err as Error).message}`);
+        res.status(500).json({
+            message: "Internal server error",
+            error: (err as Error).message
+        });
+        return;
+    }
+}

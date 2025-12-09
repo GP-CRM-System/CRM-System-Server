@@ -220,7 +220,7 @@ export async function deactivateEmployee(
         // @ts-expect-error bad jwt types
         if (!token.role.Employee.delete) {
             res.status(401).json({
-                message: "Error deactivating employee",
+                message: "Error deleting employee",
                 error: "Unauthorized"
             });
             return;
@@ -228,27 +228,23 @@ export async function deactivateEmployee(
 
         const id = req.params.id;
 
-        const employee = await Employee.findById(id);
+        const employee = await Employee.findByIdAndDelete(id);
         if (!employee) {
             res.status(404).json({
-                message: "Error deactivating employee",
+                message: "Error deleting employee",
                 error: "Employee not found"
             });
             logger.warn(`Employee ${id} not found`);
             return;
         }
-        await Employee.updateOne(
-            { _id: id },
-            { $set: { isActive: !employee.isActive } }
-        );
-        logger.info(`Deactivated employee ${employee.fullName}`);
+        logger.info(`Deleted employee ${employee.fullName}`);
         res.status(200).json({
-            message: "Employee deactivated",
+            message: "Employee deleted",
             data: employee
         });
         return;
     } catch (err: unknown) {
-        logger.error(`Error deactivating employee: ${(err as Error).message}`);
+        logger.error(`Error deleting employee: ${(err as Error).message}`);
         res.status(500).json({
             message: "Internal server error",
             error: (err as Error).message

@@ -198,7 +198,7 @@ export async function updateRole(
     }
 }
 
-export async function deactivateRole(
+export async function deleteRole(
     req: Request<{ id: string }>,
     res: Response<IResponse>
 ): Promise<void> {
@@ -207,7 +207,7 @@ export async function deactivateRole(
         // @ts-expect-error bad jwt types
         if (!token.role.Role.delete) {
             res.status(401).json({
-                message: "Error deactivating role",
+                message: "Error deleting role",
                 error: "Unauthorized"
             });
             return;
@@ -215,24 +215,20 @@ export async function deactivateRole(
 
         const id = req.params.id;
 
-        const role = await Role.findById(id);
+        const role = await Role.findByIdAndDelete(id);
         if (!role) {
             res.status(404).json({
-                message: "Error deactivating role",
+                message: "Error deleting role",
                 error: "Role not found"
             });
             logger.warn(`Role ${id} not found`);
             return;
         }
-        await Role.updateOne(
-            { _id: id },
-            { $set: { isActive: !role.isActive } }
-        );
-        logger.info(`Deactivated role ${id}`);
-        res.status(200).json({ message: "Role deactivated", data: role });
+        logger.info(`Deleted role ${id}`);
+        res.status(200).json({ message: "Role deleted", data: role });
         return;
     } catch (err: unknown) {
-        logger.error(`Error deactivating role: ${(err as Error).message}`);
+        logger.error(`Error deleting role: ${(err as Error).message}`);
         res.status(500).json({
             message: "Internal server error",
             error: (err as Error).message

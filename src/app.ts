@@ -1,7 +1,7 @@
 import cors from "cors";
 import express from "express";
 import dotenv from "dotenv";
-dotenv.config({quiet: true});
+dotenv.config({ quiet: true });
 import loggerSetup, { logger } from "./config/logger.config.js";
 import mongoSetup from "./config/mongodb.config.js";
 import swaggerSetup from "./config/swagger.config.js";

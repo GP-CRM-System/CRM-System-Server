@@ -12,19 +12,17 @@ export const STicket = z.object({
             /^[a-zA-Z ]+$/,
             "Ticket name must contain only letters and spaces"
         ),
-    status: z
-        .array(
-            z.object({
-                statusType: z.enum([
-                    "New",
-                    "Waiting on Contact",
-                    "Waiting on Employee",
-                    "Closed"
-                ]),
-                date: z.date()
-            })
-        )
-        .default([{ statusType: "New", date: new Date() }]),
+    status: z.array(
+        z.object({
+            statusType: z.enum([
+                "New",
+                "Waiting on Contact",
+                "Waiting on Employee",
+                "Closed"
+            ]),
+            date: z.date()
+        })
+    ),
     description: z
         .string("Description is required")
         .min(3, "Description must be at least 3 characters long")

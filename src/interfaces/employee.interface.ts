@@ -14,7 +14,8 @@ export const SEmployee = z.object({
     phone: z
         .string("Phone number is required")
         .min(7, "Phone number must be at least 7 characters long")
-        .max(14, "Phone number must be at most 14 characters long"),
+        .max(14, "Phone number must be at most 14 characters long")
+        .regex(/^[0-9]+$/, "Phone number must contain only numbers"),
     email: z.email("Invalid email"),
     password: z
         .string("Password is required")
@@ -38,8 +39,8 @@ export const SEmployee = z.object({
         .optional(),
     isNew: z.boolean().readonly().optional(),
     resetExpire: z.date().nullable().default(null),
-    createdAt: z.date().optional(),
-    updatedAt: z.date().optional()
+    createdAt: z.coerce.date().optional(),
+    updatedAt: z.coerce.date().optional()
 });
 
 export type IEmployee = z.infer<typeof SEmployee>;
