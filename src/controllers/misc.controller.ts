@@ -29,7 +29,7 @@ export async function dashboard(req: Request, res: Response): Promise<void> {
                 totalCompanies: await Company.countDocuments(),
                 totalDeals: await Deal.countDocuments(),
                 totalPendingTickets: await Ticket.countDocuments({
-                    status: "pending"
+                    status: { statusType: "pending" }
                 }),
                 salesOverview: await getRevenueData(),
                 ticketOverview: await getTicketData()
