@@ -25,7 +25,7 @@ export const SOrder = z.object({
                 "Delivered",
                 "Cancelled"
             ]),
-            date: z.date()
+            date: z.coerce.date()
         })
     ),
     contact: z.custom<mongoose.Types.ObjectId>(async (val) => {

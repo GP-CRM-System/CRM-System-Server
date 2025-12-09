@@ -20,7 +20,7 @@ export const STicket = z.object({
                 "Waiting on Employee",
                 "Closed"
             ]),
-            date: z.date()
+            date: z.coerce.date()
         })
     ),
     description: z
@@ -41,8 +41,8 @@ export const STicket = z.object({
         mongoose.Types.ObjectId.isValid(val as string);
         return await Contact.findById(val);
     }, "Contact is should be a valid contact"),
-    createdAt: z.date().optional(),
-    updatedAt: z.date().optional()
+    createdAt: z.coerce.date().optional(),
+    updatedAt: z.coerce.date().optional()
 });
 
 export type ITicket = z.infer<typeof STicket>;

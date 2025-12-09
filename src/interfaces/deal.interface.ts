@@ -25,7 +25,7 @@ export const SDeal = z.object({
                 "Closed Won",
                 "Closed Lost"
             ]),
-            date: z.date()
+            date: z.coerce.date()
         })
     ),
 
