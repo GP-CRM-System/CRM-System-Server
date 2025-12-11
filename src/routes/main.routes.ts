@@ -10,6 +10,7 @@ import ticketRouter from "./ticket.routes.js";
 import miscRouter from "./misc.routes.js";
 import authRouter from "./auth.routes.js";
 import analyticsRouter from "./analytics.routes.js";
+import profileRouter from "./profile.routes.js";
 import { isAuthenticated } from "../middleware/auth.middleware.js";
 
 const router = express.Router();
@@ -22,6 +23,7 @@ router.use("/employees", isAuthenticated, employeeRouter);
 router.use("/orders", isAuthenticated, orderRouter);
 router.use("/roles", isAuthenticated, roleRouter);
 router.use("/tickets", isAuthenticated, ticketRouter);
+router.use("/profile", isAuthenticated, profileRouter);
 router.use("/analytics", analyticsRouter);
 router.use(miscRouter);
 

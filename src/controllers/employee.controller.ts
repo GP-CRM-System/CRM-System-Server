@@ -172,8 +172,17 @@ export async function updateEmployee(
         }
 
         const id = req.params.id;
+        //@ts-expect-error bad jwt types
+        if(token!._id === id) {
+            res.status(401).json({
+                message: "Error updating employee",
+                error: "Unauthorized"
+            });
+            logger.warn(`Employee ${id} is trying to update themselves`);
+            return;
+        }
 
-        const employee = await Employee.findById(id).select("-password");
+        const employee = await Employee.findById(id).populate("role").select("-password");
         if (!employee) {
             res.status(404).json({
                 message: "Error updating employee",

@@ -10,7 +10,6 @@ export async function createContact(
     res: Response<IResponse>
 ): Promise<void> {
     try {
-        console.log(req.body);
         const token = verifyToken(req.cookies.token);
         // @ts-expect-error bad jwt types
         if (!token.role.Contact.write) {
@@ -84,7 +83,6 @@ export async function getAllContacts(
         const limit = parseInt(req.query.limit as string) || 10;
         const skip = (page - 1) * limit;
 
-        console.log(jobTitle);
 
         const filter: { name: object; jobTitle?: object } = {
             name: { $regex: name ?? "", $options: "i" }

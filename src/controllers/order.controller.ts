@@ -188,7 +188,7 @@ export async function updateOrder(
                 message: "Invalid Order payload",
                 error: JSON.parse(order.error.message)
             });
-            logger.error("Invalid Order payload");
+            logger.error(`Invalid Order payload`);
             return;
         }
 
