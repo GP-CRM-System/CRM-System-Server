@@ -32,7 +32,37 @@ const orderSchema = new mongoose.Schema<IOrder>({
         }
     ],
     createdAt: { type: Date, default: Date.now },
-    updatedAt: { type: Date, default: Date.now }
+    updatedAt: { type: Date, default: Date.now },
+
+    //new fields
+    orderType: {
+        type: String,
+        enum: ["One Time", "Subscription"],
+        default: "One Time"
+    },
+    source: {
+        type: String,
+        enum: ["Referral", "Online", "Other", "In Person", "Email", "Phone"],
+        default: "Other"
+    },
+    company: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Company"
+    },
+    taxes: { type: Number, default: 0 },
+    expectedDeliveryDate: { type: Date },
+    shippingAddress: { type: String },
+    paymentStatus: [
+        {
+            stage: {
+                type: String,
+                enum: ["Pending", "Paid", "Failed", "Refunded"],
+                default: "Pending"
+            },
+            date: { type: Date, default: Date.now },
+            note: { type: String }
+        }
+    ]
 });
 
 const Order = mongoose.model("Order", orderSchema);

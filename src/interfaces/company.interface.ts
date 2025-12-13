@@ -195,7 +195,43 @@ export const SCompany = z.object({
         .nullable(),
     isActive: z.boolean().default(true),
     createdAt: z.coerce.date().optional(),
-    updatedAt: z.coerce.date().optional()
+    updatedAt: z.coerce.date().optional(),
+
+    //new fields
+    region: z.string().optional(),
+    annualRevenue: z
+        .number()
+        .gt(0, "Annual revenue must be greater than 0")
+        .optional(),
+    description: z.string().optional(),
+    growthStage: z
+        .enum(["Startup", "Established", "Matured", "Declining"])
+        .optional(),
+    accountStage: z
+        .array(
+            z.object({
+                name: z.enum(["Lead", "Customer"]),
+                date: z.date()
+            })
+        )
+        .optional(),
+    phone: z.string().optional(),
+    source: z
+        .enum(["Referral", "Online", "Other", "In Person", "Email", "Phone"])
+        .optional(),
+    history: z
+        .array(
+            z.object({
+                mean: z.enum(["Meeting", "Call", "Email", "Other"]),
+                date: z.date(),
+                note: z.string(),
+                employee: z.custom<mongoose.Types.ObjectId>(async (val) => {
+                    mongoose.Types.ObjectId.isValid(val as string);
+                    return await Employee.findById(val);
+                }, "Employee is should be a valid employee")
+            })
+        )
+        .optional()
 });
 
 export type ICompany = z.infer<typeof SCompany>;

@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import { z } from "zod";
 import Employee from "../models/employee.model.js";
 import Contact from "../models/contact.model.js";
+import Company from "../models/company.model.js";
 
 export const STicket = z.object({
     name: z
@@ -36,13 +37,30 @@ export const STicket = z.object({
         return await Employee.findById(val);
     }, "Owner is should be a valid employee"),
     source: z.enum(["Chat", "Email", "Phone", "Form"]),
-    priority: z.enum(["Low", "Medium", "High"]),
+    priority: z.enum(["Low", "Medium", "High", "Critical"]),
     contact: z.custom<mongoose.Types.ObjectId>(async (val) => {
         mongoose.Types.ObjectId.isValid(val as string);
         return await Contact.findById(val);
     }, "Contact is should be a valid contact"),
     createdAt: z.coerce.date().optional(),
-    updatedAt: z.coerce.date().optional()
+    updatedAt: z.coerce.date().default(() => new Date()),
+
+    //new fields
+    category: z
+        .enum(["Bug", "Question", "Request", "Billing", "Other"])
+        .optional(),
+    company: z
+        .custom<mongoose.Types.ObjectId>(async (val) => {
+            mongoose.Types.ObjectId.isValid(val as string);
+            return await Company.findById(val);
+        }, "Company is should be a valid company")
+        .optional(),
+    feedback: z.string().optional(),
+    firstResponseDueDate: z.coerce.date().optional(),
+    resolutionDueDate: z.coerce.date().optional(),
+    resolutionStatus: z
+        .enum(["Pending", "Solved", "Workaround", "Won't Fix"])
+        .optional()
 });
 
 export type ITicket = z.infer<typeof STicket>;

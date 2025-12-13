@@ -1,9 +1,9 @@
-import bcrypt  from 'bcrypt';
+import bcrypt from "bcrypt";
 import type { Request, Response } from "express";
 import { logger } from "../config/logger.config.js";
 import type { IResponse } from "../interfaces/response.interface.js";
 import Employee from "../models/employee.model.js";
-import z from 'zod';
+import z from "zod";
 
 export async function getProfile(
     req: Request,
@@ -11,7 +11,9 @@ export async function getProfile(
 ): Promise<void> {
     try {
         const id = req.params.id;
-        const profile = await Employee.findById(id).populate("role").select("-password");
+        const profile = await Employee.findById(id)
+            .populate("role")
+            .select("-password");
         if (!profile) {
             res.status(404).json({
                 message: "Error retrieving profile",
@@ -22,9 +24,9 @@ export async function getProfile(
         }
         logger.info(`Retrieved Profile ${profile.fullName}`);
         res.status(200).json({
-            message: "Profile retrieved", data: {
-                profile,
-
+            message: "Profile retrieved",
+            data: {
+                profile
             }
         });
         return;
@@ -45,7 +47,13 @@ export async function updateProfile(
     try {
         const id = req.params.id;
         const { fullName, email, phone } = req.body;
-        const profile = await Employee.findByIdAndUpdate(id, { fullName, email, phone }, { new: true }).populate("role").select("-password");
+        const profile = await Employee.findByIdAndUpdate(
+            id,
+            { fullName, email, phone },
+            { new: true }
+        )
+            .populate("role")
+            .select("-password");
         if (!profile) {
             res.status(404).json({
                 message: "Error updating profile",
@@ -56,7 +64,8 @@ export async function updateProfile(
         }
         logger.info(`Updated Profile ${profile.fullName}`);
         res.status(200).json({
-            message: "Profile updated", data: profile
+            message: "Profile updated",
+            data: profile
         });
         return;
     } catch (err: unknown) {
@@ -83,7 +92,7 @@ export async function changePassword(
             .max(64, "Password must be at most 64 characters long")
             .nullable()
             .safeParse(password);
-        
+
         if (!success) {
             res.status(400).json({
                 message: "Error updating profile",
@@ -103,7 +112,7 @@ export async function changePassword(
             return;
         }
 
-        if(!profile.password){
+        if (!profile.password) {
             res.status(400).json({
                 message: "Error updating profile",
                 error: "Password is required"
@@ -126,10 +135,10 @@ export async function changePassword(
         profile.password = hashedPassword;
         await profile.save();
 
-
         logger.info(`Password changed for Profile ${profile.fullName}`);
         res.status(200).json({
-            message: "Password changed", data: profile
+            message: "Password changed",
+            data: profile
         });
         return;
     } catch (err: unknown) {

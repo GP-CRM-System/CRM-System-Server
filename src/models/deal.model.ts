@@ -18,7 +18,8 @@ const dealSchema = new mongoose.Schema<IDeal>({
                     "Closed Lost"
                 ]
             },
-            date: { type: Date, required: true, default: Date.now }
+            date: { type: Date, required: true, default: Date.now },
+            note: { type: String, required: false }
         }
     ],
     amount: { type: Number, required: true },
@@ -39,7 +40,10 @@ const dealSchema = new mongoose.Schema<IDeal>({
         ref: "Company"
     },
     createdAt: { type: Date, default: Date.now },
-    updatedAt: { type: Date, default: Date.now }
+    updatedAt: { type: Date, default: Date.now },
+
+    //new fields
+    expectedCloseDate: { type: Date, required: false }
 });
 
 const Deal = mongoose.model<IDeal>("Deal", dealSchema);

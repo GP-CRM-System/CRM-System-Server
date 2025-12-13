@@ -25,7 +25,8 @@ export const SDeal = z.object({
                 "Closed Won",
                 "Closed Lost"
             ]),
-            date: z.coerce.date()
+            date: z.coerce.date(),
+            note: z.string().optional()
         })
     ),
 
@@ -49,7 +50,10 @@ export const SDeal = z.object({
         }, "Company is should be a valid company")
         .optional(),
     createdAt: z.coerce.date().optional(),
-    updatedAt: z.coerce.date().optional()
+    updatedAt: z.coerce.date().default(() => new Date()),
+
+    //new fields
+    expectedCloseDate: z.coerce.date().optional()
 });
 
 export type IDeal = z.infer<typeof SDeal>;

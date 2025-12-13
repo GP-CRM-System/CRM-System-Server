@@ -1,6 +1,7 @@
-import mongoose from "mongoose";
+import mongoose, { Document } from "mongoose";
 import { z } from "zod";
 import Employee from "../models/employee.model.js";
+import Company from "../models/company.model.js";
 
 export const SContact = z.object({
     name: z
@@ -43,7 +44,48 @@ export const SContact = z.object({
     ),
     isActive: z.boolean().default(true),
     createdAt: z.coerce.date().optional(),
-    updatedAt: z.coerce.date().optional()
+    updatedAt: z.coerce.date().default(() => new Date()),
+
+    //new fields
+    company: z
+        .custom<mongoose.Types.ObjectId>(
+            async (val): Promise<Document | null> => {
+                mongoose.Types.ObjectId.isValid(val as string);
+                return await Company.findById(val);
+            },
+            "Company is should be a valid company"
+        )
+        .optional(),
+    source: z
+        .enum(["Referral", "Online", "Other", "In Person", "Email", "Phone"])
+        .optional(),
+    history: z
+        .array(
+            z.object({
+                mean: z.enum(["Meeting", "Call", "Email", "Other"]).optional(),
+                date: z.coerce.date().optional(),
+                note: z.string().optional(),
+                employee: z
+                    .custom<mongoose.Types.ObjectId>(async (val) => {
+                        mongoose.Types.ObjectId.isValid(val as string);
+                        return await Employee.findById(val);
+                    }, "Employee is should be a valid employee")
+                    .optional()
+            })
+        )
+        .optional(),
+    notes: z.string().optional(),
+    seniority: z
+        .enum(["Entry Level", "Mid Level", "Senior", "Executive", "Other"])
+        .optional(),
+    socialMedia: z
+        .object({
+            linkedin: z.string().nullable().optional(),
+            twitter: z.string().nullable().optional(),
+            facebook: z.string().nullable().optional(),
+            instagram: z.string().nullable().optional()
+        })
+        .optional()
 });
 
 export type IContact = z.infer<typeof SContact>;

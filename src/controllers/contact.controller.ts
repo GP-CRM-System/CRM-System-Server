@@ -83,7 +83,6 @@ export async function getAllContacts(
         const limit = parseInt(req.query.limit as string) || 10;
         const skip = (page - 1) * limit;
 
-
         const filter: { name: object; jobTitle?: object } = {
             name: { $regex: name ?? "", $options: "i" }
         };

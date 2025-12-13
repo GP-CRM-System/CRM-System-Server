@@ -20,6 +20,43 @@ const companySchema = new mongoose.Schema<ICompany>({
     address: { type: String, required: false },
     numberOfEmployees: { type: Number, required: false, default: 0 },
     isActive: { type: Boolean, default: true },
+
+    //extra fields
+    region: { type: String },
+    annualRevenue: { type: Number },
+    description: { type: String },
+    growthStage: {
+        type: String,
+        enum: ["Startup", "Established", "Matured", "Declining"]
+    },
+    accountStage: {
+        type: [
+            {
+                name: { type: String, enum: ["Lead", "Customer"] },
+                date: { type: Date }
+            }
+        ],
+        default: [{ name: "Lead", date: new Date() }]
+    },
+    phone: { type: String },
+    source: {
+        type: String,
+        enum: ["Referral", "Online", "Other", "In Person", "Email", "Phone"],
+        default: "Other"
+    },
+    history: [
+        {
+            mean: {
+                type: String,
+                enum: ["Meeting", "Call", "Email", "Other"],
+                default: "Other"
+            },
+            date: { type: Date, default: Date.now },
+            note: { type: String },
+            employee: { type: mongoose.Schema.Types.ObjectId, ref: "Employee" }
+        }
+    ],
+
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }
 });
