@@ -11,17 +11,17 @@ export async function getTotalRevenue(history: boolean = false) {
                     createdAt: {
                         $gte: history
                             ? new Date(
-                                  new Date().setMonth(
-                                      new Date().getMonth() - 12
-                                  )
-                              )
+                                new Date().setMonth(
+                                    new Date().getMonth() - 12
+                                )
+                            )
                             : new Date(
-                                  new Date().setMonth(new Date().getMonth() - 6)
-                              ),
+                                new Date().setMonth(new Date().getMonth() - 6)
+                            ),
                         $lte: history
                             ? new Date(
-                                  new Date().setMonth(new Date().getMonth() - 6)
-                              )
+                                new Date().setMonth(new Date().getMonth() - 6)
+                            )
                             : new Date()
                     }
                 }
@@ -43,6 +43,7 @@ export async function getTotalRevenue(history: boolean = false) {
         { maxTimeMS: 60000, allowDiskUse: true }
     );
 
+    if(totalRevenue.length === 0) return 0;
     return totalRevenue[0].totalRevenue;
 }
 
@@ -54,17 +55,17 @@ export async function getNumberOfOrders(history: boolean = false) {
                     createdAt: {
                         $gte: history
                             ? new Date(
-                                  new Date().setMonth(
-                                      new Date().getMonth() - 12
-                                  )
-                              )
+                                new Date().setMonth(
+                                    new Date().getMonth() - 12
+                                )
+                            )
                             : new Date(
-                                  new Date().setMonth(new Date().getMonth() - 6)
-                              ),
+                                new Date().setMonth(new Date().getMonth() - 6)
+                            ),
                         $lte: history
                             ? new Date(
-                                  new Date().setMonth(new Date().getMonth() - 6)
-                              )
+                                new Date().setMonth(new Date().getMonth() - 6)
+                            )
                             : new Date()
                     }
                 }
@@ -74,6 +75,7 @@ export async function getNumberOfOrders(history: boolean = false) {
         { maxTimeMS: 60000, allowDiskUse: true }
     );
 
+    if(numberOfOrders.length === 0) return 0;
     return numberOfOrders[0].totalOrders;
 }
 
@@ -85,17 +87,17 @@ export async function getConversionRate(history: boolean = false) {
                     createdAt: {
                         $gte: history
                             ? new Date(
-                                  new Date().setMonth(
-                                      new Date().getMonth() - 12
-                                  )
-                              )
+                                new Date().setMonth(
+                                    new Date().getMonth() - 12
+                                )
+                            )
                             : new Date(
-                                  new Date().setMonth(new Date().getMonth() - 6)
-                              ),
+                                new Date().setMonth(new Date().getMonth() - 6)
+                            ),
                         $lte: history
                             ? new Date(
-                                  new Date().setMonth(new Date().getMonth() - 6)
-                              )
+                                new Date().setMonth(new Date().getMonth() - 6)
+                            )
                             : new Date()
                     }
                 }
@@ -145,6 +147,7 @@ export async function getConversionRate(history: boolean = false) {
         { maxTimeMS: 60000, allowDiskUse: true }
     );
 
+    if(conversionRate.length === 0) return 0;
     return conversionRate[0].percentage;
 }
 
@@ -156,17 +159,17 @@ export async function getCancellationRate(history: boolean = false) {
                     createdAt: {
                         $gte: history
                             ? new Date(
-                                  new Date().setMonth(
-                                      new Date().getMonth() - 12
-                                  )
-                              )
+                                new Date().setMonth(
+                                    new Date().getMonth() - 12
+                                )
+                            )
                             : new Date(
-                                  new Date().setMonth(new Date().getMonth() - 6)
-                              ),
+                                new Date().setMonth(new Date().getMonth() - 6)
+                            ),
                         $lte: history
                             ? new Date(
-                                  new Date().setMonth(new Date().getMonth() - 6)
-                              )
+                                new Date().setMonth(new Date().getMonth() - 6)
+                            )
                             : new Date()
                     }
                 }
@@ -222,6 +225,7 @@ export async function getCancellationRate(history: boolean = false) {
         { maxTimeMS: 60000, allowDiskUse: true }
     );
 
+    if(cancellationRate.length === 0) return 0;
     return cancellationRate[0].percentCancelled;
 }
 
@@ -345,6 +349,7 @@ export async function getRevenueData() {
         .allowDiskUse(true)
         .exec();
 
+    if(revenueData.length === 0) return [];
     return revenueData;
 }
 

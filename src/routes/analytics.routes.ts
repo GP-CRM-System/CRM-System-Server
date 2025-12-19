@@ -6,8 +6,11 @@ import {
     getRevenueTrends,
     getTicketStatuses
 } from "../controllers/analytics.controller.js";
+import { isAuthenticated } from "../middleware/auth.middleware.js";
 
 const analyticsRouter = express.Router();
+
+analyticsRouter.use(isAuthenticated);
 
 analyticsRouter.get("/cards", getCards);
 analyticsRouter.get("/revenue", getRevenueTrends);
