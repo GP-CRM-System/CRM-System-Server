@@ -1,0 +1,562 @@
+[{
+  "_id": {
+    "$oid": "69281f81f4e4776b22122eeb"
+  },
+  "fullName": "FirstName Lastname",
+  "phone": "1234567890",
+  "email": "email@gmail.com",
+  "password": "$2b$10$MB0m6SQPxqwjiJxl.wiYmOjuZ5SnmPHFYAA5x11oF5hxT8.FHzOqq",
+  "role": {
+    "$oid": "69259585a9672cfac2bf6610"
+  },
+  "salary": 0,
+  "isActive": true,
+  "resetExpire": null,
+  "createdAt": {
+    "$date": "2025-11-27T09:53:05.310Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-27T09:53:05.310Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69281f8ef4e4776b22122eef"
+  },
+  "fullName": "Michael Carter",
+  "phone": "01098765432",
+  "email": "michael.carter@example.com",
+  "password": "$2b$10$.t2PgIYuZkSVzAcnvHNOteyrhX1.8W/X6GFmSUaVAlUnTD5LoWEMK",
+  "role": {
+    "$oid": "69259585a9672cfac2bf6610"
+  },
+  "salary": 24000,
+  "isActive": true,
+  "resetExpire": null,
+  "createdAt": {
+    "$date": "2025-01-12T09:22:11.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-18T10:31:44.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69281f8ef4e4776b22122ef0"
+  },
+  "fullName": "Sarah Johnson",
+  "phone": "01544338912",
+  "email": "sarah.johnson@example.com",
+  "password": "$2b$10$F4uXCnJ1O1gtjAj6LWx55OPkj4bVRg6bQwH5vRE7azLwjD6iKutBm",
+  "role": {
+    "$oid": "692595b2a9672cfac2bf6617"
+  },
+  "salary": 12000,
+  "isActive": true,
+  "resetExpire": null,
+  "createdAt": {
+    "$date": "2025-01-14T11:19:22.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-27T13:41:08.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69281f8ef4e4776b22122ef1"
+  },
+  "fullName": "Daniel Bishop",
+  "phone": "01299734122",
+  "email": "daniel.bishop@example.com",
+  "password": "$2b$10$.mhRukrEtDvZPNog9UPvDu215f4KEOMh64umAJDa5TOujdiPbgja2",
+  "role": {
+    "$oid": "69281af5cbcecfa1493263d7"
+  },
+  "salary": 18500,
+  "isActive": false,
+  "resetExpire": {
+    "$date": "2025-03-09T10:00:00.000Z"
+  },
+  "createdAt": {
+    "$date": "2025-01-05T08:17:10.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-15T12:48:55.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69281f8ef4e4776b22122ef2"
+  },
+  "fullName": "Emily Walker",
+  "phone": "01022334987",
+  "email": "emily.walker@example.com",
+  "password": "$2b$10$/X4FvB6cbZkWbNz/eA0RwOe2WiipGfuYfkm1A5gmeTfz2d0D81DY2",
+  "role": {
+    "$oid": "69281af5cbcecfa1493263d8"
+  },
+  "salary": 15000,
+  "isActive": true,
+  "resetExpire": null,
+  "createdAt": {
+    "$date": "2025-01-09T10:13:09.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-19T10:43:25.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69281f8ef4e4776b22122ef3"
+  },
+  "fullName": "Jacob Nelson",
+  "phone": "01188923477",
+  "email": "jacob.nelson@example.com",
+  "password": "$2b$10$DQCukWQwVeO6sv1FXBnOKOGvfAdjPbdIJdPFzeOKTKjsYqgm0Yiiy",
+  "role": {
+    "$oid": "69281af5cbcecfa1493263d9"
+  },
+  "salary": 16000,
+  "isActive": true,
+  "resetExpire": null,
+  "createdAt": {
+    "$date": "2025-01-08T12:22:45.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-24T14:55:12.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69281f8ef4e4776b22122ef4"
+  },
+  "fullName": "Ava Mitchell",
+  "phone": "01255443782",
+  "email": "ava.mitchell@example.com",
+  "password": "$2b$10$kPFgvZNdvBysuzUrkTvEkegPvQQAhPBSfayUs0sgrLPn6ZRPiStCq",
+  "role": {
+    "$oid": "69281af5cbcecfa1493263da"
+  },
+  "salary": 11000,
+  "isActive": true,
+  "resetExpire": {
+    "$date": "2025-03-01T09:00:00.000Z"
+  },
+  "createdAt": {
+    "$date": "2025-01-02T09:22:31.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-21T11:11:54.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69281f8ef4e4776b22122ef5"
+  },
+  "fullName": "Olivia Turner",
+  "phone": "01173124566",
+  "email": "olivia.turner@example.com",
+  "password": "$2b$10$HW03jFT3Bnj5rkNnvkTWzu97.IKEWJjfffM6mIApBAAvaf64WMR2e",
+  "role": {
+    "$oid": "69281af5cbcecfa1493263db"
+  },
+  "salary": 27000,
+  "isActive": true,
+  "resetExpire": null,
+  "createdAt": {
+    "$date": "2025-01-14T08:51:09.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-25T10:15:22.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69281f8ef4e4776b22122ef6"
+  },
+  "fullName": "Henry Collins",
+  "phone": "01522993411",
+  "email": "henry.collins@example.com",
+  "password": "$2b$10$Xg3UEcNRaOn3v2xqkoBja.ahBMsCM5gsoVN9JBAnZ1DgtFjg0AxaW",
+  "role": {
+    "$oid": "69281af5cbcecfa1493263dc"
+  },
+  "salary": 9000,
+  "isActive": false,
+  "resetExpire": null,
+  "createdAt": {
+    "$date": "2025-01-11T12:44:33.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-18T15:17:49.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69281f8ef4e4776b22122ef7"
+  },
+  "fullName": "Laura Evans",
+  "phone": "01077344192",
+  "email": "laura.evans@example.com",
+  "password": "$2b$10$Y4uWGvZfw9qDWG6QZ5haAuINA1fOixFp7uaz72dh7bQlkiWrg3/f6",
+  "role": {
+    "$oid": "69281af5cbcecfa1493263dd"
+  },
+  "salary": 13000,
+  "isActive": true,
+  "resetExpire": null,
+  "createdAt": {
+    "$date": "2025-01-17T07:12:51.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-26T16:17:22.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69281f8ef4e4776b22122ef8"
+  },
+  "fullName": "Thomas Reed",
+  "phone": "01011993543",
+  "email": "thomas.reed@example.com",
+  "password": "$2b$10$Ijro15j9rC6KOp/sHxqUzOgCjOsnSGX08HXN/exrfLxFwczQkbbQW",
+  "role": {
+    "$oid": "69281af5cbcecfa1493263de"
+  },
+  "salary": 18000,
+  "isActive": true,
+  "resetExpire": {
+    "$date": "2025-02-22T11:30:00.000Z"
+  },
+  "createdAt": {
+    "$date": "2025-01-03T13:29:03.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-16T12:11:19.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69281f8ef4e4776b22122ef9"
+  },
+  "fullName": "Sofia Brooks",
+  "phone": "01500112233",
+  "email": "sofia.brooks@example.com",
+  "password": "$2b$10$K6Hj12WolrDsRLfSfR2Nz.P/GZxOBBHVBQW0ArpXQP68xDjhKON5m",
+  "role": {
+    "$oid": "69281af5cbcecfa1493263df"
+  },
+  "salary": 14000,
+  "isActive": true,
+  "resetExpire": null,
+  "createdAt": {
+    "$date": "2025-01-09T09:14:55.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-21T11:41:10.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69281f8ef4e4776b22122efa"
+  },
+  "fullName": "Wyatt Harper",
+  "phone": "01188229911",
+  "email": "wyatt.harper@example.com",
+  "password": "$2b$10$VYYLmXv9BfzwyRZGqZK/TeDrQTsFYzTYdtuD2sKP7kTPKI05Px3T.",
+  "role": {
+    "$oid": "69281af5cbcecfa1493263e0"
+  },
+  "salary": 22000,
+  "isActive": false,
+  "resetExpire": null,
+  "createdAt": {
+    "$date": "2025-01-06T12:33:40.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-20T10:20:09.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69281f8ef4e4776b22122efb"
+  },
+  "fullName": "Nora Jenkins",
+  "phone": "01055228833",
+  "email": "nora.jenkins@example.com",
+  "password": "$2b$10$31cPp4zgbT0eqQSCxQ0B3.QmD/XmetVaRS1oIFnFrBfCdO69WrcOm",
+  "role": {
+    "$oid": "69281af5cbcecfa1493263e1"
+  },
+  "salary": 21000,
+  "isActive": true,
+  "resetExpire": {
+    "$date": "2025-02-14T08:00:00.000Z"
+  },
+  "createdAt": {
+    "$date": "2025-01-18T14:13:22.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-28T09:44:51.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69281f8ef4e4776b22122efc"
+  },
+  "fullName": "Liam Gray",
+  "phone": "01088331155",
+  "email": "liam.gray@example.com",
+  "password": "$2b$10$T456d5WDWDnjWfAugauFTeHMYdco9rMwgX/BfRPJ.xzGtQ2WOudEa",
+  "role": {
+    "$oid": "69281af5cbcecfa1493263e2"
+  },
+  "salary": 12500,
+  "isActive": true,
+  "resetExpire": null,
+  "createdAt": {
+    "$date": "2025-01-10T10:44:18.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-24T12:59:33.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69281f8ef4e4776b22122efd"
+  },
+  "fullName": "Chloe Mills",
+  "phone": "01572394412",
+  "email": "chloe.mills@example.com",
+  "password": "$2b$10$fQhPk2ByHgCJaQG5.XHf2.7mKpFlMI0qoPrBMBh/khg78/ynoHkqm",
+  "role": {
+    "$oid": "69281af5cbcecfa1493263e3"
+  },
+  "salary": 19500,
+  "isActive": false,
+  "resetExpire": null,
+  "createdAt": {
+    "$date": "2025-01-02T09:31:18.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-19T14:27:40.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69281f8ef4e4776b22122efe"
+  },
+  "fullName": "Evan Rogers",
+  "phone": "01244119988",
+  "email": "evan.rogers@example.com",
+  "password": "$2b$10$Rf6Q4ydD6nyDZYU1obZkKuwXH4fBZzPJ0yIEJZ3P.x6iXIwx4Tknq",
+  "role": {
+    "$oid": "69281af5cbcecfa1493263e4"
+  },
+  "salary": 17000,
+  "isActive": true,
+  "resetExpire": null,
+  "createdAt": {
+    "$date": "2025-01-07T13:11:11.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-25T11:01:32.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69281f8ef4e4776b22122eff"
+  },
+  "fullName": "Madison Hayes",
+  "phone": "01100445221",
+  "email": "madison.hayes@example.com",
+  "password": "$2b$10$Dkao2OTOyr/7Gco5spm2x.3RvHj/AMF6uNHZeDrDq9B89SuTvdqn6",
+  "role": {
+    "$oid": "69281af5cbcecfa1493263e5"
+  },
+  "salary": 15000,
+  "isActive": true,
+  "resetExpire": {
+    "$date": "2025-03-03T10:00:00.000Z"
+  },
+  "createdAt": {
+    "$date": "2025-01-15T12:55:22.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-29T14:22:09.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69281f8ef4e4776b22122f00"
+  },
+  "fullName": "Ryan Matthews",
+  "phone": "01088772265",
+  "email": "ryan.matthews@example.com",
+  "password": "$2b$10$E4OocTwkR03rQd1C99vIaOI4nIN/V6aARo2G0vpkIKSmpkbz.eNte",
+  "role": {
+    "$oid": "69281af5cbcecfa1493263e6"
+  },
+  "salary": 26000,
+  "isActive": true,
+  "resetExpire": null,
+  "createdAt": {
+    "$date": "2025-01-04T10:29:59.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-18T11:52:14.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69281f8ef4e4776b22122f01"
+  },
+  "fullName": "Ella Simmons",
+  "phone": "01533889912",
+  "email": "ella.simmons@example.com",
+  "password": "$2b$10$bneY.XZObu2enSnH.55O8et1SDQVi1vn/1vgDtFffmIp55HzZjOde",
+  "role": {
+    "$oid": "69281af5cbcecfa1493263e7"
+  },
+  "salary": 10000,
+  "isActive": false,
+  "resetExpire": null,
+  "createdAt": {
+    "$date": "2025-01-11T11:34:45.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-23T16:14:40.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69281f8ef4e4776b22122f02"
+  },
+  "fullName": "Hunter Price",
+  "phone": "01266339988",
+  "email": "hunter.price@example.com",
+  "password": "$2b$10$qrw5G10TmpaYnl/KMX5bqOTis.0qlITeN8RI8KOTzDWGlgZca3jL.",
+  "role": {
+    "$oid": "69281af5cbcecfa1493263e8"
+  },
+  "salary": 14500,
+  "isActive": true,
+  "resetExpire": null,
+  "createdAt": {
+    "$date": "2025-01-16T09:31:29.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-28T12:17:22.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69281f8ef4e4776b22122f03"
+  },
+  "fullName": "Zoe Bennett",
+  "phone": "01122114455",
+  "email": "zoe.bennett@example.com",
+  "password": "$2b$10$aw/bgNi2y5drBiVDufd4TumN3/Hhy/FbkC0tHrF/K0LnUyOW2F1oy",
+  "role": {
+    "$oid": "69281af5cbcecfa1493263e9"
+  },
+  "salary": 11000,
+  "isActive": true,
+  "resetExpire": null,
+  "createdAt": {
+    "$date": "2025-01-05T08:45:31.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-15T10:13:49.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69281f8ef4e4776b22122f04"
+  },
+  "fullName": "Julia West",
+  "phone": "01510994355",
+  "email": "julia.west@example.com",
+  "password": "$2b$10$3ZKCCgOqtGCtn1F2sJdAaOTihc/aOlNGJGoObEBAG2yV/4DCqfQi.",
+  "role": {
+    "$oid": "69281af5cbcecfa1493263ea"
+  },
+  "salary": 23000,
+  "isActive": true,
+  "resetExpire": {
+    "$date": "2025-02-27T12:00:00.000Z"
+  },
+  "createdAt": {
+    "$date": "2025-01-04T12:15:11.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-26T17:12:33.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69281f8ef4e4776b22122f05"
+  },
+  "fullName": "Cole Barker",
+  "phone": "01055009233",
+  "email": "cole.barker@example.com",
+  "password": "$2b$10$VkVL2Q5exGCkysUB7eviBOuVKGiqEJk9BbLVDK8VOqlXHyN7.Svhu",
+  "role": {
+    "$oid": "69281af5cbcecfa1493263eb"
+  },
+  "salary": 17500,
+  "isActive": false,
+  "resetExpire": null,
+  "createdAt": {
+    "$date": "2025-01-13T09:19:14.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-24T11:55:27.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69281f8ef4e4776b22122f06"
+  },
+  "fullName": "Grace Fowler",
+  "phone": "01199334477",
+  "email": "grace.fowler@example.com",
+  "password": "$2b$10$yP18aNq1N9ue/szomgy.PuDFF8JqRpCwhcTIj.ZV10VBsnomNGQ8e",
+  "role": {
+    "$oid": "69281af5cbcecfa1493263ec"
+  },
+  "salary": 15500,
+  "isActive": true,
+  "resetExpire": null,
+  "createdAt": {
+    "$date": "2025-01-09T07:41:57.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-20T15:22:11.000Z"
+  },
+  "__v": 0
+}]

@@ -1,0 +1,438 @@
+[{
+  "_id": {
+    "$oid": "69284a0050c9f138e6845a50"
+  },
+  "name": "Critical Bug: Login Failure",
+  "description": "Users are unable to log in after the latest platform update.",
+  "priority": "High",
+  "source": "Form",
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122eef"
+  },
+  "contact": {
+    "$oid": "69282c7f3a5583fd5d6be59c"
+  },
+  "status": [
+    {
+      "statusType": "New",
+      "date": {
+        "$date": "2025-03-20T08:00:00.000Z"
+      }
+    },
+    {
+      "statusType": "Waiting on Employee",
+      "date": {
+        "$date": "2025-03-20T08:15:00.000Z"
+      }
+    },
+    {
+      "statusType": "Closed",
+      "date": {
+        "$date": "2025-03-20T11:45:00.000Z"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-03-20T08:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-20T11:45:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69284a0050c9f138e6845a51"
+  },
+  "name": "API Documentation Clarification",
+  "description": "Need more examples for the batch processing endpoint payload structure.",
+  "priority": "Medium",
+  "source": "Email",
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122f04"
+  },
+  "contact": {
+    "$oid": "69282c7f3a5583fd5d6be59e"
+  },
+  "status": [
+    {
+      "statusType": "New",
+      "date": {
+        "$date": "2025-03-21T10:30:00.000Z"
+      }
+    },
+    {
+      "statusType": "Waiting on Contact",
+      "date": {
+        "$date": "2025-03-21T11:00:00.000Z"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-03-21T10:30:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-21T11:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69284a0050c9f138e6845a52"
+  },
+  "name": "Request for new dashboard metric",
+  "description": "We need to track conversion rate by device type on the main dashboard.",
+  "priority": "Low",
+  "source": "Chat",
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122f05"
+  },
+  "contact": {
+    "$oid": "69282c7f3a5583fd5d6be5a1"
+  },
+  "status": [
+    {
+      "statusType": "New",
+      "date": {
+        "$date": "2025-03-22T14:10:00.000Z"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-03-22T14:10:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-22T14:10:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69284a0050c9f138e6845a53"
+  },
+  "name": "Security Audit Findings Review",
+  "description": "A third-party audit found three medium-risk vulnerabilities that need validation.",
+  "priority": "High",
+  "source": "Phone",
+  "owner": {
+    "$oid": "69281f81f4e4776b22122eeb"
+  },
+  "contact": {
+    "$oid": "69282c7f3a5583fd5d6be5a3"
+  },
+  "status": [
+    {
+      "statusType": "New",
+      "date": {
+        "$date": "2025-03-23T09:00:00.000Z"
+      }
+    },
+    {
+      "statusType": "Waiting on Employee",
+      "date": {
+        "$date": "2025-03-23T09:30:00.000Z"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-03-23T09:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-23T09:30:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69284a0050c9f138e6845a54"
+  },
+  "name": "User Profile Data Sync Error",
+  "description": "New users added via the API are not showing up in the CRM portal.",
+  "priority": "Medium",
+  "source": "Form",
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122eef"
+  },
+  "contact": {
+    "$oid": "69282c7f3a5583fd5d6be5c3"
+  },
+  "status": [
+    {
+      "statusType": "New",
+      "date": {
+        "$date": "2025-03-24T15:20:00.000Z"
+      }
+    },
+    {
+      "statusType": "Waiting on Employee",
+      "date": {
+        "$date": "2025-03-24T16:00:00.000Z"
+      }
+    },
+    {
+      "statusType": "Waiting on Contact",
+      "date": {
+        "$date": "2025-03-25T09:00:00.000Z"
+      }
+    },
+    {
+      "statusType": "Closed",
+      "date": {
+        "$date": "2025-03-26T10:15:00.000Z"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-03-24T15:20:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-26T10:15:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69284a0050c9f138e6845a55"
+  },
+  "name": "General Inquiry on Billing",
+  "description": "Client is confused about the latest invoice and needs an itemized breakdown.",
+  "priority": "Low",
+  "source": "Phone",
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122f04"
+  },
+  "contact": {
+    "$oid": "69282c7f3a5583fd5d6be5ce"
+  },
+  "status": [
+    {
+      "statusType": "New",
+      "date": {
+        "$date": "2025-03-25T11:10:00.000Z"
+      }
+    },
+    {
+      "statusType": "Closed",
+      "date": {
+        "$date": "2025-03-25T14:30:00.000Z"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-03-25T11:10:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-25T14:30:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69284a0050c9f138e6845a56"
+  },
+  "name": "Server Downtime Alert",
+  "description": "Unscheduled maintenance led to a 10-minute server outage during peak hours.",
+  "priority": "High",
+  "source": "Email",
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122f05"
+  },
+  "contact": {
+    "$oid": "69282c7f3a5583fd5d6be59c"
+  },
+  "status": [
+    {
+      "statusType": "New",
+      "date": {
+        "$date": "2025-03-26T07:45:00.000Z"
+      }
+    },
+    {
+      "statusType": "Waiting on Employee",
+      "date": {
+        "$date": "2025-03-26T08:00:00.000Z"
+      }
+    },
+    {
+      "statusType": "Closed",
+      "date": {
+        "$date": "2025-03-26T12:00:00.000Z"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-03-26T07:45:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-26T12:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69284a0050c9f138e6845a57"
+  },
+  "name": "Password Reset Request",
+  "description": "User is locked out of their account and requires immediate password assistance.",
+  "priority": "Low",
+  "source": "Form",
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122eef"
+  },
+  "contact": {
+    "$oid": "69282c7f3a5583fd5d6be59e"
+  },
+  "status": [
+    {
+      "statusType": "New",
+      "date": {
+        "$date": "2025-03-27T09:10:00.000Z"
+      }
+    },
+    {
+      "statusType": "Closed",
+      "date": {
+        "$date": "2025-03-27T09:25:00.000Z"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-03-27T09:10:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-27T09:25:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69284a0050c9f138e6845a58"
+  },
+  "name": "Database Connection Issue",
+  "description": "Intermittent failure when accessing the main production database on weekends.",
+  "priority": "High",
+  "source": "Phone",
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122f04"
+  },
+  "contact": {
+    "$oid": "69282c7f3a5583fd5d6be5a1"
+  },
+  "status": [
+    {
+      "statusType": "New",
+      "date": {
+        "$date": "2025-03-27T11:40:00.000Z"
+      }
+    },
+    {
+      "statusType": "Waiting on Employee",
+      "date": {
+        "$date": "2025-03-27T12:00:00.000Z"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-03-27T11:40:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-27T12:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69284a0050c9f138e6845a59"
+  },
+  "name": "Feature X is too slow",
+  "description": "The processing time for data in the analytics module has doubled this week.",
+  "priority": "Medium",
+  "source": "Chat",
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122f05"
+  },
+  "contact": {
+    "$oid": "69282c7f3a5583fd5d6be5a3"
+  },
+  "status": [
+    {
+      "statusType": "New",
+      "date": {
+        "$date": "2025-03-28T14:30:00.000Z"
+      }
+    },
+    {
+      "statusType": "Waiting on Contact",
+      "date": {
+        "$date": "2025-03-28T15:00:00.000Z"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-03-28T14:30:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-28T15:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69284a0050c9f138e6845a5a"
+  },
+  "name": "Missing Report Data",
+  "description": "The monthly summary report is completely blank for the last two quarters.",
+  "priority": "Medium",
+  "source": "Email",
+  "owner": {
+    "$oid": "69281f81f4e4776b22122eeb"
+  },
+  "contact": {
+    "$oid": "69282c7f3a5583fd5d6be5c3"
+  },
+  "status": [
+    {
+      "statusType": "New",
+      "date": {
+        "$date": "2025-03-28T16:00:00.000Z"
+      }
+    },
+    {
+      "statusType": "Waiting on Employee",
+      "date": {
+        "$date": "2025-03-28T16:45:00.000Z"
+      }
+    },
+    {
+      "statusType": "Closed",
+      "date": {
+        "$date": "2025-03-29T10:00:00.000Z"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-03-28T16:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-29T10:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69284a0050c9f138e6845a5b"
+  },
+  "name": "Question about API limits",
+  "description": "Need clarification on the usage allowance for the premium tier API subscription.",
+  "priority": "Low",
+  "source": "Email",
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122eef"
+  },
+  "contact": {
+    "$oid": "69282c7f3a5583fd5d6be5ce"
+  },
+  "status": [
+    {
+      "statusType": "New",
+      "date": {
+        "$date": "2025-03-29T08:20:00.000Z"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-03-29T08:20:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-29T08:20:00.000Z"
+  }
+}]

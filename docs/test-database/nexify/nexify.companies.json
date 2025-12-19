@@ -1,0 +1,550 @@
+[{
+  "_id": {
+    "$oid": "69282f97cbcecfa1493263f8"
+  },
+  "name": "Global Tech Solutions",
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122eef"
+  },
+  "website": "https://www.globaltech.com",
+  "email": "info@globaltech.com",
+  "industry": "Information Technology & Services",
+  "type": "Partner",
+  "address": "123 Silicon Valley Blvd",
+  "numberOfEmployees": 150,
+  "isActive": true,
+  "createdAt": {
+    "$date": "2024-10-01T10:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-15T11:20:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69282f97cbcecfa1493263f9"
+  },
+  "name": "Innovate Marketing Group",
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122ef0"
+  },
+  "website": "https://www.innovatemarketing.net",
+  "email": "contact@innovatemarketing.net",
+  "industry": "Marketing & Advertising",
+  "type": "Prospect",
+  "address": "456 Creative Lane",
+  "numberOfEmployees": 35,
+  "isActive": true,
+  "createdAt": {
+    "$date": "2024-11-10T14:30:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-01T09:45:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69282f97cbcecfa1493263fa"
+  },
+  "name": "Phoenix Construction Co",
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122ef1"
+  },
+  "website": "https://www.phoenixbuilds.com",
+  "email": "support@phoenixbuilds.com",
+  "industry": "Construction",
+  "type": "Vendor",
+  "address": "789 Building Heights",
+  "numberOfEmployees": 500,
+  "isActive": false,
+  "createdAt": {
+    "$date": "2024-09-05T08:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-20T16:10:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69282f97cbcecfa1493263fb"
+  },
+  "name": "MediCare Health Systems",
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122ef2"
+  },
+  "website": "https://www.medicarehealth.org",
+  "email": "hr@medicarehealth.org",
+  "industry": "Hospital & Health Care",
+  "type": "Prospect",
+  "address": "10 Health Pkwy",
+  "numberOfEmployees": 1200,
+  "isActive": true,
+  "createdAt": {
+    "$date": "2024-12-12T11:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-25T13:05:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69282f97cbcecfa1493263fc"
+  },
+  "name": "Apex Financial Consulting",
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122ef3"
+  },
+  "website": "https://www.apexfinance.co",
+  "email": "advise@apexfinance.co",
+  "industry": "Financial Services",
+  "type": "Other",
+  "address": "22 Money Street",
+  "numberOfEmployees": 80,
+  "isActive": true,
+  "createdAt": {
+    "$date": "2024-10-20T09:15:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-15T10:30:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69282f97cbcecfa1493263fd"
+  },
+  "name": "Elite Logistics Hub",
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122ef4"
+  },
+  "website": null,
+  "email": "logistics@elitehub.com",
+  "industry": "Logistics & Supply Chain",
+  "type": "Vendor",
+  "address": "33 Shipping Way",
+  "numberOfEmployees": 210,
+  "isActive": true,
+  "createdAt": {
+    "$date": "2024-09-15T12:40:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-05T14:50:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69282f97cbcecfa1493263fe"
+  },
+  "name": "Digital Waves Agency",
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122ef5"
+  },
+  "website": "https://www.digitalwaves.net",
+  "email": "jobs@digitalwaves.net",
+  "industry": "Graphic Design",
+  "type": "Reseller",
+  "address": "44 Pixel Place",
+  "numberOfEmployees": 15,
+  "isActive": true,
+  "createdAt": {
+    "$date": "2025-01-01T15:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-28T10:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69282f97cbcecfa1493263ff"
+  },
+  "name": "Green Earth Energy",
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122ef6"
+  },
+  "website": "https://www.greenearth.com",
+  "email": null,
+  "industry": "Renewables & Environment",
+  "type": "Partner",
+  "address": "55 Solar Farm Rd",
+  "numberOfEmployees": 95,
+  "isActive": false,
+  "createdAt": {
+    "$date": "2024-10-05T09:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-11T12:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69282f97cbcecfa149326400"
+  },
+  "name": "Streamline Software",
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122ef7"
+  },
+  "website": "https://www.streamlinesoft.net",
+  "email": "sales@streamlinesoft.net",
+  "industry": "Computer Software",
+  "type": "Prospect",
+  "address": "66 Code Alley",
+  "numberOfEmployees": 45,
+  "isActive": true,
+  "createdAt": {
+    "$date": "2024-11-20T13:10:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-04T15:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69282f97cbcecfa149326401"
+  },
+  "name": "Precision Engineering",
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122ef8"
+  },
+  "website": "https://www.precisioneng.com",
+  "email": "contact@precisioneng.com",
+  "industry": "Mechanical or Industrial Engineering",
+  "type": "Vendor",
+  "address": "77 Machining Rd",
+  "numberOfEmployees": 320,
+  "isActive": true,
+  "createdAt": {
+    "$date": "2024-09-25T16:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-30T09:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69282f97cbcecfa149326402"
+  },
+  "name": "Horizon Retail Stores",
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122ef9"
+  },
+  "website": "https://www.horizonstores.com",
+  "email": "management@horizonstores.com",
+  "industry": "Retail",
+  "type": "Prospect",
+  "address": "88 Shopping Center",
+  "numberOfEmployees": 800,
+  "isActive": true,
+  "createdAt": {
+    "$date": "2024-10-15T11:55:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-22T14:40:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69282f97cbcecfa149326403"
+  },
+  "name": "NextGen Gaming Studio",
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122efa"
+  },
+  "website": "https://www.nextgengaming.net",
+  "email": "press@nextgengaming.net",
+  "industry": "Computer Games",
+  "type": "Partner",
+  "address": "99 Virtual Street",
+  "numberOfEmployees": 65,
+  "isActive": true,
+  "createdAt": {
+    "$date": "2025-01-07T10:05:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-08T11:15:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69282f97cbcecfa149326404"
+  },
+  "name": "Oceanic Food Suppliers",
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122efb"
+  },
+  "website": null,
+  "email": "orders@oceanicfoods.co",
+  "industry": "Food Production",
+  "type": "Vendor",
+  "address": "10 Seafront Rd",
+  "numberOfEmployees": 40,
+  "isActive": true,
+  "createdAt": {
+    "$date": "2024-11-01T14:20:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-18T08:35:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69282f97cbcecfa149326405"
+  },
+  "name": "Cityscape Real Estate",
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122efc"
+  },
+  "website": "https://www.cityscaperealty.com",
+  "email": "sell@cityscaperealty.com",
+  "industry": "Real Estate",
+  "type": "Reseller",
+  "address": "11 Downtown Towers",
+  "numberOfEmployees": 25,
+  "isActive": true,
+  "createdAt": {
+    "$date": "2024-10-29T12:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-14T16:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69282f97cbcecfa149326406"
+  },
+  "name": "Future Telecom Services",
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122efd"
+  },
+  "website": "https://www.futuretelecom.net",
+  "email": "biz@futuretelecom.net",
+  "industry": "Telecommunications",
+  "type": "Prospect",
+  "address": "12 Fiber Optic Lane",
+  "numberOfEmployees": 600,
+  "isActive": false,
+  "createdAt": {
+    "$date": "2024-09-01T07:30:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-09T10:25:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69282f97cbcecfa149326407"
+  },
+  "name": "Global Import Export",
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122efe"
+  },
+  "website": "https://www.globalimport.com",
+  "email": "trade@globalimport.com",
+  "industry": "Import & Export",
+  "type": "Other",
+  "address": "13 Port Authority Dr",
+  "numberOfEmployees": 180,
+  "isActive": true,
+  "createdAt": {
+    "$date": "2024-12-05T10:40:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-29T15:30:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69282f97cbcecfa149326408"
+  },
+  "name": "Alpha Biotech Research",
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122eff"
+  },
+  "website": null,
+  "email": "research@alphabio.org",
+  "industry": "Biotechnology",
+  "type": "Partner",
+  "address": "14 Lab District",
+  "numberOfEmployees": 90,
+  "isActive": true,
+  "createdAt": {
+    "$date": "2024-11-15T15:20:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-06T11:45:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69282f97cbcecfa149326409"
+  },
+  "name": "Summit Education Hub",
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122f00"
+  },
+  "website": "https://www.summithub.edu",
+  "email": "admissions@summithub.edu",
+  "industry": "Higher Education",
+  "type": "Prospect",
+  "address": "15 University Ave",
+  "numberOfEmployees": 300,
+  "isActive": true,
+  "createdAt": {
+    "$date": "2024-10-18T08:50:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-02T13:20:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69282f97cbcecfa14932640a"
+  },
+  "name": "Coastal Tourism Group",
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122f01"
+  },
+  "website": "https://www.coastaltravel.com",
+  "email": "reservations@coastaltravel.com",
+  "industry": "Leisure, Travel & Tourism",
+  "type": "Other",
+  "address": "16 Beachfront Walk",
+  "numberOfEmployees": 75,
+  "isActive": false,
+  "createdAt": {
+    "$date": "2024-09-08T11:10:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-13T10:10:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69282f97cbcecfa14932640b"
+  },
+  "name": "Midwest Auto Parts",
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122f02"
+  },
+  "website": "https://www.midwestauto.com",
+  "email": "supply@midwestauto.com",
+  "industry": "Automotive",
+  "type": "Vendor",
+  "address": "17 Gear Street",
+  "numberOfEmployees": 450,
+  "isActive": true,
+  "createdAt": {
+    "$date": "2024-12-24T09:30:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-10T14:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69282f97cbcecfa14932640c"
+  },
+  "name": "Data Security Shield",
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122f03"
+  },
+  "website": "https://www.datashield.net",
+  "email": "security@datashield.net",
+  "industry": "Computer & Network Security",
+  "type": "Partner",
+  "address": "18 Firewall Lane",
+  "numberOfEmployees": 110,
+  "isActive": true,
+  "createdAt": {
+    "$date": "2024-10-25T13:45:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-08T09:55:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69282f97cbcecfa14932640d"
+  },
+  "name": "Creative Apparel Co",
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122f04"
+  },
+  "website": "https://www.creativeapparel.com",
+  "email": "design@creativeapparel.com",
+  "industry": "Apparel & Fashion",
+  "type": "Prospect",
+  "address": "19 Fabric Place",
+  "numberOfEmployees": 50,
+  "isActive": true,
+  "createdAt": {
+    "$date": "2025-01-11T16:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-02T12:10:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69282f97cbcecfa14932640e"
+  },
+  "name": "Industrial Robotics Inc",
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122f05"
+  },
+  "website": "https://www.irobotics.net",
+  "email": "support@irobotics.net",
+  "industry": "Industrial Automation",
+  "type": "Reseller",
+  "address": "20 Assembly Line",
+  "numberOfEmployees": 130,
+  "isActive": false,
+  "createdAt": {
+    "$date": "2024-09-19T09:20:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-26T14:25:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69282f97cbcecfa14932640f"
+  },
+  "name": "E-Learning Pro",
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122f06"
+  },
+  "website": "https://www.elearningpro.com",
+  "email": "info@elearningpro.com",
+  "industry": "E-Learning",
+  "type": "Partner",
+  "address": "21 Online Course Rd",
+  "numberOfEmployees": 60,
+  "isActive": true,
+  "createdAt": {
+    "$date": "2024-12-01T10:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-09T13:30:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69282f97cbcecfa149326410"
+  },
+  "name": "Coast Guard Maritime",
+  "owner": {
+    "$oid": "69281f8ef4e4776b22122eeb"
+  },
+  "website": null,
+  "email": null,
+  "industry": "Maritime",
+  "type": "Other",
+  "address": "34 Portside Pier",
+  "numberOfEmployees": 250,
+  "isActive": true,
+  "createdAt": {
+    "$date": "2024-11-22T14:10:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-17T11:00:00.000Z"
+  }
+}]

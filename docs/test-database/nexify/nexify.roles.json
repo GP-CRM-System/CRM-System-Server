@@ -1,0 +1,1098 @@
+[{
+  "_id": {
+    "$oid": "69259585a9672cfac2bf6610"
+  },
+  "name": "root",
+  "isActive": true,
+  "Company": {
+    "read": true,
+    "write": true,
+    "delete": true
+  },
+  "Employee": {
+    "read": true,
+    "write": true,
+    "delete": true
+  },
+  "Contact": {
+    "read": true,
+    "write": true,
+    "delete": true
+  },
+  "Deal": {
+    "read": true,
+    "write": true,
+    "delete": true
+  },
+  "Role": {
+    "read": true,
+    "write": true,
+    "delete": true
+  },
+  "Order": {
+    "read": true,
+    "write": true,
+    "delete": true
+  },
+  "Ticket": {
+    "read": true,
+    "write": true,
+    "delete": true
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692595b2a9672cfac2bf6617"
+  },
+  "name": "Human Resources",
+  "isActive": true,
+  "Company": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "Employee": {
+    "read": true,
+    "write": false,
+    "delete": false
+  },
+  "Contact": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "Deal": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "Role": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "Order": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "Ticket": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69281af5cbcecfa1493263d7"
+  },
+  "name": "Account Manager",
+  "isActive": true,
+  "Company": {
+    "read": true,
+    "write": true,
+    "delete": false
+  },
+  "Employee": {
+    "read": true,
+    "write": false,
+    "delete": false
+  },
+  "Contact": {
+    "read": true,
+    "write": true,
+    "delete": false
+  },
+  "Deal": {
+    "read": true,
+    "write": true,
+    "delete": false
+  },
+  "Role": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "Order": {
+    "read": true,
+    "write": false,
+    "delete": false
+  },
+  "Ticket": {
+    "read": true,
+    "write": true,
+    "delete": false
+  },
+  "createdAt": "2025-01-15T10:14:22.000Z",
+  "updatedAt": "2025-01-20T15:11:47.000Z"
+},
+{
+  "_id": {
+    "$oid": "69281af5cbcecfa1493263d8"
+  },
+  "name": "Sales Coordinator",
+  "isActive": true,
+  "Company": {
+    "read": true,
+    "write": false,
+    "delete": false
+  },
+  "Employee": {
+    "read": true,
+    "write": true,
+    "delete": false
+  },
+  "Contact": {
+    "read": true,
+    "write": false,
+    "delete": false
+  },
+  "Deal": {
+    "read": true,
+    "write": true,
+    "delete": false
+  },
+  "Role": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "Order": {
+    "read": true,
+    "write": true,
+    "delete": false
+  },
+  "Ticket": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "createdAt": "2025-01-11T09:22:18.000Z",
+  "updatedAt": "2025-01-27T17:43:01.000Z"
+},
+{
+  "_id": {
+    "$oid": "69281af5cbcecfa1493263d9"
+  },
+  "name": "Operations Associate",
+  "isActive": true,
+  "Company": {
+    "read": true,
+    "write": false,
+    "delete": false
+  },
+  "Employee": {
+    "read": true,
+    "write": true,
+    "delete": false
+  },
+  "Contact": {
+    "read": true,
+    "write": false,
+    "delete": false
+  },
+  "Deal": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "Role": {
+    "read": true,
+    "write": false,
+    "delete": false
+  },
+  "Order": {
+    "read": true,
+    "write": true,
+    "delete": false
+  },
+  "Ticket": {
+    "read": true,
+    "write": true,
+    "delete": false
+  },
+  "createdAt": "2025-01-03T12:37:10.000Z",
+  "updatedAt": "2025-01-19T09:14:55.000Z"
+},
+{
+  "_id": {
+    "$oid": "69281af5cbcecfa1493263da"
+  },
+  "name": "Customer Advisor",
+  "isActive": true,
+  "Company": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "Employee": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "Contact": {
+    "read": true,
+    "write": true,
+    "delete": false
+  },
+  "Deal": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "Role": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "Order": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "Ticket": {
+    "read": true,
+    "write": true,
+    "delete": true
+  },
+  "createdAt": "2025-01-09T14:22:44.000Z",
+  "updatedAt": "2025-01-09T14:58:03.000Z"
+},
+{
+  "_id": {
+    "$oid": "69281af5cbcecfa1493263db"
+  },
+  "name": "Finance Supervisor",
+  "isActive": true,
+  "Company": {
+    "read": true,
+    "write": true,
+    "delete": true
+  },
+  "Employee": {
+    "read": true,
+    "write": true,
+    "delete": false
+  },
+  "Contact": {
+    "read": true,
+    "write": false,
+    "delete": false
+  },
+  "Deal": {
+    "read": true,
+    "write": false,
+    "delete": false
+  },
+  "Role": {
+    "read": true,
+    "write": false,
+    "delete": false
+  },
+  "Order": {
+    "read": true,
+    "write": true,
+    "delete": true
+  },
+  "Ticket": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "createdAt": "2025-01-18T11:11:29.000Z",
+  "updatedAt": "2025-01-22T17:44:10.000Z"
+},
+{
+  "_id": {
+    "$oid": "69281af5cbcecfa1493263dc"
+  },
+  "name": "Support Agent",
+  "isActive": true,
+  "Company": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "Employee": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "Contact": {
+    "read": true,
+    "write": true,
+    "delete": false
+  },
+  "Deal": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "Role": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "Order": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "Ticket": {
+    "read": true,
+    "write": true,
+    "delete": false
+  },
+  "createdAt": "2025-01-05T08:55:11.000Z",
+  "updatedAt": "2025-01-05T09:14:31.000Z"
+},
+{
+  "_id": {
+    "$oid": "69281af5cbcecfa1493263dd"
+  },
+  "name": "Lead Recruiter",
+  "isActive": true,
+  "Company": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "Employee": {
+    "read": true,
+    "write": true,
+    "delete": false
+  },
+  "Contact": {
+    "read": true,
+    "write": false,
+    "delete": false
+  },
+  "Deal": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "Role": {
+    "read": true,
+    "write": false,
+    "delete": false
+  },
+  "Order": {
+    "read": true,
+    "write": false,
+    "delete": false
+  },
+  "Ticket": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "createdAt": "2025-01-14T10:43:19.000Z",
+  "updatedAt": "2025-01-21T15:40:52.000Z"
+},
+{
+  "_id": {
+    "$oid": "69281af5cbcecfa1493263de"
+  },
+  "name": "Marketing Specialist",
+  "isActive": true,
+  "Company": {
+    "read": true,
+    "write": false,
+    "delete": false
+  },
+  "Employee": {
+    "read": true,
+    "write": false,
+    "delete": false
+  },
+  "Contact": {
+    "read": true,
+    "write": true,
+    "delete": false
+  },
+  "Deal": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "Role": {
+    "read": true,
+    "write": false,
+    "delete": false
+  },
+  "Order": {
+    "read": true,
+    "write": true,
+    "delete": false
+  },
+  "Ticket": {
+    "read": true,
+    "write": false,
+    "delete": false
+  },
+  "createdAt": "2025-01-07T13:11:33.000Z",
+  "updatedAt": "2025-01-24T09:17:41.000Z"
+},
+{
+  "_id": {
+    "$oid": "69281af5cbcecfa1493263df"
+  },
+  "name": "HR Assistant",
+  "isActive": true,
+  "Company": {
+    "read": true,
+    "write": false,
+    "delete": false
+  },
+  "Employee": {
+    "read": true,
+    "write": true,
+    "delete": false
+  },
+  "Contact": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "Deal": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "Role": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "Order": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "Ticket": {
+    "read": true,
+    "write": true,
+    "delete": false
+  },
+  "createdAt": "2025-01-12T11:47:09.000Z",
+  "updatedAt": "2025-01-16T14:26:41.000Z"
+},
+{
+  "_id": {
+    "$oid": "69281af5cbcecfa1493263e0"
+  },
+  "name": "Quality Coordinator",
+  "isActive": true,
+  "Company": {
+    "read": true,
+    "write": true,
+    "delete": false
+  },
+  "Employee": {
+    "read": true,
+    "write": false,
+    "delete": false
+  },
+  "Contact": {
+    "read": true,
+    "write": false,
+    "delete": false
+  },
+  "Deal": {
+    "read": true,
+    "write": false,
+    "delete": false
+  },
+  "Role": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "Order": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "Ticket": {
+    "read": true,
+    "write": false,
+    "delete": false
+  },
+  "createdAt": "2025-01-02T09:30:04.000Z",
+  "updatedAt": "2025-01-18T10:44:29.000Z"
+},
+{
+  "_id": {
+    "$oid": "69281af5cbcecfa1493263e1"
+  },
+  "name": "Project Analyst",
+  "isActive": true,
+  "Company": {
+    "read": true,
+    "write": false,
+    "delete": false
+  },
+  "Employee": {
+    "read": true,
+    "write": false,
+    "delete": false
+  },
+  "Contact": {
+    "read": true,
+    "write": true,
+    "delete": false
+  },
+  "Deal": {
+    "read": true,
+    "write": true,
+    "delete": false
+  },
+  "Role": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "Order": {
+    "read": true,
+    "write": false,
+    "delete": false
+  },
+  "Ticket": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "createdAt": "2025-01-19T16:15:22.000Z",
+  "updatedAt": "2025-01-26T11:47:10.000Z"
+},
+{
+  "_id": {
+    "$oid": "69281af5cbcecfa1493263e2"
+  },
+  "name": "Product Advisor",
+  "isActive": true,
+  "Company": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "Employee": {
+    "read": true,
+    "write": false,
+    "delete": false
+  },
+  "Contact": {
+    "read": true,
+    "write": true,
+    "delete": false
+  },
+  "Deal": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "Role": {
+    "read": true,
+    "write": false,
+    "delete": false
+  },
+  "Order": {
+    "read": true,
+    "write": false,
+    "delete": false
+  },
+  "Ticket": {
+    "read": true,
+    "write": true,
+    "delete": false
+  },
+  "createdAt": "2025-01-04T08:21:42.000Z",
+  "updatedAt": "2025-01-14T10:57:18.000Z"
+},
+{
+  "_id": {
+    "$oid": "69281af5cbcecfa1493263e3"
+  },
+  "name": "Business Consultant",
+  "isActive": true,
+  "Company": {
+    "read": true,
+    "write": true,
+    "delete": false
+  },
+  "Employee": {
+    "read": true,
+    "write": true,
+    "delete": true
+  },
+  "Contact": {
+    "read": true,
+    "write": false,
+    "delete": false
+  },
+  "Deal": {
+    "read": true,
+    "write": false,
+    "delete": false
+  },
+  "Role": {
+    "read": true,
+    "write": false,
+    "delete": false
+  },
+  "Order": {
+    "read": true,
+    "write": true,
+    "delete": false
+  },
+  "Ticket": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "createdAt": "2025-01-06T12:33:19.000Z",
+  "updatedAt": "2025-01-17T09:40:52.000Z"
+},
+{
+  "_id": {
+    "$oid": "69281af5cbcecfa1493263e4"
+  },
+  "name": "Training Coordinator",
+  "isActive": true,
+  "Company": {
+    "read": true,
+    "write": false,
+    "delete": false
+  },
+  "Employee": {
+    "read": true,
+    "write": true,
+    "delete": false
+  },
+  "Contact": {
+    "read": true,
+    "write": false,
+    "delete": false
+  },
+  "Deal": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "Role": {
+    "read": true,
+    "write": false,
+    "delete": false
+  },
+  "Order": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "Ticket": {
+    "read": true,
+    "write": true,
+    "delete": false
+  },
+  "createdAt": "2025-01-08T10:12:01.000Z",
+  "updatedAt": "2025-01-20T14:05:41.000Z"
+},
+{
+  "_id": {
+    "$oid": "69281af5cbcecfa1493263e5"
+  },
+  "name": "Service Representative",
+  "isActive": true,
+  "Company": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "Employee": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "Contact": {
+    "read": true,
+    "write": true,
+    "delete": false
+  },
+  "Deal": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "Role": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "Order": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "Ticket": {
+    "read": true,
+    "write": true,
+    "delete": false
+  },
+  "createdAt": "2025-01-16T09:41:31.000Z",
+  "updatedAt": "2025-01-17T13:22:57.000Z"
+},
+{
+  "_id": {
+    "$oid": "69281af5cbcecfa1493263e6"
+  },
+  "name": "Logistics Officer",
+  "isActive": true,
+  "Company": {
+    "read": true,
+    "write": true,
+    "delete": false
+  },
+  "Employee": {
+    "read": true,
+    "write": true,
+    "delete": true
+  },
+  "Contact": {
+    "read": true,
+    "write": true,
+    "delete": false
+  },
+  "Deal": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "Role": {
+    "read": true,
+    "write": false,
+    "delete": false
+  },
+  "Order": {
+    "read": true,
+    "write": false,
+    "delete": false
+  },
+  "Ticket": {
+    "read": true,
+    "write": true,
+    "delete": false
+  },
+  "createdAt": "2025-01-10T11:44:28.000Z",
+  "updatedAt": "2025-01-25T08:32:17.000Z"
+},
+{
+  "_id": {
+    "$oid": "69281af5cbcecfa1493263e7"
+  },
+  "name": "Procurement Assistant",
+  "isActive": true,
+  "Company": {
+    "read": true,
+    "write": false,
+    "delete": false
+  },
+  "Employee": {
+    "read": true,
+    "write": false,
+    "delete": false
+  },
+  "Contact": {
+    "read": true,
+    "write": false,
+    "delete": false
+  },
+  "Deal": {
+    "read": true,
+    "write": true,
+    "delete": false
+  },
+  "Role": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "Order": {
+    "read": true,
+    "write": true,
+    "delete": false
+  },
+  "Ticket": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "createdAt": "2025-01-14T10:02:12.000Z",
+  "updatedAt": "2025-01-21T11:33:54.000Z"
+},
+{
+  "_id": {
+    "$oid": "69281af5cbcecfa1493263e8"
+  },
+  "name": "IT Support Officer",
+  "isActive": true,
+  "Company": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "Employee": {
+    "read": true,
+    "write": false,
+    "delete": false
+  },
+  "Contact": {
+    "read": true,
+    "write": true,
+    "delete": false
+  },
+  "Deal": {
+    "read": true,
+    "write": false,
+    "delete": false
+  },
+  "Role": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "Order": {
+    "read": true,
+    "write": false,
+    "delete": false
+  },
+  "Ticket": {
+    "read": true,
+    "write": true,
+    "delete": false
+  },
+  "createdAt": "2025-01-17T07:19:22.000Z",
+  "updatedAt": "2025-01-23T16:48:10.000Z"
+},
+{
+  "_id": {
+    "$oid": "69281af5cbcecfa1493263e9"
+  },
+  "name": "Data Entry Clerk",
+  "isActive": true,
+  "Company": {
+    "read": true,
+    "write": false,
+    "delete": false
+  },
+  "Employee": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "Contact": {
+    "read": true,
+    "write": true,
+    "delete": false
+  },
+  "Deal": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "Role": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "Order": {
+    "read": true,
+    "write": true,
+    "delete": false
+  },
+  "Ticket": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "createdAt": "2025-01-03T06:52:15.000Z",
+  "updatedAt": "2025-01-15T13:40:29.000Z"
+},
+{
+  "_id": {
+    "$oid": "69281af5cbcecfa1493263ea"
+  },
+  "name": "Content Supervisor",
+  "isActive": true,
+  "Company": {
+    "read": true,
+    "write": false,
+    "delete": false
+  },
+  "Employee": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "Contact": {
+    "read": true,
+    "write": true,
+    "delete": true
+  },
+  "Deal": {
+    "read": true,
+    "write": false,
+    "delete": false
+  },
+  "Role": {
+    "read": true,
+    "write": false,
+    "delete": false
+  },
+  "Order": {
+    "read": true,
+    "write": true,
+    "delete": false
+  },
+  "Ticket": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "createdAt": "2025-01-09T08:44:19.000Z",
+  "updatedAt": "2025-01-28T14:22:27.000Z"
+},
+{
+  "_id": {
+    "$oid": "69281af5cbcecfa1493263eb"
+  },
+  "name": "Sales Strategist",
+  "isActive": true,
+  "Company": {
+    "read": true,
+    "write": true,
+    "delete": false
+  },
+  "Employee": {
+    "read": true,
+    "write": false,
+    "delete": false
+  },
+  "Contact": {
+    "read": true,
+    "write": true,
+    "delete": false
+  },
+  "Deal": {
+    "read": true,
+    "write": true,
+    "delete": false
+  },
+  "Role": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "Order": {
+    "read": true,
+    "write": false,
+    "delete": false
+  },
+  "Ticket": {
+    "read": true,
+    "write": true,
+    "delete": false
+  },
+  "createdAt": "2025-01-05T11:31:52.000Z",
+  "updatedAt": "2025-01-23T12:44:08.000Z"
+},
+{
+  "_id": {
+    "$oid": "69281af5cbcecfa1493263ec"
+  },
+  "name": "Customer Liaison",
+  "isActive": true,
+  "Company": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "Employee": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "Contact": {
+    "read": true,
+    "write": true,
+    "delete": false
+  },
+  "Deal": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "Role": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "Order": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "Ticket": {
+    "read": true,
+    "write": true,
+    "delete": false
+  },
+  "createdAt": "2025-01-13T09:40:14.000Z",
+  "updatedAt": "2025-01-19T11:28:51.000Z"
+},
+{
+  "_id": {
+    "$oid": "69281af5cbcecfa1493263ed"
+  },
+  "name": "Compliance Officer",
+  "isActive": true,
+  "Company": {
+    "read": true,
+    "write": true,
+    "delete": false
+  },
+  "Employee": {
+    "read": true,
+    "write": false,
+    "delete": false
+  },
+  "Contact": {
+    "read": true,
+    "write": false,
+    "delete": false
+  },
+  "Deal": {
+    "read": true,
+    "write": true,
+    "delete": false
+  },
+  "Role": {
+    "read": true,
+    "write": true,
+    "delete": false
+  },
+  "Order": {
+    "read": true,
+    "write": false,
+    "delete": false
+  },
+  "Ticket": {
+    "read": false,
+    "write": false,
+    "delete": false
+  },
+  "createdAt": "2025-01-02T16:11:11.000Z",
+  "updatedAt": "2025-01-14T13:23:09.000Z"
+}]
