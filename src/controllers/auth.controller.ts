@@ -14,6 +14,7 @@ import Role from "../models/role.model.js";
 import { emailTemplates, sendEmail } from "../config/mail.config.js";
 import type { IRole } from "../interfaces/role.interface.js";
 import { z } from "zod";
+import crypto from "crypto";
 
 export async function registerAdmin(
     req: Request<object, object, IEmployee>,
@@ -86,8 +87,8 @@ export async function registerAdmin(
 
         await sendEmail(
             createdAdmin.email,
-            emailTemplates.welcome(createdAdmin.fullName).subject,
-            emailTemplates.welcome(createdAdmin.fullName).html
+            emailTemplates.welcome(createdAdmin.fullName || "Admin").subject,
+            emailTemplates.welcome(createdAdmin.fullName || "Admin").html
         );
 
         res.status(201).json({
@@ -302,25 +303,32 @@ export async function forgotPassword(
             return;
         }
 
+        const resetToken = crypto.randomBytes(32).toString("hex");
+        const resetTokenHash = crypto.createHash("sha256").update(resetToken).digest("hex");
+
         await existingEmployee.updateOne({
+            resetToken: resetTokenHash,
             resetExpire: Date.now() + 3600000 * 24 // 24 hours
         });
+
+        const appUrl = process.env.APP_URL || "http://localhost:5173";
+        const resetLink = `${appUrl}/verify-reset?token=${resetToken}`;
 
         await sendEmail(
             email.data,
             emailTemplates.forgotPassword(
-                existingEmployee.fullName,
-                `http://localhost:5173/reset-password?token=${existingEmployee._id}`
+                existingEmployee.fullName || "User",
+                resetLink
             ).subject,
             emailTemplates.forgotPassword(
-                existingEmployee.fullName,
-                `http://localhost:5173/reset-password?token=${existingEmployee._id}`
+                existingEmployee.fullName || "User",
+                resetLink
             ).html
         );
 
         res.status(200).json({
-            message: "Password Reset sucessful",
-            data: "if employee exists, an email should be sent"
+            message: "Password Reset successful",
+            data: "If an account with that email exists, a password reset link has been sent."
         });
         logger.info(`Password reset email sent to ${email.data}`);
         return;
@@ -335,11 +343,19 @@ export async function forgotPassword(
 }
 
 export async function resetPassword(
-    req: Request<{ id: string }, object, { password: string }>,
+    req: Request<object, object, { password: string; token: string }>,
     res: Response<IResponse>
 ): Promise<void> {
     try {
-        const { id } = req.params;
+        const { token, password: newPassword } = req.body;
+
+        if (!token) {
+            res.status(400).json({
+                message: "Password Reset failed",
+                error: "Reset token is required"
+            });
+            return;
+        }
         const password = z
             .string("Password is required")
             .min(8, "Password must be at least 8 characters long")
@@ -355,32 +371,25 @@ export async function resetPassword(
             return;
         }
 
-        const existingEmployee = await Employee.findById(id);
-        if (!existingEmployee) {
-            res.status(404).json({
-                message: "Password Reset failed",
-                error: "Employee not found"
-            });
-            logger.error(`Employee ${id} not found`);
-            return;
-        }
+        const resetTokenHash = crypto.createHash("sha256").update(token).digest("hex");
 
-        if (
-            existingEmployee.resetExpire === null ||
-            existingEmployee.resetExpire!.getTime() < Date.now()
-        ) {
+        const existingEmployee = await Employee.findOne({
+            resetToken: resetTokenHash,
+            resetExpire: { $gt: Date.now() }
+        });
+
+        if (!existingEmployee) {
             res.status(400).json({
                 message: "Password Reset failed",
-                error: "Reset token expired"
+                error: "Invalid or expired reset token"
             });
-            logger.error(`Reset token expired for employee ${id}`);
+            logger.error(`Invalid or expired reset token attempt`);
             return;
         }
 
-        password.data = bcrypt.hashSync(password.data, 10);
-
         await existingEmployee.updateOne({
-            password: password.data,
+            password: bcrypt.hashSync(password.data, 10),
+            resetToken: null,
             resetExpire: null
         });
 
@@ -388,7 +397,7 @@ export async function resetPassword(
             message: "Password Reset sucessful",
             data: "Password reset successfully"
         });
-        logger.info(`Password reset for employee ${id}`);
+        logger.info(`Password reset for employee ${existingEmployee._id}`);
         return;
     } catch (error: unknown) {
         logger.error(`Error reset password: ${(error as Error).message}`);
@@ -399,3 +408,52 @@ export async function resetPassword(
         return;
     }
 }
+
+export async function verifyResetToken(
+    req: Request<{ token: string }>,
+    res: Response<IResponse>
+): Promise<void> {
+    try {
+        const { token } = req.params;
+
+        if (!token) {
+            res.status(400).json({
+                message: "Verification failed",
+                error: "Token is required"
+            });
+            return;
+        }
+
+        const resetTokenHash = crypto.createHash("sha256").update(token).digest("hex");
+
+        const existingEmployee = await Employee.findOne({
+            resetToken: resetTokenHash,
+            resetExpire: { $gt: Date.now() }
+        });
+
+        if (!existingEmployee) {
+            res.status(400).json({
+                message: "Verification failed",
+                error: "Invalid or expired reset token"
+            });
+            return;
+        }
+
+        res.status(200).json({
+            message: "Token verified",
+            data: {
+                email: existingEmployee.email,
+                fullName: existingEmployee.fullName
+            }
+        });
+        return;
+    } catch (error: unknown) {
+        logger.error(`Error verifying reset token: ${(error as Error).message}`);
+        res.status(500).json({
+            message: "Internal server error",
+            error: (error as Error).message
+        });
+        return;
+    }
+}
+

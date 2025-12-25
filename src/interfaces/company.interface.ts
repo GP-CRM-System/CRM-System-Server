@@ -170,7 +170,7 @@ export const SCompany = z.object({
     contact: z.custom<mongoose.Types.ObjectId>(async (val) => {
         mongoose.Types.ObjectId.isValid(val as string);
         return await Contact.findById(val);
-    }, "Contact is should be a valid contact"),
+    }, "Contact is should be a valid contact").optional(),
     website: z.url("Website should be a valid URL").nullable(),
     email: z.email("Invalid email").nullable(),
     industry: z.enum(industries, "Invalid industry").optional(),
