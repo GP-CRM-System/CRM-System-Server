@@ -20,7 +20,6 @@ export async function createDeal(
             });
             return;
         }
-
         const deal = await SDeal.safeParseAsync(req.body);
 
         if (deal.success === false) {
@@ -83,6 +82,7 @@ export async function createDeal(
 }
 
 export async function getAllDeals(
+        // ...existing code...
     req: Request,
     res: Response<IResponse>
 ): Promise<void> {
@@ -101,7 +101,6 @@ export async function getAllDeals(
         const page = parseInt(req.query.page as string) || 1;
         const limit = parseInt(req.query.limit as string) || 10;
         const skip = (page - 1) * limit;
-
         const deals = await Deal.find({
             name: { $regex: name ?? "", $options: "i" },
             priority: { $regex: priority ?? "", $options: "i" }

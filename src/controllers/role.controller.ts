@@ -2,8 +2,16 @@ import type { Request, Response } from "express";
 import { SRole, type IRole } from "../interfaces/role.interface.js";
 import { logger } from "../config/logger.config.js";
 import Role from "../models/role.model.js";
+import Employee from "../models/employee.model.js";
+
 import type { IResponse } from "../interfaces/response.interface.js";
 import { verifyToken } from "../services/auth.service.js";
+
+
+async function getUserCountForRole(roleId: string) {
+    return Employee.countDocuments({ role: roleId });
+}
+
 
 export async function createRole(
     req: Request<object, object, IRole>,
@@ -43,7 +51,8 @@ export async function createRole(
 
         logger.info(`Created role ${role.data.name}`);
         const createdRole = await Role.create(role.data);
-        res.status(201).json({ message: "Role created", data: createdRole });
+        const userCount = await getUserCountForRole(String(createdRole._id));
+        res.status(201).json({ message: "Role created", data: { ...createdRole.toObject(), userCount } });
         return;
     } catch (err: unknown) {
         logger.error(`Error creating role: ${(err as Error).message}`);
@@ -90,10 +99,16 @@ export async function getAllRoles(
             logger.warn("No roles found");
             return;
         }
+        const rolesWithUserCount = await Promise.all(
+            roles.map(async (role) => {
+                const userCount = await getUserCountForRole(String(role._id));
+                return { ...role.toObject(), userCount };
+            })
+        );
         logger.info("Retrieved all roles");
         res.status(200).json({
             message: "Roles retrieved",
-            data: { roles, page, limit, total: roles.length }
+            data: { roles: rolesWithUserCount, page, limit, total: roles.length }
         });
         return;
     } catch (err: unknown) {
@@ -132,8 +147,10 @@ export async function getOneRole(
             logger.warn(`Role ${id} not found`);
             return;
         }
+        // Count users with this role
+        const userCount = await getUserCountForRole(String(role._id));
         logger.info(`Retrieved role ${id}`);
-        res.status(200).json({ message: "Role retrieved", data: role });
+        res.status(200).json({ message: "Role retrieved", data: { ...role.toObject(), userCount } });
         return;
     } catch (err: unknown) {
         logger.error(`Error retreiving role: ${(err as Error).message}`);
@@ -185,8 +202,11 @@ export async function updateRole(
 
         await Role.updateOne({ _id: id }, { $set: updatedRole.data });
 
+        const newRole = await Role.findById(id);
+        const userCount = newRole ? await getUserCountForRole(String(newRole._id)) : 0;
+
         logger.info(`Updated role ${id}`);
-        res.status(200).json({ message: "Role updated", data: role });
+        res.status(200).json({ message: "Role updated", data: { ...(newRole?.toObject?.() || {}), userCount } });
         return;
     } catch (err: unknown) {
         logger.error(`Error updating role: ${(err as Error).message}`);

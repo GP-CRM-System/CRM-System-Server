@@ -85,17 +85,18 @@ export async function getAllCompanies(
         const { name, industry, type } = req.query;
         const page = parseInt(req.query.page as string) || 1;
         const limit = parseInt(req.query.limit as string) || 10;
-        const skip = (page - 1) * limit;
 
-        const companies = await Company.find({
+        const skip = (page - 1) * limit;
+        const filter = {
             name: { $regex: name ?? "", $options: "i" },
             industry: { $regex: industry ?? "", $options: "i" },
             type: { $regex: type ?? "", $options: "i" }
-        })
-            .populate("owner", "fullName")
+        };
+        const total = await Company.countDocuments(filter);
+        const companies = await Company.find(filter)
+            .sort({ createdAt: -1 })
             .skip(skip)
-            .limit(limit)
-            .sort({ createdAt: -1 });
+            .limit(limit);
 
         if (companies.length === 0) {
             res.status(404).json({
@@ -105,10 +106,17 @@ export async function getAllCompanies(
             logger.warn("No companies found");
             return;
         }
+        const totalPages = Math.ceil(total / limit);
         logger.info(`Retrieved ${companies.length} companies`);
         res.status(200).json({
             message: "Companies retrieved",
-            data: { companies, total: companies.length, page, limit }
+            data: {
+                data: companies,
+                total,
+                page,
+                limit,
+                totalPages
+            }
         });
         return;
     } catch (err: unknown) {

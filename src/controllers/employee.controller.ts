@@ -83,10 +83,11 @@ export async function getAllEmployees(
         const page = parseInt(req.query.page as string) || 1;
         const limit = parseInt(req.query.limit as string) || 10;
         const skip = (page - 1) * limit;
-
-        const employees = await Employee.find({
+        const filter = {
             fullName: { $regex: fullName ?? "", $options: "i" }
-        })
+        };
+        const total = await Employee.countDocuments(filter);
+        const employees = await Employee.find(filter)
             .select("-password -__v")
             .populate("role")
             .skip(skip)
@@ -101,10 +102,17 @@ export async function getAllEmployees(
             logger.warn("No employees found");
             return;
         }
+        const totalPages = Math.ceil(total / limit);
         logger.info(`Retrieved ${employees.length} employees`);
         res.status(200).json({
             message: "Employees retrieved",
-            data: { employees, page, limit, total: employees.length }
+            data: {
+                data: employees,
+                total,
+                page,
+                limit,
+                totalPages
+            }
         });
         return;
     } catch (err: unknown) {

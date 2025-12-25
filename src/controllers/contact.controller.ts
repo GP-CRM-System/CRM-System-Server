@@ -82,15 +82,12 @@ export async function getAllContacts(
         const page = parseInt(req.query.page as string) || 1;
         const limit = parseInt(req.query.limit as string) || 10;
         const skip = (page - 1) * limit;
-
         const filter: { name: object; jobTitle?: object } = {
             name: { $regex: name ?? "", $options: "i" }
         };
-
         if (jobTitle) {
             filter.jobTitle = { $regex: jobTitle as string, $options: "i" };
         }
-
         let stageFilter = {};
 
         if (stage === "Lead") {
@@ -102,25 +99,22 @@ export async function getAllContacts(
             stageFilter = { "stage.name": "Customer" };
         }
 
-        const contacts = await Contact.find({
-            ...filter,
-            ...stageFilter
-        })
+        const queryFilter = { ...filter, ...stageFilter };
+        const total = await Contact.countDocuments(queryFilter);
+        const contacts = await Contact.find(queryFilter)
             .skip(skip)
             .limit(limit)
             .populate("owner", "fullName");
-        if (contacts.length === 0) {
-            res.status(404).json({
-                message: "Contact retrieval failed",
-                error: "No contacts found"
-            });
-            logger.warn("No contacts found");
-            return;
-        }
         logger.info("Retrieved all contacts");
         res.status(200).json({
             message: "Contacts retrieved",
-            data: { contacts, page, limit }
+            data: {
+                data: contacts,
+                total,
+                page,
+                limit,
+                totalPages: Math.ceil(total / limit)
+            }
         });
         return;
     } catch (err: unknown) {

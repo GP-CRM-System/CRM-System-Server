@@ -15,6 +15,7 @@ import { emailTemplates, sendEmail } from "../config/mail.config.js";
 import type { IRole } from "../interfaces/role.interface.js";
 import { z } from "zod";
 
+
 export async function registerAdmin(
     req: Request<object, object, IEmployee>,
     res: Response<IResponse>
@@ -335,23 +336,35 @@ export async function forgotPassword(
 }
 
 export async function resetPassword(
-    req: Request<{ id: string }, object, { password: string }>,
+    req: Request<{ id: string }, object, { oldPassword: string; newPassword: string; confirmNewPassword: string }>,
     res: Response<IResponse>
 ): Promise<void> {
     try {
         const { id } = req.params;
-        const password = z
+        const { oldPassword, newPassword, confirmNewPassword } = req.body;
+
+        // Validate new password
+        const passwordValidation = z
             .string("Password is required")
             .min(8, "Password must be at least 8 characters long")
             .max(64, "Password must be at most 64 characters long")
-            .safeParse(req.body.password);
+            .safeParse(newPassword);
 
-        if (password.success === false) {
+        if (passwordValidation.success === false) {
             res.status(400).json({
                 message: "Password Reset failed",
-                error: JSON.parse(password.error.message)
+                error: JSON.parse(passwordValidation.error.message)
             });
-            logger.error("Invalid password");
+            logger.error("Invalid new password");
+            return;
+        }
+
+        if (newPassword !== confirmNewPassword) {
+            res.status(400).json({
+                message: "Password Reset failed",
+                error: "New password and confirmation do not match"
+            });
+            logger.error("New password and confirmation do not match");
             return;
         }
 
@@ -365,6 +378,19 @@ export async function resetPassword(
             return;
         }
 
+        // Check old password
+        if (!bcrypt.compareSync(oldPassword, existingEmployee.password!)) {
+            res.status(401).json({
+                message: "Password Reset failed",
+                error: "Old password is incorrect"
+            });
+            logger.error(`Old password incorrect for employee ${id}`);
+            return;
+        }
+
+        // Optionally, you can keep the resetExpire check if this is for a reset token flow
+        // If you want to require a reset token, uncomment the following block:
+        /*
         if (
             existingEmployee.resetExpire === null ||
             existingEmployee.resetExpire!.getTime() < Date.now()
@@ -376,11 +402,12 @@ export async function resetPassword(
             logger.error(`Reset token expired for employee ${id}`);
             return;
         }
+        */
 
-        password.data = bcrypt.hashSync(password.data, 10);
+        const hashedPassword = bcrypt.hashSync(newPassword, 10);
 
         await existingEmployee.updateOne({
-            password: password.data,
+            password: hashedPassword,
             resetExpire: null
         });
 

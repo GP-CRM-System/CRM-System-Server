@@ -7,7 +7,7 @@ import {
 
 const profileRouter = express.Router();
 
-profileRouter.route("/").get(getProfile).put(updateProfile);
-profileRouter.post("/password", changePassword);
+profileRouter.route("/:id").get(getProfile).put(updateProfile);
+profileRouter.post("/:id/password", changePassword);
 
 export default profileRouter;

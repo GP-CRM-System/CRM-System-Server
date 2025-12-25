@@ -65,17 +65,17 @@ export async function getAllTickets(
         const page = parseInt(req.query.page as string) || 1;
         const limit = parseInt(req.query.limit as string) || 10;
         const skip = (page - 1) * limit;
-
-        const tickets = await Ticket.find({
+        const filter = {
             name: { $regex: name ?? "", $options: "i" },
             priority: { $regex: priority ?? "", $options: "i" },
             source: { $regex: source ?? "", $options: "i" }
-        })
+        };
+        const total = await Ticket.countDocuments(filter);
+        const tickets = await Ticket.find(filter)
             .populate("owner", "fullName")
-            .populate("contact", "name")
+            .sort({ createdAt: -1 })
             .skip(skip)
-            .limit(limit)
-            .sort({ createdAt: -1 });
+            .limit(limit);
 
         if (tickets.length === 0) {
             res.status(404).json({
@@ -85,10 +85,17 @@ export async function getAllTickets(
             logger.warn("No tickets found");
             return;
         }
+        const totalPages = Math.ceil(total / limit);
         logger.info("Retrieved all tickets");
         res.status(200).json({
             message: "Tickets retrieved",
-            data: { tickets, total: tickets.length, page, limit }
+            data: {
+                data: tickets,
+                total,
+                page,
+                limit,
+                totalPages
+            }
         });
         return;
     } catch (err: unknown) {
