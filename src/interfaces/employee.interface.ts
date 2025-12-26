@@ -4,18 +4,20 @@ import Role from "../models/role.model.js";
 
 export const SEmployee = z.object({
     fullName: z
-        .string("Full name is required")
-        .min(3, "Full name must be at least 3 characters long")
+        .string()
         .max(50, "Full name must be at most 50 characters long")
         .regex(
-            /^[a-zA-Z ]+$/,
+            /^[a-zA-Z ]*$/,
             "Full name must contain only letters and spaces"
-        ),
+        )
+        .optional()
+        .or(z.literal("")),
     phone: z
-        .string("Phone number is required")
-        .min(7, "Phone number must be at least 7 characters long")
+        .string()
         .max(14, "Phone number must be at most 14 characters long")
-        .regex(/^[0-9]+$/, "Phone number must contain only numbers"),
+        .regex(/^[0-9]*$/, "Phone number must contain only numbers")
+        .optional()
+        .or(z.literal("")),
     email: z.email("Invalid email"),
     password: z
         .string("Password is required")
@@ -39,6 +41,9 @@ export const SEmployee = z.object({
         .optional(),
     isNew: z.boolean().readonly().optional(),
     resetExpire: z.date().nullable().default(null),
+    resetToken: z.string().nullable().optional(),
+    inviteToken: z.string().nullable().optional(),
+    inviteExpire: z.date().nullable().optional(),
     createdAt: z.coerce.date().optional(),
     updatedAt: z.coerce.date().optional()
 });

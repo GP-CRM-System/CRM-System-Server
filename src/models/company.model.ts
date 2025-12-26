@@ -10,7 +10,7 @@ const companySchema = new mongoose.Schema<ICompany>({
     },
     contact: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true,
+        required: false,
         ref: "Contact"
     },
     website: { type: String, required: false },

@@ -271,3 +271,109 @@ export async function deactivateEmployee(
         return;
     }
 }
+
+export async function inviteEmployee(
+    req: Request<object, object, { email: string }>,
+    res: Response<IResponse>
+): Promise<void> {
+    try {
+        const token = verifyToken(req.cookies.token);
+        // @ts-expect-error bad jwt types
+        if (!token.role.Employee.write) {
+            res.status(401).json({
+                message: "Error inviting employee",
+                error: "Unauthorized"
+            });
+            return;
+        }
+
+        const { email } = req.body;
+
+        // Validate email
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            res.status(400).json({
+                message: "Error inviting employee",
+                error: "Invalid email address"
+            });
+            return;
+        }
+
+        // Check if employee already exists
+        const existingEmployee = await Employee.findOne({ email });
+        if (existingEmployee) {
+            res.status(409).json({
+                message: "Error inviting employee",
+                error: "Employee with this email already exists"
+            });
+            logger.warn(`Invite failed: Employee with email ${email} already exists`);
+            return;
+        }
+
+        // Find or get default "Employee" role
+        let defaultRole = await import("../models/role.model.js").then(m => m.default.findOne({ name: "Employee" }));
+
+        if (!defaultRole) {
+            // Create default Employee role if it doesn't exist
+            const Role = (await import("../models/role.model.js")).default;
+            defaultRole = await Role.create({
+                name: "Employee",
+                isActive: true,
+                Company: { read: false, write: false, delete: false },
+                Employee: { read: false, write: false, delete: false },
+                Contact: { read: true, write: false, delete: false },
+                Deal: { read: true, write: false, delete: false },
+                Role: { read: false, write: false, delete: false },
+                Order: { read: true, write: false, delete: false },
+                Ticket: { read: true, write: true, delete: false }
+            });
+            logger.info("Created default Employee role");
+        }
+
+        // Generate temporary password (12 characters, alphanumeric)
+        const crypto = await import("crypto");
+        const tempPassword = crypto.randomBytes(6).toString('hex'); // 12 char hex string
+        const hashedPassword = bcrypt.hashSync(tempPassword, 10);
+
+        // Create employee with temp password
+        await Employee.create({
+            email,
+            fullName: "",
+            phone: "",
+            password: hashedPassword,
+            role: defaultRole._id,
+            salary: 0,
+            isActive: true
+        });
+
+        // Send invitation email with temp password
+        const { sendEmail, emailTemplates } = await import("../config/mail.config.js");
+        const senderName = (token as any)?.fullName || "Admin";
+        const appUrl = process.env.APP_URL || "http://localhost:5173";
+        const emailTemplate = emailTemplates.teamInvite(
+            senderName,
+            email,
+            tempPassword,
+            appUrl
+        );
+
+        await sendEmail(email, emailTemplate.subject, emailTemplate.html);
+
+        logger.info(`Invited employee with email ${email}`);
+        res.status(201).json({
+            message: "Employee invited successfully",
+            data: {
+                email,
+                tempPassword, // Return temp password for admin to share if email fails
+                loginUrl: `${appUrl}/login`
+            }
+        });
+        return;
+    } catch (err: unknown) {
+        logger.error(`Error inviting employee: ${(err as Error).message}`);
+        res.status(500).json({
+            message: "Internal server error",
+            error: (err as Error).message
+        });
+        return;
+    }
+}

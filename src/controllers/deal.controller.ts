@@ -82,7 +82,7 @@ export async function createDeal(
 }
 
 export async function getAllDeals(
-        // ...existing code...
+    // ...existing code...
     req: Request,
     res: Response<IResponse>
 ): Promise<void> {
@@ -101,15 +101,20 @@ export async function getAllDeals(
         const page = parseInt(req.query.page as string) || 1;
         const limit = parseInt(req.query.limit as string) || 10;
         const skip = (page - 1) * limit;
-        const deals = await Deal.find({
+
+        const filter = {
             name: { $regex: name ?? "", $options: "i" },
             priority: { $regex: priority ?? "", $options: "i" }
-        })
+        };
+
+        const total = await Deal.countDocuments(filter);
+        const deals = await Deal.find(filter)
             .skip(skip)
             .limit(limit)
             .populate("owner", "fullName")
             .populate("contact", "name")
-            .populate("company", "name");
+            .populate("company", "name")
+            .sort({ createdAt: -1 });
 
         if (deals.length === 0) {
             res.status(404).json({
@@ -119,10 +124,18 @@ export async function getAllDeals(
             logger.warn("No deals found");
             return;
         }
+
+        const totalPages = Math.ceil(total / limit);
         logger.info("Retrieved all deals");
         res.status(200).json({
             message: "Deals retrieved",
-            data: { deals, page, limit, total: deals.length }
+            data: {
+                data: deals,
+                total,
+                page,
+                limit,
+                totalPages
+            }
         });
         return;
     } catch (err: unknown) {
@@ -228,13 +241,13 @@ export async function addNewDealStage(
         object,
         {
             name:
-                | "Appointment Scheduled"
-                | "Qualified To Buy"
-                | "Presentation Scheduled"
-                | "Decision Maker Bought-In"
-                | "Contract Sent"
-                | "Closed Won"
-                | "Closed Lost";
+            | "Appointment Scheduled"
+            | "Qualified To Buy"
+            | "Presentation Scheduled"
+            | "Decision Maker Bought-In"
+            | "Contract Sent"
+            | "Closed Won"
+            | "Closed Lost";
         }
     >,
     res: Response<IResponse>

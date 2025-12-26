@@ -5,14 +5,18 @@ import {
     googleCallback,
     forgotPassword,
     resetPassword,
-    logout
+    logout,
+    verifyResetToken,
+    changePassword
 } from "../controllers/auth.controller.js";
 import passport from "passport";
+import { isAuthenticated } from "../middleware/auth.middleware.js";
 
 const authRouter = express.Router();
 
 authRouter.post("/register", registerAdmin);
 authRouter.post("/login", login);
+authRouter.post("/change-password", isAuthenticated, changePassword);
 authRouter.get(
     "/google",
     passport.authenticate("google", {
@@ -27,7 +31,8 @@ authRouter.get(
 );
 
 authRouter.post("/forgot-password", forgotPassword);
-authRouter.post("/reset-password/:id", resetPassword);
+authRouter.post("/reset-password", resetPassword);
+authRouter.get("/verify-reset-token/:token", verifyResetToken);
 authRouter.get("/logout", logout);
 
 export default authRouter;
