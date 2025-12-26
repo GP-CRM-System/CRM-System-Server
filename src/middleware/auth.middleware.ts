@@ -14,20 +14,26 @@ export function isAuthenticated(
     const refreshToken = verifyRefreshToken(req.cookies.refreshToken);
 
     if (token && refreshToken) {
+        req.user = token as any;
         next();
+        return;
     }
 
     if (!token && refreshToken) {
+        const decodedRefreshToken = refreshToken as {
+            _id: string;
+            email: string;
+            role: any;
+        };
         const newToken = generateToken({
-            // @ts-expect-error bad type
-            _id: refreshToken._id,
-            // @ts-expect-error bad type
-            email: refreshToken.email,
-            // @ts-expect-error bad type
-            role: refreshToken.role
+            _id: decodedRefreshToken._id as any,
+            email: decodedRefreshToken.email,
+            role: decodedRefreshToken.role
         });
         res.cookie("token", newToken, { httpOnly: true });
+        req.user = decodedRefreshToken as any;
         next();
+        return;
     }
 
     if (!token && !refreshToken) {

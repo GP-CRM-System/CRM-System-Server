@@ -3,6 +3,7 @@ import type { IRole } from "../interfaces/role.interface.js";
 
 const roleSchema = new mongoose.Schema<IRole>({
     name: { type: String, required: true, unique: true },
+    description: { type: String, required: false, default: "" },
     isActive: { type: Boolean, required: true, default: true },
     Company: {
         read: { type: Boolean, default: false },
@@ -38,6 +39,10 @@ const roleSchema = new mongoose.Schema<IRole>({
         read: { type: Boolean, default: false },
         write: { type: Boolean, default: false },
         delete: { type: Boolean, default: false }
+    },
+    Analytics: {
+        read: { type: Boolean, default: false },
+        write: { type: Boolean, default: false }
     },
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }

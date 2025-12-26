@@ -9,6 +9,7 @@ export const SRole = z.object({
             /^[a-zA-Z ]+$/,
             "Role name must contain only letters and spaces"
         ),
+    description: z.string().max(255, "Description must be at most 255 characters long").optional().default(""),
     isActive: z.boolean().default(true),
     Company: z
         .object({ read: z.boolean(), write: z.boolean(), delete: z.boolean() })
@@ -31,6 +32,9 @@ export const SRole = z.object({
     Ticket: z
         .object({ read: z.boolean(), write: z.boolean(), delete: z.boolean() })
         .default({ read: false, write: false, delete: false }),
+    Analytics: z
+        .object({ read: z.boolean(), write: z.boolean() })
+        .default({ read: false, write: false }),
     createdAt: z.date().optional(),
     updatedAt: z.date().optional()
 });

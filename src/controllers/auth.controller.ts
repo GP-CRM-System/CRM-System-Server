@@ -6,7 +6,8 @@ import Employee from "../models/employee.model.js";
 import {
     createRootRole,
     generateRefreshToken,
-    generateToken
+    generateToken,
+    changePassword as changePasswordService
 } from "../services/auth.service.js";
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
@@ -343,11 +344,15 @@ export async function forgotPassword(
 }
 
 export async function resetPassword(
-    req: Request<object, object, { password: string; token: string }>,
+    req: Request<
+        object,
+        object,
+        { password: string; token: string; confirmPassword: string }
+    >,
     res: Response<IResponse>
 ): Promise<void> {
     try {
-        const { token, password: newPassword } = req.body;
+        const { token, password: newPassword, confirmPassword } = req.body;
 
         if (!token) {
             res.status(400).json({
@@ -356,18 +361,27 @@ export async function resetPassword(
             });
             return;
         }
-        const password = z
+        const passwordValidation = z
             .string("Password is required")
             .min(8, "Password must be at least 8 characters long")
             .max(64, "Password must be at most 64 characters long")
-            .safeParse(req.body.password);
+            .safeParse(newPassword);
 
-        if (password.success === false) {
+        if (passwordValidation.success === false) {
             res.status(400).json({
                 message: "Password Reset failed",
-                error: JSON.parse(password.error.message)
+                error: JSON.parse(passwordValidation.error.message)
             });
-            logger.error("Invalid password");
+            logger.error("Invalid new password");
+            return;
+        }
+
+        if (newPassword !== confirmPassword) {
+            res.status(400).json({
+                message: "Password Reset failed",
+                error: "New password and confirmation do not match"
+            });
+            logger.error("New password and confirmation do not match");
             return;
         }
 
@@ -388,7 +402,7 @@ export async function resetPassword(
         }
 
         await existingEmployee.updateOne({
-            password: bcrypt.hashSync(password.data, 10),
+            password: bcrypt.hashSync(passwordValidation.data, 10),
             resetToken: null,
             resetExpire: null
         });
@@ -449,6 +463,84 @@ export async function verifyResetToken(
         return;
     } catch (error: unknown) {
         logger.error(`Error verifying reset token: ${(error as Error).message}`);
+        res.status(500).json({
+            message: "Internal server error",
+            error: (error as Error).message
+        });
+        return;
+    }
+}
+
+export async function changePassword(
+    req: Request,
+    res: Response<IResponse>
+): Promise<void> {
+    try {
+        const { oldPassword, newPassword, confirmPassword } = req.body;
+
+        if (!oldPassword || !newPassword || !confirmPassword) {
+            res.status(400).json({
+                message: "Change password failed",
+                error: "All fields (oldPassword, newPassword, confirmPassword) are required"
+            });
+            return;
+        }
+
+        if (newPassword !== confirmPassword) {
+            res.status(400).json({
+                message: "Change password failed",
+                error: "New password and confirm password do not match"
+            });
+            return;
+        }
+
+        const passwordValidation = z
+            .string()
+            .min(8, "Password must be at least 8 characters long")
+            .max(64, "Password must be at most 64 characters long")
+            .safeParse(newPassword);
+
+        if (passwordValidation.success === false) {
+            res.status(400).json({
+                message: "Change password failed",
+                error: JSON.parse(passwordValidation.error.message)
+            });
+            return;
+        }
+
+        const userId = (req.user as any)?._id;
+        if (!userId) {
+            res.status(401).json({
+                message: "Change password failed",
+                error: "User not authenticated"
+            });
+            return;
+        }
+
+        const result = await changePasswordService(
+            userId,
+            oldPassword,
+            newPassword
+        );
+
+        if (!result.success) {
+            res.status(400).json({
+                message: "Change password failed",
+                error: result.message
+            });
+            return;
+        }
+
+        res.status(200).json({
+            message: "Password changed successfully",
+            data: null
+        });
+        logger.info(`Password changed for user ${userId}`);
+        return;
+    } catch (error: unknown) {
+        logger.error(
+            `Error in changePassword controller: ${(error as Error).message}`
+        );
         res.status(500).json({
             message: "Internal server error",
             error: (error as Error).message

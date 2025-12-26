@@ -6,14 +6,17 @@ import {
     forgotPassword,
     resetPassword,
     logout,
-    verifyResetToken
+    verifyResetToken,
+    changePassword
 } from "../controllers/auth.controller.js";
 import passport from "passport";
+import { isAuthenticated } from "../middleware/auth.middleware.js";
 
 const authRouter = express.Router();
 
 authRouter.post("/register", registerAdmin);
 authRouter.post("/login", login);
+authRouter.post("/change-password", isAuthenticated, changePassword);
 authRouter.get(
     "/google",
     passport.authenticate("google", {

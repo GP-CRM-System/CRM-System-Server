@@ -91,14 +91,14 @@ export async function getAllOrders(
         const page = parseInt(req.query.page as string) || 1;
         const limit = parseInt(req.query.limit as string) || 10;
         const skip = (page - 1) * limit;
-
-        const orders = await Order.find({
+        const filter = {
             description: { $regex: description ?? "", $options: "i" }
-        })
+        };
+        const total = await Order.countDocuments(filter);
+        const orders = await Order.find(filter)
             .select("-__v")
             .populate("owner", "fullName")
             .populate("contact", "name")
-            .populate("employee", "fullName")
             .skip(skip)
             .limit(limit)
             .sort({ createdAt: -1 });
@@ -111,10 +111,17 @@ export async function getAllOrders(
             logger.warn("No orders found");
             return;
         }
+        const totalPages = Math.ceil(total / limit);
         logger.info("Retrieved all orders");
         res.status(200).json({
             message: "Orders retrieved",
-            data: { orders, page, limit, total: orders.length }
+            data: {
+                data: orders,
+                total,
+                page,
+                limit,
+                totalPages
+            }
         });
         return;
     } catch (err: unknown) {
