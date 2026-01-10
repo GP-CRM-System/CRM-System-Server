@@ -25,7 +25,13 @@
         "prod:watch": "nodemon dist/app.js",
         "test:start": "jest",
         "test:watch": "jest --watch",
-        "seed": "tsx src/scripts/seed.ts"
+        "seed": "tsx src/scripts/seed.ts",
+        "seed:massive": "tsx src/scripts/seed-massive.ts",
+        "seed:super": "tsx src/scripts/seed-super.ts",
+        "seed:small": "SEED_PRESET=SMALL tsx src/scripts/seed-super.ts",
+        "seed:medium": "SEED_PRESET=MEDIUM tsx src/scripts/seed-super.ts",
+        "seed:large": "SEED_PRESET=LARGE tsx src/scripts/seed-super.ts",
+        "seed:extreme": "SEED_PRESET=EXTREME tsx src/scripts/seed-super.ts"
     },
     "dependencies": {
         "@faker-js/faker": "^10.1.0",

@@ -165,9 +165,69 @@ All resource routes are protected by `isAuthenticated` middleware.
 
 - `GET /health`: Check server health status.
 
-## Dummy Data
+## Database Seeding 🌱
 
-To quickly populate your database with sample data for testing, you can use the JSON data in `docs/test-database`.
+Quickly populate your database with realistic test data using our powerful seeding scripts!
+
+### Quick Start
+
+```bash
+# Small dataset (290 records) - Perfect for development
+npm run seed:small
+
+# Medium dataset (3,020 records) - Great for testing
+npm run seed:medium
+
+# Large dataset (5,025 records) - Ideal for demos
+npm run seed:massive
+
+# Extreme dataset (59,050 records) - For load testing
+npm run seed:extreme
+```
+
+### What Gets Generated
+
+- ✅ **Roles** with granular permissions
+- ✅ **Employees** (default password: `password123`)
+- ✅ **Contacts** with social media profiles
+- ✅ **Companies** with full details and history
+- ✅ **Deals** with multi-stage progression
+- ✅ **Orders** with multiple products
+- ✅ **Tickets** with resolution tracking
+
+### Available Scripts
+
+| Script | Records | Use Case | Time |
+|--------|---------|----------|------|
+| `npm run seed` | ~70 | Quick testing | ~5s |
+| `npm run seed:small` | ~290 | Development | ~10s |
+| `npm run seed:medium` | ~3,020 | Integration tests | ~30s |
+| `npm run seed:large` | ~5,025 | Demos & QA | ~45s |
+| `npm run seed:massive` | ~5,025 | Performance testing | ~45s |
+| `npm run seed:extreme` | ~59,050 | Load testing | ~5m |
+
+### Features
+
+- 📊 **Realistic data** using Faker.js
+- 🔗 **Proper relationships** between all entities
+- 📅 **Historical data** (up to 3 years old)
+- 🎯 **Stage progressions** for deals, orders, and tickets
+- 💬 **Interaction histories** for companies and contacts
+- 🌐 **Social media profiles** for contacts
+- 💰 **Multiple products** per order
+- ⚡ **Optimized batch insertion** for large datasets
+
+### Documentation
+
+- 📖 **Full Documentation**: See [docs/SEEDING.md](./docs/SEEDING.md)
+- ⚡ **Quick Reference**: See [docs/SEEDING-QUICK.md](./docs/SEEDING-QUICK.md)
+- 📋 **Summary**: See [docs/SEEDING-SUMMARY.md](./docs/SEEDING-SUMMARY.md)
+
+---
+
+## Manual Dummy Data (Alternative)
+
+If you prefer to manually add data, you can use the JSON files in `docs/test-database`.
 
 **Instructions:**
 
@@ -176,7 +236,7 @@ To quickly populate your database with sample data for testing, you can use the 
 3. Navigate to a collection.
 4. Click **Add Data** -> **Insert Document**.
 5. Switch to the **JSON** view (the `{}` icon).
-6. Paste the array of objects below and click **Insert**.
+6. Paste the array of objects and click **Insert**.
 
 ## How to Run
 
