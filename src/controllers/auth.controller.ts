@@ -253,14 +253,31 @@ export async function googleCallback(
             role: emp.role
         });
 
-        res.status(200).json({
-            message: "Google authentication successful",
-            data: {
-                token,
-                refreshToken,
-                emp
-            }
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: true,
+            sameSite: "none"
         });
+
+        res.cookie("refreshToken", refreshToken, {
+            httpOnly: true,
+            secure: true,
+            sameSite: "none"
+        });
+
+        const frontendUrl =
+            process.env.CORS_ORIGIN?.split(",")[0] || "http://localhost:5173";
+
+        const userData = {
+            _id: emp._id.toString(),
+            email: emp.email,
+            fullName: emp.fullName || "",
+            role: (emp.role as any)._id || emp.role // Role ID
+        };
+
+        const userParam = encodeURIComponent(JSON.stringify(userData));
+        res.redirect(`${frontendUrl}/auth/google/callback?user=${userParam}`);
+
         logger.info(`User logged in via Google: ${emp.email}`);
         return;
     } catch (error: unknown) {
@@ -375,6 +392,8 @@ export async function resetPassword(
             logger.error("Invalid new password");
             return;
         }
+
+        console.log(newPassword, confirmPassword);
 
         if (newPassword !== confirmPassword) {
             res.status(400).json({
