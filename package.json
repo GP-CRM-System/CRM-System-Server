@@ -15,6 +15,7 @@
     "type": "module",
     "main": "src/app.ts",
     "scripts": {
+        "dev": "nodemon",
         "dev:start": "tsx src/app.ts",
         "dev:watch": "tsx watch src/app.ts",
         "dev:build": "tsc",
@@ -24,7 +25,13 @@
         "prod:watch": "nodemon dist/app.js",
         "test:start": "jest",
         "test:watch": "jest --watch",
-        "seed": "tsx src/scripts/seed.ts"
+        "seed": "tsx src/scripts/seed.ts",
+        "seed:massive": "tsx src/scripts/seed-massive.ts",
+        "seed:super": "tsx src/scripts/seed-super.ts",
+        "seed:small": "SEED_PRESET=SMALL tsx src/scripts/seed-super.ts",
+        "seed:medium": "SEED_PRESET=MEDIUM tsx src/scripts/seed-super.ts",
+        "seed:large": "SEED_PRESET=LARGE tsx src/scripts/seed-super.ts",
+        "seed:extreme": "SEED_PRESET=EXTREME tsx src/scripts/seed-super.ts"
     },
     "dependencies": {
         "@faker-js/faker": "^10.1.0",
@@ -70,7 +77,7 @@
         "globals": "^16.4.0",
         "jiti": "^2.6.1",
         "morgan": "^1.10.1",
-        "nodemon": "^3.1.10",
+        "nodemon": "^3.1.11",
         "prettier": "^3.6.2",
         "ts-jest": "^29.4.5",
         "tsx": "^4.20.6",
