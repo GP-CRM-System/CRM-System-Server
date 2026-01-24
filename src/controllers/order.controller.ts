@@ -228,11 +228,11 @@ export async function addNewOrderStage(
         object,
         {
             stageType:
-                | "Open"
-                | "Processed"
-                | "Shipped"
-                | "Delivered"
-                | "Cancelled";
+            | "Open"
+            | "Processed"
+            | "Shipped"
+            | "Delivered"
+            | "Cancelled";
         }
     >,
     res: Response<IResponse>
@@ -302,6 +302,43 @@ export async function deleteOrder(
         await order.deleteOne();
         logger.info(`Deleted order ${order.description}`);
         res.status(200).json({ message: "Order deleted", data: order });
+        return;
+    } catch (err: unknown) {
+        logger.error(`Error deleting order: ${(err as Error).message}`);
+        res.status(500).json({
+            message: "Internal server error",
+            error: (err as Error).message
+        });
+        return;
+    }
+}
+
+export async function getOrderStatus(req: Request<{ id: string }>, res: Response<IResponse>): Promise<void> {
+    try {
+        const header = req.headers.authorization;
+        const token = header!.split(" ")[1];
+        const decodedToken = token === "nexify123";
+        if (!decodedToken) {
+            res.status(401).json({
+                message: "Error getting order status",
+                error: "Unauthorized"
+            });
+            return;
+        }
+
+        console.log(req.params.id);
+        const order = await Order.findOne({
+            _id: req.params.id
+        });
+        if (!order) {
+            res.status(404).json({
+                message: "Error getting order status",
+                error: "Order not found"
+            });
+            logger.warn(`Order with id ${req.params.id} not found`);
+            return;
+        }
+        res.status(200).json({ message: "Order status retrieved", data: order.stage[order.stage.length - 1] });
         return;
     } catch (err: unknown) {
         logger.error(`Error deleting order: ${(err as Error).message}`);
